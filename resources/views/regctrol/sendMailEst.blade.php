@@ -65,18 +65,17 @@
                     <div class="row">
                       <div class="col">
                         <div class="text-center">
-                          <button class="btn btn-success" type="submit"><i class="far fa-share-square"></i> Enviar Correo</button>
+                          <button btn-norm class="btn btn-outline-success" type="submit"><i class="far fa-share-square"></i> Enviar</button>
                         
                           @else
                           @if ($radicado->fech_notifi_end != '' )
                           <div class="row">
                               <div class="col">
                                 <div class="text-center">
-                                    <button class="btn btn-outline-secondary"disabled type=""><i class="far fa-check-circle"></i>Correo Enviado</button> 
                           @else
                           @endif
                           @endif
-                          <a name="" id="" class="btn btn-primary"
+                          <a btn-norm name="" id="" class="btn btn-secondary"
                           @if (Auth::user()->type_user == 2)
                             href="{{route('reg-ctrol.edit',$radicado->slug)}}"
                             @else

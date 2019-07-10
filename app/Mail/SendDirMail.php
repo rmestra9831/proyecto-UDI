@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendDirMail extends Mailable
+class SendDirMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -16,23 +16,14 @@ class SendDirMail extends Mailable
      *
      * @return void
      */
-<<<<<<< HEAD
-    public $subjectDirN;
-    public $messajeDirN;
+    public $subj;
+    public $mess;
     public $data;
     public function __construct($subjectDirN, $messajeDirN, $data)
     {
         $this->subj = $subjectDirN;
         $this->mess = $messajeDirN;
         $this->data = $data;
-=======
-    public $subject;
-    public $messaje;
-    public function __construct($subject, $messaje)
-    {
-        $this->sub = $subject;
-        $this->mess = $messaje;
->>>>>>> 2a2c3721d5ed94fb8f31c1e02e8e70713d052573
     }
 
     /**
@@ -44,7 +35,8 @@ class SendDirMail extends Mailable
     {
         $e_subject = $this->subj;
         $e_messaje = $this->mess;
+        $e_data = $this->data;
         
-        return $this->view('mail.dir', compact('e_messaje'))->subject($e_subject);
+        return $this->view('mail.dir', compact('e_messaje','e_data'))->subject($e_subject);
     }
 }

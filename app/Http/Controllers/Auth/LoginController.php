@@ -49,4 +49,9 @@ class LoginController extends Controller
         }
         return '/admin';
     }
+    //nombre del campo con el que valida
+    public function username()
+    {
+        return 'name';
+    }
 }

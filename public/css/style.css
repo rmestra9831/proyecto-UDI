@@ -169,12 +169,15 @@ hr {
   margin: auto;
 }
 
-.btn {
-  background: none;
+a[btn-norm],
+button[btn-norm] {
   width: 20%;
   margin: auto;
-  color: blue;
 }
+
+/*.btn-report{
+
+}*/
 
 .content-card {
   border: 1px solid #b8b8b8;

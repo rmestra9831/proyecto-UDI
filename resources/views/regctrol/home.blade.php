@@ -7,6 +7,7 @@
   </div>
   <!--cuerpo delcontenido -->
   <div class="row justify-content-md-center cont-panel">
+  
       @include('common.success')
         @if(Session::has('alert-ok-radic'))
           {{ Session::get('alert-ok-radic') }}
@@ -28,7 +29,11 @@
             </div>
           @else
             <div class="col-11 content-card">
+            @if ($radicado->fech_delivered != '')
             <img src="{{asset('img/check.svg')}}" alt="">
+            @else
+            <img src="{{asset('img/waiting.svg')}}" alt="">
+            @endif
               @include('components.cards')
             </div>
           @endif
@@ -58,5 +63,5 @@
   </form>
 -->
   </div>
-  
+
 @endsection

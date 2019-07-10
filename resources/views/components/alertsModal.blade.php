@@ -8,10 +8,10 @@
         </button>
       </div>
       <div class="modal-body">
-        ¿Desea guardar este radicado?
+        ¿Desea crear este radicado?
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-success text-capitalize">Guardar radicado</button>
+        <button type="submit" class="btn btn-success text-capitalize">Crear</button>
         <button type="button" class="btn btn-outline-danger text-capitalize" data-dismiss="modal">cancelar</button>
       </div>
     </div>

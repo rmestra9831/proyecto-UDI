@@ -65,7 +65,7 @@ class RegctrolController extends Controller
         $fech_start_radic = date("Y/m/d");
         $time_start_radic = date('h:i:s A');
         $radicado =new Radicado();
-        $programas =new Program();
+        $programas =Program::all();
 
         $id = DB::table('fech_radics')->select('id_radicado')->latest()->take(1)->value('id_radicado');
         
@@ -105,7 +105,6 @@ class RegctrolController extends Controller
         $radicado->time_start_radic = $time_start_radic;
         $radicado->slug = date("Ymd").$request->input('name').date('h_i_s').$request->input('last_name');
         $radicado->save();
-        
     //validar tipo de atencion para enviar correo
         if ($radicado->atention == "urgente") {
 
@@ -113,7 +112,6 @@ class RegctrolController extends Controller
             $subject= 'Atención Inmediata R#'.$radicado->fechradic_id.'-'.$radicado->year;
             $messaje= 'mensaje de prueba';
             Mail::to($mail)->send(new SendUrgenteMail($subject, $messaje, $radicado, $programas));
-<<<<<<< HEAD
     //enviado correo director programa
             foreach ($programas as $programa) {
                 if ($programa->id == $radicado->sendTo_id) {
@@ -137,16 +135,6 @@ class RegctrolController extends Controller
             $messajeDirN= 'mensaje de prueba';
             
             Mail::to($mailDirN)->send(new SendDirMail($subjectDirN, $messajeDirN,$radicado));
-=======
-            //enviado correo director programa
-            $mailDir= 'rmestra1@udi.edu.co';
-            $subjectDir= 'Nuevo Radicado #'.$radicado->fechradic_id;
-            $messajeDir= 'mensaje de prueba';
-            
-            Mail::to($mailDir)->send(new SendDirMail($subjectDir, $messajeDir));
-        }elseif ($radicado->atention == "normal") {
-            
->>>>>>> 2a2c3721d5ed94fb8f31c1e02e8e70713d052573
         }
 
         return redirect()->route('reg-ctrol.index')->with('status','Radicado '.$radicado->fechradic_id.'-'.$radicado->year.' Creado exitosamente');
@@ -192,6 +180,7 @@ class RegctrolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+ // UPDATES     
     public function update(Request $request, Radicado $reg_ctrol)
     {
         $radicado = $reg_ctrol;
@@ -202,10 +191,12 @@ class RegctrolController extends Controller
             'fech_recive_dir',
             'time_recive_dir',
             'fech_notifi_end',
-            'time_notifi_end'
+            'time_notifi_end',
+            'fech_delivered',
+            'time_delivered'
         ));
         $radicado->save();
-        return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('status','Radicado #'.$radicado->id.' enviado exitosamente');
+        return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('status','Radicado #'.$radicado->fechradic_id.'-'.$radicado->year.' enviado exitosamente');
         //return 'Actualizado';
     }
 
@@ -218,7 +209,9 @@ class RegctrolController extends Controller
             'fech_recive_dir',
             'time_recive_dir',
             'fech_recive_radic',
-            'time_recive_radic'
+            'time_recive_radic',
+            'fech_delivered',
+            'time_delivered'
         ));
         $radicado->save();
 
@@ -227,9 +220,26 @@ class RegctrolController extends Controller
         $subject= 'Rta Radicado #'.$radicado->fechradic_id.'-'.$radicado->year; 
         Mail::to($mail)->send(new SendEstudMail($subject, $radicado));
 
-        return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('status','Radicado '.$radicado->id.' recivido correctamente ');
+        return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('status','Radicado '.$radicado->fechradic_id.'-'.$radicado->year.' recivido correctamente ');
 
     }
+    public function updateDelivered(Request $request, Radicado $reg_ctrol)
+    {
+        $radicado = $reg_ctrol;
+
+        $radicado->fill($request->except(
+            'fech_recive_radic',
+            'time_recive_radic',
+            'fech_recive_dir',
+            'time_recive_dir',
+            'fech_notifi_end',
+            'time_notifi_end'
+        ));
+        $radicado->save();
+        return redirect()->route('reg-ctrol.index',[$reg_ctrol])->with('status','Radicado #'.$radicado->fechradic_id.'-'.$radicado->year.' entregado exitosamente');
+        //return 'Actualizado';
+    }
+// ELIMINAR
     /**
      * Remove the specified resource from storage.
      *

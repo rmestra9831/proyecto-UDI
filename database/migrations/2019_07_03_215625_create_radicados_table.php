@@ -48,6 +48,9 @@ class CreateRadicadosTable extends Migration
             $table->date('fech_notifi_end')->nullable();
             $table->string('time_notifi_end')->nullable();
             //---
+            $table->date('fech_delivered')->nullable();
+            $table->string('time_delivered')->nullable();
+            //---
             $table->string('slug')->unique()->nullable();
             $table->integer('status_id')->nullable();
 

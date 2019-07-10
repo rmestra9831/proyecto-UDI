@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div style="
   display: flex;
   position: relative;
@@ -25,8 +24,8 @@
       >
     </div>
     <!-- cabecera-->
-    <div class="col" style="margin: 10px 25px; position: relative;"><strong style="color: red; text-transform: uppercase;">origen:<p class="card-text-var text-truncate" style="text-transform: capitalize;">{{$e_data->name}} {{$e_data->last_name}}</p></strong></div>
-    <div class="col" style="margin: 10px 25px; position: relative;"><strong style="color: red; text-transform: uppercase;" class="card-text">motivo:<p class="card-text-var text-truncate" style="text-transform: capitalize;">{{$e_data->motivo->name}}</p></strong></div>
+    <div class="col" style="margin: 10px 25px; position: relative;"><strong style="color: red; text-transform: uppercase;">origen:<p class="card-text-var text-truncate" style="text-transform: capitalize;">{{$data->name}} {{$data->last_name}}</p></strong></div>
+    <div class="col" style="margin: 10px 25px; position: relative;"><strong style="color: red; text-transform: uppercase;" class="card-text">motivo:<p class="card-text-var text-truncate" style="text-transform: capitalize;">{{$data->motivo->name}}</p></strong></div>
     
     <!-- cuerpo-->
     <div class="col" style="margin: 10px 25px; position: relative;">
@@ -39,5 +38,4 @@
     </div>
     </div>
 </div>
-=======
->>>>>>> 2a2c3721d5ed94fb8f31c1e02e8e70713d052573
+

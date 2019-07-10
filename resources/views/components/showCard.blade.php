@@ -123,7 +123,7 @@
         <td>{{$radicado->fech_send_dir}}</td>
         <td>{{$radicado->fech_recive_dir}}</td>
         <td>{{$radicado->fech_recive_radic}}</td>
-        <td>{{$radicado->fech_notifi_end}}</td>
+        <td>{{$radicado->fech_delivered}}</td>
       </tr>
       <tr>
         <th class="text-uppercase" scope="row">hora</th>
@@ -131,7 +131,7 @@
         <td>{{$radicado->time_send_dir}}</td>
         <td>{{$radicado->time_recive_dir}}</td>
         <td>{{$radicado->time_recive_radic}}</td>
-        <td>{{$radicado->time_notifi_end}}</td>
+        <td>{{$radicado->time_delivered}}</td>
       </tr>
     </tbody>
   </table>

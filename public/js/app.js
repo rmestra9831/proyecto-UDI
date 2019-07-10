@@ -49383,10 +49383,10 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\prosirc\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\laragon\www\prosirc\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! C:\laragon\www\prosirc\resources\sass\login.scss */"./resources/sass/login.scss");
-module.exports = __webpack_require__(/*! C:\laragon\www\prosirc\resources\sass\style.scss */"./resources/sass/style.scss");
+__webpack_require__(/*! C:\laragon\www\psirc\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\laragon\www\psirc\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\psirc\resources\sass\login.scss */"./resources/sass/login.scss");
+module.exports = __webpack_require__(/*! C:\laragon\www\psirc\resources\sass\style.scss */"./resources/sass/style.scss");
 
 
 /***/ })

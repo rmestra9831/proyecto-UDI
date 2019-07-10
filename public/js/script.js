@@ -239,7 +239,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laragon\www\prosirc\resources\js\script.js */"./resources/js/script.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\psirc\resources\js\script.js */"./resources/js/script.js");
 
 
 /***/ })

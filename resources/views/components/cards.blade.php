@@ -66,12 +66,36 @@
     </div>
   </div>
 
-<a name="" id="" class="btn btn-block btn-primary" 
-@if (Auth::user()->type_user == 2)
-  href="/reg-ctrol/{{$radicado->slug}}/edit"
-@else
-  @if (Auth::user()->type_user == 3)
-    href="/direction/{{$radicado->slug}}/edit"     
+<div class="row justify-content-md-center">
+  <div class="col-3">
+    <a btn-card name="" id="" class="btn btn-block btn-outline-primary" 
+    @if (Auth::user()->type_user == 2)
+      href="/reg-ctrol/{{$radicado->slug}}/edit"
+    @else
+      @if (Auth::user()->type_user == 3)
+        href="/direction/{{$radicado->slug}}/edit"     
+      @endif
+    @endif
+    role="button">Ver radicado</a>  
+  </div>
+<!--mostrar el boton de entregado a estudiante-->
+  @if (Auth::user()->type_user == 2)
+    <div class="col-3">
+      @if ($radicado->fech_notifi_end != '')
+        <form method="post" action="{{action('RegctrolController@updateDelivered', $radicado->slug)}}">
+          @method('PUT')
+          @csrf
+          <input  name="time_delivered" type="hidden" value="{{date("h:i:s A")}}">
+          <input  name="fech_delivered" type="hidden" value="{{date("y/m/d")}}">
+          @if ($radicado->fech_delivered != '')
+            <button btn-card class="btn btn-block btn-secondary"disabled  type="submit">Entregado</button> 
+          @else
+            <button btn-card class="btn btn-block btn-secondary"type="submit">Entregar</button>
+          @endif    
+        </form>
+      @else
+        <button btn-card class="btn btn-block btn-outline-secondary"disabled type="submit">Entregar</button>       
+      @endif
+    </div>
   @endif
-@endif
-role="button">Ver radicado</a>
+</div>

@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendUrgenteMail extends Mailable
+class SendUrgenteMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -16,10 +16,10 @@ class SendUrgenteMail extends Mailable
      *
      * @return void
      */
-    public $subject;
-    public $messaje;
+    public $sub;
+    public $mess;
     public $data;
-    public $programas;
+    public $prog;
     public function __construct($subject, $messaje, $data, $programas)
     {
         $this->sub = $subject;

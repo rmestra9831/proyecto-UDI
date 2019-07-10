@@ -9,7 +9,19 @@ use App\Models\Motivo;
 class Radicado extends Model
 {
 
-  protected $fillable = ['fech_send_dir','time_send_dir','fech_recive_radic','time_recive_radic','fech_recive_dir','time_recive_dir','fech_notifi_end','time_notifi_end','obs','respuesta'];
+  protected $fillable = [
+    'fech_send_dir',
+    'time_send_dir',
+    'fech_recive_radic',
+    'time_recive_radic',
+    'fech_recive_dir',
+    'time_recive_dir',
+    'fech_notifi_end',
+    'time_notifi_end',
+    'fech_delivered',
+    'time_delivered',
+    'obs',
+    'respuesta'];
 
   /**
  * Get the route key for the model.

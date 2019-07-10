@@ -43,6 +43,7 @@ Route::resource('reg-ctrol', 'RegctrolController',compact('radicados'))->middlew
 Route::get('reg-ctrol/sendMail/{reg_ctrol}', 'RegctrolController@sendEmail',compact('radicados'))->middleware('auth')->name('reg-ctrol.sendmail');
 Route::post('reg-ctrol/restart', 'RegctrolController@restarFechRadic')->middleware('auth')->name('reg-ctrol.restarFechRadic');
 Route::put('sme/{reg_ctrol}', 'RegctrolController@updateMailEst')->middleware('auth')->name('reg-ctrol.sme');
+Route::put('delivered/{reg_ctrol}', 'RegctrolController@updateDelivered')->middleware('auth')->name('reg-ctrol.updateDelivered');
 
 
 //rutas de direccion

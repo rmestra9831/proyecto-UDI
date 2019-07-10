@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','| Nuevo radicado')
 @section('content-panel')
 
 <!-- cabecera del contenido-->

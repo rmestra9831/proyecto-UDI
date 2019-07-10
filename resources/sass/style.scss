@@ -140,14 +140,16 @@ hr{
         margin: auto;
     }
 }
-.btn{
-    background: none;
+a[btn-norm], button[btn-norm]{
     width: 20%;
     margin: auto;
-    color: blue;
-}.btn-report{
-    
 }
+a[btn-card], button[btn-card]{
+    //width: 20%;
+}
+/*.btn-report{
+    
+}*/
 .content-card {
     border: 1px solid rgb(184, 184, 184);
     padding: 20px;
@@ -381,8 +383,7 @@ hr{
     }
 }
 //estilos de los inputs del form
-#form-create {
-}
+
 div[no-margin] {
     margin-bottom: 5px;
 }

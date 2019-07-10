@@ -10,7 +10,7 @@
 <!--contenido de listas del panel -->
 <div class="p-2">
     <div class="btn-report">
-        <a name="" id="" class="btn-report btn-block btn-outline-light text-capitalize" href="#" role="button">reportes</a>
+        <a name="" id="" class="btn btn-report btn-block btn-outline-light text-capitalize" href="#" role="button">reportes</a>
     </div>
     <div class="p-item-list text-capitalize">
       @if (Auth::user()->type_user == 2)
