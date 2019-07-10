@@ -1,0 +1,106 @@
+@import url(https://fonts.googleapis.com/css?family=Oxygen&display=swap);@import url(https://fonts.googleapis.com/css?family=DM+Sans|Nunito|Poppins|Source+Sans+Pro|Work+Sans&display=swap);/**
+@font-face{
+  font-family: 'Arima Madurai';
+  src: url('public/fonts/Arima_Madurai/ArimaMadurai-Light.ttf');
+}**/
+
+@font-face {
+  font-family: "DidactGothic";
+  src: url(/fonts/DidactGothic-Regular.ttf?ecfe17460f696739f05433c081a3edd1);
+}
+
+html {
+  overflow: hidden;
+}
+
+body {
+  background: url(/images/background.jpg?e38271f73025bb995920cc6786c70773) no-repeat;
+  background-size: cover;
+}
+
+.panel-login {
+  background: white;
+  justify-content: center;
+  display: flex;
+  position: relative;
+  box-shadow: 1px 0px 5px 0px #9e9e9e;
+}
+
+.panel-login .form {
+  margin: auto 0;
+  width: 80%;
+}
+
+h4 {
+  font-family: "DidactGothic";
+  font-weight: 700px;
+  margin-bottom: 30px;
+}
+
+.input-icon input {
+  padding-left: 30px !important;
+  position: relative;
+}
+
+.input-icon input:focus + i {
+  color: rgba(52, 144, 220, 0.664) !important;
+  transform: scale(1.06);
+  transition: 0.2s;
+}
+
+#icon {
+  position: absolute;
+  top: 0;
+  padding: 7px 0 7px 10px;
+  transition: 0.2s;
+}
+
+.sec-foot-log {
+  background: #a5a5a5;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100px;
+}
+
+.sec-foot-log div {
+  position: relative;
+  height: 100%;
+  margin-top: 25px;
+}
+
+.sec-foot-log div p {
+  color: #ebebeb;
+  margin: auto;
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 10px;
+}
+
+.sec-head-log {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 5%;
+  height: 120px;
+}
+
+.sec-head-log p {
+  text-align: center;
+  font-family: "DidactGothic";
+  text-transform: capitalize;
+  font-size: 1.1rem;
+}
+
+.sec-head-log div {
+  position: relative;
+  display: flex;
+  height: 100%;
+}
+
+.sec-head-log div img {
+  margin: auto;
+  width: 80%;
+}
+

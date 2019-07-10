@@ -1,0 +1,88 @@
+@import "_variables";
+
+//fuentes personalizadas
+@font-face{
+  font-family: 'DidactGothic';
+  src: url(public\fonts\Didact_Gothic\DidactGothic-Regular.ttf);
+}
+html{
+  overflow: hidden;
+}
+body{
+  background: url(public\img\login\background.jpg) no-repeat;
+  background-size: cover;
+}
+.panel-login{
+  background: white;
+  justify-content: center;
+  display: flex;
+  position: relative;
+  -webkit-box-shadow: 1px 0px 5px 0px rgba(158,158,158,1);
+  -moz-box-shadow: 1px 0px 5px 0px rgba(158,158,158,1);
+  box-shadow: 1px 0px 5px 0px rgba(158,158,158,1);
+  .form{
+    margin: auto 0;
+    width: 80%;
+  }
+}
+h4{
+  font-family: 'DidactGothic';
+  font-weight: 700px;
+  margin-bottom: 30px;
+}
+.input-icon{
+  input{
+    padding-left: 30px !important;
+    position: relative;
+    &:focus + i{  
+        color:rgba(52, 144, 220, 0.664)!important;
+        transform: scale(1.06);
+        transition: .2s;
+    }
+  }
+}#icon{
+  position: absolute;
+  top: 0;
+  padding: 7px 0 7px 10px;
+  transition: .2s;
+}.sec-foot-log{
+  background: rgb(165, 165, 165);
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100px;
+  div{
+    position: relative;
+    height: 100%;
+    margin-top:25px;
+    p{
+      color: rgb(235, 235, 235);
+      margin: auto;
+      text-transform: capitalize;
+      text-align: center;
+      font-size: 10px
+    }
+  }
+}.sec-head-log{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 5%;
+  height: 120px;
+  p{
+    text-align: center;   
+    font-family: 'DidactGothic';
+    text-transform: capitalize;
+    font-size: 1.1rem;
+  }
+  div{
+    position: relative;
+    display: flex;
+    height: 100%;
+    img{
+      margin: auto;
+      width: 80%;
+    }
+  }
+}

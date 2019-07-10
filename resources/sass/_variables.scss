@@ -1,0 +1,45 @@
+// Body
+$body-bg: #f8fafc;
+
+//importaciones de fuentes
+@import url('https://fonts.googleapis.com/css?family=Oxygen&display=swap');
+@import url('https://fonts.googleapis.com/css?family=DM+Sans|Nunito|Poppins|Source+Sans+Pro|Work+Sans&display=swap');
+
+// Typography
+$font-poppins: 'Poppins', sans-serif;
+$font-source-sans-pro: 'Source Sans Pro', sans-serif;
+$font-oxygen:'Poppins', sans-serif;
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66d9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+$panel_reg: #4D4D4D;
+$panel_direction: #0c649a;
+// tipo de atencion
+$p_normal: rgb(195, 195, 195);
+$p_urgente: rgb(243, 130, 0);
+
+// estados de radicado
+$status_new:rgb(255, 255, 255);
+$status_send:rgb(255, 231, 16);
+$status_recive_dir:rgb(59, 255, 24);
+$status_saw_dir:rgb(24, 59, 255);
+
+
+//fuentes personalizadas
+/**
+@font-face{
+  font-family: 'Arima Madurai';
+  src: url('public/fonts/Arima_Madurai/ArimaMadurai-Light.ttf');
+}**/
