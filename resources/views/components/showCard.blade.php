@@ -69,7 +69,7 @@
       <div class="col-6">
         <div class="form-group">
           <label class="card-text" for="my-textarea">observaciones:</label>
-          <textarea id="my-textarea" class="form-control" disabled name="" rows="1">{{$radicado->observaciones}}</textarea>
+          <textarea id="my-textarea" style="overflow:hidden; resize:none" class="form-control" disabled name="" rows="2">{{$radicado->observaciones}}</textarea>
         </div>
       </div>
       <!--mostrar el campo de respuesta -->
@@ -77,7 +77,7 @@
       <div class="col-6">
         <div class="form-group">
           <label class="card-text" for="my-textarea">respuesta:</label>
-        <textarea id="my-textarea" class="form-control" name="" rows="1"<?php if(Auth::user()->type_user == 3){?>placeholder="Escribe aquí tu respuesta" <?php }else{ ?>disabled placeholder="N/a"<?php } ?>><?php if($radicado->fech_recive_radic != ''){ ?>{{$radicado->respuesta}}<?php }?></textarea>
+          <textarea id="my-textarea" style="overflow:hidden; resize:none" class="form-control" name="" rows="2"<?php if(Auth::user()->type_user == 3){?>placeholder="Escribe aquí tu respuesta" <?php }else{ ?>disabled placeholder="N/a"<?php } ?>><?php if($radicado->fech_recive_radic != ''){ ?>{{$radicado->respuesta}}<?php }?></textarea>
         </div>
       </div>
       @else
@@ -89,7 +89,7 @@
             @method('PUT')
             @csrf
             <label class="card-text" for="my-textarea">respuesta:</label>
-              <textarea id="my-textarea" class="form-control col-12 @error('respuesta') is-invalid @enderror" name="respuesta" rows="1"<?php if(Auth::user()->type_user == 3){?>placeholder="Escribe aquí tu respuesta" <?php }else{ ?>disabled placeholder="N/a"<?php }?> <?php if($radicado->respuesta == ''){?><?php }else{ ?>placeholder="{{$radicado->respuesta}}"<?php }?>>{{$radicado->respuesta}}</textarea>
+              <textarea id="my-textarea" style="overflow:hidden; resize:none" class="form-control col-12 @error('respuesta') is-invalid @enderror" name="respuesta" rows="2"<?php if(Auth::user()->type_user == 3){?>placeholder="Escribe aquí tu respuesta" <?php }else{ ?>disabled placeholder="N/a"<?php }?> <?php if($radicado->respuesta == ''){?><?php }else{ ?>placeholder="{{$radicado->respuesta}}" disabled<?php }?>>{{$radicado->respuesta}}</textarea>
               <button class="btn-revisado <?php if($radicado->respuesta == ''){?><?php }else{ ?>d-none<?php }?>" type="submit"><i class="fas fa-check"></i></button>
               @error('respuesta')
                 <span class="invalid-feedback" role="alert">

@@ -32,6 +32,9 @@
       <strong class="card-text">
         <p class="card-text-var">
             Se ha solicitado un nuevo radicado <br><br>
+            @if ($data->atention == 'urgente')
+            <strong style="text-transform: uppercase">* este radicado debe ser resuelto lo mas pronto posible *</strong>
+            @endif
             El tiempo de respuesta es de maximo 3 dìas a partir recibido este correo
         </p>
       </strong>

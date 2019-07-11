@@ -45,11 +45,24 @@ class RegctrolController extends Controller
         $radicados= Radicado::all();
         $programas= Program::all();
         $motivos= Motivo::orderBy('name', 'ASC')->get();
+        $id = DB::table('fech_radics')->select('id_radicado')->latest()->take(1)->value('id_radicado');
+        $num_more= str_pad($id, 4, "0", STR_PAD_LEFT);
+        $year= date('dmY');
         if (auth()->user()->type_user == 2) {
-            return view('regctrol.createRadic', compact('radicado','programas','motivos'));
+            return view('regctrol.createRadic', compact('radicado','programas','motivos','num_more','year'));
         }else{
             abort(403);
         }
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        
     }
 
     /**
@@ -91,7 +104,7 @@ class RegctrolController extends Controller
         }else {
             $radicado->asunto = $request->input('asunto');
         };
-        /* ------------------ */
+    /* ------------------ */
         $radicado->origen_cel = $request->input('origen_cel');
         $radicado->origen_correo = $request->input('origen_correo');
     /* ------auto llenar campo observaciones----- */
@@ -108,22 +121,25 @@ class RegctrolController extends Controller
     //validar tipo de atencion para enviar correo
         if ($radicado->atention == "urgente") {
 
-            $mail= 'jema@emailapps.in';
+            $mail= 'direccion@nextemail.in';
             $subject= 'Atención Inmediata R#'.$radicado->fechradic_id.'-'.$radicado->year;
             $messaje= 'mensaje de prueba';
             Mail::to($mail)->send(new SendUrgenteMail($subject, $messaje, $radicado, $programas));
     //enviado correo director programa
             foreach ($programas as $programa) {
                 if ($programa->id == $radicado->sendTo_id) {
-                    $mailDir= $programa->correo_director;
+                    if ($radicado->sendTo_id == 1) {
+                        
+                    }else {
+                        $mailDir= $programa->correo_director;
+                        $subjectDir= 'Atención Inmediata R#'.$radicado->fechradic_id.'-'.$radicado->year;
+                        $messajeDir= 'mensaje de prueba';
+
+                        Mail::to($mailDir)->send(new SendDirMail($subjectDir, $messajeDir, $radicado));
+                    }
                 }
             }
-
-            $subjectDir= 'Atención Inmediata R#'.$radicado->fechradic_id.'-'.$radicado->year;
-            $messajeDir= 'mensaje de prueba';
             
-            Mail::to($mailDir)->send(new SendDirMail($subjectDir, $messajeDir, $radicado));
-        
         }else{
             foreach ($programas as $programa) {
                 if ($programa->id == $radicado->sendTo_id) {
@@ -138,19 +154,6 @@ class RegctrolController extends Controller
         }
 
         return redirect()->route('reg-ctrol.index')->with('status','Radicado '.$radicado->fechradic_id.'-'.$radicado->year.' Creado exitosamente');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-    public function show(Radicado $reg_ctrol)
-    {
-        /*$radicado = $reg_ctrol;
-        return view('regctrol.showRadic', compact('radicado'));*/
     }
 
     /**
@@ -239,7 +242,7 @@ class RegctrolController extends Controller
         return redirect()->route('reg-ctrol.index',[$reg_ctrol])->with('status','Radicado #'.$radicado->fechradic_id.'-'.$radicado->year.' entregado exitosamente');
         //return 'Actualizado';
     }
-// ELIMINAR
+    // ELIMINAR
     /**
      * Remove the specified resource from storage.
      *
@@ -255,7 +258,6 @@ class RegctrolController extends Controller
         $programas = Program::all();
         $radicado = $reg_ctrol;
         if (auth()->user()->type_user == 2) {
-
             return view('regctrol.sendMailEst', compact('radicado','programas'));
         }else{
             abort(403);
@@ -267,5 +269,19 @@ class RegctrolController extends Controller
         ]);
 
         return redirect()->route('reg-ctrol.index')->with('Se ah resetado exitosamente el contador de radicados');
+    }
+    public function viewSearchRadic()
+    {
+        $radicados= Radicado::orderBy('id', 'DESC')->get();
+        $r_n = DB::table('radicados')
+                ->whereRaw('fech_start_radic != "" ')
+                ->get();
+        $programas= Program::get();
+
+        if (auth()->user()->type_user == 2) {
+            return view('filter.search-radic', compact('radicados','programas','r_n'));
+        }else{
+            abort(403);
+        }
     }
 }

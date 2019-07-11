@@ -44,6 +44,7 @@ Route::get('reg-ctrol/sendMail/{reg_ctrol}', 'RegctrolController@sendEmail',comp
 Route::post('reg-ctrol/restart', 'RegctrolController@restarFechRadic')->middleware('auth')->name('reg-ctrol.restarFechRadic');
 Route::put('sme/{reg_ctrol}', 'RegctrolController@updateMailEst')->middleware('auth')->name('reg-ctrol.sme');
 Route::put('delivered/{reg_ctrol}', 'RegctrolController@updateDelivered')->middleware('auth')->name('reg-ctrol.updateDelivered');
+Route::get('filterStatus', 'RegctrolController@viewSearchRadic',compact('radicados'))->middleware('auth')->name('reg-ctrol.viewSearchRadic');
 
 
 //rutas de direccion

@@ -4,11 +4,13 @@
 
 <!-- cabecera del contenido-->
 <div class="row title-content">
-    <h2 class="text-center text-capitalize title">nuevo radicado</h2>
+    <h2 class="text-center text-capitalize title">nuevo radicado <strong>#{{$num_more}}-{{$year}}</strong></h2>
 </div>
 <!--cuerpo delcontenido -->
 <div class="row justify-content-md-center">
     <div class="container">
+<hr>
+
         <form class="needs-validation" action="/reg-ctrol" method="post" id="form-create">
           @csrf
           <div class="row">
@@ -50,7 +52,7 @@
                   </div>
                 </div>
             <!-- selects-->
-                <!-- SELECT DE MOTIVOS-->
+              <!-- SELECT DE MOTIVOS-->
               <div class="col-6 form-group" no-margin>
                 <label class="text-capitalize col-form-label-sm col-form-label" for="motivo_id">motivo</label>
                 <select name="motivo_id" id="motivo" class="text-capitalize form-control form-control-sm">
@@ -115,9 +117,11 @@
           </div>
           @include('components.alertsModal')
         </form>
+        <hr>
+        <!--botones-->
         <div class="text-center">
-          <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary">Guardar</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button btn-norm type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-primary">Guardar</button>
+          <button btn-norm type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
     </div>
 </div>

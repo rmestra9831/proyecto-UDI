@@ -43,7 +43,7 @@
                         @include('components.main-panel')
                     </div>
                     <!--Panel contenido -->
-                    <div class="col-10 container-fluid content-panel h-100">
+                    <div panel class="col-10 container-fluid content-panel h-100">
                         @yield('content-panel') 
                     </div>
                 </div>
