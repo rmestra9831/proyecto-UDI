@@ -46,4 +46,19 @@ class Radicado extends Model
   public function fechradic(){
     return $this->hasOne(FechRadic::class);
   }
+
+  //query scope
+  public function scopeName($query, $name){
+    if ($name) 
+      return $query->where('name','LIKE',"%$name%");  
+  }
+  public function scopelastname($query, $lastname){
+    if ($lastname)
+      return $query->where('last_name','LIKE',"%$lastname%");  
+  }
+  public function scopeNumradic($query, $fechradic_id){
+    if ($fechradic_id)
+      return $query->where('fechradic_id','LIKE',"%$fechradic_id%");  
+  }
+
 }

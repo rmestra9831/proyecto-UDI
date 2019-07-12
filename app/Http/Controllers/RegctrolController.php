@@ -272,14 +272,86 @@ class RegctrolController extends Controller
     }
     public function viewSearchRadic()
     {
-        $radicados= Radicado::orderBy('id', 'DESC')->get();
-        $r_n = DB::table('radicados')
-                ->whereRaw('fech_start_radic != "" ')
-                ->get();
+            $programas= Program::get();
+            $radicados= Radicado::orderBy('id', 'DESC')->get();
+            $query_norm = Radicado::orderBy('id', 'DESC')->whereNull('fech_send_dir')->get();#->paginate(1)
+        //filtrdo de enviados    
+            $query_send = Radicado::orderBy('id', 'DESC')->where([
+                ['fech_send_dir','!=',' '],
+                ['fech_recive_dir',null]
+            ])->get();
+        //filtrdo de recibidos            
+            $query_recive = Radicado::orderBy('id', 'DESC')->where([
+                ['fech_recive_dir','!=',' '],
+                ['fech_notifi_end',null],
+                ['respuesta',null]
+            ])->get();
+        //filtrdo de respondidos            
+            $query_response = Radicado::orderBy('id', 'DESC')->where([
+                ['respuesta','!=',' '],
+                ['fech_notifi_end',null],
+                ['fech_recive_radic',null],
+                ['fech_delivered',null]
+            ])->get();
+        //filtrdo de recibido registro y control            
+            $query_reciverg = Radicado::orderBy('id', 'DESC')->where([
+                ['fech_recive_radic','!=',' '],
+                ['respuesta','!=',' '],  
+                ['fech_notifi_end',null],
+                ['fech_delivered',null]
+            ])->get();
+        //filtrdo de entregados           
+            $query_entregado = Radicado::orderBy('id', 'DESC')->where([
+                ['fech_notifi_end','!=',' '],
+                ['fech_delivered','!=',' ']
+            ])->get();
+        //filtrdo de pendientes           
+            $query_pendiente = Radicado::orderBy('id', 'DESC')->where([
+                ['fech_notifi_end','!=',' '],
+                ['fech_delivered',null]
+            ])->get();
+        //filtrdo de importantes           
+            $query_important = Radicado::orderBy('id', 'DESC')->where([
+                ['atention','=','urgente '],
+            ])->get();
+            
+            if (auth()->user()->type_user == 2) {
+                return view('filter.search-radic', compact(
+                    'query_norm',
+                    'query_send',
+                    'query_recive',
+                    'query_response',
+                    'query_reciverg',
+                    'query_entregado',
+                    'query_pendiente',
+                    'query_important',
+                    'pag_rad',
+                    'radicados',
+                    'programas',
+                    'r_n'
+                ));
+            }else{
+                abort(403);
+            }
+    }
+    public function viewAllRadic(Request $request){
+
+        $name= $request->get('name');
+        $last_name= $request->get('last_name');
+        $fechradic_id= $request->get('fechradic_id');
+
         $programas= Program::get();
+        $radicados= Radicado::orderBy('id', 'DESC')
+            ->name($name)
+            ->lastname($last_name)
+            ->numradic($fechradic_id)
+            ->paginate(5);
 
         if (auth()->user()->type_user == 2) {
-            return view('filter.search-radic', compact('radicados','programas','r_n'));
+            return view('filter.all-radic', compact(
+                'radicados',
+                'programas'
+            ));
         }else{
             abort(403);
         }

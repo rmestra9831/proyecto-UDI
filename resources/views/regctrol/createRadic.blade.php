@@ -10,7 +10,6 @@
 <div class="row justify-content-md-center">
     <div class="container">
 <hr>
-
         <form class="needs-validation" action="/reg-ctrol" method="post" id="form-create">
           @csrf
           <div class="row">

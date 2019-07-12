@@ -16,7 +16,7 @@
       @if (Auth::user()->type_user == 2)
         <a href="{{route('reg-ctrol.index')}}"><i class="fas fa-chevron-right"></i>Inicio</a>
         <a href="{{route('reg-ctrol.create')}}"><i class="fas fa-chevron-right"></i>nuevo radicado</a>
-        <a href=""><i class="fas fa-chevron-right"></i>filtrado de radicado</a>
+        <a href="{{route('reg-ctrol.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>
         <a href="{{route('reg-ctrol.viewSearchRadic')}}"><i class="fas fa-chevron-right"></i>estado de radicados</a>
           @else
           @if (Auth::user()->type_user == 3)
