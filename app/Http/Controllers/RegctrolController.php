@@ -29,7 +29,7 @@ class RegctrolController extends Controller
         $programas= Program::get();
 
         if (auth()->user()->type_user == 2) {
-            return view('regctrol.home', compact('radicados','programas','radic'));
+            return view('regctrol.home', compact('radicados','programas'));
         }else{
             abort(403);
         }
@@ -42,7 +42,7 @@ class RegctrolController extends Controller
      */
     public function create()
     {
-        $radicados= Radicado::all();
+        $radicado= Radicado::all();
         $programas= Program::all();
         $motivos= Motivo::orderBy('name', 'ASC')->get();
         $id = DB::table('fech_radics')->select('id_radicado')->latest()->take(1)->value('id_radicado');
@@ -183,7 +183,7 @@ class RegctrolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
- // UPDATES     
+    // UPDATES     
     public function update(Request $request, Radicado $reg_ctrol)
     {
         $radicado = $reg_ctrol;
@@ -325,10 +325,8 @@ class RegctrolController extends Controller
                     'query_entregado',
                     'query_pendiente',
                     'query_important',
-                    'pag_rad',
                     'radicados',
-                    'programas',
-                    'r_n'
+                    'programas'
                 ));
             }else{
                 abort(403);
