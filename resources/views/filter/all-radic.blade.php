@@ -23,7 +23,7 @@
           <div class="form-group">
             <button class="btn btn-outline-primary" type="submit">Buscar</button>
           </div>
-          
+ 
         </form>
     </div>
   </div>
