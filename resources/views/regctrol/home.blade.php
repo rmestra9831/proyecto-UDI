@@ -42,7 +42,7 @@
       
         @endforeach
   </div>
-  <div class="row footer-home">
+  <div class="row footer-home b-show-top">
     <div><p class="foo-title">estados</p></div>
     <div><i class="far fa-circle"></i></div>
     <div><p class="foo-txt">Creado</p></div>

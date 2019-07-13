@@ -203,6 +203,16 @@ div[p2] {
   margin: 10px auto;
 }
 
+.b-show-buttom {
+  box-shadow: 0px 0px 6px 3px #80808070;
+  transition: 0.5s;
+}
+
+.b-show-top {
+  box-shadow: 0px -2px 14px -8px #80808070;
+  transition: 0.5s;
+}
+
 a[btn-norm],
 button[btn-norm] {
   width: 20%;
@@ -217,7 +227,7 @@ button[btn-norm] {
   border: 1px solid #b8b8b8;
   padding: 20px;
   margin: 40px auto;
-  box-shadow: 2px 6px 10px 0px rgba(135, 135, 135, 0.5);
+  box-shadow: 2px 6px 2px -4px rgba(135, 135, 135, 0.5);
   transition: 0.2s;
   overflow: hidden;
 }
@@ -225,7 +235,7 @@ button[btn-norm] {
 .content-card:hover {
   transform: scale(1.005);
   transition: 0.2s;
-  box-shadow: 2px 6px 15px 0px #878787;
+  box-shadow: 2px 6px 15px -5px #878787b3;
 }
 
 .content-card img {

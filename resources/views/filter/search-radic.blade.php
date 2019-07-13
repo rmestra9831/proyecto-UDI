@@ -35,7 +35,7 @@
         <div class="tab-pane fade" id="nav-importantes" role="tabpanel" aria-labelledby="nav-importantes-tab">@include('filter.important')</div>
       </div>
   </div>
-  <div class="row footer-home">
+  <div class="row footer-home b-show-top">
     <!-- paginacion-->
   
     <!--reset contador-->

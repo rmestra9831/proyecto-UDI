@@ -36,7 +36,7 @@
       @endforeach
     </div>
 <!-- piecera-->
-<div class="row footer-home">
+<div class="row footer-home b-show-top">
     <div><p class="foo-title">{{$radicados->render()}}</p></div>
     <!--reset contador-->
 <!--

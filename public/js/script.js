@@ -227,7 +227,18 @@ $(document).ready(function () {
     wordLimit($(this));
   }); //validacion tolstip
 
-  $('i[status]').tooltip(options);
+  $('i[status]').tooltip(options); //activar el box-shadown de la cabecera
+});
+$('.cont-panel').scroll(function () {
+  $scrolltop = $('.cont-panel').scrollTop();
+
+  if ($scrolltop > 15) {
+    $('.title-content').addClass('b-show-buttom');
+  } else if ($scrolltop < 15) {
+    $('.title-content').removeClass('b-show-buttom');
+  }
+
+  console.log($scrolltop);
 });
 
 /***/ }),
@@ -239,7 +250,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laragon\www\psirc\resources\js\script.js */"./resources/js/script.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\proyecto-UDI\resources\js\script.js */"./resources/js/script.js");
 
 
 /***/ })

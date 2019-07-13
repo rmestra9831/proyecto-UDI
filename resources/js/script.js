@@ -136,5 +136,19 @@ function formatToTelephone(str) {
     wordLimit($(this));
   });
 //validacion tolstip
-$('i[status]').tooltip(options)
+$('i[status]').tooltip(options);
+
+//activar el box-shadown de la cabecera
+
+});$('.cont-panel').scroll(function () { 
+    $scrolltop = $('.cont-panel').scrollTop();
+
+      if ($scrolltop > 15) {
+        $('.title-content').addClass('b-show-buttom');        
+      }else if($scrolltop < 15){
+        $('.title-content').removeClass('b-show-buttom');
+      }
+
+    console.log($scrolltop);
+    
 });
