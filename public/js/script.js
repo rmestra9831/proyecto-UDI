@@ -227,8 +227,9 @@ $(document).ready(function () {
     wordLimit($(this));
   }); //validacion tolstip
 
-  $('i[status]').tooltip(options); //activar el box-shadown de la cabecera
-});
+  $('i[status]').tooltip(options);
+}); //activar el box-shadown de la cabecera
+
 $('.cont-panel').scroll(function () {
   $scrolltop = $('.cont-panel').scrollTop();
 

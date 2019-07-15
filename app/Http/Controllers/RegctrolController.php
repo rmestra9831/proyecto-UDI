@@ -337,17 +337,26 @@ class RegctrolController extends Controller
         $name= $request->get('name');
         $last_name= $request->get('last_name');
         $fechradic_id= $request->get('fechradic_id');
+        $motivo= $request->get('motivo');
+        $programa= $request->get('programa');
+        $start_date= $request->get('start');
+        $end_date= $request->get('end');
 
         $programas= Program::get();
+        $motivos= Motivo::orderBy('name', 'ASC')->get();
         $radicados= Radicado::orderBy('id', 'DESC')
             ->name($name)
             ->lastname($last_name)
             ->numradic($fechradic_id)
+            ->motivo($motivo)
+            ->programa($programa)
+            ->Dates($start_date, $end_date)
             ->paginate(5);
 
         if (auth()->user()->type_user == 2) {
             return view('filter.all-radic', compact(
                 'radicados',
+                'motivos',
                 'programas'
             ));
         }else{

@@ -60,5 +60,18 @@ class Radicado extends Model
     if ($fechradic_id)
       return $query->where('fechradic_id','LIKE',"%$fechradic_id%");  
   }
+  public function scopeMotivo($query, $motivo){
+    if ($motivo)
+      return $query->where('motivo_id',$motivo);  
+  }
+  public function scopePrograma($query, $programa){
+    if ($programa)
+      return $query->where('program_id',$programa);  
+  }
+  public function scopeDates($query, $start_date, $end_date){
+    if ($start_date || $end_date)
+      return $query->whereBetween('year',[$start_date, $end_date]);  
+  }
+
 
 }

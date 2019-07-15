@@ -161,6 +161,11 @@ hr {
   padding-right: 5px;
 }
 
+.footer-home .pagination {
+  justify-content: center;
+  margin: auto;
+}
+
 div[panel] {
   grid-gap: initial !important;
 }

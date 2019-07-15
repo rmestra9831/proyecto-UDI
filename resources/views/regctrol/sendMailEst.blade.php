@@ -69,9 +69,9 @@
                         
                           @else
                           @if ($radicado->fech_notifi_end != '' )
-                          <div class="row">
-                              <div class="col">
-                                <div class="text-center">
+                    <div class="row">
+                      <div class="col">
+                        <div class="text-center">
                           @else
                           @endif
                           @endif
@@ -90,6 +90,7 @@
                       </div>
                     </div>
               </form>
+            
             </div>
           </div>
       </div>
