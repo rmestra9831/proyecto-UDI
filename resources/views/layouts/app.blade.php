@@ -6,6 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/png" href="{{ asset('img/logo_udi.png') }}" />
 
     <title>UDI Sirc @yield('title')</title>
 

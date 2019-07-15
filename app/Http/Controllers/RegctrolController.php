@@ -270,52 +270,60 @@ class RegctrolController extends Controller
 
         return redirect()->route('reg-ctrol.index')->with('Se ah resetado exitosamente el contador de radicados');
     }
-    public function viewSearchRadic()
-    {
+    public function viewSearchRadic(Request $request)
+    {   
+            //variables de busqueda
+            $name= $request->get('name');
+            $last_name= $request->get('last_name');
+            $fechradic_id= $request->get('fechradic_id');
+            $motivo= $request->get('motivo');
+            $programa= $request->get('programa');
+            $start_date= $request->get('start');
+            $end_date= $request->get('end');
+
+            $motivos= Motivo::orderBy('name', 'ASC')->get();
             $programas= Program::get();
             $radicados= Radicado::orderBy('id', 'DESC')->get();
-            $query_norm = Radicado::orderBy('id', 'DESC')->whereNull('fech_send_dir')->get();#->paginate(1)
+            $query_norm = Radicado::orderBy('id', 'DESC')->whereNull('fech_send_dir')
+            ->name($name)
+            ->lastname($last_name)
+            ->numradic($fechradic_id)
+            ->motivo($motivo)
+            ->programa($programa)->get();#->paginate(1)
         //filtrdo de enviados    
             $query_send = Radicado::orderBy('id', 'DESC')->where([
                 ['fech_send_dir','!=',' '],
-                ['fech_recive_dir',null]
-            ])->get();
+                ['fech_recive_dir',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de recibidos            
             $query_recive = Radicado::orderBy('id', 'DESC')->where([
                 ['fech_recive_dir','!=',' '],
                 ['fech_notifi_end',null],
-                ['respuesta',null]
-            ])->get();
+                ['respuesta',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de respondidos            
             $query_response = Radicado::orderBy('id', 'DESC')->where([
                 ['respuesta','!=',' '],
                 ['fech_notifi_end',null],
                 ['fech_recive_radic',null],
-                ['fech_delivered',null]
-            ])->get();
+                ['fech_delivered',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de recibido registro y control            
             $query_reciverg = Radicado::orderBy('id', 'DESC')->where([
                 ['fech_recive_radic','!=',' '],
                 ['respuesta','!=',' '],  
                 ['fech_notifi_end',null],
-                ['fech_delivered',null]
-            ])->get();
+                ['fech_delivered',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de entregados           
             $query_entregado = Radicado::orderBy('id', 'DESC')->where([
                 ['fech_notifi_end','!=',' '],
-                ['fech_delivered','!=',' ']
-            ])->get();
+                ['fech_delivered','!=',' ']])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de pendientes           
             $query_pendiente = Radicado::orderBy('id', 'DESC')->where([
                 ['fech_notifi_end','!=',' '],
-                ['fech_delivered',null]
-            ])->get();
+                ['fech_delivered',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de importantes           
             $query_important = Radicado::orderBy('id', 'DESC')->where([
-                ['atention','=','urgente '],
-            ])->get();
+                ['atention','=','urgente '],])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
             
-            if (auth()->user()->type_user == 2) {
+          
                 return view('filter.search-radic', compact(
                     'query_norm',
                     'query_send',
@@ -326,11 +334,10 @@ class RegctrolController extends Controller
                     'query_pendiente',
                     'query_important',
                     'radicados',
+                    'motivos',
                     'programas'
                 ));
-            }else{
-                abort(403);
-            }
+       
     }
     public function viewAllRadic(Request $request){
 
@@ -353,14 +360,10 @@ class RegctrolController extends Controller
             ->Dates($start_date, $end_date)
             ->paginate(5);
 
-        if (auth()->user()->type_user == 2) {
             return view('filter.all-radic', compact(
                 'radicados',
                 'motivos',
                 'programas'
             ));
-        }else{
-            abort(403);
-        }
     }
 }

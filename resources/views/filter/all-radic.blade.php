@@ -74,8 +74,8 @@
       <p class="foo-title">{{$radicados->render()}}</p>
     </div>
     <div class="col-4">
-      <strong class="contador text-uppercase">registros encontrados: {{count($radicados)}} </strong>
-    </div>
+    <strong class="contador text-uppercase">registros encontrados: {{count($radicados)}} </strong>
+</div>
     <!--reset contador-->
 
 <!--

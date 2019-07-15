@@ -36,6 +36,49 @@
       </div>
   </div>
   <div class="row footer-home b-show-top">
+      <div class="col-10">
+        <form method="GET" class="" action="{{action('RegctrolController@viewSearchRadic')}}">
+          <div class="row justify-content-md-center">
+            <div class="col form-group">
+              <input id="my-input" class="form-control form-control-sm" type="text" name="fechradic_id" placeholder="Numero de radicado">
+            </div>
+
+            <div class="col form-group">
+              <input id="my-input" class="form-control form-control-sm" type="text" name="name" placeholder="Nombre">
+            </div>
+            
+            <div class="col form-group">
+              <input id="my-input" class="form-control form-control-sm" type="text" name="last_name" placeholder="Apellidos">
+            </div>
+
+            <div class="col form-group">
+              <select name="motivo" id="motivo" class="text-capitalize form-control form-control-sm">
+                  <option class="text-capitalize" value="">Motivo</option>                                          
+                @foreach ($motivos as $motivo)
+                <option class="text-capitalize" value="{{$motivo->id}}">{{$motivo->name}}</option>
+                @endforeach
+              </select>
+            </div>
+            <!--programas-->
+            <div class="col form-group">
+              <select name="programa" id="programa" class="text-capitalize form-control form-control-sm">
+                  <option class="text-capitalize" value="">programa</option>                                          
+                @foreach ($programas as $programa)
+                <option class="text-capitalize" value="{{$programa->id}}">{{$programa->name}}</option>
+                @endforeach
+              </select>
+            </div>
+
+            <div class="col form-group">
+              <button class="btn btn-block btn-outline-primary form-control-sm" type="submit">Buscar</button>
+            </div>
+
+          </div>
+        </form>
+        </div>
+      <div class="col-2">
+        <strong class="contador text-uppercase">registros encontrados: {{count($query_important)}} </strong>
+      </div>
     <!-- paginacion-->
   
     <!--reset contador-->
