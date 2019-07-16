@@ -21,7 +21,8 @@ class Radicado extends Model
     'fech_delivered',
     'time_delivered',
     'obs',
-    'respuesta'];
+    'respuesta',
+    'respon_id'];
 
   /**
  * Get the route key for the model.

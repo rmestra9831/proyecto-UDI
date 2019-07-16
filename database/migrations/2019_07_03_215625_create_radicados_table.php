@@ -24,6 +24,7 @@ class CreateRadicadosTable extends Migration
             $table->integer('program_id')->unsigned()->nullable();
             $table->integer('sendTo_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('respon_id')->unsigned()->nullable();
             $table->integer('motivo_id')->unsigned()->nullable();
             $table->string('asunto')->nullable();
             $table->string('origen_cel',14)->nullable();

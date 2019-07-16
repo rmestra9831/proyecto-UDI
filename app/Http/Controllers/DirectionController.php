@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Radicado;
 use App\Models\Program;
+use App\User;
 use App\Http\Requests\UpdateRespuestaRequest;
 
 class DirectionController extends Controller
@@ -16,11 +17,12 @@ class DirectionController extends Controller
      */
     public function index()
     {
+        $users= User::get();
         $radicados= Radicado::orderBy('id', 'DESC')->get();
         $programas= Program::all();
 
         if (auth()->user()->type_user == 3) {
-            return view('direction.home', compact('radicados','programas'));
+            return view('direction.home', compact('radicados','programas','users'));
         }else{
             abort(403);
         }
@@ -66,11 +68,12 @@ class DirectionController extends Controller
      */
     public function edit(Radicado $direction)
     {
+        $users= User::get();
         $programas= Program::all();
         $radicado = $direction;
         
         if (auth()->user()->type_user == 3) {
-            return view('direction.showRadic', compact('radicado','programas'));
+            return view('direction.showRadic', compact('radicado','programas','users'));
         }else{
             abort(403);
         }
@@ -93,7 +96,8 @@ class DirectionController extends Controller
             'fech_recive_dir',
             'time_recive_dir',
             'fech_notifi_end',
-            'time_notifi_end'
+            'time_notifi_end',
+            'respon_id'
         ));
         $radicado->save();
 

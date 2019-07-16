@@ -71,7 +71,7 @@ class RegisterController extends Controller
     }
     public function redirectPath()
     {
-        $radicados= Radicado::all();
+        $radicados= Radicado::get();
 
         if (auth()->user()->type_user == 3) {
             //return '/direction';

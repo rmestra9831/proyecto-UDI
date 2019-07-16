@@ -70,14 +70,14 @@
             </div>
 
             <div class="col form-group">
-              <button class="btn btn-block btn-outline-primary form-control-sm" type="submit">Buscar</button>
+              <button class="btn btn-block btn-primary form-control-sm" type="submit">Buscar</button>
             </div>
 
           </div>
         </form>
         </div>
       <div class="col-2">
-        <strong class="contador text-uppercase">registros encontrados: {{count($query_important)}} </strong>
+        <strong class="contador text-uppercase">registros encontrados: {{count($radicados)}} </strong>
       </div>
     <!-- paginacion-->
   
