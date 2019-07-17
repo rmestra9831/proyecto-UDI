@@ -18,8 +18,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="h-100" id="">
     <div class="h-100" id="app">
@@ -28,7 +28,7 @@
         <div class="container-fluid h-100">
         <!-- variable para cambiar color de admin-->
         <div class="row h-100">
-            <div class="col-md-4 panel-login">
+            <div class="col-md-3 panel-login">
                 @yield('content')    
             </div>
         </div>

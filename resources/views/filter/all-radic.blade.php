@@ -10,7 +10,7 @@
       <div class="container">
           <div class="row">
               <div class="col-12">
-                <form method="GET" class="" action="{{action('RegctrolController@viewAllRadic')}}">
+                <form method="GET" class="" action="{{action('FilterController@viewAllRadic')}}">
                   <div class="row justify-content-md-center">
                     <div class="col form-group">
                       <input id="my-input" class="form-control form-control-sm" type="text" name="name" placeholder="Nombre">

@@ -3,10 +3,8 @@
 @section('content')
 <div class="form">
     <div class="sec-head-log">
-        <div>
-            <img src="{{asset('img\logo-udi-completo.svg')}}" alt="">
-        </div>
-        <p>sistema de información registro y control</p>
+        <h1>SIAR</h1>
+        <p>sistema de información admiciones y registro</p>
     </div>
     <!-- seccion del formulario-->
     <div class="tt-login text-capitalize"><h4>iniciar sesión</h4></div>
@@ -58,6 +56,11 @@
                 </div>
     </form>
     <!-- seccion del pie de pagina del login-->
+    <div class="sec-body-log">
+        <div>
+            <img src="{{asset('img\logo-udi-completo.svg')}}" alt="">
+        </div>
+    </div>
     <div class="sec-foot-log">
         <div>
             <p class="text-capitalize container-fluid">Copyright © 2019 Universidad de Investigación Y Desarrollo - UDI - .

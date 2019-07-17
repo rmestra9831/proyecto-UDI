@@ -98,10 +98,10 @@
   <div class="col-3">
     <a btn-card name="" id="" class="btn btn-block btn-outline-primary" 
     @if (Auth::user()->type_user == 2)
-      href="/reg-ctrol/{{$radicado->slug}}/edit"
+      href="{{action('RegctrolController@edit', $radicado->slug)}}"
     @else
       @if (Auth::user()->type_user == 3)
-        href="/direction/{{$radicado->slug}}/edit"     
+        href="{{action('DirectionController@edit', $radicado->slug)}}"     
       @endif
     @endif
     role="button">Ver radicado</a>  

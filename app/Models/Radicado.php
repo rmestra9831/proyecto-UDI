@@ -73,6 +73,4 @@ class Radicado extends Model
     if ($start_date || $end_date)
       return $query->whereBetween('year',[$start_date, $end_date]);  
   }
-
-
 }

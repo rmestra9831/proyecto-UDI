@@ -2,6 +2,7 @@
 
 use App\Models\Radicado;
 use App\Models\Program;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,19 +21,20 @@ Route::get('/', function () {
     //return view('auth.login');        
     //variables
     $radicados= Radicado::all();
-$programas= Program::all();
+    $programas= Program::all();
+    $users= User::get();
 
     if (Auth::check()== false) {
         return view('auth.login'); //cuando sin logeo       
     }else {
 
         if (auth()->user()->type_user == 3) {
-            return view('direction.home',compact('radicados','programas')); //entra a direccion
+            return view('direction.home',compact('radicados','programas','users')); //entra a direccion
 
         }elseif (auth()->user()->type_user == 2) {
-            return view('regctrol.home',compact('radicados','programas')); //Entra a registro y control
+            return view('regctrol.home',compact('radicados','programas','users')); //Entra a registro y control
         
-        }return view('admin.home',compact('radicados','programas')); //cuando este en administrador
+        }return view('admin.home',compact('radicados','programas','users')); //cuando este en administrador
     
     }
 })->name('at_login');
@@ -44,9 +46,6 @@ Route::get('reg-ctrol/sendMail/{reg_ctrol}', 'RegctrolController@sendEmail',comp
 Route::post('reg-ctrol/restart', 'RegctrolController@restarFechRadic')->middleware('auth')->name('reg-ctrol.restarFechRadic');
 Route::put('sme/{reg_ctrol}', 'RegctrolController@updateMailEst')->middleware('auth')->name('reg-ctrol.sme');
 Route::put('delivered/{reg_ctrol}', 'RegctrolController@updateDelivered')->middleware('auth')->name('reg-ctrol.updateDelivered');
-Route::get('filterStatus', 'RegctrolController@viewSearchRadic',compact('radicados'))->middleware('auth')->name('reg-ctrol.viewSearchRadic');
-Route::get('filter_all_radic', 'RegctrolController@viewAllRadic',compact('radicados'))->middleware('auth')->name('reg-ctrol.viewAllRadic');
-
 
 //rutas de direccion
 Route::resource('direction', 'DirectionController',compact('radicados'))->middleware('auth');
@@ -55,3 +54,7 @@ Route::put('save/{direction}', 'DirectionController@saveRequest',compact('radica
 //rutas de estado
 Route::resource('status', 'EstadoController',compact('radicados'))->middleware('auth');
 
+//rutas de filtrado
+Route::get('filterStatus', 'FilterController@viewSearchRadic',compact('radicados'))->middleware('auth')->name('filter.viewSearchRadic');
+Route::get('filterStatus_dir', 'FilterController@viewSearchRadicDir',compact('radicados'))->middleware('auth')->name('filter.viewSearchRadicDir');
+Route::get('filter_all_radic', 'FilterController@viewAllRadic',compact('radicados'))->middleware('auth')->name('filter.viewAllRadic');

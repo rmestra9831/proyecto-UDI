@@ -119,7 +119,7 @@
         <hr>
         <!--botones-->
         <div class="text-center">
-          <button btn-norm type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-primary">Guardar</button>
+          <button btn-norm data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-primary">Guardar</button>
           <button btn-norm type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
     </div>

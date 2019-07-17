@@ -22,7 +22,7 @@ hr{
 #h-content-img {
     display: flex !important;
     #w-img-log {
-        width: 89px;
+        height: 29px;
         margin-right: 10px;
     }
 }
@@ -182,9 +182,6 @@ div[p2]{
 a[btn-norm], button[btn-norm]{
     width: 20%;
     margin: auto;
-}
-a[btn-card], button[btn-card]{
-    //width: 20%;
 }
 /*.btn-report{
     

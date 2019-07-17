@@ -16,7 +16,7 @@
         </div>
       </nav>
   </div>
-  <!--cuerpo delcontenido -->
+<!--cuerpo delcontenido -->
   <div p2 class="row justify-content-md-center cont-panel">
 
     @include('common.success')
@@ -37,7 +37,7 @@
   </div>
   <div class="row footer-home b-show-top">
       <div class="col-10">
-        <form method="GET" class="" action="{{action('RegctrolController@viewSearchRadic')}}">
+        <form method="GET" class="" action="{{action('FilterController@viewSearchRadic')}}">
           <div class="row justify-content-md-center">
             <div class="col form-group">
               <input id="my-input" class="form-control form-control-sm" type="text" name="fechradic_id" placeholder="Numero de radicado">
@@ -79,7 +79,7 @@
       <div class="col-2">
         <strong class="contador text-uppercase">registros encontrados: {{count($radicados)}} </strong>
       </div>
-    <!-- paginacion-->
+<!-- paginacion-->
   
     <!--reset contador-->
 <!--
