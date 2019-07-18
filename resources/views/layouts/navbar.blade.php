@@ -16,7 +16,7 @@
                                 Administrador
                             @else
                             @if (Auth::user()->type_user == 2)
-                                Admiciones y Registro
+                                Admisiones y Registro
                             @else
                             @if (Auth::user()->type_user == 3)
                             Direccion                                        

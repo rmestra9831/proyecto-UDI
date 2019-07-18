@@ -124,6 +124,25 @@ hr {
   scrollbar-face-color: red;
 }
 
+.cont-panel .export-list {
+  overflow: auto;
+  height: 50%;
+  width: 95%;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.cont-panel .export-list::-webkit-scrollbar-thumb {
+  background: none;
+  border-radius: 8px;
+  border: 2px solid gray;
+}
+
+.cont-panel .export-list::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
 .bg-p-regctrol {
   background: #4D4D4D;
 }

@@ -79,14 +79,13 @@
       <div class="col-2">
         <strong class="contador text-uppercase">registros encontrados: {{count($radicados)}} </strong>
       </div>
-<!-- paginacion-->
   
-    <!--reset contador-->
-<!--
-  <form method="POST" action="{{action('RegctrolController@restarFechRadic')}}">
-    @csrf
-    <button class="btn btn-primary" type="submit">reset contador</button>
-  </form>
--->
+          <!--reset contador-->
+      <!--
+        <form method="POST" action="{{action('RegctrolController@restarFechRadic')}}">
+          @csrf
+          <button class="btn btn-primary" type="submit">reset contador</button>
+        </form>
+      -->
   </div>
 @endsection

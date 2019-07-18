@@ -60,4 +60,7 @@ Route::get('filterStatus_dir', 'FilterController@viewSearchRadicDir',compact('ra
 Route::get('filter_all_radic', 'FilterController@viewAllRadic',compact('radicados'))->middleware('auth')->name('filter.viewAllRadic');
 
 //Generar reportes
+Route::get('Exports', 'ReportController@index',compact('radicados'))->middleware('auth')->name('Report.index');
 Route::get('Export_all_Radic', 'ReportController@ExportAR',compact('radicados'))->middleware('auth')->name('Report.ExportAR');
+Route::get('Export_for_motivo', 'ReportController@ExportMotivo',compact('radicados'))->middleware('auth')->name('Report.ExportMotivo');
+Route::get('Export_for_programa', 'ReportController@ExportPrograma',compact('radicados'))->middleware('auth')->name('Report.ExportPrograma');

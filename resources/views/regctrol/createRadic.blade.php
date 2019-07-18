@@ -68,20 +68,20 @@
               </div>
     
               <div class="col-6 form-group" no-margin>
-                <label class="text-capitalize col-form-label-sm col-form-label" for="number_contacto">numero de contacto</label>            
+                <label class="text-capitalize col-form-label-sm col-form-label" for="number_contacto">número de contacto</label>            
                 <input maxlength="14" type="text"class="text-capitalize form-control form-control-sm" name="origen_cel" id="number_contacto" aria-describedby="helpId" placeholder="(123) 456-7890">
               </div>
     
               <div class="col-6 form-group" no-margin>
                 <label class="text-capitalize col-form-label-sm col-form-label" for="origen_correo">correo</label>
-                <input type="text"class="text-capitalize @error('origen_correo') is-invalid @enderror form-control form-control-sm" name="origen_correo" id="origen_correo" aria-describedby="helpId" placeholder="Correo de origen" value="{{old('origen_correo')}}">
+                <input type="text"class="text-lowercase @error('origen_correo') is-invalid @enderror form-control form-control-sm" name="origen_correo" id="origen_correo" aria-describedby="helpId" placeholder="Correo de origen" value="{{old('origen_correo')}}">
               </div>
               
               <div class="col-12">
                 <div class="row">
                   <!-- radio buttom tipo de atenciòn-->
                   <div class="col-6 form-group" no-margin>
-                    <label class="text-capitalize col-form-label-sm col-form-label" for="atention">Tipo de Atenciòn</label>  
+                    <label class="text-capitalize col-form-label-sm col-form-label" for="atention">Tipo de Atención</label>  
                     <div class="card">
                       <div class="card-body">
                           <div class="">
@@ -101,7 +101,7 @@
                   <div class="col-6 form-group" no-margin>
                     <label class="text-capitalize col-form-label-sm col-form-label" for="observaciones">observaciones</label>  
                     <textarea class="form-control form-control-sm @error('observaciones') is-invalid @enderror" name="observaciones" id="observaciones" cols="30"></textarea>
-                    <small id="emailHelp" class="form-text text-muted">Observaciones hechas por Registro y Control</small>
+                    <small id="emailHelp" class="form-text text-muted">Observaciones hechas por Admisiones Registro</small>
                   </div>
                   <!-- respuesta del radicado-->
                   <!--
@@ -120,7 +120,17 @@
         <!--botones-->
         <div class="text-center">
           <button btn-norm data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-primary">Guardar</button>
-          <button btn-norm type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <a btn-norm name="" id="" class="btn btn-secondary"
+            @if (Auth::user()->type_user == 2)
+              href="{{route('reg-ctrol.index')}}"
+              @else
+                @if (Auth::user()->type_user == 3)
+                  href="{{route('direction.index')}}"
+                @else
+                      
+               @endif
+            @endif
+            role="button">Volver</a>
         </div>
     </div>
 </div>

@@ -26,7 +26,7 @@ class RegctrolController extends Controller
     public function index()
     {    
         $users= User::get();
-        $radicados= Radicado::orderBy('id', 'DESC')->get();
+        $radicados= Radicado::orderBy('id', 'DESC')->paginate(15);
         $programas= Program::get();
 
         if (auth()->user()->type_user == 2) {

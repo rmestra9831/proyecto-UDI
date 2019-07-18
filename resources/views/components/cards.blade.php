@@ -65,7 +65,7 @@
     <div class="row">
       <div class="col-4 text-truncate">
         <div class="row">
-          <div class="col"><strong class="card-text">Correo:<p class="card-text-var text-left">{{$radicado->origen_correo}}</p></strong></div>
+          <div class="col"><strong class="card-text">Correo:<p class="card-text-var text-left text-lowercase">{{$radicado->origen_correo}}</p></strong></div>
         </div>
       </div>
       <div class="col-4 text-truncate text-right">
@@ -109,7 +109,7 @@
 <!--mostrar el boton de entregado a estudiante-->
   @if (Auth::user()->type_user == 2)
     <div class="col-3">
-      @if ($radicado->fech_notifi_end != '')
+      @if ($radicado->fech_notifi_end != '' || $radicado->fech_recive_radic != null)
         <form method="post" action="{{action('RegctrolController@updateDelivered', $radicado->slug)}}">
           @method('PUT')
           @csrf

@@ -167,7 +167,7 @@
 
     <tbody>
     @foreach($radicados as $radicado)
-
+        
         @if ($radicado->fech_recive_radic != null && $radicado->fech_notifi_end != null)
             @if ($radicado->fech_delivered != null)
                 <tr>

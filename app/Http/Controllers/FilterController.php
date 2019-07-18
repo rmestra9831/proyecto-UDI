@@ -29,7 +29,7 @@ class FilterController extends Controller
             ->lastname($last_name)
             ->numradic($fechradic_id)
             ->motivo($motivo)
-            ->programa($programa)->get();#->paginate(1)
+            ->programa($programa)->get();
         //filtrdo de enviados    
             $query_send = Radicado::orderBy('id', 'DESC')->where([
                 ['fech_send_dir','!=',' '],
@@ -57,7 +57,7 @@ class FilterController extends Controller
                 ['fech_delivered','!=',' ']])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de pendientes           
             $query_pendiente = Radicado::orderBy('id', 'DESC')->where([
-                ['fech_notifi_end','!=',' '],
+                ['fech_recive_radic','!=',' '],
                 ['fech_delivered',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de importantes           
             $query_important = Radicado::orderBy('id', 'DESC')->where([
