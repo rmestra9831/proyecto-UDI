@@ -12,7 +12,7 @@
 	  	<!--botones y formulario para guardar la fecha y la hora-->
 	  	@if ($radicado->fech_send_dir == '')
 	  		<div class="d-inline-flex">
-				<form method="POST" action="/reg-ctrol/{{$radicado->slug}}">
+				<form method="POST" action="{{action('RegctrolController@update', $radicado->slug)}}">
 				@method('PUT')
 				@csrf
 				  	<input name="time_send_dir" type="hidden" value="{{date("h:i:s A")}}">

@@ -11,7 +11,7 @@
         <!-- Aqui se imprime la información que contiene el radicado-->
         @if ($radicado->fech_recive_radic == '')
         <div class="d-inline-flex">
-          <form method="POST" action="/direction/{{$radicado->slug}}">
+          <form method="POST" action="{{route('direction.update',$radicado->slug)}}">
             @method('PUT')
             @csrf
               <input  name="time_recive_radic" type="hidden" value="{{date("h:i:s A")}}">

@@ -82,7 +82,7 @@ class EstadoController extends Controller
             'time_notifi_end'
         ));
         $radicado->save();
-        return redirect()->route('direction.edit',[$status])->with('status','Radicado '.$radicado->id.' recivido correctamente ');
+        return redirect()->route('direction.edit',[$status])->with('status','Radicado '.$radicado->fechradic_id.'-'.$radicado->year.' recivido correctamente ');
 
     }
     /**

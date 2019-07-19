@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" href="{{ asset('img/logo_udi.png') }}" />
 
-    <title>UDI Sirc @yield('title')</title>
+    <title>UDI Siar @yield('title')</title>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -49,7 +49,7 @@
                         ?>bg-p-regctrol<?php }
                         elseif (Auth::user()->type_user == 3) {
                             ?>bg-p-direction<?php
-                        }?>bg-success
+                        }else{?> bg-success<?php } ?>
                         text-white h-100">
                         @include('components.main-panel')
                     </div>

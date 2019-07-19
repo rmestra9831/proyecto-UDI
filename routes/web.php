@@ -43,6 +43,9 @@ Auth::routes();
 
 //rutas de registro y control
 Route::group(['middleware' => 'userAR'], function () {
+    $radicados= Radicado::all();
+    $programas= Program::all();
+    
     Route::resource('reg-ctrol', 'RegctrolController',compact('radicados'))->middleware('auth');
     Route::get('reg-ctrol/sendMail/{reg_ctrol}', 'RegctrolController@sendEmail',compact('radicados'))->middleware('auth')->name('reg-ctrol.sendmail');
     Route::post('reg-ctrol/restart', 'RegctrolController@restarFechRadic')->middleware('auth')->name('reg-ctrol.restarFechRadic');
@@ -53,6 +56,8 @@ Route::group(['middleware' => 'userAR'], function () {
 
 //rutas de direccion
 Route::group(['middleware' => 'userDir'], function () {
+    $radicados= Radicado::all();
+    $programas= Program::all();
     Route::resource('direction', 'DirectionController',compact('radicados'))->middleware('auth');
     Route::put('save/{direction}', 'DirectionController@saveRequest',compact('radicados'))->middleware('auth')->name('direction.saveRequest');    
 });
@@ -67,6 +72,8 @@ Route::get('filter_all_radic', 'FilterController@viewAllRadic',compact('radicado
 
 //Generar reportes
 Route::get('Exports', 'ReportController@index',compact('radicados'))->middleware('auth')->name('Report.index');
+Route::get('Cont_motivo', 'ReportController@contMotivo',compact('radicados'))->middleware('auth')->name('Report.contMotivo');
 Route::get('Export_all_Radic', 'ReportController@ExportAR',compact('radicados'))->middleware('auth')->name('Report.ExportAR');
 Route::get('Export_for_motivo', 'ReportController@ExportMotivo',compact('radicados'))->middleware('auth')->name('Report.ExportMotivo');
 Route::get('Export_for_programa', 'ReportController@ExportPrograma',compact('radicados'))->middleware('auth')->name('Report.ExportPrograma');
+Route::get('Export_for_fecha', 'ReportController@ExportFecha',compact('radicados'))->middleware('auth')->name('Report.ExportFecha');

@@ -21,11 +21,7 @@ class DirectionController extends Controller
         $radicados= Radicado::orderBy('id', 'DESC')->get();
         $programas= Program::all();
 
-        if (auth()->user()->type_user == 3) {
-            return view('direction.home', compact('radicados','programas','users'));
-        }else{
-            abort(403);
-        }
+        return view('direction.home', compact('radicados','programas','users'));
     }
 
     /**
@@ -71,12 +67,8 @@ class DirectionController extends Controller
         $users= User::get();
         $programas= Program::all();
         $radicado = $direction;
-        
-        if (auth()->user()->type_user == 3) {
-            return view('direction.showRadic', compact('radicado','programas','users'));
-        }else{
-            abort(403);
-        }
+
+        return view('direction.showRadic', compact('radicado','programas','users'));
     }
 
     /**

@@ -168,7 +168,7 @@
     <tbody>
     @foreach($radicados as $radicado)
         
-        @if ($radicado->fech_recive_radic != null && $radicado->fech_notifi_end != null)
+        @if ($radicado->fech_recive_radic != null || $radicado->fech_notifi_end != null && $radicado->fech_notifi_end == null)
             @if ($radicado->fech_delivered != null)
                 <tr>
                     <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->fechradic_id}}-{{ $radicado->year}}</td>

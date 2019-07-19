@@ -18,7 +18,7 @@ class ReportExport implements FromView, ShouldQueue
     public function view(): View
     {
         return view('export.allRadic', [
-            'radicados' => Radicado::all(),
+            'radicados' => Radicado::orderBy('id', 'DESC')->get(),
             'programas' => Program::all(),
             'users' => User::all()
         ]);

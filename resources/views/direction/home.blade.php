@@ -26,7 +26,7 @@
               <!--ventada de recivido-->
                <div class="unrecive" id="{{$radicado->id}}" valid="{{$radicado->id}}">
                  <!-- formulario para actualizar el estado de recivido direccion-->
-                 <form action="/status/{{$radicado->slug}}" method="post">
+                 <form action="{{route('status.update',$radicado->slug)}}" method="post">
                     @method('PUT')
                     @csrf
                       <input  name="time_recive_dir" type="hidden" value="{{date("h:i:s A")}}">
