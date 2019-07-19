@@ -228,13 +228,10 @@
       <div><p class="foo-txt">Creado</p></div>
 
       <div><i class="fas fa-circle status-send"></i></div>
-      <div><p class="foo-txt">Enviado</p></div>
+      <div><p class="foo-txt">Pendientes</p></div>
 
       <div><i class="fas fa-circle status-recive-dir"></i></div>
-      <div><p class="foo-txt">Recibido en Dirección</p></div>
-
-      <div><i class="fas fa-circle status-saw-dir"></i></div>
-      <div><p class="foo-txt">Revisado</p></div>
+      <div><p class="foo-txt">Entregados</p></div>
 
       <!--reset contador-->
       <!--

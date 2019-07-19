@@ -26,14 +26,10 @@ class RegctrolController extends Controller
     public function index()
     {    
         $users= User::get();
-        $radicados= Radicado::orderBy('id', 'DESC')->paginate(15);
+        $radicados= Radicado::orderBy('id', 'DESC')->get();
         $programas= Program::get();
 
-        if (auth()->user()->type_user == 2) {
-            return view('regctrol.home', compact('radicados','programas','users'));
-        }else{
-            abort(403);
-        }
+        return view('regctrol.home', compact('radicados','programas','users'));
     }
 
     /**
@@ -49,11 +45,8 @@ class RegctrolController extends Controller
         $id = DB::table('fech_radics')->select('id_radicado')->latest()->take(1)->value('id_radicado');
         $num_more= str_pad($id, 4, "0", STR_PAD_LEFT);
         $year= date('dmY');
-        if (auth()->user()->type_user == 2) {
-            return view('regctrol.createRadic', compact('radicado','programas','motivos','num_more','year'));
-        }else{
-            abort(403);
-        }
+        
+        return view('regctrol.createRadic', compact('radicado','programas','motivos','num_more','year'));
     }
     /**
      * Display the specified resource.
@@ -170,11 +163,7 @@ class RegctrolController extends Controller
         
         $radicado = $reg_ctrol;
         
-        if (auth()->user()->type_user == 2) {
-            return view('regctrol.showRadic', compact('radicado','programas','users'));
-        }else{
-            abort(403);
-        }
+        return view('regctrol.showRadic', compact('radicado','programas','users'));
     }
 
     /**
@@ -258,11 +247,8 @@ class RegctrolController extends Controller
     public function sendEmail(Radicado $reg_ctrol){
         $programas = Program::all();
         $radicado = $reg_ctrol;
-        if (auth()->user()->type_user == 2) {
-            return view('regctrol.sendMailEst', compact('radicado','programas'));
-        }else{
-            abort(403);
-        }
+        
+        return view('regctrol.sendMailEst', compact('radicado','programas'));
     }
     public function restarFechRadic(){
         FechRadic::create([

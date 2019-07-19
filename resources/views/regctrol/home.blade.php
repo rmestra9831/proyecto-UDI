@@ -57,7 +57,6 @@
     <div><i class="fas fa-circle status-saw-dir"></i></div>
     <div><p class="foo-txt">Revisado</p></div>
 
-    <div style="display: contents;"><p class="foo-title">{{$radicados->render() }} </p></div>
     <!--reset contador-->
     <!--
       <form method="POST" action="{{action('RegctrolController@restarFechRadic')}}">

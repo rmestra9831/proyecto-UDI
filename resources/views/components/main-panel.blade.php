@@ -23,8 +23,13 @@
             <a href="{{route('direction.index')}}"><i class="fas fa-chevron-right"></i>inicio</a>
             <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>
             <a href="{{route('filter.viewSearchRadicDir')}}"><i class="fas fa-chevron-right"></i>estado de radicados</a>
-          @endif
-        @endif
+            @else
+            <a href="{{route('reg-ctrol.index')}}"><i class="fas fa-chevron-right"></i>Inicio</a>
+            <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>
+            <a href="{{route('filter.viewSearchRadic')}}"><i class="fas fa-chevron-right"></i>estado de radicados</a>
+    
+            @endif
+      @endif
     </div>
 </div>
 

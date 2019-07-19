@@ -49,8 +49,8 @@
                         ?>bg-p-regctrol<?php }
                         elseif (Auth::user()->type_user == 3) {
                             ?>bg-p-direction<?php
-                        };?>
-                    text-white h-100">
+                        }?>bg-success
+                        text-white h-100">
                         @include('components.main-panel')
                     </div>
                     <!--Panel contenido -->
