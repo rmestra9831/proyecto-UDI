@@ -6,7 +6,8 @@
     <div class="row title-content">
         <h2 class="text-center text-capitalize title">generar reportes</h2>
     </div>
-    <!-- FILTRADO POR MOTIVO-->
+<!--
+    FILTRADO POR MOTIVO
     <div class="row footer-home">
         <div class="col-2">
             <div class="col form-group">
@@ -22,7 +23,7 @@
                       <select name="motivo" id="motivo" class="text-capitalize form-control form-control-sm">
                           <option class="text-capitalize" value="">Motivo</option>                                          
                         @foreach ($motivos as $motivo)
-                        <option class="text-capitalize" value="{{$motivo->id}}">{{$motivo->name}}</option>
+                        <option class="text-capitalize" value="</option>
                         @endforeach
                       </select>
                     </div>
@@ -30,7 +31,7 @@
                     <div class="col-3 form-group">
                       <button class="btn btn-block btn-outline-success form-control-sm" type="submit" onclick=this.form.action="{{action('ReportController@ExportMotivo')}}">Generar</button>
                     </div>
-                    <!--PREVISUALIZAR CANTIDAD DE RESULTADOS-->
+                    PREVISUALIZAR CANTIDAD DE RESULTADOS
                     <div class="col-3 form-group">
                         <button class="btn btn-block btn-secondary form-control-sm" type="submit" onclick=this.form.action="{{action('ReportController@index')}}">Mostrar Cantidad</button>
                     </div>
@@ -39,10 +40,10 @@
             </form>
         </div>
         <div class="col-2">
-          <strong class="contador text-uppercase">registros encontrados: {{count($r_by_motivo)}} </strong>
+          <strong class="contador text-uppercase">registros encontrados:  </strong>
         </div>
     </div>
-    <!-- FILTRADO POR PROGRAMA-->
+     FILTRADO POR PROGRAMA
     <div class="row footer-home">
         <div class="col-2">
             <div class="col form-group">
@@ -58,7 +59,7 @@
                         <select name="programa" id="programa" class="text-capitalize form-control form-control-sm">
                             <option class="text-capitalize" value="">programa</option>                                          
                             @foreach ($programas as $programa)
-                            <option class="text-capitalize" value="{{$programa->id}}">{{$programa->name}}</option>
+                            <option class="text-capitalize" value="</option>
                             @endforeach
                         </select>
                     </div>
@@ -66,7 +67,7 @@
                     <div class="col-3 form-group">
                       <button class="btn btn-block btn-outline-success form-control-sm" type="submit" onclick=this.form.action="{{action('ReportController@ExportPrograma')}}">Generar</button>
                     </div>
-                    <!--PREVISUALIZAR CANTIDAD DE RESULTADOS-->
+                    PREVISUALIZAR CANTIDAD DE RESULTADOS
                     <div class="col-3 form-group">
                             <button class="btn btn-block btn-secondary form-control-sm" type="submit" onclick=this.form.action="{{action('ReportController@index')}}">Mostrar Cantidad</button>
                         </div>
@@ -74,43 +75,79 @@
             </form>
         </div>
         <div class="col-2">
-          <strong class="contador text-uppercase">registros encontrados: {{count($r_by_programa)}} </strong>
+          <strong class="contador text-uppercase">registros encontrados: </strong>
         </div>
     </div>
-    <!-- FILTRADO ENTRE FECHAS-->
+-->
+    <!-- FILTRADO COMPLETO-->
     <div class="row footer-home">
-        <div class="col-2">
-            <div class="col form-group">
-                <p class="text-capitalize">generar entre fechas</p>
-            </div>
-        </div>
-        <div class="col-8">
+        <div class="col-12">
 
             <form method="GET" class="" action="">
                 <div class="row justify-content-md-center">
 
-                    <div class="col form-group">
-                        <div class="input-daterange input-group-sm input-group" id="datepicker" data-provide="datepicker">
-                            <input type="text" class="form-control-sm form-control datepicker" name="start" placeholder="Desde" autocomplete="off" />
-                            <input type="text" class="form-control-sm form-control datepicker" name="end" placeholder="Hasta" autocomplete="off" />
+                    <div class="row">
+                        <div class="col form-group">
+                          <input id="my-input" class="form-control form-control-sm" type="text" name="name" placeholder="Nombre">
+                        </div>
+                
+                        <div class="col form-group">
+                          <input id="my-input" class="form-control form-control-sm" type="text" name="last_name" placeholder="Apellidos">
+                        </div>
+                        <!-- DATA PICKER-->
+                        <div class="col form-group">
+                            <div class="input-daterange input-group-sm input-group" id="datepicker" data-provide="datepicker">
+                                <input type="text" class="form-control-sm form-control datepicker" name="start" placeholder="Desde" autocomplete="off" />
+                                <input type="text" class="form-control-sm form-control datepicker" name="end" placeholder="Hasta" autocomplete="off" />
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!--selects-->
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col">
+                            <!-- SELECT MOTIVO-->
+                            <div class="col form-group">
+                                <select name="motivo" id="motivo" class="text-capitalize form-control form-control-sm">
+                                    <option class="text-capitalize" value="">Motivo</option>                                          
+                                    @foreach ($motivos as $motivo)
+                                    <option class="text-capitalize" value="{{$motivo->id}}">{{$motivo->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="col form-group">
+                                <select name="programa" id="programa" class="text-capitalize form-control form-control-sm">
+                                    <option class="text-capitalize" value="">programa</option>                                          
+                                    @foreach ($programas as $programa)
+                                    <option class="text-capitalize" value="{{$programa->id}}">{{$programa->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- BOTONES DE ENVIO DE FORMILARIO-->
+                        <div class="col-2 form-group">
+                            <button class="btn btn-block btn-outline-success form-control-sm" type="submit" onclick=this.form.action="{{action('ReportController@ExportFilter')}}">Generar</button>
+                        </div>
+                        <div class="col-2 form-group">
+                            <!--PREVISUALIZAR CANTIDAD DE RESULTADOS-->
+                            <button class="btn btn-block btn-secondary form-control-sm" type="submit" onclick=this.form.action="{{action('ReportController@index')}}">Mostrar Cantidad</button>                    
                         </div>
                     </div>
 
-                    <div class="col-3 form-group">
-                      <button class="btn btn-block btn-outline-success form-control-sm" type="submit" onclick=this.form.action="{{action('ReportController@ExportFecha')}}">Generar</button>
-                    </div>
-                    <!--PREVISUALIZAR CANTIDAD DE RESULTADOS-->
-                    <div class="col-3 form-group">
-                            <button class="btn btn-block btn-secondary form-control-sm" type="submit" onclick=this.form.action="{{action('ReportController@index')}}">Mostrar Cantidad</button>
-                        </div>
-                    </div>
+                </div>
             </form>
-        </div>
-        <div class="col-2">
-          <strong class="contador text-uppercase">registros encontrados: {{count($r_by_fecha)}} </strong>
+            <div class="row">
+                    <!--MOSTRAR CUANTOS HAY-->
+                    <div class="col-12 text-center">
+                        <strong class="contador text-uppercase">registros encontrados: {{count($r_by_all)}} </strong>
+                    </div>
+                </div>
         </div>
     </div>
-    
 <!--cuerpo delcontenido -->
     <div class="row justify-content-md-center cont-panel">
 

@@ -11,7 +11,7 @@ use App\Exports\ReportExport;
 use App\Exports\ReportFechas;
 use App\Exports\ReportMotivo;
 use App\Exports\ReportPrograma;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use App\Exports\ReportExportFilter;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
@@ -28,14 +28,20 @@ class ReportController extends Controller
 
     public function index(Request $request){
         //valores de filtrado
-        $moti = $request->motivo;
-        $programa = $request->programa;
+        $name = $request->get('name');
+        $last_name = $request->get('last_name');
+        $get_programa= $request->get('programa');
+        $get_motivo= $request->get('motivo');
         $start= $request->get('start');
         $end= $request->get('end');
         
-        $r_by_motivo = Radicado::orderBy('id', 'DESC')->motivo($moti)->get();
-        $r_by_programa = Radicado::orderBy('id', 'DESC')->programa($programa)->get();
-        $r_by_fecha = Radicado::orderBy('id', 'DESC')->Dates($start, $end)->get();
+        $r_by_all = Radicado::orderBy('id', 'DESC')
+            ->name($name)
+            ->lastname($last_name)
+            ->programa($get_programa)
+            ->motivo($get_motivo)
+            ->Dates($start, $end)
+            ->get();
         
 
         $users= User::get();
@@ -44,15 +50,32 @@ class ReportController extends Controller
         $motivos= Motivo::orderBy('name', 'ASC')->get();
 
         return view('export.home', compact(
-            'r_by_motivo',
-            'r_by_programa',
-            'r_by_fecha',
+            'r_by_all',
             'radicados',
             'programas',
             'users',
             'motivos'));
     }
+    //este es el filtrado completo para realizar los reportes
+    public function ExportFilter(Request $request){
+        $name = $request->get('name');
+        $last_name = $request->get('last_name');
+        $get_programa= $request->get('programa');
+        $get_motivo= $request->get('motivo');
+        $start= $request->get('start');
+        $end= $request->get('end');
 
+        $date = date('d:m:Y');
+        return Excel::download(new ReportExportFilter(
+            $name,
+            $last_name,
+            $get_programa,
+            $get_motivo,
+            $start,
+            $end
+        ), ''.$date.'_reportes_radicados.xlsx');
+    }
+    //estos filtrados son por tipo, los cuales puede ser agregador si el cliente desea
     public function ExportAR(){
         $date = date('d:m:Y');
         return Excel::download(new ReportExport, ''.$date.'_reportes_radicados.xlsx');
