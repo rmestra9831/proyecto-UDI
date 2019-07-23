@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Maatwebsite\Excel\Concerns\Exportable;
 
-class ReportExportFilter implements FromView, ShouldQueue
+class ReportAdmAR implements FromView, ShouldQueue
 {
     public $name;
     public $last_name;
@@ -44,7 +44,7 @@ class ReportExportFilter implements FromView, ShouldQueue
         $start = $this->start;
         $end = $this->end;
         
-        return view('export.forProgram', [
+        return view('export.forAdmAR', [
             'radicados' => Radicado::orderBy('id', 'DESC')
             ->name($name)
             ->lastname($last_name)

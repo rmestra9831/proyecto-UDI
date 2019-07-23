@@ -1,9 +1,10 @@
 @extends('layouts.app')
-@section('title','| Administracion')
+@section('title','| Exportaciones')
 @section('content-panel')
+
 <!-- cabecera del contenido-->
-<div class="row title-content">
-        <h2 class="text-center text-capitalize title">inicio</h2>
+    <div class="row title-content">
+        <h2 class="text-center text-capitalize title">usuarios</h2>
     </div>
 <!--cuerpo delcontenido -->
     <div class="row justify-content-md-center cont-panel">
@@ -16,4 +17,6 @@
     </div>
 
 <!-- piecera-->
+    
+
 @endsection

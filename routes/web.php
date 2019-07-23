@@ -62,6 +62,17 @@ Route::group(['middleware' => 'userDir'], function () {
     Route::put('save/{direction}', 'DirectionController@saveRequest',compact('radicados'))->middleware('auth')->name('direction.saveRequest');    
 });
 
+//rutas de administrador
+Route::group(['middleware' => 'userAdm'], function () {
+    $radicados= Radicado::all();
+    
+    Route::resource('admin', 'AdminController',compact('radicados'))->middleware('auth');
+    //controladores para generar los reportes
+    Route::get('Export_for_ar', 'ReportController@indexAR',compact('radicados'))->middleware('auth')->name('Report.indexAR');
+    Route::get('Export_for_dir', 'ReportController@indexDir',compact('radicados'))->middleware('auth')->name('Report.indexDir');
+    Route::get('show_Users', 'AdminController@showUsers',compact('radicados'))->middleware('auth')->name('admin.showUsers');
+});
+
 //rutas de estado
 Route::resource('status', 'EstadoController',compact('radicados'))->middleware('auth');
 
@@ -73,6 +84,8 @@ Route::get('filter_all_radic', 'FilterController@viewAllRadic',compact('radicado
 //Generar reportes
 Route::get('Exports', 'ReportController@index',compact('radicados'))->middleware('auth')->name('Report.index');
 Route::get('ExportFilter', 'ReportController@ExportFilter',compact('radicados'))->middleware('auth')->name('Report.ExportFilter');
+Route::get('ExportAdmDir', 'ReportController@ExportAdmDir',compact('radicados'))->middleware('auth')->name('Report.ExportAdmDir');
+Route::get('ExportAdmAR', 'ReportController@ExportAdmAR',compact('radicados'))->middleware('auth')->name('Report.ExportAdmAR');
 Route::get('Cont_motivo', 'ReportController@contMotivo',compact('radicados'))->middleware('auth')->name('Report.contMotivo');
 Route::get('Export_all_Radic', 'ReportController@ExportAR',compact('radicados'))->middleware('auth')->name('Report.ExportAR');
 Route::get('Export_for_motivo', 'ReportController@ExportMotivo',compact('radicados'))->middleware('auth')->name('Report.ExportMotivo');

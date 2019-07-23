@@ -27,12 +27,10 @@
             ">RESPONDIDO POR</th>
             <th style="background-color: #ffffff; color: #000000; font-size: 15px;text-align: center; height: 25px; width: 40px; border: 2px solid black; font-weight: 800;
             ">FECHA DE CREACIÓN</th>
-            <th style="background-color: #ffe710; color: #000000; font-size: 15px;text-align: center; height: 25px; width: 40px; border: 2px solid black; font-weight: 800;
-            ">FECHA ENVIADO A DIRECCIÓN</th>
             <th style="background-color: #00d3ea; color: #000000; font-size: 15px;text-align: center; height: 25px; width: 40px; border: 2px solid black; font-weight: 800;
             ">RECIBIDO DE DIRECCIÓN</th>
             <th style="background-color: ##183bff; color: #ffffff; font-size: 15px;text-align: center; height: 25px; width: 40px; border: 2px solid black; font-weight: 800;
-            ">ENTREGADO FINAL</th>
+            ">ENTREGADO AR</th>
             
         </tr>
         </thead>
@@ -71,9 +69,8 @@
                         @endif
                         
                         <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_send_dir}} | {{$radicado->time_send_dir}}</td>
+                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
                         <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_delivered}} | {{$radicado->time_delivered}}</td>
                     </tr>  
                 @else
                     <tr>
@@ -105,9 +102,8 @@
                         @endif
                         
                         <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_send_dir}} | {{$radicado->time_send_dir}}</td>
+                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
                         <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_delivered}} | {{$radicado->time_delivered}}</td>
                     </tr>
                 @endif
             @else
@@ -138,10 +134,9 @@
                             @endforeach
                         @endif
                         
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_send_dir}} | {{$radicado->time_send_dir}}</td>
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_delivered}} | {{$radicado->time_delivered}}</td>
+                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto;">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
+                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto;">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
+                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto;">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
                 </tr>
             @endif
         @endif

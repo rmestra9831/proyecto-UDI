@@ -143,7 +143,13 @@
             <div class="row">
                     <!--MOSTRAR CUANTOS HAY-->
                     <div class="col-12 text-center">
-                        <strong class="contador text-uppercase">registros encontrados: {{count($r_by_all)}} </strong>
+                        @if (Auth::user()->type_user == 2)
+                            <strong class="contador text-uppercase">registros encontrados: {{count($r_by_all)}} </strong>                       
+                        @else
+                            @if(Auth::user()->type_user == 3)
+                                <strong class="contador text-uppercase">registros encontrados: {{count($r_by_all_dir)}} </strong>                       
+                            @endif  
+                        @endif
                     </div>
                 </div>
         </div>
@@ -181,7 +187,8 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach($radicados as $radicado)
+                    @if(count($r_by_all) > 0)
+                        @foreach($r_by_all as $radicado)
     
                             @if ($radicado->fech_recive_radic != null  || $radicado->fech_notifi_end != null && $radicado->fech_notifi_end == null)
                                 @if ($radicado->fech_delivered != null)
@@ -289,6 +296,9 @@
                             @endif
                     
                         @endforeach
+                    @else
+                        <div class="content-card" style="width: 50%"><h4 style="margin: 0; text-align: center">No se encontró la petición</h4></div>    
+                    @endif
                     </tbody>
                 </table>
             @else
@@ -310,11 +320,11 @@
                             <th scope="col">RESPONDIDO POR</th>
                             <th scope="col">FECHA DE CREACIÓN</th>
                             <th scope="col">RECIBIDO DE DIRECCIÓN</th>
-                            <th scope="col">ENTREGADO FINAL</th>
+                            <th scope="col">ENTREGADO AR</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @foreach($radicados as $radicado)
+                            @foreach($r_by_all_dir as $radicado)
                             @if($radicado->fech_send_dir != null)    
                                 @if ($radicado->fech_recive_dir != null)
                                     @if ($radicado->fech_recive_dir != null &&  $radicado->fech_recive_radic != null )
@@ -346,8 +356,8 @@
                                                 @endforeach
                                             @endif                      
                                             <td class="text-truncate">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
+                                            <td class="text-truncate">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
                                             <td class="text-truncate">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
-                                            <td class="text-truncate">{{ $radicado->fech_notifi_end}} | {{$radicado->time_notifi_end}}</td>
                                         </tr>  
                                     @else
                                         <tr class="bg-light">
@@ -379,8 +389,8 @@
                                             @endif
                                             
                                             <td class="text-truncate">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
+                                            <td class="text-truncate">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
                                             <td class="text-truncate">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
-                                            <td class="text-truncate">{{ $radicado->fech_notifi_end}} | {{$radicado->time_notifi_end}}</td>
                                         </tr>
                                     @endif
                                 @else
@@ -413,14 +423,14 @@
                                             @endif
                                             
                                             <td class="text-truncate">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
+                                            <td class="text-truncate">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
                                             <td class="text-truncate">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
-                                            <td class="text-truncate">{{ $radicado->fech_notifi_end}} | {{$radicado->time_notifi_end}}</td>
                                     </tr>
                                 @endif
                             @endif
                             @endforeach
                         </tbody>
-                    </table>          
+                    </table>   
                 @endif
             @endif
         </div>
@@ -436,7 +446,13 @@
     <div class="row footer-home b-show-top">
       <div><p class="foo-title">estados</p></div>
       <div><i class="far fa-circle"></i></div>
-      <div><p class="foo-txt">Creado</p></div>
+      @if (Auth::user()->type_user == 2)
+            <div><p class="foo-txt">Creado</p></div>
+        @else
+            @if (Auth::user()->type_user == 3)
+                <div><p class="foo-txt">Recibido</p></div>    
+            @endif
+        @endif
 
       <div><i class="fas fa-circle status-send"></i></div>
       <div><p class="foo-txt">Pendientes</p></div>

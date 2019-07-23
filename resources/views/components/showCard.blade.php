@@ -138,7 +138,7 @@
         <th class="text-uppercase" scope="col">creación</th>
         <th class="text-uppercase" scope="col">env dirección</th>
         <th class="text-uppercase" scope="col">rec dirección</th>
-        <th class="text-uppercase" scope="col">rec reg-ctrol</th>
+        <th class="text-uppercase" scope="col">rec admi-reg</th>
         <th class="text-uppercase" scope="col">entregado final</th>
       </tr>
     </thead>

@@ -47,7 +47,7 @@ class LoginController extends Controller
         }elseif (auth()->user()->type_user == 2) {
             return '/reg-ctrol';
         }
-        return '/admin';
+        return route('admin.index');
     }
     //nombre del campo con el que valida
     public function username()
