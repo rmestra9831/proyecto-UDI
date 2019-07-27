@@ -5,10 +5,9 @@
 <!-- cabecera del contenido-->
     <div class="row title-content">
         <h2 class="text-center text-capitalize title">generar reportes de dirección</h2>
-    </div>
-    <!-- FILTRADO COMPLETO-->
-    <div class="row footer-home">
-        <div class="col-12">
+        <!-- FILTRADO COMPLETO-->
+        <div class="footer-home">
+            <div class="col-12">
 
             <form method="GET" class="" action="">
                 <div class="row justify-content-md-center">
@@ -73,6 +72,7 @@
                         <strong class="contador text-uppercase">registros encontrados: {{count($r_by_all_dir)}} </strong>                       
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 <!--cuerpo delcontenido -->

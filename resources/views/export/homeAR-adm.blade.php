@@ -5,75 +5,75 @@
 <!-- cabecera del contenido-->
     <div class="row title-content">
         <h2 class="text-center text-capitalize title">generar reportes admisiones y registro</h2>
-    </div>
-    <!-- FILTRADO COMPLETO-->
-    <div class="row footer-home">
-        <div class="col-12">
-
-            <form method="GET" class="" action="">
-                <div class="row justify-content-md-center">
-
-                    <div class="row">
-                        <div class="col form-group">
-                          <input id="my-input" class="form-control form-control-sm" type="text" name="name" placeholder="Nombre">
-                        </div>
-                
-                        <div class="col form-group">
-                          <input id="my-input" class="form-control form-control-sm" type="text" name="last_name" placeholder="Apellidos">
-                        </div>
-                        <!-- DATA PICKER-->
-                        <div class="col form-group">
-                            <div class="input-daterange input-group-sm input-group" id="datepicker" data-provide="datepicker">
-                                <input type="text" class="form-control-sm form-control datepicker" name="start" placeholder="Desde" autocomplete="off" />
-                                <input type="text" class="form-control-sm form-control datepicker" name="end" placeholder="Hasta" autocomplete="off" />
-                            </div>
-                        </div>
-                    </div>
-                
-                    <!--selects-->
-                    <div class="row" style="margin-top: 10px;">
-                        <div class="col">
-                            <!-- SELECT MOTIVO-->
+        <!-- FILTRADO COMPLETO-->
+            <div class="footer-home">
+                <div class="col-12">
+    
+                <form method="GET" class="" action="">
+                    <div class="row justify-content-md-center">
+    
+                        <div class="row">
                             <div class="col form-group">
-                                <select name="motivo" id="motivo" class="text-capitalize form-control form-control-sm">
-                                    <option class="text-capitalize" value="">Motivo</option>                                          
-                                    @foreach ($motivos as $motivo)
-                                    <option class="text-capitalize" value="{{$motivo->id}}">{{$motivo->name}}</option>
-                                    @endforeach
-                                </select>
+                              <input id="my-input" class="form-control form-control-sm" type="text" name="name" placeholder="Nombre">
                             </div>
-                        </div>
-
-                        <div class="col">
+                    
                             <div class="col form-group">
-                                <select name="programa" id="programa" class="text-capitalize form-control form-control-sm">
-                                    <option class="text-capitalize" value="">programa</option>                                          
-                                    @foreach ($programas as $programa)
-                                    <option class="text-capitalize" value="{{$programa->id}}">{{$programa->name}}</option>
-                                    @endforeach
-                                </select>
+                              <input id="my-input" class="form-control form-control-sm" type="text" name="last_name" placeholder="Apellidos">
+                            </div>
+                            <!-- DATA PICKER-->
+                            <div class="col form-group">
+                                <div class="input-daterange input-group-sm input-group" id="datepicker" data-provide="datepicker">
+                                    <input type="text" class="form-control-sm form-control datepicker" name="start" placeholder="Desde" autocomplete="off" />
+                                    <input type="text" class="form-control-sm form-control datepicker" name="end" placeholder="Hasta" autocomplete="off" />
+                                </div>
                             </div>
                         </div>
-
-                        <!-- BOTONES DE ENVIO DE FORMILARIO-->
-                        <div class="col-2 form-group">
-                            <button class="btn btn-block btn-outline-success form-control-sm" type="submit" onclick=this.form.action="{{action('ReportController@ExportAdmAR')}}">Generar</button>
+                    
+                        <!--selects-->
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col">
+                                <!-- SELECT MOTIVO-->
+                                <div class="col form-group">
+                                    <select name="motivo" id="motivo" class="text-capitalize form-control form-control-sm">
+                                        <option class="text-capitalize" value="">Motivo</option>                                          
+                                        @foreach ($motivos as $motivo)
+                                        <option class="text-capitalize" value="{{$motivo->id}}">{{$motivo->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+    
+                            <div class="col">
+                                <div class="col form-group">
+                                    <select name="programa" id="programa" class="text-capitalize form-control form-control-sm">
+                                        <option class="text-capitalize" value="">programa</option>                                          
+                                        @foreach ($programas as $programa)
+                                        <option class="text-capitalize" value="{{$programa->id}}">{{$programa->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+    
+                            <!-- BOTONES DE ENVIO DE FORMILARIO-->
+                            <div class="col-2 form-group">
+                                <button class="btn btn-block btn-outline-success form-control-sm" type="submit" onclick=this.form.action="{{action('ReportController@ExportAdmAR')}}">Generar</button>
+                            </div>
+                            <div class="col-2 form-group">
+                                <!--PREVISUALIZAR CANTIDAD DE RESULTADOS-->
+                                <button class="btn btn-block btn-secondary form-control-sm" type="submit" onclick=this.form.action="{{action('ReportController@indexAR')}}">Mostrar Cantidad</button>                    
+                            </div>
                         </div>
-                        <div class="col-2 form-group">
-                            <!--PREVISUALIZAR CANTIDAD DE RESULTADOS-->
-                            <button class="btn btn-block btn-secondary form-control-sm" type="submit" onclick=this.form.action="{{action('ReportController@indexAR')}}">Mostrar Cantidad</button>                    
+    
+                    </div>
+                </form>
+                <div class="row">
+                        <!--MOSTRAR CUANTOS HAY-->
+                        <div class="col-12 text-center">
+                            <strong class="contador text-uppercase">registros encontrados: {{count($r_by_all)}} </strong> 
                         </div>
                     </div>
-
                 </div>
-            </form>
-            <div class="row">
-                    <!--MOSTRAR CUANTOS HAY-->
-                    <div class="col-12 text-center">
-                        <strong class="contador text-uppercase">registros encontrados: {{count($r_by_all)}} </strong> 
-                    </div>
-                </div>
-        </div>
+            </div>
     </div>
 <!--cuerpo delcontenido -->
     <div class="row justify-content-md-center cont-panel">

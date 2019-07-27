@@ -24,7 +24,7 @@
 	  		@if ($radicado->fech_send_dir == $radicado->fech_send_dir)
 				@if ($radicado->fech_recive_radic != '')
 				  	<button btn-norm class="btn btn-outline-secondary"disabled type="submit"><i class="far fa-check-circle"></i> Revisado</button>
-				  	<a btn-norm name="" id="" class="btn btn-outline-primary" href="/reg-ctrol/sendMail/{{$radicado->slug}}" role="button"><?php if($radicado->fech_notifi_end != ''){ ?><i class="far fa-check-circle"></i> Correo enviado<?php }else { ?><i class="far fa-envelope"></i> Enviar Correo<?php } ?></a>
+				  	<a btn-norm name="" id="" class="btn btn-outline-primary" href=" {{route('reg-ctrol.sendmail',$radicado->slug)}}" role="button"><?php if($radicado->fech_notifi_end != ''){ ?><i class="far fa-check-circle"></i> Correo enviado<?php }else { ?><i class="far fa-envelope"></i> Enviar Correo<?php } ?></a>
 				@else
 				  	<button class="btn btn-outline-secondary text-capitalize"disabled type="submit"><i class="fas fa-check"></i> Enviado a Direccion</button>      
 				@endif

@@ -99,32 +99,67 @@
       </div>
       <!--mostrar el campo de respuesta -->
       @if (Auth::user()->type_user == 2)
-      <div class="col-6">
-        <div class="form-group">
-          <label class="card-text" for="my-textarea">respuesta:</label>
-          <textarea id="my-textarea" style="overflow:hidden; resize:none" class="form-control" name="" rows="2"<?php if(Auth::user()->type_user == 3){?>placeholder="Escribe aquí tu respuesta" <?php }else{ ?>disabled placeholder="N/a"<?php } ?>><?php if($radicado->fech_recive_radic != ''){ ?>{{$radicado->respuesta}}<?php }?></textarea>
-        </div>
-      </div>
-      @else
-        @if (Auth::user()->type_user == 3)
         <div class="col-6">
           <div class="form-group">
-            <!-- guardar la respuesta al radicado-->
-          <form method="POST" action="{{action('DirectionController@saveRequest', $radicado->slug)}}">
-            @method('PUT')
-            @csrf
-            <input type="hidden" name="respon_id" value="{{auth()->user()->id}}">
             <label class="card-text" for="my-textarea">respuesta:</label>
-              <textarea id="my-textarea" style="overflow:hidden; resize:none" class="form-control col-12 @error('respuesta') is-invalid @enderror" name="respuesta" rows="2"<?php if(Auth::user()->type_user == 3){?>placeholder="Escribe aquí tu respuesta" <?php }else{ ?>disabled placeholder="N/a"<?php }?> <?php if($radicado->respuesta == ''){?><?php }else{ ?>placeholder="{{$radicado->respuesta}}" disabled<?php }?>>{{$radicado->respuesta}}</textarea>
-              <button class="btn-revisado <?php if($radicado->respuesta == ''){?><?php }else{ ?>d-none<?php }?>" type="submit"><i class="fas fa-check"></i></button>
-              @error('respuesta')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-              @enderror
-            </form>
+            <textarea id="my-textarea" style="overflow:hidden; resize:none" class="form-control" name="" rows="2"<?php if(Auth::user()->type_user == 3){?>placeholder="Escribe aquí tu respuesta" <?php }else{ ?>disabled placeholder="N/a"<?php } ?>><?php if($radicado->fech_recive_radic != ''){ ?>{{$radicado->respuesta}}<?php }?></textarea>
+            <!--mostrando cuando se edito la respuesta-->
+            @if ($radicado->fech_recive_radic != null)
+              @if ($radicado->editAdmRequest != null)
+                <small id="emailHelp" class="form-text text-muted">[Editado por el Administrador {{$radicado->editAdmRequest}} ]</small> 
+              @endif
+            @endif
           </div>
         </div>
+      @else
+        @if (Auth::user()->type_user == 3)
+          <div class="col-6">
+            <div class="form-group">
+              <!-- guardar la respuesta al radicado-->
+                <form method="POST" action="{{action('DirectionController@saveRequest', $radicado->slug)}}">
+                  @method('PUT')
+                  @csrf
+                  <input type="hidden" name="respon_id" value="{{auth()->user()->id}}">
+                  <label class="card-text" for="my-textarea">respuesta:</label>
+                  <textarea id="my-textarea" style="overflow:hidden; resize:none" class="form-control col-12 @error('respuesta') is-invalid @enderror" name="respuesta" rows="2"<?php if(Auth::user()->type_user == 3){?>placeholder="Escribe aquí tu respuesta" <?php }else{ ?>disabled placeholder="N/a"<?php }?> <?php if($radicado->respuesta == ''){?><?php }else{ ?>placeholder="{{$radicado->respuesta}}" disabled<?php }?>>{{$radicado->respuesta}}</textarea>
+                    @if ($radicado->editAdmRequest != null)
+                      <small id="emailHelp" class="form-text text-muted">[ Editado por el Administrador {{$radicado->editAdmRequest}} ]</small> 
+                    @endif    
+                  <button class="btn-revisado <?php if($radicado->respuesta == ''){?><?php }else{ ?>d-none<?php }?>" type="submit"><i class="fas fa-check"></i></button>
+                  @error('respuesta')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </form>
+            </div>
+          </div>
+        @else
+        <!-- ESTO ES LO QUE VE EL ADMINISTRADOR -->
+          <div class="col-6">
+            <div class="form-group">
+              <!-- guardar la respuesta al radicado-->
+                <form method="POST" action="{{action('AdminController@saveRequest', $radicado->slug)}}">
+                  @method('PUT')
+                  @csrf
+                  <input type="hidden" name="editAdmRequest" value="{{date('h:i:s A')}} | {{date('d_m_Y')}}">
+                  <label class="card-text" for="my-textarea">respuesta:</label>
+                  <textarea id="my-textarea" style="overflow:hidden; resize:none" class="form-control col-12 @error('respuesta') is-invalid @enderror" name="respuesta" rows="2"
+                    <?php if(Auth::user()->type_user == 1){?>
+                      <?php if($radicado->respuesta == ''){?>disabled placeholder="N/a"<?php }else{ ?>placeholder="{{$radicado->respuesta}}"<?php }?>>{{$radicado->respuesta}}</textarea>
+                    <?php }else{ ?><?php }?> 
+                  @if ($radicado->editAdmRequest != null)
+                    <small id="emailHelp" class="form-text text-muted">[Editado por el Administrador {{$radicado->editAdmRequest}} ]</small> 
+                  @endif      
+                    <button class="btn-revisado <?php if($radicado->respuesta == null){?>d-none<?php }?>" type="submit"><i class="fas fa-check"></i></button>
+                  @error('respuesta')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </form>
+            </div>
+          </div>
         @endif
       @endif
 

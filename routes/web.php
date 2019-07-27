@@ -47,7 +47,7 @@ Route::group(['middleware' => 'userAR'], function () {
     $programas= Program::all();
     
     Route::resource('reg-ctrol', 'RegctrolController',compact('radicados'))->middleware('auth');
-    Route::get('reg-ctrol/sendMail/{reg_ctrol}', 'RegctrolController@sendEmail',compact('radicados'))->middleware('auth')->name('reg-ctrol.sendmail');
+    Route::get('reg-ctrol/{reg_ctrol}/sendMail', 'RegctrolController@sendEmail',compact('radicados'))->middleware('auth')->name('reg-ctrol.sendmail');
     Route::post('reg-ctrol/restart', 'RegctrolController@restarFechRadic')->middleware('auth')->name('reg-ctrol.restarFechRadic');
     Route::put('sme/{reg_ctrol}', 'RegctrolController@updateMailEst')->middleware('auth')->name('reg-ctrol.sme');
     Route::put('delivered/{reg_ctrol}', 'RegctrolController@updateDelivered')->middleware('auth')->name('reg-ctrol.updateDelivered');
@@ -71,6 +71,11 @@ Route::group(['middleware' => 'userAdm'], function () {
     Route::get('Export_for_ar', 'ReportController@indexAR',compact('radicados'))->middleware('auth')->name('Report.indexAR');
     Route::get('Export_for_dir', 'ReportController@indexDir',compact('radicados'))->middleware('auth')->name('Report.indexDir');
     Route::get('show_Users', 'AdminController@showUsers',compact('radicados'))->middleware('auth')->name('admin.showUsers');
+    Route::get('admin/{admin}/show_Users', 'AdminController@ShowRadic',compact('radicados'))->middleware('auth')->name('admin.ShowRadic');
+    Route::put('save_request/{admin}', 'AdminController@saveRequest',compact('radicados'))->middleware('auth')->name('admin.saveRequest');    
+    //exportaciones
+    Route::get('ExportFilter', 'ReportController@ExportFilter',compact('radicados'))->middleware('auth')->name('Report.ExportFilter');
+    Route::get('ExportAdmDir', 'ReportController@ExportAdmDir',compact('radicados'))->middleware('auth')->name('Report.ExportAdmDir');
 });
 
 //rutas de estado
@@ -83,8 +88,6 @@ Route::get('filter_all_radic', 'FilterController@viewAllRadic',compact('radicado
 
 //Generar reportes
 Route::get('Exports', 'ReportController@index',compact('radicados'))->middleware('auth')->name('Report.index');
-Route::get('ExportFilter', 'ReportController@ExportFilter',compact('radicados'))->middleware('auth')->name('Report.ExportFilter');
-Route::get('ExportAdmDir', 'ReportController@ExportAdmDir',compact('radicados'))->middleware('auth')->name('Report.ExportAdmDir');
 Route::get('ExportAdmAR', 'ReportController@ExportAdmAR',compact('radicados'))->middleware('auth')->name('Report.ExportAdmAR');
 Route::get('Cont_motivo', 'ReportController@contMotivo',compact('radicados'))->middleware('auth')->name('Report.contMotivo');
 Route::get('Export_all_Radic', 'ReportController@ExportAR',compact('radicados'))->middleware('auth')->name('Report.ExportAR');

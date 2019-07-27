@@ -22,6 +22,7 @@ class Radicado extends Model
     'time_delivered',
     'obs',
     'respuesta',
+    'editAdmRequest',
     'respon_id'];
 
   /**

@@ -114,7 +114,7 @@ hr {
   background: white;
   position: relative;
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: auto auto 50px;
   grid-gap: 10px;
   grid-auto-rows: minmax(50px, auto);
 }
@@ -123,6 +123,7 @@ hr {
   display: inline-block;
   height: 100%;
   overflow: auto;
+  overflow-x: hidden;
   scrollbar-face-color: red;
 }
 
@@ -222,7 +223,6 @@ div[p2] {
 
 .title-content {
   display: flex !important;
-  height: 50px;
 }
 
 .title-content .title {
@@ -356,6 +356,7 @@ button[btn-norm] {
 
 .show-card {
   display: flex;
+  margin-bottom: 10%;
 }
 
 .show-card .title-content {
@@ -521,5 +522,77 @@ button[btn-norm] {
 
 div[no-margin] {
   margin-bottom: 5px;
+}
+
+/*PANEL ADMINISTRATIVO*/
+
+.cont-panel-adm {
+  display: flex;
+  grid-template-columns: auto auto;
+  grid-gap: 20px;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  padding: 15px;
+}
+
+.cont-panel-adm .container {
+  margin: auto;
+  display: grid;
+  height: 50%;
+  grid-gap: 20px;
+  grid-template-columns: auto auto;
+}
+
+.cont-panel-adm .desing-1 {
+  grid-column: auto;
+  text-decoration: none;
+  overflow: hidden;
+  padding: 0;
+  color: white;
+}
+
+.cont-panel-adm .desing-1:nth-child(3) img {
+  top: -20%;
+}
+
+.cont-panel-adm .desing-1:nth-child(4) img {
+  top: -60%;
+}
+
+.cont-panel-adm .desing-1 .h3 {
+  position: absolute;
+  font-size: 3.5rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 0 0 15px black;
+}
+
+.cont-panel-adm .desing-1 .p {
+  position: absolute;
+  font-size: 1.5rem;
+  left: 50%;
+  top: 70%;
+  transform: translate(-50%, -50%);
+}
+
+.cont-panel-adm .desing-1 img {
+  transition: 0.4s;
+  position: absolute;
+  width: 100%;
+  -webkit-filter: brightness(0.4);
+          filter: brightness(0.4);
+}
+
+.cont-panel-adm .desing-1:hover {
+  transition: 0.4s;
+}
+
+.cont-panel-adm .desing-1:hover img {
+  -webkit-filter: brightness(0.8);
+          filter: brightness(0.8);
+  transform: scale(1.05);
 }
 

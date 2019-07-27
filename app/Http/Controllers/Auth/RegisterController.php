@@ -82,6 +82,6 @@ class RegisterController extends Controller
             return redirect()->route('reg-ctrol.index',compact('radicados'));
 
         }
-        return '/admin';
+        return redirect()->route('admin.index',compact('radicados'));
     }
 }

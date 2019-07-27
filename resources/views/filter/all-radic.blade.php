@@ -70,9 +70,20 @@
     </div>
 <!-- piecera-->
 <div class="row footer-home b-show-top">
-    <div class="col-8">
-      <p class="foo-title">{{$radicados->render()}}</p>
-    </div>
+    @if (Auth::user()->type_user == 1)
+    <div><p class="foo-title">estados</p></div>
+    <div><i class="far fa-circle"></i></div>
+    <div><p class="foo-txt">Creado</p></div>
+  
+    <div><i class="fas fa-circle status-send"></i></div>
+    <div><p class="foo-txt">Enviado</p></div>
+  
+    <div><i class="fas fa-circle status-recive-dir"></i></div>
+    <div><p class="foo-txt">Recibido en Dirección</p></div>
+  
+    <div><i class="fas fa-circle status-saw-dir"></i></div>
+    <div><p class="foo-txt">Revisado</p></div>
+  @endif
     <div class="col-4">
     <strong class="contador text-uppercase">registros encontrados: {{count($radicados)}} </strong>
 </div>

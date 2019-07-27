@@ -102,6 +102,8 @@
     @else
       @if (Auth::user()->type_user == 3)
         href="{{action('DirectionController@edit', $radicado->slug)}}"     
+      @else
+        href="{{action('AdminController@ShowRadic', $radicado->slug)}}"     
       @endif
     @endif
     role="button">Ver radicado</a>  

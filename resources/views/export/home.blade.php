@@ -1,87 +1,12 @@
 @extends('layouts.app')
 @section('title','| Exportaciones')
 @section('content-panel')
-
 <!-- cabecera del contenido-->
     <div class="row title-content">
         <h2 class="text-center text-capitalize title">generar reportes</h2>
-    </div>
-<!--
-    FILTRADO POR MOTIVO
-    <div class="row footer-home">
-        <div class="col-2">
-            <div class="col form-group">
-                <p class="text-capitalize">generar por motivo</p>
-            </div>
-        </div>
-        <div class="col-8">
-
-            <form method="GET" class="" action="">
-                <div class="row justify-content-md-center">
-
-                    <div class="col form-group">
-                      <select name="motivo" id="motivo" class="text-capitalize form-control form-control-sm">
-                          <option class="text-capitalize" value="">Motivo</option>                                          
-                        @foreach ($motivos as $motivo)
-                        <option class="text-capitalize" value="</option>
-                        @endforeach
-                      </select>
-                    </div>
-                
-                    <div class="col-3 form-group">
-                      <button class="btn btn-block btn-outline-success form-control-sm" type="submit" onclick=this.form.action="{{action('ReportController@ExportMotivo')}}">Generar</button>
-                    </div>
-                    PREVISUALIZAR CANTIDAD DE RESULTADOS
-                    <div class="col-3 form-group">
-                        <button class="btn btn-block btn-secondary form-control-sm" type="submit" onclick=this.form.action="{{action('ReportController@index')}}">Mostrar Cantidad</button>
-                    </div>
-            
-                </div>
-            </form>
-        </div>
-        <div class="col-2">
-          <strong class="contador text-uppercase">registros encontrados:  </strong>
-        </div>
-    </div>
-     FILTRADO POR PROGRAMA
-    <div class="row footer-home">
-        <div class="col-2">
-            <div class="col form-group">
-                <p class="text-capitalize">generar por Programa</p>
-            </div>
-        </div>
-        <div class="col-8">
-
-            <form method="GET" class="" action="">
-                <div class="row justify-content-md-center">
-
-                    <div class="col form-group">
-                        <select name="programa" id="programa" class="text-capitalize form-control form-control-sm">
-                            <option class="text-capitalize" value="">programa</option>                                          
-                            @foreach ($programas as $programa)
-                            <option class="text-capitalize" value="</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-3 form-group">
-                      <button class="btn btn-block btn-outline-success form-control-sm" type="submit" onclick=this.form.action="{{action('ReportController@ExportPrograma')}}">Generar</button>
-                    </div>
-                    PREVISUALIZAR CANTIDAD DE RESULTADOS
-                    <div class="col-3 form-group">
-                            <button class="btn btn-block btn-secondary form-control-sm" type="submit" onclick=this.form.action="{{action('ReportController@index')}}">Mostrar Cantidad</button>
-                        </div>
-                    </div>
-            </form>
-        </div>
-        <div class="col-2">
-          <strong class="contador text-uppercase">registros encontrados: </strong>
-        </div>
-    </div>
--->
-    <!-- FILTRADO COMPLETO-->
-    <div class="row footer-home">
-        <div class="col-12">
+        <!-- FILTRADO COMPLETO-->
+        <div class="footer-home">
+            <div class="col-12">
 
             <form method="GET" class="" action="">
                 <div class="row justify-content-md-center">
@@ -152,6 +77,7 @@
                         @endif
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 <!--cuerpo delcontenido -->
