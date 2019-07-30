@@ -27,8 +27,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-datepicker3.standalone.css') }}" rel="stylesheet">
-
-    <!-- Datepicker Files -->
+    <!-- DataTable Files -->
+    <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     
 </head>
 <body class="h-important">
@@ -61,6 +61,8 @@
             </div>
         </div>
     </div>
-    
+    <script type="text/javascript" src="{{ asset('js/datatables.min.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables.fixedHeader.min.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables.select.min.js') }}" defer></script>
 </body>
 </html>

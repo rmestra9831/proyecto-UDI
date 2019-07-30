@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Radicado;
 use App\Models\Program;
 use App\Models\Motivo;
+use App\Models\Role;
 use App\User;
 
 class AdminController extends Controller
@@ -15,6 +16,7 @@ class AdminController extends Controller
         $this->programas = Program::get();
         $this->motivos = Motivo::get();
         $this->users = User::get();
+        $this->roles = Role::get();
     }
     /**
      * Display a listing of the resource.
@@ -34,8 +36,9 @@ class AdminController extends Controller
         $users= $this->users;
         $radicados= $this->radicados;
         $programas= $this->programas;
+        $roles = $this->roles;
 
-        return view('admin.showusers', compact('radicados','programas','users'));
+        return view('admin.showusers', compact('radicados','programas','users', 'roles'));
 
     }
 

@@ -596,3 +596,81 @@ div[no-margin] {
   transform: scale(1.05);
 }
 
+.cont-panel-adm-user {
+  display: flex;
+  grid-template-columns: auto auto;
+  grid-gap: 20px;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  padding: 15px;
+}
+
+.cont-panel-adm-user .container {
+  margin: auto;
+  display: grid;
+  height: 85%;
+  grid-gap: 20px;
+  grid-template-columns: auto auto 40%;
+  grid-template-rows: auto 30%;
+}
+
+.cont-panel-adm-user .container .desing-1_1 {
+  grid-column: 1/3;
+  grid-row: 1;
+  text-decoration: none;
+  overflow: hidden;
+  padding: 0;
+}
+
+.cont-panel-adm-user .container .desing-1_1 h5 {
+  padding: 5px;
+  border: 1px solid #b9b9b9;
+}
+
+.cont-panel-adm-user .container .desing-1_2 {
+  grid-column: 3;
+  grid-row: 1;
+  text-decoration: none;
+  overflow: hidden;
+  padding: 0;
+}
+
+.cont-panel-adm-user .container .desing-1_2 h5 {
+  padding: 5px;
+  border: 1px solid #b9b9b9;
+}
+
+.cont-panel-adm-user .container .desing-2 {
+  grid-column: 1/4;
+  text-decoration: none;
+  overflow: hidden;
+  padding: 0;
+}
+
+.cont-panel-adm-user .container .desing-2 h5 {
+  padding: 5px;
+  border: 1px solid #b9b9b9;
+}
+
+.item_user h5 {
+  margin-bottom: 20px;
+}
+
+.item_user .par {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.item_user .par::-webkit-scrollbar-thumb {
+  background: none;
+  border-radius: 8px;
+  border: 2px solid gray;
+}
+
+.item_user .par::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
