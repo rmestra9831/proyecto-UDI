@@ -71,8 +71,20 @@ Route::group(['middleware' => 'userAdm'], function () {
     Route::get('Export_for_ar', 'ReportController@indexAR',compact('radicados'))->middleware('auth')->name('Report.indexAR');
     Route::get('Export_for_dir', 'ReportController@indexDir',compact('radicados'))->middleware('auth')->name('Report.indexDir');
     Route::get('show_Users', 'AdminController@showUsers',compact('radicados'))->middleware('auth')->name('admin.showUsers');
+    Route::get('show_Directores', 'AdminController@showDir',compact('radicados'))->middleware('auth')->name('admin.showDir');
+    Route::get('show_programas', 'AdminController@showProg',compact('radicados'))->middleware('auth')->name('admin.showProg');
     Route::get('admin/{admin}/show_Users', 'AdminController@ShowRadic',compact('radicados'))->middleware('auth')->name('admin.ShowRadic');
+    Route::get('admin/{admin}/edit_user', 'AdminController@userEdit',compact('radicados'))->middleware('auth')->name('admin.userEdit');    
+    Route::get('admin/{admin}/edit_dir', 'AdminController@dirEdit',compact('radicados'))->middleware('auth')->name('admin.dirEdit');    
+    Route::get('admin/{admin}/edit_prog', 'AdminController@progEdit',compact('radicados'))->middleware('auth')->name('admin.progEdit');    
+    Route::put('edit_user/{admin}', 'AdminController@userEdit_ctrl',compact('radicados'))->middleware('auth')->name('admin.userEdit_ctrl');    
+    Route::put('edit_dir/{admin}', 'AdminController@dirgEdit_ctrl',compact('radicados'))->middleware('auth')->name('admin.dirgEdit_ctrl');    
+    Route::put('edit_prog/{admin}', 'AdminController@progEdit_ctrl',compact('radicados'))->middleware('auth')->name('admin.progEdit_ctrl');    
     Route::put('save_request/{admin}', 'AdminController@saveRequest',compact('radicados'))->middleware('auth')->name('admin.saveRequest');    
+    Route::post('show_Users', 'AdminController@register')->middleware('auth')->name('admin.register');
+    Route::post('show_Directores', 'AdminController@registerDir')->middleware('auth')->name('admin.registerDir');
+    Route::post('show_Programs', 'AdminController@registerProg')->middleware('auth')->name('admin.registerProg');
+
     //exportaciones
     Route::get('ExportFilter', 'ReportController@ExportFilter',compact('radicados'))->middleware('auth')->name('Report.ExportFilter');
     Route::get('ExportAdmDir', 'ReportController@ExportAdmDir',compact('radicados'))->middleware('auth')->name('Report.ExportAdmDir');

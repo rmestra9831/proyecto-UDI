@@ -535,6 +535,9 @@ div[no-margin] {
             //color: white;
         }
         .desing-1_2{
+            iframe{
+                height: 100%;
+            }
             h5{
                 padding: 5px;
                 border:1px solid rgb(185, 185, 185);
@@ -577,3 +580,4 @@ div[no-margin] {
         }
     }
 }
+

@@ -137,6 +137,7 @@ function formatToTelephone(str) {
   });
 //validacion tolstip
 $('i[status]').tooltip(options);
+
 });
 
 //activar el box-shadown de la cabecera

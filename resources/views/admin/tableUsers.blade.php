@@ -3,6 +3,7 @@
         <tr>
             <th>Nombre</th>
             <th>Cargo</th>
+            <th>Acción</th>
         </tr>
     </thead>
     <tbody>
@@ -12,6 +13,7 @@
                 @foreach ($roles as $rol)
                     @if ($rol->id == $user->type_user)
                         <td>{{$rol->name_role}}</td>
+                        <td><button id="btnEdit" class="btn btn-primary" value="{{$user->id}}" >Editar</button></td>
                     @endif
                 @endforeach
             </tr>

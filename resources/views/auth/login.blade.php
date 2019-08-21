@@ -7,6 +7,8 @@
         <p>sistema de información admiciones y registro</p>
     </div>
     <!-- seccion del formulario-->
+    @include('common.denegado')
+
     <div class="tt-login text-capitalize"><h4>iniciar sesión</h4></div>
     <form method="POST" action="{{ route('login') }}">
                 @csrf

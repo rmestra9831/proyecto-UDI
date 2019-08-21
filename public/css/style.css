@@ -637,6 +637,10 @@ div[no-margin] {
   padding: 0;
 }
 
+.cont-panel-adm-user .container .desing-1_2 iframe {
+  height: 100%;
+}
+
 .cont-panel-adm-user .container .desing-1_2 h5 {
   padding: 5px;
   border: 1px solid #b9b9b9;

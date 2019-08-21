@@ -21,13 +21,13 @@
                         <div class="p">cantidad aqui</div>
                     </a>
 
-                    <a href="" class="col card desing-1">
+                    <a href="{{route('admin.showUsers')}}" class="col card desing-1">
                         <img src=" {{asset('img/usuarios.svg')}} " alt="">
                         <div class="h3">Usuarios</div>
                         <div class="p">cantidad aqui</div>
                     </a>
 
-                    <a href="" class="col card desing-1">
+                    <a href="{{route('admin.showDir')}}" class="col card desing-1">
                         <img src=" {{asset('img/directors.svg')}} " alt="">
                         <div class="h3">Directores</div>
                         <div class="p">cantidad aqui</div>

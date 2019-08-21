@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'userAR' => \App\Http\Middleware\UserAR::class,
         'userDir' => \App\Http\Middleware\UserDir::class,
         'userAdm' => \App\Http\Middleware\UserAdm::class,
+        'checkActive' => \App\Http\Middleware\CheckActive::class,
     ];
 
     /**

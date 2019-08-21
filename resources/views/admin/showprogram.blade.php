@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title','| Usuarios')
+@section('title','| Programas')
 @section('content-panel')
 
 <!-- cabecera del contenido-->
     <div class="row title-content">
-        <h2 class="text-center text-capitalize title">usuarios</h2>
+        <h2 class="text-center text-capitalize title">Programas</h2>
     </div>
 <!--cuerpo delcontenido -->
     <div class="row justify-content-md-center cont-panel">
@@ -20,7 +20,7 @@
                     <div class="card p-4 item_user desing-1_1">
                         <h5 class="text-capitalize text-center">Listado</h5>
                         <div class="par">
-                            @include('admin.tableUsers')
+                            @include('admin.tableProg')
                         </div>
                     </div>
                     <!-- Se edita el usuario seleccionado-->
@@ -31,59 +31,31 @@
                     </div>
                     <!-- Se crean los usuarios-->
                     <div class="card p-4 desing-2">
-                        <h5 class="text-capitalize text-center">Crear nuevo usuario</h5>
-                            <form method="POST" action="{{ action('AdminController@register') }}" style="margin: auto 5%;">
+                        <h5 class="text-capitalize text-center">Crear nuevo Director</h5>
+                            <form method="POST" action="{{ action('AdminController@registerProg') }}" style="margin: auto 5%;">
                                 @csrf
         
                                 <div class="form-group row">
-                                    
                                     <div class="col-md-6">
-                                        <input autocomplete="off" id="name" placeholder="Nombre de Usuario" type="text" class="form-control form-control-sm @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-        
+                                        <input autocomplete="off" id="name" placeholder="Nombre del Programa" type="text" class="form-control form-control-sm @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="off" autofocus>
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
-
                                     <div class="col-md-6">
-                                        <select name="type_user" id="" class="text-capitalize form-control custom-select custom-select-sm form-control-sm @error('program_id') is-invalid @enderror">
-                                            <option class="text-capitalize" value="">Cargo</option>                      
-                                            @foreach ($roles as $rol)
-                                                <option class="text-capitalize" value="{{$rol->id}}">{{$rol->name_role}}</option>          
-                                            @endforeach
-                                        </select>
+                                        <input autocomplete="off" id="correo_director" placeholder="Correo del Programa" type="text" class="form-control form-control-sm @error('name') is-invalid @enderror" name="correo_director" value="{{ old('name') }}" required autocomplete="off" autofocus>
                                     </div>
-
-                                </div>
-      
-                                <div class="form-group row">
-                                    <div class="col-md-6">
-                                        <input id="password" placeholder="Contraseña" type="" class="form-control form-control-sm @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-        
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <input id="password-confirm" type="password" class="form-control form-control-sm " placeholder="Confirmar Contraseña" name="password_confirmation" required autocomplete="new-password">
-                                    </div>
-
                                 </div>
 
                                 <div class="form-group row">
-                     
                                     <div class="col-md-12">
                                         <button type="submit" class="btn btn-outline-secondary btn-sm btn-block">
                                             {{ __('Registrar') }}
                                         </button>
                                     </div>
                                 </div>
-    
                             </form>
                     </div>
                 </div>
@@ -106,7 +78,7 @@
             $('.table #btnEdit').click(function(){
               //$('#content_edit_user').load("public/views/admin/editUser.php");
                 $valor = $(this).val();
-                $url = "http://localhost:8000/admin/"+$valor+"/edit_user";
+                $url = "http://localhost:8000/admin/"+$valor+"/edit_prog";
                 $('.user_create #frame_show').attr("src", $url);
 
                 //alert("el valor es: "+ $valor);
