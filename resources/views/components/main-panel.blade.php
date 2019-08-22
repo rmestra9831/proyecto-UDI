@@ -8,6 +8,23 @@
           <img class="align-items-center" src="{{ asset('icon/admin.svg') }}" alt="">
         @endif
      @endif
+     <div class="type_user">
+        @if (Auth::check())
+        @if (Auth::user()->type_user == 1)
+            Administrador
+        @else
+            @if (Auth::user()->type_user == 2)
+                Admisiones y Registro
+            @else
+                @if (Auth::user()->type_user == 3)
+                Direccion                                        
+                @endif                                 
+            @endif
+        @endif 
+        @else
+            <strong>Sirc UDI</strong>
+        @endif
+     </div>
 </div>
 <!--contenido de listas del panel -->
 <div class="p-2">
@@ -39,5 +56,27 @@
             @endif
       @endif
     </div>
+</div>
+<!-- Piecera -->
+<div class="p-3">
+  <div class="col" id="log-panel-foot">
+      <div class="btn-group dropup col name_user">
+        <div class="item"data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="far fa-user-circle"></i><a class="text-capitalize">{{ Auth::user()->name }}</a>
+        </div>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
+             {{ __('Cerrar Sesion') }}
+          </a>
+
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+          </form>
+        </div>
+      </div>
+    <img src="{{ asset('img/udi-brand-white.webp') }}" alt="">
+  </div>
 </div>
 

@@ -1,3 +1,5 @@
+<!-- Navbar eliminado-->
+<!--
 <nav class="navbar fixed-top navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         
@@ -6,7 +8,7 @@
         </button>
         
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
+            Left Side Of Navbar 
             <ul class="navbar-nav mr-auto">
                 <li>
                     <a class="navbar-brand mb-0 h1" id="h-content-img" href="#">
@@ -15,24 +17,24 @@
                             @if (Auth::user()->type_user == 1)
                                 Administrador
                             @else
-                            @if (Auth::user()->type_user == 2)
-                                Admisiones y Registro
-                            @else
-                            @if (Auth::user()->type_user == 3)
-                            Direccion                                        
-                            @endif                                 
-                        @endif
-                        @endif 
+                                @if (Auth::user()->type_user == 2)
+                                    Admisiones y Registro
+                                @else
+                                    @if (Auth::user()->type_user == 3)
+                                    Direccion                                        
+                                    @endif                                 
+                                @endif
+                            @endif 
                         @else
-                    <strong>Sirc UDI</strong>
-                @endif
+                            <strong>Sirc UDI</strong>
+                        @endif
                     </a>
                 </li>
             </ul>
 
-            <!-- Right Side Of Navbar -->
+            Right Side Of Navbar 
             <ul class="navbar-nav ml-auto">
-                <!-- Authentication Links -->
+                Authentication Links 
                 @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -64,4 +66,4 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav>-->

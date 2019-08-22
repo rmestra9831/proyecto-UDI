@@ -25,7 +25,6 @@ hr {
 
 .content {
   height: 100%;
-  padding-top: 55px;
 }
 
 #h-content-img {
@@ -53,12 +52,18 @@ hr {
 .menu-panel .p-1 {
   grid-column: 1/1;
   grid-row: 1;
-  display: inline-flex;
+  display: inherit;
 }
 
 .menu-panel .p-1 img {
   width: 80%;
   margin: auto;
+}
+
+.menu-panel .p-1 .type_user {
+  margin: auto;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 .menu-panel .p-2 {
@@ -69,6 +74,72 @@ hr {
 .menu-panel .p-2 ul {
   text-decoration: none;
   list-style: none;
+}
+
+.menu-panel .p-3 {
+  grid-column: 1/1;
+}
+
+.menu-panel .p-3 ul {
+  text-decoration: none;
+  list-style: none;
+}
+
+.menu-panel .p-3 #log-panel-foot {
+  padding: 0 !important;
+  width: 100%;
+  display: contents;
+  position: absolute;
+}
+
+.menu-panel .p-3 img {
+  width: 100%;
+}
+
+.menu-panel .p-3 .name_user {
+  margin-bottom: 30px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: 0.2s;
+}
+
+.menu-panel .p-3 .name_user .item {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  transition: 0.2s;
+  color: #ffffffb0;
+}
+
+.menu-panel .p-3 .name_user .item i {
+  width: auto;
+  font-size: 1.5rem;
+}
+
+.menu-panel .p-3 .name_user .item .arrow {
+  margin: auto !important;
+  font-size: 0.8rem !important;
+  position: relative !important;
+  right: -45% !important;
+}
+
+.menu-panel .p-3 .name_user .item a {
+  margin: auto 10px;
+  font-size: 1rem;
+}
+
+.menu-panel .p-3 .name_user:hover {
+  background: #ffffff1f;
+  transition: 0.2s;
+}
+
+.menu-panel .p-3 .name_user:hover .item {
+  color: #ffffff;
+  transition: 0.2s;
+}
+
+.menu-panel .dropdown-menu {
+  top: -5px !important;
 }
 
 .menu-panel .btn-report {

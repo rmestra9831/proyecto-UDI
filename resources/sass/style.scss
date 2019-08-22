@@ -17,7 +17,7 @@ hr{
 }
 .content {
     height: 100%;
-    padding-top: 55px;
+    //padding-top: 55px; Eliminando el espacio del nav
 }
 #h-content-img {
     display: flex !important;
@@ -40,10 +40,15 @@ hr{
     .p-1 {
         grid-column: 1 / 1;
         grid-row: 1;
-        display: inline-flex;
+        display: inherit;
         img {
             width: 80%;
             margin: auto;
+        }
+        .type_user{
+            margin: auto;
+            font-size: 1.5rem;
+            text-align: center;
         }
     }
     .p-2 {
@@ -53,6 +58,61 @@ hr{
             text-decoration: none;
             list-style: none;
         }
+    }
+    .p-3 {
+        grid-column: 1 / 1;
+        ul {
+            text-decoration: none;
+            list-style: none;
+        }
+        #log-panel-foot{
+            padding: 0 !important;
+            width: 100%;
+            display: contents;
+            position: absolute;
+        }
+        img{
+            width: 100%;
+        }
+        .name_user{
+            margin-bottom: 30px;
+            border-radius: 5px;
+            padding: 5px 10px;
+            transition: .2s;
+            .item{
+                position: relative;
+                display: flex;
+                cursor: pointer;
+                transition: .2s;
+                color: #ffffffb0;
+
+                i{
+                    width: auto;
+                    font-size: 1.5rem;
+                }
+                .arrow{
+                    margin: auto !important;
+                    font-size: .8rem !important;
+                    position: relative !important;
+                    right: -45% !important;
+                }
+                a{
+                    margin: auto 10px;
+                    font-size: 1rem;
+                }
+            }
+            &:hover{
+                background: #ffffff1f;
+                transition: .2s;
+                .item{
+                    color: #ffffff;
+                    transition: .2s;
+                }
+            }
+        }
+    }
+    .dropdown-menu{
+        top: -5px !important;
     }
     .btn-report {
         margin-bottom: 45px;
