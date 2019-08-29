@@ -1,4 +1,4 @@
-<table class="table table-striped hover" id="users" class="display">
+<table class="table table-striped hover table-datas" id="users" class="display">
     <thead>
         <tr>
             <th>Nombre</th>
@@ -18,4 +18,5 @@
         @endforeach
     </tbody>
 </table>
+
 

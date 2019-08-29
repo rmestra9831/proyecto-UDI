@@ -17,6 +17,7 @@ class CreateMotivosTable extends Migration
         Schema::create('motivos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->integer('type_motivo');
             $table->timestamps();
         });
     }

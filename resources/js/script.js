@@ -1,4 +1,4 @@
-$(document).ready(function () {
+//imports
   window.setTimeout(function () {
     $(".alert").fadeTo(500, 0).slideUp(500, function () {
       $(this).remove();
@@ -138,7 +138,103 @@ function formatToTelephone(str) {
 //validacion tolstip
 $('i[status]').tooltip(options);
 
+
+//Seleccionando las opciones de select motivos para mostrar en asunto 
+var asunto = document.getElementById('asunto');
+var select_ac = document.getElementById('motivo_select_ac');
+var select_ad = document.getElementById('motivo_select_ad');
+var select_mot_type = document.getElementById('type_motivo');
+$hidden = document.createAttribute('hidden');
+$disabled = document.createAttribute('disabled');
+
+  /** ocultando el campo de motivos al no selecccionar nada */
+  select_mot_type.addEventListener('change',function(){
+    var selectedOption_mot_type = this.options[select_mot_type.selectedIndex];
+    if (selectedOption_mot_type.value != '') {
+      $('#motivo_select_ac').removeAttr('disabled');
+      $('#motivo_select_ad').removeAttr('disabled');
+      if (select_mot_type.value == 2) {
+        $hidden = document.createAttribute('hidden');
+        select_ad.setAttributeNode($hidden);
+        select_ad.value = '';
+        select_ac.value = '';
+        asunto.value = '';
+        $('#motivo_select_ac').removeAttr('hidden');
+      } if(select_mot_type.value == 1) {
+        $hidden = document.createAttribute('hidden');
+        select_ac.setAttributeNode($hidden);
+        select_ac.value = '';
+        select_ad.value = '';
+        asunto.value = '';
+        $('#motivo_select_ad').removeAttr('hidden');
+      }
+    } else {
+      asunto.value = '';
+      select_ac.value = '';
+      select_ad.value = '';
+      $disabled = document.createAttribute('disabled');
+      select_ad.setAttributeNode($disabled);
+      $disabled = document.createAttribute('disabled');
+      select_ac.setAttributeNode($disabled);
+    }
+  });
+//mostrar el select ACADEMICO
+  select_ac.addEventListener('change',function(){
+    var selectedOption_ac = this.options[select_ac.selectedIndex];
+    if (selectedOption_ac.value == 23) {
+      //$('#asunto').removeAttr('disabled');
+      input_asunto = document.getElementById('asunto');
+      input_asunto.value = "";
+      $('#asunto').removeAttr('disabled');
+      $('#asunto').attr('value', null);
+      //creando nuevos atributos
+      $required = document.createAttribute('required');
+      //agregando nuevos atributos
+      asunto.setAttributeNode($required);
+    }else{
+      $valor = (selectedOption_ac.text);
+      input_asunto = document.getElementById('asunto');
+      input_asunto.value = "";
+      input_asunto.value = $valor;
+      //creando nuevos atributos
+      $disabled = document.createAttribute('disabled');
+      //agregando nuevos atributos
+      asunto.setAttributeNode($disabled);
+    }
+  });
+//mostrar el select ADMINISTRATIVO
+  select_ad.addEventListener('change',function(){
+    var selectedOption_ad = this.options[select_ad.selectedIndex];
+    if (selectedOption_ad.value == 23) {
+      //$('#asunto').removeAttr('disabled');
+      input_asunto = document.getElementById('asunto');
+      input_asunto.value = "";
+      $('#asunto').removeAttr('disabled');
+      $('#asunto').attr('value', null);
+      //creando nuevos atributos
+      $required = document.createAttribute('required');
+      //agregando nuevos atributos
+      asunto.setAttributeNode($required);
+    }else{
+      $valor = (selectedOption_ad.text);
+      input_asunto = document.getElementById('asunto');
+      input_asunto.value = "";
+      input_asunto.value = $valor;
+      //creando nuevos atributos
+      $disabled = document.createAttribute('disabled');
+      //agregando nuevos atributos
+      asunto.setAttributeNode($disabled);
+    }
+  });
+
+//ACTIVANDO EL SPINNER AL GUARDAR UN RADICADO
+$('form').submit(function(event){
+  $('#spinner').fadeIn();
+  $('#exampleModal').hide();
+  $('.modal-backdrop').hide();
+  $('#spinner').removeAttr('hidden');
 });
+
 
 //activar el box-shadown de la cabecera
 $('.cont-panel').scroll(function () { 

@@ -11,27 +11,28 @@ class MotivoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('motivos')->insert(['name'=>'Prueba de suficiencia de ingles']);                
-        DB::table('motivos')->insert(['name'=>'Cancelacion']);                
-        DB::table('motivos')->insert(['name'=>'Habilitacion']);                
-        DB::table('motivos')->insert(['name'=>'Inclusion']);                
-        DB::table('motivos')->insert(['name'=>'Reintegro o readmision']);                
-        DB::table('motivos')->insert(['name'=>'Validacion']);                
-        DB::table('motivos')->insert(['name'=>'Aplazamiento']);                
-        DB::table('motivos')->insert(['name'=>'Supletorio ']);                
-        DB::table('motivos')->insert(['name'=>'Cuenta de cobro']);                
-        DB::table('motivos')->insert(['name'=>'Hoja de vida']);                
-        DB::table('motivos')->insert(['name'=>'Servios publicos']);                
-        DB::table('motivos')->insert(['name'=>'Invitaciones']);                
-        DB::table('motivos')->insert(['name'=>'Derecho de peticion']);                
-        DB::table('motivos')->insert(['name'=>'Permiso laboral']);                
-        DB::table('motivos')->insert(['name'=>'Certificado laboral']);                
-        DB::table('motivos')->insert(['name'=>'Traslado de sede']);                
-        DB::table('motivos')->insert(['name'=>'Homologacion']);                
-        DB::table('motivos')->insert(['name'=>'Curso vacacional']);                
-        DB::table('motivos')->insert(['name'=>'Cambio de programa']);                
-        DB::table('motivos')->insert(['name'=>'Dev de documentos']);                
-        DB::table('motivos')->insert(['name'=>'Excusa de inasistencia']);                
-        DB::table('motivos')->insert(['name'=>'Cambio de horario']);                
+        DB::table('motivos')->insert(['name'=>'prueba de suficiencia de ingles','type_motivo'=>'2']);             
+        DB::table('motivos')->insert(['name'=>'cancelacion','type_motivo'=>'2']);                
+        DB::table('motivos')->insert(['name'=>'habilitacion','type_motivo'=>'2']);                
+        DB::table('motivos')->insert(['name'=>'inclusion','type_motivo'=>'2']);                
+        DB::table('motivos')->insert(['name'=>'reintegro o readmision','type_motivo'=>'2']);                
+        DB::table('motivos')->insert(['name'=>'validacion','type_motivo'=>'2']);                
+        DB::table('motivos')->insert(['name'=>'aplazamiento','type_motivo'=>'2']);                
+        DB::table('motivos')->insert(['name'=>'supletorio ','type_motivo'=>'2']);                
+        DB::table('motivos')->insert(['name'=>'cuenta de cobro','type_motivo'=>'1']);                
+        DB::table('motivos')->insert(['name'=>'hoja de vida','type_motivo'=>'1']);                
+        DB::table('motivos')->insert(['name'=>'servios publicos','type_motivo'=>'1']);                
+        DB::table('motivos')->insert(['name'=>'invitaciones','type_motivo'=>'1']);                
+        DB::table('motivos')->insert(['name'=>'derecho de petición','type_motivo'=>'1']);                
+        DB::table('motivos')->insert(['name'=>'permiso laboral','type_motivo'=>'1']);                
+        DB::table('motivos')->insert(['name'=>'certificado laboral','type_motivo'=>'1']);                
+        DB::table('motivos')->insert(['name'=>'traslado de sede','type_motivo'=>'2']);                
+        DB::table('motivos')->insert(['name'=>'homologación','type_motivo'=>'2']);                
+        DB::table('motivos')->insert(['name'=>'curso vacacional','type_motivo'=>'2']);                
+        DB::table('motivos')->insert(['name'=>'cambio de programa','type_motivo'=>'2']);                
+        DB::table('motivos')->insert(['name'=>'devolución de documentos','type_motivo'=>'1']);                
+        DB::table('motivos')->insert(['name'=>'excusa de inasistencia','type_motivo'=>'2']);                
+        DB::table('motivos')->insert(['name'=>'cambio de horario','type_motivo'=>'2']);                
+        DB::table('motivos')->insert(['name'=>'otro','type_motivo'=>'3']);                
     }
 }

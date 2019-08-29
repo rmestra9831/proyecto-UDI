@@ -21,5 +21,10 @@ class UsersSeeder extends Seeder
             'type_user'=>'3',
             'password'=> bcrypt('123'),
         ]);
+        DB::table('users')->insert([
+            'name'=>'admin',
+            'type_user'=>'1',
+            'password'=> bcrypt('123'),
+        ]);
     }
 }

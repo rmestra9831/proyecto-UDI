@@ -15,6 +15,7 @@ class CreateProgramsTable extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name_dir')->nullable();
             $table->string('name');
             $table->string('correo_director');
             $table->timestamps();

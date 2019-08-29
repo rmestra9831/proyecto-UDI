@@ -4,18 +4,18 @@
 <div class="form">
     <div class="sec-head-log">
         <h1>SIAR</h1>
-        <p>sistema de información admiciones y registro</p>
+        <p>Sistema de Información Admiciones y Registro</p>
     </div>
     <!-- seccion del formulario-->
     @include('common.denegado')
 
-    <div class="tt-login text-capitalize"><h4>iniciar sesión</h4></div>
+    <div class="tt-login text-capitalize"><h2>iniciar sesión</h2></div>
     <form method="POST" action="{{ route('login') }}">
                 @csrf
         
                 <div class="form-group row">
                     <div class="col-md-12 input-icon">
-                        <input id="name" type="name" class="form-control form-control-sm @error('name') is-invalid @enderror" placeholder="Usuario" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus><i id="icon" class="far fa-user"></i>
+                        <input id="name" type="name" class="form-control form-control-md @error('name') is-invalid @enderror" placeholder="Usuario" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus><i id="icon" class="far fa-user"></i>
         
                         @error('name')
                             <span class="invalid-feedback" role="alert">
@@ -27,7 +27,7 @@
         
                 <div class="form-group row">
                     <div class="col-md-12 input-icon">
-                        <input id="password" type="password" class="form-control form-control-sm @error('password') is-invalid @enderror" placeholder="Contraseña" name="password" required autocomplete="current-password"><i id="icon" class="fas fa-key"></i>
+                        <input id="password" type="password" class="form-control form-control-md @error('password') is-invalid @enderror" placeholder="Contraseña" name="password" required autocomplete="current-password"><i id="icon" class="fas fa-key"></i>
         
                         @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -51,7 +51,7 @@
                 
                 <div class="form-group row mb-0">
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-block btn-primary">
+                        <button type="submit" class="btn btn-block btn-primary" style="font-size: 1.2rem" >
                             {{ __('Ingresar') }}
                         </button>
                     </div>
@@ -65,9 +65,9 @@
     </div>
     <div class="sec-foot-log">
         <div>
-            <p class="text-capitalize container-fluid">Copyright © 2019 Universidad de Investigación Y Desarrollo - UDI - .
-                    Todos los derechos reservados. Desarrollado:</p>
-            <p class="text-capitalize container-fluid">Richard andres mestra a. - Webmaster | Martha Cecilia Guarnizo García - Dirección ORI</p>
+            <p class="container-fluid">Copyright © 2019 Universidad de Investigación Y Desarrollo - UDI - .</p>
+                    <p>Todos los derechos reservados. Desarrollado:</p>
+            <p class="text-capitalize container-fluid">Richard andres mestra a. - Webmaster | Ing Martha Cecilia Guarnizo García. Dirección ORI</p>
         </div>
     </div>
 </div>

@@ -17,38 +17,38 @@
     
         
       @foreach ($radicados as $radicado)
-      @if ($radicado->fech_send_dir == '')
-
-      @else
-        @if ($radicado->fech_recive_radic == '')
-          @if ($radicado->fech_recive_dir == '')
-          <div class="col-11 content-card">
-              <!--ventada de recivido-->
-               <div class="unrecive" id="{{$radicado->id}}" valid="{{$radicado->id}}">
-                 <!-- formulario para actualizar el estado de recivido direccion-->
-                 <form action="{{route('status.update',$radicado->slug)}}" method="post">
-                    @method('PUT')
-                    @csrf
-                      <input  name="time_recive_dir" type="hidden" value="{{date("h:i:s A")}}">
-                      <input  name="fech_recive_dir" type="hidden" value="{{date("y/m/d")}}">
-                   <button class="btn btn-primary text-capitalize" type="submit">recibir</button>
-                 </form>
-               </div>
-               @include('components.cards')
-             </div>
-            @else
-             <div class="col-11 content-card">
-                @include('components.cards')
-              </div>
-          @endif
-
+        @if ($radicado->fech_send_dir == '')
+  
         @else
-        <div class="col-11 content-card">
-          <img src="{{asset('img/check.svg')}}" alt="">
-          @include('components.cards')
-        </div>
+          @if ($radicado->fech_recive_radic == '')
+            @if ($radicado->fech_recive_dir == '')
+            <div class="col-11 content-card">
+                <!--ventada de recivido-->
+                 <div class="unrecive" id="{{$radicado->id}}" valid="{{$radicado->id}}">
+                   <!-- formulario para actualizar el estado de recivido direccion-->
+                   <form action="{{route('status.update',$radicado->slug)}}" method="post">
+                      @method('PUT')
+                      @csrf
+                        <input  name="time_recive_dir" type="hidden" value="{{date("h:i:s A")}}">
+                        <input  name="fech_recive_dir" type="hidden" value="{{date("y/m/d")}}">
+                     <button class="btn btn-primary text-capitalize" type="submit">recibir</button>
+                   </form>
+                 </div>
+                 @include('components.cards')
+               </div>
+              @else
+               <div class="col-11 content-card">
+                  @include('components.cards')
+                </div>
+            @endif
+              
+          @else
+          <div class="col-11 content-card">
+            <img src="{{asset('img/check.svg')}}" alt="">
+            @include('components.cards')
+          </div>
+          @endif
         @endif
-      @endif
       @endforeach
 </div>
 <div class="row footer-home b-show-top">

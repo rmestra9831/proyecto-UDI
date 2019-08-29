@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->integer('type_user')->unsigned();
             $table->string('password');
-
+            $table->boolean('activeUser')->nullable();
             //clave foranea
             $table->foreign('type_user')->references('id')->on('roles');
             

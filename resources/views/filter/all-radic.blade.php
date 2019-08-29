@@ -22,8 +22,8 @@
                     
                     <!--datapicker-->
                     <div class="col-3 input-daterange input-group-sm input-group" id="datepicker" data-provide="datepicker">
-                        <input type="text" class="form-control-sm form-control datepicker" name="start" placeholder="Desde" autocomplete="none" />
-                        <input type="text" class="form-control-sm form-control datepicker" name="end" placeholder="Hasta" autocomplete="none" />
+                        <input type="text" class="form-control-sm form-control datepicker" name="start" placeholder="Desde" autocomplete="none" >
+                        <input type="text" class="form-control-sm form-control datepicker" name="end" placeholder="Hasta" autocomplete="none" >
                     </div>
                    
                     <div class="col form-group">
@@ -44,7 +44,7 @@
                       <select name="programa" id="programa" class="text-capitalize form-control form-control-sm">
                           <option class="text-capitalize" value="">programa</option>                                          
                         @foreach ($programas as $programa)
-                        <option class="text-capitalize" value="{{$programa->id}}">{{$programa->name}}</option>
+                        <option class="" value="{{$programa->id}}">Dirección de {{$programa->name}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -61,13 +61,93 @@
     </div>
   </div>
 <!--cuerpo delcontenido -->
+  <!-- validación de filtrado segun TIPO DE USUARIO -->
+  @if (Auth::user()->type_user == 3)
     <div class="row justify-content-md-center cont-panel">
-      @foreach ($radicados as $radicado)
-        <div  class="col-11 content-card">
-          @include('components.cards')
-        </div>
-      @endforeach
+        @include('common.success')
+          @if(Session::has('alert-ok-radic'))
+            {{ Session::get('alert-ok-radic') }}
+          @endif
+
+
+          @foreach ($radicados as $radicado)
+            @if ($radicado->fech_send_dir == '')
+
+            @else
+              @if ($radicado->fech_recive_radic == '')
+                @if ($radicado->fech_recive_dir == '')
+                <div class="col-11 content-card">
+                    <!--ventada de recivido-->
+                     <div class="unrecive" id="{{$radicado->id}}" valid="{{$radicado->id}}">
+                       <!-- formulario para actualizar el estado de recivido direccion-->
+                       <form action="{{route('status.update',$radicado->slug)}}" method="post">
+                          @method('PUT')
+                          @csrf
+                            <input  name="time_recive_dir" type="hidden" value="{{date("h:i:s A")}}">
+                            <input  name="fech_recive_dir" type="hidden" value="{{date("y/m/d")}}">
+                         <button class="btn btn-primary text-capitalize" type="submit">recibir</button>
+                       </form>
+                     </div>
+                     @include('components.cards')
+                   </div>
+                  @else
+                   <div class="col-11 content-card">
+                      @include('components.cards')
+                    </div>
+                @endif
+                  
+              @else
+              <div class="col-11 content-card">
+                <img src="{{asset('img/check.svg')}}" alt="">
+                @include('components.cards')
+              </div>
+              @endif
+            @endif
+          @endforeach
     </div>
+  @else
+  <!-- validación de filtrado según TIPO DE USUARIO -->
+    @if (Auth::user()->type_user == 2)
+      <div class="row justify-content-md-center cont-panel">
+        @foreach ($radicados as $radicado)
+          <div  class="col-11 content-card">
+            @include('components.cards')
+          </div>
+        @endforeach
+      </div>      
+    @else
+      <!-- validación de filtrado según TIPO DE USUARIO -->
+      <div class="row justify-content-md-center cont-panel">
+        @include('common.success')
+          @if(Session::has('alert-ok-radic'))
+            {{ Session::get('alert-ok-radic') }}
+          @endif
+          <!-- imprime todo lo que no se ha revisado -->
+          @foreach ($radicados as $radicado)
+            @if ($radicado->respuesta != null)
+              <div  class="col-11 content-card">
+                @include('components.cards')
+              </div>
+            @else
+            <div class="col-11 content-card">
+                <!--ventada de recivido-->
+                 <div class="unrecive" id="{{$radicado->id}}" valid="{{$radicado->id}}">
+                   <!-- formulario para actualizar el estado de recivido direccion-->
+                   <form action="{{route('status.update',$radicado->slug)}}" method="post">
+                      @method('PUT')
+                      @csrf
+                        <input  name="time_recive_dir" type="hidden" value="{{date("h:i:s A")}}">
+                        <input  name="fech_recive_dir" type="hidden" value="{{date("y/m/d")}}">
+                     <button class="btn btn-primary text-capitalize" type="submit">recibir</button>
+                   </form>
+                 </div>
+                 @include('components.cards')
+               </div>
+            @endif
+          @endforeach
+      </div>
+    @endif
+  @endif
 <!-- piecera-->
 <div class="row footer-home b-show-top">
     @if (Auth::user()->type_user == 1)

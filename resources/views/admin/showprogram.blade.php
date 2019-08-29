@@ -31,7 +31,7 @@
                     </div>
                     <!-- Se crean los usuarios-->
                     <div class="card p-4 desing-2">
-                        <h5 class="text-capitalize text-center">Crear nuevo Director</h5>
+                        <h5 class="text-capitalize text-center">Crear nuevo Programa</h5>
                             <form method="POST" action="{{ action('AdminController@registerProg') }}" style="margin: auto 5%;">
                                 @csrf
         
@@ -62,7 +62,8 @@
             </div>
 
     </div>
-
+@endsection
+@section('scripts')
     <script>
         $(document).ready(function () {
             $('#users').DataTable({
@@ -78,17 +79,12 @@
             $('.table #btnEdit').click(function(){
               //$('#content_edit_user').load("public/views/admin/editUser.php");
                 $valor = $(this).val();
-                $url = "http://localhost:8000/admin/"+$valor+"/edit_prog";
+                $url = window.location.origin+"/admin/"+$valor+"/edit_prog";
                 $('.user_create #frame_show').attr("src", $url);
 
                 //alert("el valor es: "+ $valor);
             });
 
         });
-
-        
-    </script>
-<!-- piecera-->
-    
-
+    </script> 
 @endsection

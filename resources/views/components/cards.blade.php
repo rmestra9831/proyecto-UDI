@@ -1,7 +1,7 @@
 <div class="col-12 cabecera-radic
   <?php if($radicado->atention == 'urgente')
   {?>p-urgente<?php }else{?> p-normal<?php }?>">
-  <strong>#{{$radicado->fechradic_id}}-{{$radicado->year}}</strong>
+  <strong>{{$radicado->fechradic_id}}-{{$radicado->year}}</strong>
   @if ($radicado->atention == "urgente")
     <div class="txt-ur"><strong>Atención Urgente</strong></div>
   @endif
@@ -19,7 +19,7 @@
 
       <div class="col-3 text-truncate text-right">
         <div class="row">
-          <div class="col"><strong class="card-text">Programa: <p class="card-text-var">{{$radicado->program->name}}</p></strong></div>
+          <div class="col"><strong class="card-text">Programa: <p class="card-text-var">Dirección de {{$radicado->program->name}}</p></strong></div>
         </div>
       </div>
 

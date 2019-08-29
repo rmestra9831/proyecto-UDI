@@ -33,7 +33,7 @@
                         <div class="p">cantidad aqui</div>
                     </a>
 
-                    <a href="" class="col card desing-1">
+                    <a href="{{route('admin.showProg')}}" class="col card desing-1">
                         <img src=" {{asset('img/inge.svg')}} " alt="">
                         <div class="h3">Programas</div>
                         <div class="p">cantidad aqui</div>

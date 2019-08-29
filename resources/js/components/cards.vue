@@ -1,23 +1,30 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div>
+    <div class="text-center mb-3 d-flex justify-content-between">
+      <b-spinner
+        v-for="variant in variants"
+        :variant="variant"
+        :key="variant"
+      ></b-spinner>
     </div>
+
+    <div class="text-center d-flex justify-content-between">
+      <b-spinner
+        v-for="variant in variants"
+        :variant="variant"
+        :key="variant"
+        type="grow"
+      ></b-spinner>
+    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
+  export default {
+    data() {
+      return {
+        variants: ['primary', 'secondary','warning', 'success', 'info', 'light', 'dark']
+      }
     }
+  }
 </script>

@@ -9,6 +9,8 @@ use App\Models\Program;
 use App\Models\Motivo;
 use App\Models\Role;
 use App\User;
+use DataTables;
+
 
 class AdminController extends Controller
 {
@@ -87,12 +89,26 @@ class AdminController extends Controller
         return view('admin.showusers', compact('radicados','radic','programas','users', 'roles'));
 
     }
-    public function showDir(User $admin){
+    public function showDir(Request $request, User $admin){
         $users= $this->users;
         $radicados= $this->radicados;
         $programas= $this->programas;
         $roles = $this->roles;
         $radic = $admin;
+
+        
+        // if ($request->ajax()) {
+        //     $data = $programas;
+        //     return DataTables::of($data)
+        //             ->addIndexColumn()
+        //             ->addColumn('action', ['admin.actions'])
+        //             ->rawColumns(['action'])
+        //             ->make(true);
+        // }
+        // else {
+        //     return 'no es ajax';
+        // }
+
 
         return view('admin.showdir', compact('radicados','radic','programas','users', 'roles'));
 
@@ -153,13 +169,15 @@ class AdminController extends Controller
         return view('admin.editUser', compact('radicados','programas','users', 'roles'));
     }
     //vista editar Directores
-    public function dirEdit(Program $admin){
+    public function dirEdit(Request $request, Program $admin){
+        // dd($admin);
 
         $programas= $admin;
         $radicados= $this->radicados;
         $roles = $this->roles;
-
+    
         return view('admin.editDir', compact('radicados','programas','roles'));
+
     }
     //vista editar Programas
     public function progEdit(Program $admin){

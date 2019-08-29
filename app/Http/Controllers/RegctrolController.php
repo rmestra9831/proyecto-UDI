@@ -44,7 +44,7 @@ class RegctrolController extends Controller
         $motivos= Motivo::orderBy('name', 'ASC')->get();
         $id = DB::table('fech_radics')->select('id_radicado')->latest()->take(1)->value('id_radicado');
         $num_more= str_pad($id, 4, "0", STR_PAD_LEFT);
-        $year= date('dmY');
+        $year= date('d/m/Y');
         
         return view('regctrol.createRadic', compact('radicado','programas','motivos','num_more','year'));
     }
@@ -68,10 +68,11 @@ class RegctrolController extends Controller
     public function store(StoreRadicadoRequest $request)
     {
         //variables
-        $year = date("dmY");
+        $year = date("d/m/Y");
         $fech_start_radic = date("Y/m/d");
         $time_start_radic = date('h:i:s A');
         $radicado =new Radicado();
+        $motivos = Motivo::all();
         $programas =Program::all();
         $id = DB::table('fech_radics')->select('id_radicado')->latest()->take(1)->value('id_radicado');
         
@@ -91,9 +92,13 @@ class RegctrolController extends Controller
         $radicado->sendTo_id = $request->input('sendTo_id');
         $radicado->user_id = auth()->user()->id;
         $radicado->motivo_id = $request->input('motivo_id');
-    /* ------auto llenar campo asunto------ */
+    /* ------llenar el campo con la variable del motivo------ */
         if ($request->input('asunto') == '') {
-            $radicado->asunto = 'N/a';
+            foreach ($motivos as $motivo) {
+                if ($request->input('motivo_id') == $motivo->id) {
+                    $radicado->asunto = $motivo->name;
+                }
+            }
         }else {
             $radicado->asunto = $request->input('asunto');
         };

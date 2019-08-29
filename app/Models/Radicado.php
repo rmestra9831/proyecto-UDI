@@ -71,7 +71,7 @@ class Radicado extends Model
       return $query->where('program_id',$programa);  
   }
   public function scopeDates($query, $start_date, $end_date){
-    if ($start_date || $end_date)
+    if ($start_date && $end_date)
       return $query->whereBetween('year',[$start_date, $end_date]);  
   }
 }

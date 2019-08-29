@@ -39,6 +39,7 @@ body {
 h4 {
   font-family: "DidactGothic";
   font-weight: 700px;
+  font-size: 1.5rem;
   margin-bottom: 30px;
 }
 
@@ -56,7 +57,7 @@ h4 {
 #icon {
   position: absolute;
   top: 0;
-  padding: 7px 0 7px 10px;
+  padding: 11px 0 7px 10px;
   transition: 0.2s;
 }
 
@@ -66,7 +67,7 @@ h4 {
   position: absolute;
   left: 0;
   bottom: 0;
-  height: 100px;
+  height: 130px;
 }
 
 .sec-foot-log div {
@@ -80,7 +81,7 @@ h4 {
   margin: auto;
   text-transform: capitalize;
   text-align: center;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .sec-head-log {
@@ -99,9 +100,8 @@ h4 {
 }
 
 .sec-head-log p {
-  font-size: 1rem;
+  font-size: 1.3rem;
   text-align: unset;
-  text-transform: capitalize;
   width: 70%;
   margin: auto;
   margin-top: -20px;

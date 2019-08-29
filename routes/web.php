@@ -94,6 +94,7 @@ Route::resource('status', 'EstadoController',compact('radicados'))->middleware('
 //rutas de filtrado
 Route::get('filterStatus', 'FilterController@viewSearchRadic',compact('radicados'))->middleware('auth')->name('filter.viewSearchRadic');
 Route::get('filterStatus_dir', 'FilterController@viewSearchRadicDir',compact('radicados'))->middleware('auth')->name('filter.viewSearchRadicDir');
+Route::get('filterStatus_adm', 'FilterController@viewSearchRadicAdm',compact('radicados'))->middleware('auth')->name('filter.viewSearchRadicAdm');
 Route::get('filter_all_radic', 'FilterController@viewAllRadic',compact('radicados'))->middleware('auth')->name('filter.viewAllRadic');
 
 //Generar reportes

@@ -4,9 +4,16 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+ //usar bootstra vue
+import Vue from 'vue'
+import BootstrapVue from 'bootstrap-vue'
+
+Vue.use(BootstrapVue)
+
 require('./bootstrap');
 
 window.Vue = require('vue');
+
 
 Vue.component('cards-component', require('./components/cards.vue').default);
 

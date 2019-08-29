@@ -53,6 +53,7 @@
               <a href="{{route('admin.showDir')}}"><i class="fas fa-chevron-right"></i>Directores</a>
               <a href="{{route('admin.showProg')}}"><i class="fas fa-chevron-right"></i>programas</a>
               <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>   
+              <a href="{{route('filter.viewSearchRadicAdm')}}"><i class="fas fa-chevron-right"></i>estado de radicados</a>
             @endif
       @endif
     </div>
