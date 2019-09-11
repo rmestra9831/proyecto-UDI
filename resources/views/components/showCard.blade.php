@@ -120,12 +120,13 @@
                   @method('PUT')
                   @csrf
                   <input type="hidden" name="respon_id" value="{{auth()->user()->id}}">
+                  <input type="hidden" name="revisar" id="" value="0" hidden>
                   <label class="card-text" for="my-textarea">respuesta:</label>
-                  <textarea id="my-textarea" style="overflow:hidden; resize:none" class="form-control col-12 @error('respuesta') is-invalid @enderror" name="respuesta" rows="2"<?php if(Auth::user()->type_user == 3){?>placeholder="Escribe aquí tu respuesta" <?php }else{ ?>disabled placeholder="N/a"<?php }?> <?php if($radicado->respuesta == ''){?><?php }else{ ?>placeholder="{{$radicado->respuesta}}" disabled<?php }?>>{{$radicado->respuesta}}</textarea>
+                  <textarea  id="my-textarea" style="overflow:hidden; resize:none" class="form-control col-12 @error('respuesta') is-invalid @enderror" name="respuesta" rows="2"<?php if(Auth::user()->type_user == 3){?>placeholder="Escribe aquí tu respuesta" <?php }else{ ?>disabled placeholder="N/a"<?php }?> <?php if($radicado->respuesta == '' || $radicado->revisar == true){?><?php }else{ ?>placeholder="{{$radicado->respuesta}}" disabled<?php }?>>{{$radicado->respuesta}}</textarea>
                     @if ($radicado->editAdmRequest != null)
                       <small id="emailHelp" class="form-text text-muted">[ Editado por el Administrador {{$radicado->editAdmRequest}} ]</small> 
                     @endif    
-                  <button class="btn-revisado <?php if($radicado->respuesta == ''){?><?php }else{ ?>d-none<?php }?>" type="submit"><i class="fas fa-check"></i></button>
+                  <button class="btn-revisado <?php if($radicado->respuesta == '' || $radicado->revisar == true){?><?php }else{ ?>d-none<?php }?>" type="submit"><i class="fas fa-check"></i></button>
                   @error('respuesta')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -144,14 +145,13 @@
                   @csrf
                   <input type="hidden" name="editAdmRequest" value="{{date('h:i:s A')}} | {{date('d_m_Y')}}">
                   <label class="card-text" for="my-textarea">respuesta:</label>
-                  <textarea id="my-textarea" style="overflow:hidden; resize:none" class="form-control col-12 @error('respuesta') is-invalid @enderror" name="respuesta" rows="2"
+                  <textarea id="responText" style="overflow:hidden; resize:none" value="" class="form-control col-12 @error('respuesta') is-invalid @enderror" name="respuesta" rows="2"
                     <?php if(Auth::user()->type_user == 1){?>
                       <?php if($radicado->respuesta == ''){?>disabled placeholder="N/a"<?php }else{ ?>placeholder="{{$radicado->respuesta}}"<?php }?>>{{$radicado->respuesta}}</textarea>
                     <?php }else{ ?><?php }?> 
                   @if ($radicado->editAdmRequest != null)
                     <small id="emailHelp" class="form-text text-muted">[Editado por el Administrador {{$radicado->editAdmRequest}} ]</small> 
                   @endif      
-                    <button class="btn-revisado <?php if($radicado->respuesta == null){?>d-none<?php }?>" type="submit"><i class="fas fa-check"></i></button>
                   @error('respuesta')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -165,6 +165,47 @@
 
     </div>
   </div>
+  <!-- Botones del administrador para EDITAR - REVISAR - APROVADO -->
+  @if (Auth::user()->type_user == 1)
+    <div class="row justify-content-center">
+      <!-- boton para editar la respuesta-->
+        <form method="POST" action="{{action('AdminController@saveRequest', $radicado->slug)}}">
+            @method('PUT')
+            @csrf
+
+            <input type="hidden" name="editAdmRequest" value="{{date('h:i:s A')}} | {{date('d_m_Y')}}">
+            <input type="text" name="respuesta" id="seteoTextArea" value="" hidden>
+            @if ($radicado->aproved != 1)
+              @if ($radicado->revisar == 1 || $radicado->aproved ==1)
+              @else  
+                <button id="btnedit" name="" class="btn btn-outline-primary mr-2 ml-2" type="submit" disabled>Editar</button>
+              @endif
+            @endif
+        </form>
+      <!-- boton para editar la respuesta-->
+        <form method="POST" action="{{action('EstadoController@revisar', $radicado->slug)}}">
+          @method('PUT')
+          @csrf
+          <input type="text" name="revisar" id="" value="1" hidden>
+          <button  class="btn btn-outline-danger mr-2 ml-2" type="submit" <?php if($radicado->revisar == 1 || $radicado->aproved == 1){ ?>disabled<?php }?>><?php if($radicado->revisar == 1){ ?>Revisando<?php }else{?> Revisar<?php }?></button>
+        </form>
+      <!-- boton para aprovar la respuesta-->
+        <form method="POST" action="{{action('EstadoController@aprovado', $radicado->slug)}}">
+          @method('PUT')
+          @csrf
+          <input type="text" name="aproved" id="" value="1" hidden>
+          <button class="btn btn-success mr-2 ml-2" type="submit" <?php if($radicado->revisar == 1 || $radicado->aproved == 1){ ?>disabled<?php }?>>Aprovado</button>
+        </form>
+      <!-- boton para Generar PDF de la respuestya-->
+        <form method="get" action="{{action('ReportController@imprimir', $radicado->slug)}}">
+          @csrf
+            @if ($radicado->aproved == 1)
+              <button class="btn btn-secondary mr-2 ml-2" type="submit">Generar PDF</button>
+            @endif
+        </form>
+    </div>
+    <hr>
+  @endif
   <!--tabla de fechas -->
   <table class="table table-sm">
     <thead class="thead-dark">
@@ -196,3 +237,4 @@
       </tr>
     </tbody>
   </table>
+  

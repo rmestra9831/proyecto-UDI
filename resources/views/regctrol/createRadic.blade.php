@@ -29,20 +29,21 @@
                 </div>
               </div>
             <!-- selects-->
+            
                 <div class="col-6">
                   <div class="row">
                       <div class="col-6 form-group" no-margin>
-                          <label class=" col-form-label-lg col-form-label text-capitalize" for="program_id">programa / destino</label>              
-                          <select name="program_id" id="" class=" form-control form-control-lg @error('program_id') is-invalid @enderror">
-                            <option class="text-capitalize" value="">Selección</option>                      
+                          <label class=" col-form-label-lg col-form-label text-capitalize" for="program_id">dependencia destino</label>              
+                          <select name="program_id" id="" class="form-control form-control-lg @error('program_id') is-invalid @enderror">
+                            <option class="text-capitalize" value="{{ old('program_id') }}">Selección</option>                      
                             @foreach ($programas as $programa)
                             <option class="" value="{{$programa->id}}">dirección de {{$programa->name}}</option>
                             @endforeach
                           </select>
                         </div>
                         <div class="col-6 form-group" no-margin>
-                          <label class=" col-form-label-lg col-form-label text-capitalize" for="sendTo_id">supervición</label>
-                          <select name="sendTo_id" id="sendTo_id" class=" form-control form-control-lg @error('sendTo_id') is-invalid @enderror">
+                          <label class=" col-form-label-lg col-form-label text-capitalize" for="sendTo_id">supervisión</label>
+                          <select name="sendTo_id" id="sendTo_id" class="text-capitalize form-control form-control-lg @error('sendTo_id') is-invalid @enderror">
                               <option class="" value="1">dirección</option>                                          
                           </select>
                         </div>
@@ -57,32 +58,18 @@
                     <select name="type_motivo" id="type_motivo" class="@error('sendTo_id') is-invalid @enderror btn btn-lg btn-outline-secondary">
                       <div class="dropdown-menu">
                         <option class="dropdown-item" value="">Tipo</option>                                          
-                        <option class="dropdown-item" value="2">Academino</option>                                          
+                        <option class="dropdown-item" value="2">Academico</option>                                          
                         <option class="dropdown-item" value="1">Administrativo</option>
                       </div>                                    
                     </select>
                   </div>
                   <!-- select de academico-->
-                  <select name="motivo_id" id="motivo_select_ac" class="form-control form-control-lg" disabled hidden>
-                    <option class="" value="" vname="">Seleción</option>    
+                  <select name="motivo_id" id="motivo_select" class="form-control form-control-lg" disabled>
+                    <option class="" value="" vname="">Selección</option>    
                       <!-- Select del sector academico -->
                       <div class="list_ac">                                     
                         @foreach ($motivos as $motivo)
-                          @if ($motivo->type_motivo == 2 || $motivo->type_motivo == 3)
-                            <option class="" id="itemSelecMotivo" value="{{$motivo->id}}" vname="{{$motivo->name}}">{{$motivo->name}}</option>
-                          @endif
-                        @endforeach
-                      </div>
-                  </select>
-                  <!-- select de Administrativo-->
-                  <select name="motivo_id" id="motivo_select_ad" class="form-control form-control-lg" disabled>
-                    <option class="" value="" vname="">Seleción</option>    
-                      <!-- Select del sector academico -->
-                      <div class="list_ad">                                     
-                        @foreach ($motivos as $motivo)
-                          @if ($motivo->type_motivo == 1 || $motivo->type_motivo == 3)
-                            <option class="" id="itemSelecMotivo" value="{{$motivo->id}}" vname="{{$motivo->name}}">{{$motivo->name}}</option>
-                          @endif
+                          <option  class="" id="motivo_select_op" value="{{$motivo->id}}" vtypemotivo="{{$motivo->type_motivo}}" vname="{{$motivo->name}}">{{$motivo->name}}</option>
                         @endforeach
                       </div>
                   </select>
@@ -109,7 +96,7 @@
                 </div>
               
               <div class="col-6 form-group" no-margin>
-                <label class="text-capitalize col-form-label-lg col-form-label" for="number_contacto">número de contacto</label>            
+                <label class=" col-form-label-lg col-form-label" for="number_contacto">Número de Contacto</label>            
                 <input maxlength="14" type="text"class="text-capitalize form-control form-control-lg" name="origen_cel" id="number_contacto" aria-describedby="helpId" placeholder="(123) 456-7890">
               </div>
     
@@ -122,7 +109,7 @@
                 <div class="row">
                   <!-- radio buttom tipo de atenciòn-->
                   <div class="col-6 form-group" no-margin>
-                    <label class="text-capitalize col-form-label-lg col-form-label" for="atention">Tipo de Atención</label>  
+                    <label class="col-form-label-lg col-form-label" for="atention">Tipo de Atención</label>  
                     <div class="card">
                       <div class="card-body">
                           <div class="">

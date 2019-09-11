@@ -15,6 +15,7 @@ use App\Exports\ReportExportFilter;
 use App\Exports\ReportAdmAR;
 use App\Exports\ReportAdmDir;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class ReportController extends Controller
 {
@@ -229,6 +230,18 @@ class ReportController extends Controller
 
         return Excel::download(new ReportFechas($start, $end), 'radicados_entre_'.$start.'_'.$end.'.xlsx');
     }
+    // exportación del pdf
+    public function imprimir($id){
+        //fecha carbon
+        $Date = Carbon::now('America/Bogota');
+        $fechaCompleto = $Date->isoFormat('DD').' de '.$Date->isoFormat('MMMM').' de '.$Date->isoFormat('YYYY');
+        $radicados = Radicado::where('slug',$id)->get();
+        $programa = $this->programas;
+        $motivo = $this->motivos;
+        $pdf = \PDF::loadView('export.pdf',compact('radicados','fechaCompleto'));
+        return $pdf->download('ejemplo.pdf');
+    }
+    
 
 
 }

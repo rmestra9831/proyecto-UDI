@@ -8,6 +8,7 @@ use App\Models\Radicado;
 use App\Models\Program;
 use App\Models\Motivo;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use App\Models\FechRadic;
@@ -68,6 +69,8 @@ class RegctrolController extends Controller
     public function store(StoreRadicadoRequest $request)
     {
         //variables
+
+ 
         $year = date("d/m/Y");
         $fech_start_radic = date("Y/m/d");
         $time_start_radic = date('h:i:s A');
@@ -84,6 +87,7 @@ class RegctrolController extends Controller
             'id_radicado'=> $id_rad
         ]);
     //otras variables
+        $user = Auth::user();
         $radicado->atention = $request->input('atention');
         $radicado->name = $request->input('name');
         $radicado->last_name = $request->input('last_name');
@@ -92,6 +96,7 @@ class RegctrolController extends Controller
         $radicado->sendTo_id = $request->input('sendTo_id');
         $radicado->user_id = auth()->user()->id;
         $radicado->motivo_id = $request->input('motivo_id');
+        $radicado->sede = $user->sede;
     /* ------llenar el campo con la variable del motivo------ */
         if ($request->input('asunto') == '') {
             foreach ($motivos as $motivo) {
@@ -105,7 +110,10 @@ class RegctrolController extends Controller
     /* ------------------ */
         $radicado->origen_cel = $request->input('origen_cel');
         $radicado->origen_correo = $request->input('origen_correo');
-    /* ------auto llenar campo observaciones----- */
+        $radicado->aproved = false;
+        $radicado->revisar = false;
+        $radicado->openAdm = false;
+//    /* ------auto llenar campo observaciones----- */
         if ($request->input('observaciones') == '') {
             $radicado->observaciones = 'N/a';
         }else {
@@ -150,7 +158,6 @@ class RegctrolController extends Controller
             
             Mail::to($mailDirN)->send(new SendDirMail($subjectDirN, $messajeDirN,$radicado));
         }
-
         return redirect()->route('reg-ctrol.index')->with('status','Radicado '.$radicado->fechradic_id.'-'.$radicado->year.' Creado exitosamente');
     }
 

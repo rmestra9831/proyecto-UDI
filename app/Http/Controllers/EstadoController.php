@@ -69,8 +69,6 @@ class EstadoController extends Controller
      */
     public function update(Request $request, Radicado $status)
     {
-        
-
         $radicado = $status;
 
         $radicado->fill($request->except(
@@ -79,10 +77,69 @@ class EstadoController extends Controller
             'fech_recive_radic',
             'time_recive_radic',
             'fech_notifi_end',
-            'time_notifi_end'
+            'time_notifi_end',
+            'revisar',
+            'aproved',
+            'openAdm'
         ));
         $radicado->save();
         return redirect()->route('direction.edit',[$status])->with('status','Radicado '.$radicado->fechradic_id.'-'.$radicado->year.' recivido correctamente ');
+
+    }
+    public function openRadicAdm(Request $request, Radicado $status){
+        $radicado = $status;
+        
+        $radicado->fill($request->except(
+            'fech_send_dir',
+            'time_send_dir',
+            'fech_recive_radic',
+            'time_recive_radic',
+            'fech_notifi_end',
+            'time_notifi_end',
+            'time_recive_dir',
+            'fech_recive_dir',
+            'revisar',
+            'aproved'
+        ));
+        $radicado->save();
+        return redirect()->route('admin.ShowRadic',[$status])->with('status','Radicado '.$radicado->fechradic_id.'-'.$radicado->year.' Abierto correctamente ');
+    }
+    // Mandar la solicitud de revisar la respuesta del radicado
+    public function revisar(Request $request, Radicado $status){
+        $radicado = $status;
+        
+        $radicado->fill($request->except(
+            'fech_send_dir',
+            'time_send_dir',
+            'fech_recive_radic',
+            'time_recive_radic',
+            'fech_notifi_end',
+            'time_notifi_end',
+            'time_recive_dir',
+            'fech_recive_dir',
+            'aproved'
+        ));
+        $radicado->save();
+        return redirect()->route('admin.ShowRadic',[$status])->with('status','Radicado '.$radicado->fechradic_id.'-'.$radicado->year.' en Revisión ');
+
+    }
+    // Mandar la solicitud de revisar la respuesta del radicado
+    public function aprovado(Request $request, Radicado $status){
+        $radicado = $status;
+        
+        $radicado->fill($request->except(
+            'fech_send_dir',
+            'time_send_dir',
+            'fech_recive_radic',
+            'time_recive_radic',
+            'fech_notifi_end',
+            'time_notifi_end',
+            'time_recive_dir',
+            'fech_recive_dir',
+            'revisar'
+        ));
+        $radicado->save();
+        return redirect()->route('admin.ShowRadic',[$status])->with('status','Radicado '.$radicado->fechradic_id.'-'.$radicado->year.' Aprovado correctamente ');
 
     }
     /**

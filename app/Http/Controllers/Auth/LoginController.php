@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\User;
+use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -42,16 +46,21 @@ class LoginController extends Controller
     //redirecionamiento de tipo de usuario
     public function redirectPath()
     {
-        if (auth()->user()->type_user == 3) {
-            return '/direction';
-        }elseif (auth()->user()->type_user == 2) {
-            return '/reg-ctrol';
-        }
-        return route('admin.index');
+      
+            if (auth()->user()->type_user == 3) {
+                return '/direction';
+            }elseif (auth()->user()->type_user == 2) {
+                return '/reg-ctrol';
+            }
+            return route('admin.index');
+
     }
+
     //nombre del campo con el que valida
     public function username()
     {
         return 'name';
     }
+    //Mirar la autenticación del select
+
 }

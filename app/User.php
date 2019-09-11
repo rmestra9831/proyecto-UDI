@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','type_user','password',
+        'name','type_user','password','sede'
     ];
 
     /**
@@ -44,4 +44,22 @@ class User extends Authenticatable
       public function radicados(){
         return $this->hasMany(Radicado::class);
     }
+
+
+    public function validate(Request $request)
+    {
+        $bandera = true;
+        $users = User::where('sede', $request->sede)->get();
+    
+        foreach ($users as  $value) {
+    
+            if($value->sede===$user->sede){
+                $bandera = true; 
+            }
+        }
+        if ($bandera==false) {
+            abort(404, 'Esta acción no está autorizada.');
+        }
+       
+    }    
 }

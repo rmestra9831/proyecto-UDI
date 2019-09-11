@@ -23,6 +23,10 @@ class Radicado extends Model
     'obs',
     'respuesta',
     'editAdmRequest',
+    'revisar',
+    'aproved',
+    'openAdm',
+    'sede',
     'respon_id'];
 
   /**

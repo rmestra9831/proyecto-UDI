@@ -98,7 +98,7 @@ window.setTimeout(function () {
   $(".alert").fadeTo(500, 0).slideUp(500, function () {
     $(this).remove();
   });
-}, 4000) //deshabilitar el modal delcard 
+}, 4000); //deshabilitar el modal delcard 
 
 btn = $("[class*='.unrecive']");
 btn.click(function () {
@@ -172,14 +172,20 @@ function formatToTelephone(str) {
   }
 
   return returnValue;
-} //validacion del campo descripcion
+} //SETEAR EL CAMPO DEL TEXTAREA AL UN INPUT PARA ENVIAR LA INFORMACIÓN
+
+
+$("#responText").keyup(function () {
+  var texto = $(this).val();
+  $('#btnedit').removeAttr('disabled');
+  $('#seteoTextArea').val(texto);
+}); //validacion del campo descripcion
 // ***
 // Limit input length if `data-word-limit` attr present.
 // append a countdown block after input and record key inputs.
 // retest count if delete press (keys 8 and 46).
 // change color status as approach limit untill met then disable.
 //
-
 
 var wordLimit = function wordLimit(element) {
   var thisLimit = element.attr('data-word-limit');
@@ -225,100 +231,57 @@ var wordLimit = function wordLimit(element) {
 
 $('input[data-word-limit], textarea[data-word-limit]').each(function () {
   wordLimit($(this));
-}); //validacion tolstip
-
-//Seleccionando las opciones de select motivos para mostrar en asunto 
+}); //Seleccionando las opciones de select motivos para mostrar en asunto 
 
 var asunto = document.getElementById('asunto');
-var select_ac = document.getElementById('motivo_select_ac');
-var select_ad = document.getElementById('motivo_select_ad');
 var select_mot_type = document.getElementById('type_motivo');
+var select_mot = document.getElementById('motivo_select');
 $hidden = document.createAttribute('hidden');
 $disabled = document.createAttribute('disabled');
+/** select De los tipos de motivos */
+
 /** ocultando el campo de motivos al no selecccionar nada */
 
-select_mot_type.addEventListener('change', function () {
+$(select_mot_type).change(function (e) {
   var selectedOption_mot_type = this.options[select_mot_type.selectedIndex];
 
   if (selectedOption_mot_type.value != '') {
-    $('#motivo_select_ac').removeAttr('disabled');
-    $('#motivo_select_ad').removeAttr('disabled');
+    $('#motivo_select').removeAttr('disabled');
 
-    if (select_mot_type.value == 2) {
-      $hidden = document.createAttribute('hidden');
-      select_ad.setAttributeNode($hidden);
-      select_ad.value = '';
-      select_ac.value = '';
+    if (selectedOption_mot_type.value == 2) {
+      select_mot.value = '';
+      opt2 = $("[vtypemotivo='2']").show();
+      opt1 = $("[vtypemotivo='1']").hide();
       asunto.value = '';
-      $('#motivo_select_ac').removeAttr('hidden');
-    }
-
-    if (select_mot_type.value == 1) {
-      $hidden = document.createAttribute('hidden');
-      select_ac.setAttributeNode($hidden);
-      select_ac.value = '';
-      select_ad.value = '';
+    } else {
+      select_mot.value = '';
+      opt1 = $("[vtypemotivo='1']").show();
+      opt2 = $("[vtypemotivo='2']").hide();
       asunto.value = '';
-      $('#motivo_select_ad').removeAttr('hidden');
     }
   } else {
+    select_mot.value = '';
     asunto.value = '';
-    select_ac.value = '';
-    select_ad.value = '';
-    $disabled = document.createAttribute('disabled');
-    select_ad.setAttributeNode($disabled);
-    $disabled = document.createAttribute('disabled');
-    select_ac.setAttributeNode($disabled);
-  }
-}) //mostrar el select ACADEMICO
-
-select_ac.addEventListener('change', function () {
-  var selectedOption_ac = this.options[select_ac.selectedIndex];
-
-  if (selectedOption_ac.value == 23) {
-    //$('#asunto').removeAttr('disabled');
-    input_asunto = document.getElementById('asunto');
-    input_asunto.value = "";
-    $('#asunto').removeAttr('disabled');
-    $('#asunto').attr('value', null); //creando nuevos atributos
-
-    $required = document.createAttribute('required'); //agregando nuevos atributos
-
-    asunto.setAttributeNode($required);
-  } else {
-    $valor = selectedOption_ac.text;
-    input_asunto = document.getElementById('asunto');
-    input_asunto.value = "";
-    input_asunto.value = $valor; //creando nuevos atributos
-
-    $disabled = document.createAttribute('disabled'); //agregando nuevos atributos
-
+    opt1 = $("[vtypemotivo='1']").hide();
+    opt2 = $("[vtypemotivo='2']").hide();
+    opt3 = $("[vtypemotivo='3']").hide();
     asunto.setAttributeNode($disabled);
+    select_mot.setAttributeNode($disabled);
   }
-}); //mostrar el select ADMINISTRATIVO
+});
+/** Selec del motivo */
 
-select_ad.addEventListener('change', function () {
-  var selectedOption_ad = this.options[select_ad.selectedIndex];
+$(select_mot).change(function (e) {
+  var selectedMotivoOption = this.options[select_mot.selectedIndex];
 
-  if (selectedOption_ad.value == 23) {
-    //$('#asunto').removeAttr('disabled');
-    input_asunto = document.getElementById('asunto');
-    input_asunto.value = "";
-    $('#asunto').removeAttr('disabled');
-    $('#asunto').attr('value', null); //creando nuevos atributos
-
-    $required = document.createAttribute('required'); //agregando nuevos atributos
-
-    asunto.setAttributeNode($required);
+  if (selectedMotivoOption.value == 23) {
+    asunto.value = '';
+    $(asunto).removeAttr('disabled');
   } else {
-    $valor = selectedOption_ad.text;
-    input_asunto = document.getElementById('asunto');
-    input_asunto.value = "";
-    input_asunto.value = $valor; //creando nuevos atributos
-
-    $disabled = document.createAttribute('disabled'); //agregando nuevos atributos
-
+    $disabled = document.createAttribute('disabled');
     asunto.setAttributeNode($disabled);
+    asunto.value = '';
+    asunto.value = selectedMotivoOption.text;
   }
 }); //ACTIVANDO EL SPINNER AL GUARDAR UN RADICADO
 

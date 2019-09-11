@@ -18,7 +18,9 @@
               <input  name="fech_recive_radic" type="hidden" value="{{date("y/m/d")}}">
               <!-- Si el estado no es enviado aparece este boton, cuando ya se ha enviado-->
               <!-- este cambia de estadp-->
-          <button class="btn btn-primary" type="submit"<?php if($radicado->respuesta == ''){ ?>disabled<?php }else{ ?><?php }?>>Esperando Aprovación</button>
+          <button class="btn btn-primary" type="submit"
+            <?php if($radicado->respuesta == '' || $radicado->aproved == false){ 
+            ?>disabled<?php }?> <?php if($radicado->respuesta == ''){ ?>hidden<?php }?>><?php if($radicado->revisar == true){?> corregir <?php }else if($radicado->aproved == 0){?> Esperando aprovación<?php }else{ ?> Enviar a Registro y control <?php }?></button>
           </form>
         </div>
         @else

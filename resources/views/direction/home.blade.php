@@ -22,7 +22,7 @@
         @else
           @if ($radicado->fech_recive_radic == '')
             @if ($radicado->fech_recive_dir == '')
-            <div class="col-11 content-card">
+              <div class="col-11 content-card">
                 <!--ventada de recivido-->
                  <div class="unrecive" id="{{$radicado->id}}" valid="{{$radicado->id}}">
                    <!-- formulario para actualizar el estado de recivido direccion-->
@@ -37,11 +37,18 @@
                  @include('components.cards')
                </div>
               @else
+              {{-- aqui se pone la imagen del estado de revisar y aprovado --}}
                <div class="col-11 content-card">
+                  @if ($radicado->revisar == 1)
+                   <img src="{{asset('img/warning.svg')}}" alt="">
+                  @else
+                    @if ($radicado->aproved == 0)
+                      <img src="{{asset('img/waiting.svg')}}" alt="">
+                    @endif
+                  @endif
                   @include('components.cards')
                 </div>
-            @endif
-              
+            @endif             
           @else
           <div class="col-11 content-card">
             <img src="{{asset('img/check.svg')}}" alt="">

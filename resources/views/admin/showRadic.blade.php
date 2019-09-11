@@ -22,8 +22,7 @@
     				  href="{{route('filter.viewAllRadic')}}"
                     @endif
     	  		@endif
-    	  	role="button">Volver</a>
-        
+          role="button">Volver</a>        
     	</div>
     
     </div>

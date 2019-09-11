@@ -15,6 +15,22 @@
         
                 <div class="form-group row">
                     <div class="col-md-12 input-icon">
+                        <select id="sede" class="form-control form-control-md text-capitalize" value="{{ old('sede') }}" name="sede">
+                            <option value="">Sede</option>
+                            <option value="1">bucaramanga</option>
+                            <option value="2">barrancabermeja</option>
+                            <option value="3">san gil</option>
+                        </select>
+                        @error('sede')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12 input-icon">
                         <input id="name" type="name" class="form-control form-control-md @error('name') is-invalid @enderror" placeholder="Usuario" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus><i id="icon" class="far fa-user"></i>
         
                         @error('name')

@@ -14,9 +14,17 @@ use App\User;
 | contains the "web" middleware group. Now create something great!
 |
 */
-$radicados= Radicado::all();
-$programas= Program::all();
+// if (Auth::user()->type_user == 2) {
+//     $radicados= Radicado::all();
+// }elseif (Auth::user()->type_user == 3) {
 
+// }elseif (Auth::user()->type_user == 4) {
+
+// }else{
+
+// }
+$radicados= Radicado::all();
+$programas= Program::all();       
 Route::get('/', function () {
     //return view('auth.login');        
     //variables
@@ -86,10 +94,17 @@ Route::group(['middleware' => 'userAdm'], function () {
     Route::post('show_Programs', 'AdminController@registerProg')->middleware('auth')->name('admin.registerProg');
 
     //exportaciones
+    Route::get('/imprimir/{admin}', 'ReportController@imprimir')->name('admin.print_pdf');
 });
-
+//rutas de Director de Programa
+Route::group(['middleware' => 'UserDirProg'], function () {
+    Route::get('Dir_programa','DirprogController@index')->name('dirprog.index');
+});
 //rutas de estado
 Route::resource('status', 'EstadoController',compact('radicados'))->middleware('auth');
+Route::put('open_radicAdm/{status}','EstadoController@openRadicAdm',compact('radicados'))->middleware('auth')->name('status.openRadicAdm');
+Route::put('revisar/{status}','EstadoController@revisar',compact('radicados'))->middleware('auth')->name('status.revisar');
+Route::put('aprovar/{status}','EstadoController@aprovado',compact('radicados'))->middleware('auth')->name('status.aprovado');
 
 //rutas de filtrado
 Route::get('filterStatus', 'FilterController@viewSearchRadic',compact('radicados'))->middleware('auth')->name('filter.viewSearchRadic');

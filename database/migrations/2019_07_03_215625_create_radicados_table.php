@@ -33,6 +33,10 @@ class CreateRadicadosTable extends Migration
             $table->text('obs')->nullable();
             $table->text('respuesta')->nullable();
             $table->string('editAdmRequest')->nullable();
+            $table->boolean('aproved')->nullable();
+            $table->boolean('revisar')->nullable();
+            $table->boolean('openAdm')->nullable();
+            $table->integer('sede');
 
             //---
             $table->date('fech_start_radic')->nullable();

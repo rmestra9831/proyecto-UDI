@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FechSeeder::class);
         $this->call(ProgramSeeder::class);
         $this->call(MotivoSeeder::class);
+        $this->call(SedesSeeder::class);
     }
 }

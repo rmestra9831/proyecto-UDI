@@ -96,6 +96,7 @@
 
 <div class="row justify-content-md-center">
   <div class="col-3">
+    <!--boton para ver el radicado-->
     <a btn-card name="" id="" class="btn btn-block btn-outline-primary" 
     @if (Auth::user()->type_user == 2)
       href="{{action('RegctrolController@edit', $radicado->slug)}}"
@@ -106,7 +107,7 @@
         href="{{action('AdminController@ShowRadic', $radicado->slug)}}"     
       @endif
     @endif
-    role="button">Ver radicado</a>  
+    role="button">Ver radicado</a>     
   </div>
 <!--mostrar el boton de entregado a estudiante-->
   @if (Auth::user()->type_user == 2)
