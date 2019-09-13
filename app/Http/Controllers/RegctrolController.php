@@ -26,8 +26,10 @@ class RegctrolController extends Controller
      */
     public function index()
     {    
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
+        // dd($radicados);
+      
         $users= User::get();
-        $radicados= Radicado::orderBy('id', 'DESC')->get();
         $programas= Program::get();
 
         return view('regctrol.home', compact('radicados','programas','users'));
@@ -114,7 +116,7 @@ class RegctrolController extends Controller
         $radicado->aproved = false;
         $radicado->revisar = false;
         $radicado->openAdm = false;
-//    /* ------auto llenar campo observaciones----- */
+    //    /* ------auto llenar campo observaciones----- */
         if ($request->input('observaciones') == '') {
             $radicado->observaciones = 'N/a';
         }else {

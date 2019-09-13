@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Radicado;
 use App\Models\Program;
@@ -23,7 +24,7 @@ class FilterController extends Controller
             $users= User::get();
             $motivos= Motivo::orderBy('name', 'ASC')->get();
             $programas= Program::get();
-            $radicados= Radicado::orderBy('id', 'DESC')->get();
+            $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
             $query_norm = Radicado::orderBy('id', 'DESC')->whereNull('fech_send_dir')
             ->name($name)
             ->lastname($last_name)
@@ -33,35 +34,35 @@ class FilterController extends Controller
         //filtrdo de enviados    
             $query_send = Radicado::orderBy('id', 'DESC')->where([
                 ['fech_send_dir','!=',' '],
-                ['fech_recive_dir',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
+                ['fech_recive_dir',null],['sede',Auth::user()->sede]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de recibidos            
             $query_recive = Radicado::orderBy('id', 'DESC')->where([
                 ['fech_recive_dir','!=',' '],
                 ['fech_notifi_end',null],
-                ['respuesta',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
+                ['respuesta',null],['sede',Auth::user()->sede]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de respondidos            
             $query_response = Radicado::orderBy('id', 'DESC')->where([
                 ['respuesta','!=',' '],
                 ['fech_notifi_end',null],
                 ['fech_recive_radic',null],
-                ['fech_delivered',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
+                ['fech_delivered',null],['sede',Auth::user()->sede]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de recibido registro y control            
             $query_reciverg = Radicado::orderBy('id', 'DESC')->where([
                 ['fech_recive_radic','!=',' '],
                 ['respuesta','!=',' '],  
                 ['fech_notifi_end',null],
-                ['fech_delivered',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
+                ['fech_delivered',null],['sede',Auth::user()->sede]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de entregados           
             $query_entregado = Radicado::orderBy('id', 'DESC')->where([
                 ['fech_notifi_end','!=',' '],
-                ['fech_delivered','!=',' ']])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
+                ['fech_delivered','!=',' '],['sede',Auth::user()->sede]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de pendientes           
             $query_pendiente = Radicado::orderBy('id', 'DESC')->where([
                 ['fech_recive_radic','!=',' '],
-                ['fech_delivered',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
+                ['fech_delivered',null],['sede',Auth::user()->sede]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de importantes           
             $query_important = Radicado::orderBy('id', 'DESC')->where([
-                ['atention','=','urgente '],])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
+                ['atention','=','urgente '],['sede',Auth::user()->sede]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
             
           
                 return view('filter.search-radic', compact(
@@ -93,7 +94,8 @@ class FilterController extends Controller
             $users= User::get();
             $motivos= Motivo::orderBy('name', 'ASC')->get();
             $programas= Program::get();
-            $radicados= Radicado::orderBy('id', 'DESC')->get();
+            $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
+            // $radicados= Radicado::orderBy('id', 'DESC')->get();
             $query_norm = Radicado::orderBy('id', 'DESC')->whereNull('fech_send_dir')
             ->name($name)
             ->lastname($last_name)
@@ -147,7 +149,8 @@ class FilterController extends Controller
             $users= User::get();
             $motivos= Motivo::orderBy('name', 'ASC')->get();
             $programas= Program::get();
-            $radicados= Radicado::orderBy('id', 'DESC')->get();
+            $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
+            // $radicados= Radicado::orderBy('id', 'DESC')->get();
             $query_norm = Radicado::orderBy('id', 'DESC')->whereNull('fech_send_dir')
             ->name($name)
             ->lastname($last_name)
@@ -201,7 +204,8 @@ class FilterController extends Controller
         $users= User::get();
         $programas= Program::get();
         $motivos= Motivo::orderBy('name', 'ASC')->get();
-        $radicados= Radicado::orderBy('id', 'DESC')
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')
+        // $radicados= Radicado::orderBy('id', 'DESC')
             ->name($name)
             ->lastname($last_name)
             ->numradic($fechradic_id)
