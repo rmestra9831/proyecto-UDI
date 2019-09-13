@@ -77,6 +77,7 @@ class RegctrolController extends Controller
         $radicado =new Radicado();
         $motivos = Motivo::all();
         $programas =Program::all();
+        // validando ubicación del usuario
         $id = DB::table('fech_radics')->select('id_radicado')->latest()->take(1)->value('id_radicado');
         
         $cont_id_string = str_pad($id, 4, "0", STR_PAD_LEFT);       

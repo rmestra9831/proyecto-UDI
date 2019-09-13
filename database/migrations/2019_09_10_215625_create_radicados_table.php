@@ -36,7 +36,7 @@ class CreateRadicadosTable extends Migration
             $table->boolean('aproved')->nullable();
             $table->boolean('revisar')->nullable();
             $table->boolean('openAdm')->nullable();
-            $table->integer('sede');
+            $table->integer('sede')->unsigned();
 
             //---
             $table->date('fech_start_radic')->nullable();
@@ -65,6 +65,7 @@ class CreateRadicadosTable extends Migration
             $table->foreign('program_id')->references('id')->on('programs');
             $table->foreign('sendTo_id')->references('id')->on('programs');
             $table->foreign('motivo_id')->references('id')->on('motivos');
+            $table->foreign('sede')->references('id')->on('sedes');
             //$table->foreign('fechradic_id')->references('id')->on('fech_radics');
 
         });

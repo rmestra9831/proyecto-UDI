@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Role;
 use App\Models\Radicado;
+use App\Models\Sede;
 
 class User extends Authenticatable
 {
@@ -40,26 +41,12 @@ class User extends Authenticatable
     //relaciones Usuario - Rol
     public function role(){
         return $this->BelongsTo(Role::class);
-      }
-      public function radicados(){
+    }
+    public function radicados(){
         return $this->hasMany(Radicado::class);
     }
-
-
-    public function validate(Request $request)
-    {
-        $bandera = true;
-        $users = User::where('sede', $request->sede)->get();
-    
-        foreach ($users as  $value) {
-    
-            if($value->sede===$user->sede){
-                $bandera = true; 
-            }
-        }
-        if ($bandera==false) {
-            abort(404, 'Esta acción no está autorizada.');
-        }
-       
-    }    
+    public function sede(){
+        return $this->BelongsTo(Sede::class);
+    }
+ 
 }

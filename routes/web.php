@@ -2,6 +2,7 @@
 
 use App\Models\Radicado;
 use App\Models\Program;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 /*
@@ -14,111 +15,83 @@ use App\User;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// if (Auth::user()->type_user == 2) {
-//     $radicados= Radicado::all();
-// }elseif (Auth::user()->type_user == 3) {
-
-// }elseif (Auth::user()->type_user == 4) {
-
-// }else{
-
-// }
-$radicados= Radicado::all();
-$programas= Program::all();       
 Route::get('/', function () {
-    //return view('auth.login');        
-    //variables
-    $radicados= Radicado::all();
-    $programas= Program::all();
-    $users= User::get();
-
     if (Auth::check()== false) {
         return view('auth.login'); //cuando sin logeo       
     }else {
 
         if (auth()->user()->type_user == 3) {
-            return view('direction.home',compact('radicados','programas','users')); //Entra a registro y control
+            return redirect()->intended('direction');
         }elseif (auth()->user()->type_user == 2) {
-            return view('regctrol.home',compact('radicados','programas','users')); //Entra a registro y control
+            return redirect()->intended('reg-ctrol');
         }else {
-            return view('admin.home',compact('radicados','programas','users')); //cuando este en administrador
+            return redirect()->intended('admin');
         }
     
     }
 })->name('at_login');
 
-Auth::routes();
 
 //rutas de registro y control
-Route::group(['middleware' => 'userAR'], function () {
-    $radicados= Radicado::all();
-    $programas= Program::all();
-    
-    Route::resource('reg-ctrol', 'RegctrolController',compact('radicados'))->middleware('auth');
-    Route::get('reg-ctrol/{reg_ctrol}/sendMail', 'RegctrolController@sendEmail',compact('radicados'))->middleware('auth')->name('reg-ctrol.sendmail');
-    Route::post('reg-ctrol/restart', 'RegctrolController@restarFechRadic')->middleware('auth')->name('reg-ctrol.restarFechRadic');
-    Route::put('sme/{reg_ctrol}', 'RegctrolController@updateMailEst')->middleware('auth')->name('reg-ctrol.sme');
-    Route::put('delivered/{reg_ctrol}', 'RegctrolController@updateDelivered')->middleware('auth')->name('reg-ctrol.updateDelivered');
-
+Route::group(['middleware' => 'auth','userAR'], function () {
+    Route::resource('reg-ctrol', 'RegctrolController');
+    Route::get('reg-ctrol/{reg_ctrol}/sendMail', 'RegctrolController@sendEmail')->name('reg-ctrol.sendmail');
+    Route::post('reg-ctrol/restart', 'RegctrolController@restarFechRadic')->name('reg-ctrol.restarFechRadic');
+    Route::put('sme/{reg_ctrol}', 'RegctrolController@updateMailEst')->name('reg-ctrol.sme');
+    Route::put('delivered/{reg_ctrol}', 'RegctrolController@updateDelivered')->name('reg-ctrol.updateDelivered');
 });
-
 //rutas de direccion
-Route::group(['middleware' => 'userDir'], function () {
-    $radicados= Radicado::all();
-    $programas= Program::all();
-    Route::resource('direction', 'DirectionController',compact('radicados'))->middleware('auth');
-    Route::put('save/{direction}', 'DirectionController@saveRequest',compact('radicados'))->middleware('auth')->name('direction.saveRequest');    
+Route::group(['middleware' => 'auth','userDir'], function () {
+    Route::resource('direction', 'DirectionController');
+    Route::put('save/{direction}', 'DirectionController@saveRequest')->name('direction.saveRequest');    
 });
-
 //rutas de administrador
-Route::group(['middleware' => 'userAdm'], function () {
-    $radicados= Radicado::all();
-    
-    Route::resource('admin', 'AdminController',compact('radicados'))->middleware('auth');
-    //controladores para generar los reportes
-    Route::get('Export_for_ar', 'ReportController@indexAR',compact('radicados'))->middleware('auth')->name('Report.indexAR');
-    Route::get('Export_for_dir', 'ReportController@indexDir',compact('radicados'))->middleware('auth')->name('Report.indexDir');
-    Route::get('show_Users', 'AdminController@showUsers',compact('radicados'))->middleware('auth')->name('admin.showUsers');
-    Route::get('show_Directores', 'AdminController@showDir',compact('radicados'))->middleware('auth')->name('admin.showDir');
-    Route::get('show_programas', 'AdminController@showProg',compact('radicados'))->middleware('auth')->name('admin.showProg');
-    Route::get('admin/{admin}/show_Users', 'AdminController@ShowRadic',compact('radicados'))->middleware('auth')->name('admin.ShowRadic');
-    Route::get('admin/{admin}/edit_user', 'AdminController@userEdit',compact('radicados'))->middleware('auth')->name('admin.userEdit');    
-    Route::get('admin/{admin}/edit_dir', 'AdminController@dirEdit',compact('radicados'))->middleware('auth')->name('admin.dirEdit');    
-    Route::get('admin/{admin}/edit_prog', 'AdminController@progEdit',compact('radicados'))->middleware('auth')->name('admin.progEdit');    
-    Route::put('edit_user/{admin}', 'AdminController@userEdit_ctrl',compact('radicados'))->middleware('auth')->name('admin.userEdit_ctrl');    
-    Route::put('edit_dir/{admin}', 'AdminController@dirgEdit_ctrl',compact('radicados'))->middleware('auth')->name('admin.dirgEdit_ctrl');    
-    Route::put('edit_prog/{admin}', 'AdminController@progEdit_ctrl',compact('radicados'))->middleware('auth')->name('admin.progEdit_ctrl');    
-    Route::put('save_request/{admin}', 'AdminController@saveRequest',compact('radicados'))->middleware('auth')->name('admin.saveRequest');    
-    Route::post('show_Users', 'AdminController@register')->middleware('auth')->name('admin.register');
-    Route::post('show_Directores', 'AdminController@registerDir')->middleware('auth')->name('admin.registerDir');
-    Route::post('show_Programs', 'AdminController@registerProg')->middleware('auth')->name('admin.registerProg');
-
+Route::group(['middleware' => 'auth','userAdm'], function () {   
+    Route::resource('admin', 'AdminController');
+    Route::get('Export_for_ar', 'ReportController@indexAR')->name('Report.indexAR');
+    Route::get('Export_for_dir', 'ReportController@indexDir')->name('Report.indexDir');
+    Route::get('show_Users', 'AdminController@showUsers')->name('admin.showUsers');
+    Route::get('show_Directores', 'AdminController@showDir')->name('admin.showDir');
+    Route::get('show_programas', 'AdminController@showProg')->name('admin.showProg');
+    Route::get('admin/{admin}/show_Users', 'AdminController@ShowRadic')->name('admin.ShowRadic');
+    Route::get('admin/{admin}/edit_user', 'AdminController@userEdit')->name('admin.userEdit');    
+    Route::get('admin/{admin}/edit_dir', 'AdminController@dirEdit')->name('admin.dirEdit');    
+    Route::get('admin/{admin}/edit_prog', 'AdminController@progEdit')->name('admin.progEdit');    
+    Route::put('edit_user/{admin}', 'AdminController@userEdit_ctrl')->name('admin.userEdit_ctrl');    
+    Route::put('edit_dir/{admin}', 'AdminController@dirgEdit_ctrl')->name('admin.dirgEdit_ctrl');    
+    Route::put('edit_prog/{admin}', 'AdminController@progEdit_ctrl')->name('admin.progEdit_ctrl');    
+    Route::put('save_request/{admin}', 'AdminController@saveRequest')->name('admin.saveRequest');    
+    Route::post('show_Users', 'AdminController@register')->name('admin.register');
+    Route::post('show_Directores', 'AdminController@registerDir')->name('admin.registerDir');
+    Route::post('show_Programs', 'AdminController@registerProg')->name('admin.registerProg');
     //exportaciones
     Route::get('/imprimir/{admin}', 'ReportController@imprimir')->name('admin.print_pdf');
 });
 //rutas de Director de Programa
-Route::group(['middleware' => 'UserDirProg'], function () {
+Route::group(['middleware' => 'auth','UserDirProg'], function () {
     Route::get('Dir_programa','DirprogController@index')->name('dirprog.index');
 });
 //rutas de estado
-Route::resource('status', 'EstadoController',compact('radicados'))->middleware('auth');
-Route::put('open_radicAdm/{status}','EstadoController@openRadicAdm',compact('radicados'))->middleware('auth')->name('status.openRadicAdm');
-Route::put('revisar/{status}','EstadoController@revisar',compact('radicados'))->middleware('auth')->name('status.revisar');
-Route::put('aprovar/{status}','EstadoController@aprovado',compact('radicados'))->middleware('auth')->name('status.aprovado');
+Route::resource('status', 'EstadoController')->middleware('auth');
+Route::put('open_radicAdm/{status}','EstadoController@openRadicAdm')->middleware('auth')->name('status.openRadicAdm');
+Route::put('revisar/{status}','EstadoController@revisar')->middleware('auth')->name('status.revisar');
+Route::put('aprovar/{status}','EstadoController@aprovado')->middleware('auth')->name('status.aprovado');
 
 //rutas de filtrado
-Route::get('filterStatus', 'FilterController@viewSearchRadic',compact('radicados'))->middleware('auth')->name('filter.viewSearchRadic');
-Route::get('filterStatus_dir', 'FilterController@viewSearchRadicDir',compact('radicados'))->middleware('auth')->name('filter.viewSearchRadicDir');
-Route::get('filterStatus_adm', 'FilterController@viewSearchRadicAdm',compact('radicados'))->middleware('auth')->name('filter.viewSearchRadicAdm');
-Route::get('filter_all_radic', 'FilterController@viewAllRadic',compact('radicados'))->middleware('auth')->name('filter.viewAllRadic');
+Route::get('filterStatus', 'FilterController@viewSearchRadic')->middleware('auth')->name('filter.viewSearchRadic');
+Route::get('filterStatus_dir', 'FilterController@viewSearchRadicDir')->middleware('auth')->name('filter.viewSearchRadicDir');
+Route::get('filterStatus_adm', 'FilterController@viewSearchRadicAdm')->middleware('auth')->name('filter.viewSearchRadicAdm');
+Route::get('filter_all_radic', 'FilterController@viewAllRadic')->middleware('auth')->name('filter.viewAllRadic');
 
 //Generar reportes
-Route::get('ExportFilter', 'ReportController@ExportFilter',compact('radicados'))->middleware('auth')->name('Report.ExportFilter');
-Route::get('Exports', 'ReportController@index',compact('radicados'))->middleware('auth')->name('Report.index');
-Route::get('ExportAdmDir', 'ReportController@ExportAdmDir',compact('radicados'))->middleware('auth')->name('Report.ExportAdmDir');
-Route::get('ExportAdmAR', 'ReportController@ExportAdmAR',compact('radicados'))->middleware('auth')->name('Report.ExportAdmAR');
-Route::get('Cont_motivo', 'ReportController@contMotivo',compact('radicados'))->middleware('auth')->name('Report.contMotivo');
-Route::get('Export_all_Radic', 'ReportController@ExportAR',compact('radicados'))->middleware('auth')->name('Report.ExportAR');
-Route::get('Export_for_motivo', 'ReportController@ExportMotivo',compact('radicados'))->middleware('auth')->name('Report.ExportMotivo');
-Route::get('Export_for_programa', 'ReportController@ExportPrograma',compact('radicados'))->middleware('auth')->name('Report.ExportPrograma');
-Route::get('Export_for_fecha', 'ReportController@ExportFecha',compact('radicados'))->middleware('auth')->name('Report.ExportFecha');
+Route::get('ExportFilter', 'ReportController@ExportFilter')->middleware('auth')->name('Report.ExportFilter');
+Route::get('Exports', 'ReportController@index')->middleware('auth')->name('Report.index');
+Route::get('ExportAdmDir', 'ReportController@ExportAdmDir')->middleware('auth')->name('Report.ExportAdmDir');
+Route::get('ExportAdmAR', 'ReportController@ExportAdmAR')->middleware('auth')->name('Report.ExportAdmAR');
+Route::get('Cont_motivo', 'ReportController@contMotivo')->middleware('auth')->name('Report.contMotivo');
+Route::get('Export_all_Radic', 'ReportController@ExportAR')->middleware('auth')->name('Report.ExportAR');
+Route::get('Export_for_motivo', 'ReportController@ExportMotivo')->middleware('auth')->name('Report.ExportMotivo');
+Route::get('Export_for_programa', 'ReportController@ExportPrograma')->middleware('auth')->name('Report.ExportPrograma');
+Route::get('Export_for_fecha', 'ReportController@ExportFecha')->middleware('auth')->name('Report.ExportFecha');
+
+Auth::routes();

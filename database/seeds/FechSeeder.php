@@ -11,6 +11,8 @@ class FechSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('fech_radics')->insert(['id_radicado'=> 0]);                        
+        DB::table('fech_radics')->insert([
+            'id_radicado'=> 0,
+            ]);                        
     }
 }

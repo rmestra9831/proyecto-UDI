@@ -17,7 +17,7 @@ class UserAR
     public function handle($request, Closure $next)
     {
         $now_user = Auth::user();
-        if ($now_user->type_user != 2) {
+        if ($now_user->type_user != 2 && Auth::check() == true) {
             abort(403);
         }
         return $next($request);

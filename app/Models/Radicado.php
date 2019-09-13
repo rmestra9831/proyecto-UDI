@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Models\Motivo;
+use App\Models\Sede;
 
 class Radicado extends Model
 {
@@ -51,6 +52,9 @@ class Radicado extends Model
   }
   public function fechradic(){
     return $this->hasOne(FechRadic::class);
+  }
+  public function sede(){
+    return $this->BelongsTo(Sede::class);
   }
 
   //query scope
