@@ -49,7 +49,7 @@
                         elseif (Auth::user()->type_user == 3) {
                             ?>bg-p-direction<?php
                         }elseif(Auth::user()->type_user == 4) {
-                            ?>bg-light<?php
+                            ?>bg-warning<?php
                         }
                         else{?> bg-success<?php } ?>
                         text-white h-100">

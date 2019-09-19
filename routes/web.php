@@ -23,8 +23,10 @@ Route::get('/', function () {
         if (auth()->user()->type_user == 3) {
             return redirect()->intended('direction');
         }elseif (auth()->user()->type_user == 2) {
-            return redirect()->intended('reg-ctrol');
-        }else {
+            return redirect()->intended('/home/reg-ctrol');
+        }elseif(auth()->user()->type_user == 4) {
+            return redirect()->intended('dir-programa');
+        }else{
             return redirect()->intended('admin');
         }
     
@@ -34,7 +36,7 @@ Route::get('/', function () {
 
 //rutas de registro y control
 Route::group(['middleware' => 'auth','userAR'], function () {
-    Route::resource('reg-ctrol', 'RegctrolController');
+    Route::resource('/home/reg-ctrol', 'RegctrolController');
     Route::get('reg-ctrol/{reg_ctrol}/sendMail', 'RegctrolController@sendEmail')->name('reg-ctrol.sendmail');
     Route::post('reg-ctrol/restart', 'RegctrolController@restarFechRadic')->name('reg-ctrol.restarFechRadic');
     Route::put('sme/{reg_ctrol}', 'RegctrolController@updateMailEst')->name('reg-ctrol.sme');
@@ -53,14 +55,17 @@ Route::group(['middleware' => 'auth','userAdm'], function () {
     Route::get('show_Users', 'AdminController@showUsers')->name('admin.showUsers');
     Route::get('show_Directores', 'AdminController@showDir')->name('admin.showDir');
     Route::get('show_programas', 'AdminController@showProg')->name('admin.showProg');
+    Route::get('show_radicados', 'AdminController@showRadics')->name('admin.showRadics');
     Route::get('admin/{admin}/show_Users', 'AdminController@ShowRadic')->name('admin.ShowRadic');
     Route::get('admin/{admin}/edit_user', 'AdminController@userEdit')->name('admin.userEdit');    
     Route::get('admin/{admin}/edit_dir', 'AdminController@dirEdit')->name('admin.dirEdit');    
     Route::get('admin/{admin}/edit_prog', 'AdminController@progEdit')->name('admin.progEdit');    
+    Route::get('admin/{admin}/show_radic', 'AdminController@showradicedit')->name('admin.showradicedit');    
     Route::put('edit_user/{admin}', 'AdminController@userEdit_ctrl')->name('admin.userEdit_ctrl');    
     Route::put('edit_dir/{admin}', 'AdminController@dirgEdit_ctrl')->name('admin.dirgEdit_ctrl');    
     Route::put('edit_prog/{admin}', 'AdminController@progEdit_ctrl')->name('admin.progEdit_ctrl');    
     Route::put('save_request/{admin}', 'AdminController@saveRequest')->name('admin.saveRequest');    
+    Route::put('asing_delegate/{admin}', 'AdminController@asingDelegate')->name('admin.asingDelegate');    
     Route::post('show_Users', 'AdminController@register')->name('admin.register');
     Route::post('show_Directores', 'AdminController@registerDir')->name('admin.registerDir');
     Route::post('show_Programs', 'AdminController@registerProg')->name('admin.registerProg');
@@ -69,7 +74,9 @@ Route::group(['middleware' => 'auth','userAdm'], function () {
 });
 //rutas de Director de Programa
 Route::group(['middleware' => 'auth','UserDirProg'], function () {
-    Route::get('Dir_programa','DirprogController@index')->name('dirprog.index');
+    Route::get('dir-programa','DirprogController@index')->name('dirprog.index');
+    Route::get('dir-programa/{dirprog}/info-radic','DirprogController@showinfoRadic')->name('dirprog.showinfoRadic');
+    Route::get('save_request/{dirprog}','DirprogController@saveRequest')->name('dirprog.saveRequest');
 });
 //rutas de estado
 Route::resource('status', 'EstadoController')->middleware('auth');

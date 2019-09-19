@@ -16,6 +16,7 @@ class CreateSedesTable extends Migration
         Schema::create('sedes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->integer('cont_radic');
             $table->timestamps();
         });
     }

@@ -32,4 +32,4 @@
         @endsection
       </div>
   </div>
-</div>
+</div> 

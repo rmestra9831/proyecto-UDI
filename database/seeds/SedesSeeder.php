@@ -11,8 +11,8 @@ class SedesSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('sedes')->insert(['name'=>'bucaramanga']);        
-        DB::table('sedes')->insert(['name'=>'barrancabermeja']);        
-        DB::table('sedes')->insert(['name'=>'san gil']);        
+        DB::table('sedes')->insert(['name'=>'bucaramanga','cont_radic'=>0]);        
+        DB::table('sedes')->insert(['name'=>'barrancabermeja','cont_radic'=>0]);        
+        DB::table('sedes')->insert(['name'=>'san gil','cont_radic'=>0]);        
     }
 }

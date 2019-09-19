@@ -21,7 +21,9 @@ class Radicado extends Model
     'time_notifi_end',
     'fech_delivered',
     'time_delivered',
+    'fech_aprovado',
     'obs',
+    'delegate_id',
     'respuesta',
     'editAdmRequest',
     'revisar',
@@ -49,9 +51,6 @@ class Radicado extends Model
   }
   public function user(){
     return $this->BelongsTo(User::class);
-  }
-  public function fechradic(){
-    return $this->hasOne(FechRadic::class);
   }
   public function sede(){
     return $this->BelongsTo(Sede::class);

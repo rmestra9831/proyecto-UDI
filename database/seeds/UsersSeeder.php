@@ -18,6 +18,12 @@ class UsersSeeder extends Seeder
             'password'=> bcrypt('123'),
         ]);
         DB::table('users')->insert([
+            'name'=>'admin2',
+            'type_user'=>'1',
+            'sede'=>'2',
+            'password'=> bcrypt('123'),
+        ]);
+        DB::table('users')->insert([
             'name'=>'richard',
             'type_user'=>'2',
             'sede'=>'1',
@@ -33,6 +39,12 @@ class UsersSeeder extends Seeder
             'name'=>'cris',
             'sede'=>'2',
             'type_user'=>'2',
+            'password'=> bcrypt('123'),
+        ]);
+        DB::table('users')->insert([
+            'name'=>'juan',
+            'sede'=>'2',
+            'type_user'=>'4',
             'password'=> bcrypt('123'),
         ]);
     }

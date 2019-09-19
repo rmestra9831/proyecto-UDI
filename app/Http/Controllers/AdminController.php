@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use App\Models\Radicado;
 use App\Models\Program;
 use App\Models\Motivo;
@@ -15,10 +16,8 @@ use DataTables;
 class AdminController extends Controller
 {
     public function __construct(){
-        $this->radicados = Radicado::orderBy('id', 'DESC')->get();
         $this->programas = Program::get();
         $this->motivos = Motivo::get();
-        $this->users = User::get();
         $this->roles = Role::get();
     }
     /**
@@ -28,8 +27,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $users= $this->users;
-        $radicados= $this->radicados;
+        $users= User::where('sede',Auth::user()->sede)->get();
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
         $programas= $this->programas;
 
         return view('admin.home', compact('radicados','programas','users'));
@@ -42,6 +41,8 @@ class AdminController extends Controller
         $user->name = $request->input('name');
         $user->password = Hash::make($request->input('password'));
         $user->type_user = $request->input('type_user');
+        $user->program_id = $request->input('program_id');
+        $user->sede = Auth::user()->sede;
 
         $user->save();
 
@@ -78,11 +79,10 @@ class AdminController extends Controller
 
         return redirect()->route('admin.showProg')->with('status','Usuario creado satisfactoriamente');
     }
-
     public function showUsers(User $admin){
-        $users= $this->users;
-        $radicados= $this->radicados;
-        $programas= $this->programas;
+        $users= User::where('sede',Auth::user()->sede)->get();
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
+        $programas= Program::where('sede',Auth::user()->sede)->get();
         $roles = $this->roles;
         $radic = $admin;
 
@@ -90,8 +90,8 @@ class AdminController extends Controller
 
     }
     public function showDir(Request $request, User $admin){
-        $users= $this->users;
-        $radicados= $this->radicados;
+        $users= User::where('sede',Auth::user()->sede)->get();
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
         $programas= $this->programas;
         $roles = $this->roles;
         $radic = $admin;
@@ -114,15 +114,27 @@ class AdminController extends Controller
 
     }
     public function showProg(User $admin){
-        $users= $this->users;
-        $radicados= $this->radicados;
-        $programas= $this->programas;
+        $users= User::where('sede',Auth::user()->sede)->get();
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
+        $programas= Program::where('sede',Auth::user()->sede)->get();
         $roles = $this->roles;
         $radic = $admin;
 
         return view('admin.showprogram', compact('radicados','radic','programas','users', 'roles'));
 
     }
+    public function showRadics(User $admin){
+        $users= User::where('sede',Auth::user()->sede)->get();
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
+        $programas= Program::where('sede',Auth::user()->sede)->get();
+        $roles = $this->roles;
+        $radic = $admin;
+
+        return view('admin.showradics', compact('radicados','radic','programas','users', 'roles'));
+
+    }
+    
+    //redireccionar a la pagina de mostrar radicado
 
     //controler editar usuarios
     public function userEdit_ctrl(Request $request, User $admin){
@@ -159,10 +171,8 @@ class AdminController extends Controller
 
     //vista editar usuarios
     public function userEdit(User $admin){
-
-
         $users= $admin;
-        $radicados= $this->radicados;
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
         $programas= $this->programas;
         $roles = $this->roles;
 
@@ -173,7 +183,7 @@ class AdminController extends Controller
         // dd($admin);
 
         $programas= $admin;
-        $radicados= $this->radicados;
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
         $roles = $this->roles;
     
         return view('admin.editDir', compact('radicados','programas','roles'));
@@ -183,20 +193,20 @@ class AdminController extends Controller
     public function progEdit(Program $admin){
 
         $programas= $admin;
-        $radicados= $this->radicados;
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
         $roles = $this->roles;
 
         return view('admin.editProg', compact('radicados','programas','roles'));
     }
 
     public function ShowRadic(Radicado $admin){
-        $users= $this->users;
+        $users= User::where('sede',Auth::user()->sede)->get();
         $programas= $this->programas;
         $radicado = $admin;
 
         return view('admin.showRadic', compact('radicado','programas','users'));
     }
-//salvar la respuesta del administrador
+    //salvar la respuesta del administrador
     public function saveRequest (Request $request, Radicado $admin)
     {
         $radicado = $admin;
@@ -211,6 +221,15 @@ class AdminController extends Controller
         ));
         $radicado->save();
         return redirect()->route('admin.ShowRadic',[$admin])->with('status','Respuesta guardada');
+    }
+
+    //delegar quien responde el radicado
+    public function asingDelegate(Request $request, Radicado $admin){
+        // dd($request->input('delegate_id'));
+        $radicado = $admin;
+        $radicado->delegate_id = $request->input('delegate_id');
+        $radicado->save();
+        return redirect()->route('admin.ShowRadic',[$admin])->with('status','Petición de Respuesta enviada');
     }
     /**
      * Remove the specified resource from storage.

@@ -74,11 +74,14 @@ class LoginController extends Controller
     {
       
             if (auth()->user()->type_user == 3) {
-                return '/direction';
+                return redirect()->intended('/direction');
             }elseif (auth()->user()->type_user == 2) {
-                return '/reg-ctrol';
+                return redirect()->intended('/reg-ctrol');
+            }elseif(auth()->user()->type_user == 4){
+                return redirect()->intended('/dir_programa');
+            }else{
+                return route('admin.index');
             }
-            return route('admin.index');
 
     }
 

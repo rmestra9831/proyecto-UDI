@@ -25,11 +25,15 @@
                 <div class="col">
                     <strong class="card-text">
                       <p class="card-text-var">
-                          Apreciado(a) estudiante,<br>
-                          Informo que ya salio la respuesta de solicitud Radicado N°{{$radicado->fechradic_id}}-{{$radicado->year}}<br>
-                          Por favor diríjase a la oficina de Admisiones y registro a reclamar su respectiva respuesta.<br>
-                          En horario de atención de Lunes a Viernes de 8:00a.m.  a  12:00m - 2:00 p.m. a 6:00 p.m. Sábado de 8:00a.m. a 12:00m.<br>
-                          Gracias
+                          Le informamos que en atención a su comunicación recibida el día (x) con radicado N° <strong>{{$e_data->fechradic_id}}-{{$e_data->year}}</strong>, la respuesta la puede solicitar en la oficina de admisiones y registro.<br>
+                          Los horarios de atención son:<br>
+                          Lunes a viernes de 8:00am a 12:00m y 2:00pm a 6:15pm<br>
+                          Sábados de 8:00am a 12:00m.<br>
+                          En caso de no reclamo dentro de los 5 días siguientes de este llamado, entenderemos que acoge la(s) decisión(es) emitida y será archivada en su hoja de vida académica.<br>
+                          
+                          Cordial saludo,<br>
+                          
+                          Dirección Sede (nombre de la sede) <br>
                       </p>
                     </strong>
                 </div>

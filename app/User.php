@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','type_user','password','sede'
+        'name','type_user','password','sede','program_id','superAdmin'
     ];
 
     /**
@@ -47,6 +47,10 @@ class User extends Authenticatable
     }
     public function sede(){
         return $this->BelongsTo(Sede::class);
+    }
+
+    public function Program(){
+        return $this->BelongsTo(Program::class);
     }
  
 }

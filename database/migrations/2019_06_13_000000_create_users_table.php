@@ -17,11 +17,15 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('type_user')->unsigned();
+            $table->integer('program_id')->unsigned()->nullable();
             $table->integer('sede');
             $table->string('password');
+            //permisos de usuario
             $table->boolean('activeUser')->nullable();
+            $table->boolean('superAdmin')->nullable();
             //clave foranea
             $table->foreign('type_user')->references('id')->on('roles');
+            $table->foreign('program_id')->references('id')->on('programs');
             
             $table->rememberToken();
             $table->timestamps();

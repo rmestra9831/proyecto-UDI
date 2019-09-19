@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 use App\Models\Radicado;
 use App\Models\Program;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateRespuestaRequest;
 
 class DirectionController extends Controller
 {
+    public function __construct(){
+        $this->programas = Program::get();
+        $this->users = User::get();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,9 +22,9 @@ class DirectionController extends Controller
      */
     public function index()
     {
-        $users= User::get();
-        $radicados= Radicado::orderBy('id', 'DESC')->get();
-        $programas= Program::all();
+        $radicados = Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();;
+        $users = $this->users;
+        $programas = $this->programas;
 
         return view('direction.home', compact('radicados','programas','users'));
     }
@@ -64,10 +69,9 @@ class DirectionController extends Controller
      */
     public function edit(Radicado $direction)
     {
-        $users= User::get();
-        $programas= Program::all();
+        $users = $this->users;
+        $programas = $this->programas;
         $radicado = $direction;
-
         return view('direction.showRadic', compact('radicado','programas','users'));
     }
 

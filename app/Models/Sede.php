@@ -19,4 +19,9 @@ class Sede extends Model
     public function radicados(){
         return $this->hasMany(Radicado::class);
     }
+
+    public function programs()
+    {
+        return $this->hasMany(Program::class);
+    }
 }

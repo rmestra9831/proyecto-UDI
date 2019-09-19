@@ -18,7 +18,11 @@ class CreateProgramsTable extends Migration
             $table->string('name_dir')->nullable();
             $table->string('name');
             $table->string('correo_director');
+            $table->integer('sede')->unsigned()->nullable();
             $table->timestamps();
+
+            //relaciones
+            $table->foreign('sede')->references('id')->on('sedes');
         });
     }
 

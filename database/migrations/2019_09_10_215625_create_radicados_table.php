@@ -31,12 +31,14 @@ class CreateRadicadosTable extends Migration
             $table->string('origen_correo')->nullable();
             $table->text('observaciones');
             $table->text('obs')->nullable();
+            $table->integer('delegate_id')->unsigned()->nullable();
             $table->text('respuesta')->nullable();
             $table->string('editAdmRequest')->nullable();
             $table->boolean('aproved')->nullable();
             $table->boolean('revisar')->nullable();
             $table->boolean('openAdm')->nullable();
             $table->integer('sede')->unsigned();
+            $table->string('fech_aprovado')->nullable();
 
             //---
             $table->date('fech_start_radic')->nullable();
@@ -64,6 +66,7 @@ class CreateRadicadosTable extends Migration
             //agregando las claves foraneas
             $table->foreign('program_id')->references('id')->on('programs');
             $table->foreign('sendTo_id')->references('id')->on('programs');
+            $table->foreign('delegate_id')->references('id')->on('programs');
             $table->foreign('motivo_id')->references('id')->on('motivos');
             $table->foreign('sede')->references('id')->on('sedes');
             //$table->foreign('fechradic_id')->references('id')->on('fech_radics');

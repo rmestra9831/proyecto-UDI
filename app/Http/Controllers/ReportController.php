@@ -15,16 +15,15 @@ use App\Exports\ReportExportFilter;
 use App\Exports\ReportAdmAR;
 use App\Exports\ReportAdmDir;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class ReportController extends Controller
 {
     //variables globales
-    public $radicados;
     public $programas;
 
     public function __construct(){
-        $this->radicados = Radicado::orderBy('id', 'DESC')->get();
         $this->programas = Program::get();
         $this->motivos = Motivo::orderBy('name', 'ASC')->get();;
     }
@@ -38,14 +37,14 @@ class ReportController extends Controller
         $start= $request->get('start');
         $end= $request->get('end');
         
-        $r_by_all = Radicado::orderBy('id', 'DESC')
+        $r_by_all = Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')
             ->name($name)
             ->lastname($last_name)
             ->programa($get_programa)
             ->motivo($get_motivo)
             ->Dates($start, $end)
         ->get();
-        $r_by_all_dir = Radicado::orderBy('id', 'DESC')->where('fech_send_dir','!=','null')
+        $r_by_all_dir = Radicado::orderBy('id', 'DESC')->where([['fech_send_dir','!=','null'],['sede',Auth::user()->sede]])
             ->name($name)
             ->lastname($last_name)
             ->programa($get_programa)
@@ -55,7 +54,7 @@ class ReportController extends Controller
         
 
         $users= User::get();
-        $radicados= Radicado::orderBy('id', 'DESC')->get();
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
         $programas= Program::get();
         $motivos= Motivo::orderBy('name', 'ASC')->get();
 
@@ -77,7 +76,7 @@ class ReportController extends Controller
         $start= $request->get('start');
         $end= $request->get('end');
         
-        $r_by_all = Radicado::orderBy('id', 'DESC')
+        $r_by_all = Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')
             ->name($name)
             ->lastname($last_name)
             ->programa($get_programa)
@@ -86,7 +85,7 @@ class ReportController extends Controller
         ->get();
 
         $users= User::get();
-        $radicados= Radicado::orderBy('id', 'DESC')->get();
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
         $programas= Program::get();
         $motivos= Motivo::orderBy('name', 'ASC')->get();
 
@@ -106,7 +105,7 @@ class ReportController extends Controller
         $start= $request->get('start');
         $end= $request->get('end');
     
-        $r_by_all_dir = Radicado::orderBy('id', 'DESC')->where('fech_send_dir','!=','null')
+        $r_by_all_dir = Radicado::orderBy('id', 'DESC')->where([['fech_send_dir','!=','null'],['sede',Auth::user()->sede]])
             ->name($name)
             ->lastname($last_name)
             ->programa($get_programa)
@@ -115,7 +114,7 @@ class ReportController extends Controller
         ->get();
 
         $users= User::get();
-        $radicados= $this->radicados;
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
         $programas= $this->programas;
         $motivos= $this->motivos;
 
@@ -235,7 +234,7 @@ class ReportController extends Controller
         //fecha carbon
         $Date = Carbon::now('America/Bogota');
         $fechaCompleto = $Date->isoFormat('DD').' de '.$Date->isoFormat('MMMM').' de '.$Date->isoFormat('YYYY');
-        $radicados = Radicado::where('slug',$id)->get();
+        $radicados = Radicado::where([['slug',$id],['sede',Auth::user()->sede]])->get();
         $programa = $this->programas;
         $motivo = $this->motivos;
         $pdf = \PDF::loadView('export.pdf',compact('radicados','fechaCompleto'));

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreRadicadoRequest;
 use App\Models\Radicado;
 use App\Models\Program;
 use App\Models\Motivo;
+use App\Models\Sede;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -19,6 +20,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class RegctrolController extends Controller
 {
+    public function __construct(){
+        $this->programas = Program::get();
+        $this->motivos = Motivo::orderBy('name', 'ASC')->get();
+        $this->users = User::get();
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,11 +33,9 @@ class RegctrolController extends Controller
      */
     public function index()
     {    
-        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
-        // dd($radicados);
-      
-        $users= User::get();
-        $programas= Program::get();
+        $radicados = Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();;
+        $users = $this->users;
+        $programas = $this->programas;
 
         return view('regctrol.home', compact('radicados','programas','users'));
     }
@@ -42,14 +47,18 @@ class RegctrolController extends Controller
      */
     public function create()
     {
-        $radicado= Radicado::all();
-        $programas= Program::all();
-        $motivos= Motivo::orderBy('name', 'ASC')->get();
-        $id = DB::table('fech_radics')->select('id_radicado')->latest()->take(1)->value('id_radicado');
-        $num_more= str_pad($id, 4, "0", STR_PAD_LEFT);
+        $radicados = Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();;
+        $programas = $this->programas;
+        $motivos = $this->motivos;
+        // $id = DB::table('fech_radics')->select('id_radicado')->latest()->take(1)->value('id_radicado');
+        $sede_id_user = Auth::user()->sede;
+        $sede = DB::table('sedes')->select('cont_radic')->where('id',$sede_id_user)->value('cont_radic');
+        $sede__cont = intval($sede) + 1;
+        // dd($sede__cont);
+        $num_more= str_pad($sede__cont, 4, "0", STR_PAD_LEFT);
         $year= date('d/m/Y');
         
-        return view('regctrol.createRadic', compact('radicado','programas','motivos','num_more','year'));
+        return view('regctrol.createRadic', compact('radicados','programas','motivos','num_more','year'));
     }
     /**
      * Display the specified resource.
@@ -71,24 +80,22 @@ class RegctrolController extends Controller
     public function store(StoreRadicadoRequest $request)
     {
         //variables
-
- 
         $year = date("d/m/Y");
         $fech_start_radic = date("Y/m/d");
         $time_start_radic = date('h:i:s A');
         $radicado =new Radicado();
         $motivos = Motivo::all();
         $programas =Program::all();
+        $sede_id_user = Auth::user()->sede;
         // validando ubicación del usuario
-        $id = DB::table('fech_radics')->select('id_radicado')->latest()->take(1)->value('id_radicado');
-        
-        $cont_id_string = str_pad($id, 4, "0", STR_PAD_LEFT);       
-        $radicado->fechradic_id = $cont_id_string;
+        // $id = DB::table('fech_radics')->select('id_radicado')->latest()->take(1)->value('id_radicado');
+        $sede = DB::table('sedes')->select('cont_radic')->where('id',$sede_id_user)->value('cont_radic');
+        $sede__cont = intval($sede) + 1;
+        // dd($sede__cont);
+        $num_more= str_pad($sede__cont, 4, "0", STR_PAD_LEFT);
+        $radicado->fechradic_id = $num_more;
 
-        $id_rad = $id + 1;
-        FechRadic::create([
-            'id_radicado'=> $id_rad
-        ]);
+        DB::table('sedes')->where('id',$sede_id_user)->update(['cont_radic'=>$num_more]);
     //otras variables
         $user = Auth::user();
         $radicado->atention = $request->input('atention');
@@ -172,12 +179,11 @@ class RegctrolController extends Controller
      */
     public function edit(Radicado $reg_ctrol)
     {
-        $users= User::get();
-        $radicados= Radicado::orderBy('id', 'DESC')->get();
-        $programas= Program::all();
-        
+        $radicados = Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();;
+        $users = $this->users;
+        $programas = $this->programas;        
         $radicado = $reg_ctrol;
-        
+    
         return view('regctrol.showRadic', compact('radicado','programas','users'));
     }
 
@@ -260,7 +266,7 @@ class RegctrolController extends Controller
     }
     //personalizado
     public function sendEmail(Radicado $reg_ctrol){
-        $programas = Program::all();
+        $programas = Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();;
         $radicado = $reg_ctrol;
         
         return view('regctrol.sendMailEst', compact('radicado','programas'));

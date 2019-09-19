@@ -83,7 +83,11 @@
               @else
                 @foreach ($users as $user)
                     @if ($user->id == $radicado->respon_id)
-                    {{$user->name}}
+                    {{$user->name}} | <?php foreach ($programas as  $programa) {
+                      if ($programa->id == $user->program_id) {
+                        ?> {{$programa->name}} <?php
+                      }
+                    } ?>
                     @endif
                 @endforeach
               @endif
@@ -104,7 +108,11 @@
       @if (Auth::user()->type_user == 3)
         href="{{action('DirectionController@edit', $radicado->slug)}}"     
       @else
-        href="{{action('AdminController@ShowRadic', $radicado->slug)}}"     
+        @if (Auth::user()->type_user == 4)
+          href="{{action('DirprogController@showinfoRadic', $radicado->slug)}}"
+        @else
+          href="{{action('AdminController@ShowRadic', $radicado->slug)}}"
+        @endif   
       @endif
     @endif
     role="button">Ver radicado</a>     

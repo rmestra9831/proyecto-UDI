@@ -5,7 +5,11 @@
         @if (Auth::user()->type_user == 3)
           <img class="align-items-center" src="{{ asset('icon/direction.svg') }}" alt="">
         @else
-          <img class="align-items-center" src="{{ asset('icon/admin.svg') }}" alt="">
+          @if (Auth::user()->type_user == 4)
+            <img class="align-items-center" src="{{ asset('icon/work.svg') }}" alt="">
+          @else
+            <img class="align-items-center" src="{{ asset('icon/admin.svg') }}" alt=""> 
+          @endif
         @endif
      @endif
      <div class="type_user">
@@ -17,7 +21,11 @@
                 Admisiones y Registro
             @else
                 @if (Auth::user()->type_user == 3)
-                Direccion                                        
+                Direccion
+                @else
+                  @if (Auth::user()->type_user == 4)
+                      Director de Programa
+                  @endif                                        
                 @endif                                 
             @endif
         @endif 
@@ -29,7 +37,7 @@
 <!--contenido de listas del panel -->
 <div class="p-2">
     <div class="btn-report">
-        @if (Auth::user()->type_user == 2 || Auth::user()->type_user == 3)
+        @if (Auth::user()->type_user == 2 || Auth::user()->type_user == 3|| Auth::user()->type_user == 4)
           <a name="" id="" class="btn btn-report btn-block btn-outline-light text-capitalize" href="{{route('Report.index')}}" role="button">reportes</a>
         @else
           <a style="margin: 0;" name="" id="" class="btn btn-report btn-block btn-outline-light text-capitalize" href="{{route('Report.indexAR')}}" role="button">reportes de AR</a>
@@ -48,12 +56,21 @@
             <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>
             <a href="{{route('filter.viewSearchRadicDir')}}"><i class="fas fa-chevron-right"></i>estado de radicados</a>
             @else
-              <a href="{{route('admin.index')}}"><i class="fas fa-chevron-right"></i>Inicio</a>
-              <a href="{{route('admin.showUsers')}}"><i class="fas fa-chevron-right"></i>Usuarios</a>
-              <a href="{{route('admin.showDir')}}"><i class="fas fa-chevron-right"></i>Directores</a>
-              <a href="{{route('admin.showProg')}}"><i class="fas fa-chevron-right"></i>programas</a>
-              <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>   
-              <a href="{{route('filter.viewSearchRadicAdm')}}"><i class="fas fa-chevron-right"></i>estado de radicados</a>
+              @if (Auth::user()->type_user == 4)
+                <a href="{{route('dirprog.index')}}"><i class="fas fa-chevron-right"></i>inicio</a>
+                <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>
+                <a href="{{route('filter.viewSearchRadicDir')}}"><i class="fas fa-chevron-right"></i>estado de radicados</a>  
+              @else
+                <a href="{{route('admin.index')}}"><i class="fas fa-chevron-right"></i>Inicio</a>
+                <a href="{{route('admin.showRadics')}}"><i class="fas fa-chevron-right"></i>radicados</a>
+                
+                <a href="{{route('admin.showUsers')}}"><i class="fas fa-chevron-right"></i>Usuarios</a>
+                <a href="{{route('admin.showDir')}}"><i class="fas fa-chevron-right"></i>Directores</a>
+                <a href="{{route('admin.showProg')}}"><i class="fas fa-chevron-right"></i>programas</a>
+                
+                <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>   
+                <a href="{{route('filter.viewSearchRadicAdm')}}"><i class="fas fa-chevron-right"></i>estado de radicados</a>                  
+              @endif
             @endif
       @endif
     </div>

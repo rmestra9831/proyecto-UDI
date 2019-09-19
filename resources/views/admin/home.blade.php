@@ -15,28 +15,28 @@
         
         <div class=" cont-panel-adm">
             <div class="container">
-                    <a href=" {{route('filter.viewAllRadic')}} " class="col card desing-1">
+                    <a href=" {{route('admin.showRadics')}} " class="col card desing-1">
                         <img src=" {{asset('img/radic-2.svg')}} " alt="">
                         <div class="h3">Radicados</div>
-                        <div class="p">cantidad aqui</div>
+                        <div class="p"> {{count($radicados)}} </div>
                     </a>
 
                     <a href="{{route('admin.showUsers')}}" class="col card desing-1">
                         <img src=" {{asset('img/usuarios.svg')}} " alt="">
                         <div class="h3">Usuarios</div>
-                        <div class="p">cantidad aqui</div>
+                        <div class="p">{{count($users)}}</div>
                     </a>
 
                     <a href="{{route('admin.showDir')}}" class="col card desing-1">
                         <img src=" {{asset('img/directors.svg')}} " alt="">
                         <div class="h3">Directores</div>
-                        <div class="p">cantidad aqui</div>
+                        <div class="p">directores</div>
                     </a>
 
                     <a href="{{route('admin.showProg')}}" class="col card desing-1">
                         <img src=" {{asset('img/inge.svg')}} " alt="">
                         <div class="h3">Programas</div>
-                        <div class="p">cantidad aqui</div>
+                        <div class="p">{{count($programas)}}</div>
                     </a>
                     
             </div>

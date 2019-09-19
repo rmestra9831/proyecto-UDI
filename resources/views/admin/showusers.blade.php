@@ -47,11 +47,20 @@
                                         @enderror
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <select name="type_user" id="" class="text-capitalize form-control custom-select custom-select-sm form-control-sm @error('program_id') is-invalid @enderror">
                                             <option class="text-capitalize" value="">Cargo</option>                      
                                             @foreach ($roles as $rol)
                                                 <option class="text-capitalize" value="{{$rol->id}}">{{$rol->name_role}}</option>          
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <select name="program_id" id="" class="text-capitalize form-control custom-select custom-select-sm form-control-sm @error('program_id') is-invalid @enderror">
+                                            <option class="text-capitalize" value="">Programa</option>                      
+                                            @foreach ($programas as $programa)
+                                                <option class="text-capitalize" value="{{$programa->id}}">{{$programa->name}}</option>          
                                             @endforeach
                                         </select>
                                     </div>

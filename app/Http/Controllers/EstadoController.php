@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Radicado;
+use Carbon\Carbon;
 
 class EstadoController extends Controller
 {
@@ -83,7 +84,7 @@ class EstadoController extends Controller
             'openAdm'
         ));
         $radicado->save();
-        return redirect()->route('direction.edit',[$status])->with('status','Radicado '.$radicado->fechradic_id.'-'.$radicado->year.' recivido correctamente ');
+        return redirect()->route('admin.ShowRadic',[$status])->with('status','Radicado '.$radicado->fechradic_id.'-'.$radicado->year.' recivido correctamente ');
 
     }
     public function openRadicAdm(Request $request, Radicado $status){
@@ -126,7 +127,9 @@ class EstadoController extends Controller
     // Mandar la solicitud de revisar la respuesta del radicado
     public function aprovado(Request $request, Radicado $status){
         $radicado = $status;
-        
+        $fech_save_aproved = Carbon::now();
+
+        $radicado->fech_aprovado = $fech_save_aproved->isoFormat('MMMM DD [del] YYYY [a las] h:mm:ss a');
         $radicado->fill($request->except(
             'fech_send_dir',
             'time_send_dir',
