@@ -60,9 +60,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         $credentials = $request->only('name', 'password', 'sede');
-        $bandera = true;
         if (Auth::attempt($credentials)) {
-            $bandera = true;
             return redirect()->intended('/');
         }else{
             Auth::logout();

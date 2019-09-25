@@ -33,7 +33,7 @@
                           
                           Cordial saludo,<br>
                           
-                          Dirección Sede (nombre de la sede) <br>
+                          Dirección Sede {{Auth::user()->sede}} (nombre de la sede) <br>
                       </p>
                     </strong>
                 </div>

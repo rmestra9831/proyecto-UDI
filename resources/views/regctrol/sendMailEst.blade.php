@@ -30,7 +30,7 @@
                 <div class="col">
                     <strong class="card-text">
                       <p class="card-text-var">
-                          Le informamos que en atención a su comunicación recibida el día (x) con radicado N° <strong>{{$radicado->fechradic_id}}-{{$radicado->year}}</strong>, la respuesta la puede solicitar en la oficina de admisiones y registro.<br>
+                          Le informamos que en atención a su comunicación recibida el día ({{$radicado->fech_start_radic}}) con radicado N° <strong>{{$radicado->fechradic_id}}-{{$radicado->year}}</strong>, la respuesta la puede solicitar en la oficina de admisiones y registro.<br>
                           Los horarios de atención son:<br><br>
                           Lunes a viernes de 8:00am a 12:00m y 2:00pm a 6:15pm<br>
                           Sábados de 8:00am a 12:00m.<br><br>
@@ -38,7 +38,13 @@
                           
                           Cordial saludo,<br>
                           
-                          Dirección Sede ( {{$radicado->sedes->name}} nombre de la sede) <br>
+                          Dirección Sede
+                          @foreach ($sedes as $sede)
+                              @if ($sede->id == $radicado->sede)
+                                ( {{$sede->name}} ) <br>
+                              @endif
+                          @endforeach  
+                         
                       </p>
                     </strong>
                 </div>

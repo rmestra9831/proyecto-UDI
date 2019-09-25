@@ -204,8 +204,12 @@ class FilterController extends Controller
         $users= User::get();
         $programas= Program::get();
         $motivos= Motivo::orderBy('name', 'ASC')->get();
-        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')
-        // $radicados= Radicado::orderBy('id', 'DESC')
+
+        if (Auth::user()->type_user == 4) {
+            $radicados= Radicado::where('sede',Auth::user()->sede)->where(function ($query) {
+                $id_progm_dir = Auth::user()->program_id;
+                $query->where('delegate_id', '=', $id_progm_dir);})
+            ->orderBy('id', 'DESC')
             ->name($name)
             ->lastname($last_name)
             ->numradic($fechradic_id)
@@ -220,5 +224,29 @@ class FilterController extends Controller
                 'programas',
                 'users'
             ));
+
+        }else{
+            $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')
+                ->name($name)
+                ->lastname($last_name)
+                ->numradic($fechradic_id)
+                ->motivo($motivo)
+                ->programa($programa)
+                ->Dates($start_date, $end_date)
+                ->paginate(25);
+    
+                return view('filter.all-radic', compact(
+                    'radicados',
+                    'motivos',
+                    'programas',
+                    'users'
+                ));
+        }
+
+
+
+            // ->where(function ($query) {
+                // $id_progm_dir = Auth::user()->program_id;
+                // $query->where('delegate_id', '=', $id_progm_dir);})
     }
 }

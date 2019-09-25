@@ -124,7 +124,7 @@
           <!-- imprime todo lo que no se ha revisado -->
           @foreach ($radicados as $radicado)
             @if ($radicado->respuesta != null)
-              @if ($radicado->openAdm == 1)
+              @if ($radicado->openAdm == 1 )
                 <div class="col-11 content-card">
                   {{-- mostrar imagen segun el estado --}}
                     @if ($radicado->revisar == 1)
@@ -137,19 +137,26 @@
                   @include('components.cards')
                 </div>
               @else
-                <div class="col-11 content-card">
-                    <!--ventada de recivido-->
-                    <div class="unrecive" id="{{$radicado->id}}" valid="{{$radicado->id}}">
-                      <!-- formulario para actualizar el estado de recivido direccion-->
-                      <form action="{{route('status.openRadicAdm',$radicado->slug)}}" method="post">
-                         @method('PUT')
-                         @csrf
-                           <input  name="openAdm" type="hidden" value="1">
-                        <button class="btn btn-primary text-capitalize" type="submit">Abrir</button>
-                      </form>
-                  </div>
-                  @include('components.cards')
-                </div>
+                @if (Auth::user()->type_user != 4)
+                    <div class="col-11 content-card">
+                      <!--ventada de recivido-->
+                      <div class="unrecive" id="{{$radicado->id}}" valid="{{$radicado->id}}">
+                        <!-- formulario para actualizar el estado de recivido direccion-->
+                        <form action="{{route('status.openRadicAdm',$radicado->slug)}}" method="post">
+                           @method('PUT')
+                           @csrf
+                             <input  name="openAdm" type="hidden" value="1">
+                          <button class="btn btn-primary text-capitalize" type="submit">Abrir</button>
+                        </form>
+                    </div>
+                      @include('components.cards')
+                    </div>
+                  @else
+                    <div class="col-11 content-card">   
+                      @include('components.cards')
+                    </div>
+                    <div>
+                @endif
               @endif
             @endif
           @endforeach

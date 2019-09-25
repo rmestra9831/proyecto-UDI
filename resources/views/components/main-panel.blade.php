@@ -61,12 +61,18 @@
                 <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>
                 <a href="{{route('filter.viewSearchRadicDir')}}"><i class="fas fa-chevron-right"></i>estado de radicados</a>  
               @else
-                <a href="{{route('admin.index')}}"><i class="fas fa-chevron-right"></i>Inicio</a>
+                @if (Auth::user()->superAdmin == 1)
+                  <a href="{{route('superAdm.index')}}"><i class="fas fa-chevron-right"></i>Inicio</a>
+                @else
+                  <a href="{{route('admin.index')}}"><i class="fas fa-chevron-right"></i>Inicio</a>
+                @endif
                 <a href="{{route('admin.showRadics')}}"><i class="fas fa-chevron-right"></i>radicados</a>
                 
                 <a href="{{route('admin.showUsers')}}"><i class="fas fa-chevron-right"></i>Usuarios</a>
                 <a href="{{route('admin.showDir')}}"><i class="fas fa-chevron-right"></i>Directores</a>
-                <a href="{{route('admin.showProg')}}"><i class="fas fa-chevron-right"></i>programas</a>
+                <a href="{{route('admin.showProg')}}"><i class="fas fa-chevron-right"></i>programas</a>                    
+                {{-- @if (->superAdmin == 1) --}}
+                {{-- @endif --}}
                 
                 <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>   
                 <a href="{{route('filter.viewSearchRadicAdm')}}"><i class="fas fa-chevron-right"></i>estado de radicados</a>                  

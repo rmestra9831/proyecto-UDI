@@ -78,6 +78,10 @@ Route::group(['middleware' => 'auth','UserDirProg'], function () {
     Route::get('dir-programa/{dirprog}/info-radic','DirprogController@showinfoRadic')->name('dirprog.showinfoRadic');
     Route::get('save_request/{dirprog}','DirprogController@saveRequest')->name('dirprog.saveRequest');
 });
+//rutas de superadministrador
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('superAdm','SuperadmController@index')->name('superAdm.index');    
+});
 //rutas de estado
 Route::resource('status', 'EstadoController')->middleware('auth');
 Route::put('open_radicAdm/{status}','EstadoController@openRadicAdm')->middleware('auth')->name('status.openRadicAdm');

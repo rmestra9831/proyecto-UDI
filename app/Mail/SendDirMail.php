@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Models\Sede;
 
 class SendDirMail extends Mailable implements ShouldQueue
 {
@@ -36,7 +37,8 @@ class SendDirMail extends Mailable implements ShouldQueue
         $e_subject = $this->subj;
         $e_messaje = $this->mess;
         $e_data = $this->data;
+        $e_sedes = Sede::all();
         
-        return $this->view('mail.dir', compact('e_messaje','e_data'))->subject($e_subject);
+        return $this->view('mail.dir', compact('e_messaje','e_data','e_sedes'))->subject($e_subject);
     }
 }

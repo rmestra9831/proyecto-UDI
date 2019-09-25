@@ -268,8 +268,9 @@ class RegctrolController extends Controller
     public function sendEmail(Radicado $reg_ctrol){
         $programas = Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();;
         $radicado = $reg_ctrol;
+        $sedes = Sede::all();
         
-        return view('regctrol.sendMailEst', compact('radicado','programas'));
+        return view('regctrol.sendMailEst', compact('radicado','programas','sedes'));
     }
     public function restarFechRadic(){
         FechRadic::create([

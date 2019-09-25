@@ -17,5 +17,6 @@ class ProgramSeeder extends Seeder
         DB::table('programs')->insert(['name'=>'psicologia','correo_director'=>'psicologia@maxmail.in']);
         DB::table('programs')->insert(['name'=>'sistemas','correo_director'=>'sistemas@maxmail.in']);
         DB::table('programs')->insert(['name'=>'electronica','correo_director'=>'electronica@maxmail.in']);
+        DB::table('programs')->insert(['name'=>'administrativo','correo_director'=>'administrativo@maxmail.in']);
     }
 }
