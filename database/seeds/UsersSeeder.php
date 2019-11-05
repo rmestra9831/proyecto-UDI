@@ -12,15 +12,15 @@ class UsersSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name'=>'admin',
+            'name'=>'superAdmin',
             'type_user'=>'1',
             'sede'=>'1',
             'password'=> bcrypt('123'),
         ]);
         DB::table('users')->insert([
-            'name'=>'admin2',
+            'name'=>'admin',
             'type_user'=>'1',
-            'sede'=>'2',
+            'sede'=>'1',
             'password'=> bcrypt('123'),
         ]);
         DB::table('users')->insert([
@@ -41,6 +41,13 @@ class UsersSeeder extends Seeder
             'sede'=>'1',
             'password'=> bcrypt('123'),
         ]);
+        // aqui van los usuarios de barranca
+        DB::table('users')->insert([
+            'name'=>'admin2',
+            'type_user'=>'1',
+            'sede'=>'2',
+            'password'=> bcrypt('123'),
+        ]);
         DB::table('users')->insert([
             'name'=>'cris',
             'sede'=>'2',
@@ -49,6 +56,12 @@ class UsersSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'name'=>'juan',
+            'sede'=>'2',
+            'type_user'=>'3',
+            'password'=> bcrypt('123'),
+        ]);
+        DB::table('users')->insert([
+            'name'=>'karol',
             'sede'=>'2',
             'type_user'=>'4',
             'password'=> bcrypt('123'),

@@ -37,109 +37,111 @@
     
         <tbody>
         @foreach($radicados as $radicado)
-        @if($radicado->fech_send_dir != null)
-            @if ($radicado->fech_recive_dir != null)
-                @if ($radicado->fech_recive_dir != null &&  $radicado->fech_recive_radic != null)
-                    <tr>
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->fechradic_id}}-{{ $radicado->year}}</td>
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->name}}</td>
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->last_name}}</td>
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->program->name}}</td>
-                        <!--DIRIGIDO A-->
-                        @foreach ($programas as $programa)
-                          @if ($programa->id == $radicado->sendTo_id)
-                          <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $programa->name}}</td>
-                          @endif
-                        @endforeach 
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->motivo->name}}</td>
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->asunto}}</td>
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_correo}}</td>
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_cel}}</td>
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->respuesta}}</td>
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->user->name}}</td>
-                        <!--REVISADO POR-->
-                        @if (!$radicado->respuesta)
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;"> |</td>
-                        @else
-                            @foreach ($users as $user)
-                                @if ($user->id == $radicado->respon_id)
-                                    <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $user->name}}</td>
+            @if ($radicado->sede == Auth::user()->sede)
+                @if($radicado->fech_send_dir != null)
+                    @if ($radicado->fech_recive_dir != null)
+                        @if ($radicado->fech_recive_dir != null &&  $radicado->fech_recive_radic != null)
+                            <tr>
+                                <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->fechradic_id}}-{{ $radicado->year}}</td>
+                                <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->name}}</td>
+                                <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->last_name}}</td>
+                                <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->program->name}}</td>
+                                <!--DIRIGIDO A-->
+                                @foreach ($programas as $programa)
+                                  @if ($programa->id == $radicado->sendTo_id)
+                                  <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $programa->name}}</td>
+                                  @endif
+                                @endforeach 
+                                <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->motivo->name}}</td>
+                                <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->asunto}}</td>
+                                <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_correo}}</td>
+                                <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_cel}}</td>
+                                <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->respuesta}}</td>
+                                <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->user->name}}</td>
+                                <!--REVISADO POR-->
+                                @if (!$radicado->respuesta)
+                                <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;"> |</td>
+                                @else
+                                    @foreach ($users as $user)
+                                        @if ($user->id == $radicado->respon_id)
+                                            <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $user->name}}</td>
+                                        @endif
+                                    @endforeach
                                 @endif
-                            @endforeach
-                        @endif
-                        
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
-                    </tr>  
-                @else
-                    <tr>
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->fechradic_id}}-{{ $radicado->year}}</td>
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->name}}</td>
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->last_name}}</td>
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->program->name}}</td>
-                        <!--DIRIGIDO A-->
-                        @foreach ($programas as $programa)
-                          @if ($programa->id == $radicado->sendTo_id)
-                          <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $programa->name}}</td>
-                          @endif
-                        @endforeach 
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->motivo->name}}</td>
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->asunto}}</td>
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_correo}}</td>
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_cel}}</td>
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->respuesta}}</td>
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->user->name}}</td>
-                        <!--REVISADO POR-->
-                        @if (!$radicado->respuesta)
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;"> |</td>
+
+                                <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
+                                <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
+                                <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
+                            </tr>  
                         @else
-                            @foreach ($users as $user)
-                                @if ($user->id == $radicado->respon_id)
-                                    <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $user->name}}</td>
+                            <tr>
+                                <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->fechradic_id}}-{{ $radicado->year}}</td>
+                                <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->name}}</td>
+                                <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->last_name}}</td>
+                                <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->program->name}}</td>
+                                <!--DIRIGIDO A-->
+                                @foreach ($programas as $programa)
+                                  @if ($programa->id == $radicado->sendTo_id)
+                                  <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $programa->name}}</td>
+                                  @endif
+                                @endforeach 
+                                <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->motivo->name}}</td>
+                                <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->asunto}}</td>
+                                <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_correo}}</td>
+                                <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_cel}}</td>
+                                <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->respuesta}}</td>
+                                <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->user->name}}</td>
+                                <!--REVISADO POR-->
+                                @if (!$radicado->respuesta)
+                                <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;"> |</td>
+                                @else
+                                    @foreach ($users as $user)
+                                        @if ($user->id == $radicado->respon_id)
+                                            <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $user->name}}</td>
+                                        @endif
+                                    @endforeach
                                 @endif
-                            @endforeach
+
+                                <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
+                                <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
+                                <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
+                            </tr>
                         @endif
-                        
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
-                    </tr>
+                    @else
+                        <tr>
+                                <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->fechradic_id}}-{{ $radicado->year}}</td>
+                                <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->last_name}}</td>
+                                <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->program->name}}</td>
+                                <!--DIRIGIDO A-->
+                                @foreach ($programas as $programa)
+                                  @if ($programa->id == $radicado->sendTo_id)
+                                  <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $programa->name}}</td>
+                                  @endif
+                                @endforeach 
+                                <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->motivo->name}}</td>
+                                <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->asunto}}</td>
+                                <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_correo}}</td>
+                                <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_cel}}</td>
+                                <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->respuesta}}</td>
+                                <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->user->name}}</td>
+                                <!--REVISADO POR-->
+                                @if (!$radicado->respuesta)
+                                <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;"> |</td>
+                                @else
+                                    @foreach ($users as $user)
+                                        @if ($user->id == $radicado->respon_id)
+                                            <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $user->name}}</td>
+                                        @endif
+                                    @endforeach
+                                @endif
+
+                                <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto;">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
+                                <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto;">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
+                                <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto;">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
+                        </tr>
+                    @endif
                 @endif
-            @else
-                <tr>
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->fechradic_id}}-{{ $radicado->year}}</td>
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->last_name}}</td>
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->program->name}}</td>
-                        <!--DIRIGIDO A-->
-                        @foreach ($programas as $programa)
-                          @if ($programa->id == $radicado->sendTo_id)
-                          <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $programa->name}}</td>
-                          @endif
-                        @endforeach 
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->motivo->name}}</td>
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->asunto}}</td>
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_correo}}</td>
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_cel}}</td>
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->respuesta}}</td>
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->user->name}}</td>
-                        <!--REVISADO POR-->
-                        @if (!$radicado->respuesta)
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;"> |</td>
-                        @else
-                            @foreach ($users as $user)
-                                @if ($user->id == $radicado->respon_id)
-                                    <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $user->name}}</td>
-                                @endif
-                            @endforeach
-                        @endif
-                        
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto;">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto;">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px; text-justify: auto;">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
-                </tr>
             @endif
-        @endif
         @endforeach
         </tbody>
 </table>

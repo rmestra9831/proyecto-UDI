@@ -69,7 +69,14 @@
                       <!-- Select del sector academico -->
                       <div class="list_ac">                                     
                         @foreach ($motivos as $motivo)
-                          <option  class="" id="motivo_select_op" value="{{$motivo->id}}" vtypemotivo="{{$motivo->type_motivo}}" vname="{{$motivo->name}}">{{$motivo->name}}</option>
+                          @if ($motivo->type_motivo != 3)
+                            <option  class="" id="motivo_select_op" value="{{$motivo->id}}" vtypemotivo="{{$motivo->type_motivo}}" vname="{{$motivo->name}}">{{$motivo->name}}</option>
+                          @endif
+                        @endforeach
+                        @foreach ($motivos as $motivo)
+                          @if ($motivo->type_motivo == 3)
+                            <option  class="" id="motivo_select_op" value="{{$motivo->id}}" vtypemotivo="{{$motivo->type_motivo}}" vname="{{$motivo->name}}">{{$motivo->name}}</option>
+                          @endif
                         @endforeach
                       </div>
                   </select>

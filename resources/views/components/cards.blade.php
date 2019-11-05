@@ -79,7 +79,7 @@
           <div class="col"><strong class="card-text">Respondido por:
             <p class="card-text-var">
               @if (!$radicado->respuesta)
-                sin responder
+                sin respuesta
               @else
                 @foreach ($users as $user)
                     @if ($user->id == $radicado->respon_id)

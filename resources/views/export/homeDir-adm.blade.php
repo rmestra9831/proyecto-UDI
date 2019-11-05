@@ -107,109 +107,111 @@
                 </thead>
                 <tbody>
                     @foreach($r_by_all_dir as $radicado)
-                    @if($radicado->fech_send_dir != null)    
-                        @if ($radicado->fech_recive_dir != null)
-                            @if ($radicado->fech_recive_dir != null &&  $radicado->fech_recive_radic != null )
-                                <tr class="bg-success">
-                                    <th class="text-truncate">{{ $radicado->fechradic_id}}-{{ $radicado->year}}</th>
-                                    <td class="text-truncate">{{ $radicado->name}}</td>
-                                    <td class="text-truncate">{{ $radicado->last_name}}</td>
-                                    <td>{{ $radicado->program->name}}</td>
-                                    <!--DIRIGIDO A-->
-                                    @foreach ($programas as $programa)
-                                      @if ($programa->id == $radicado->sendTo_id)
-                                      <td>{{ $programa->name}}</td>
-                                      @endif
-                                    @endforeach 
-                                    <td class="text-truncate">{{ $radicado->motivo->name}}</td>
-                                    <td class="text-truncate">{{ $radicado->asunto}}</td>
-                                    <td>{{ $radicado->origen_correo}}</td>
-                                    <td class="text-truncate">{{ $radicado->origen_cel}}</td>
-                                    <td class="text-truncate">{{ $radicado->respuesta}}</td>
-                                    <td>{{ $radicado->user->name}}</td>
-                                    <!--REVISADO POR-->
-                                    @if (!$radicado->respuesta)
-                                    <td> |</td>
+                        @if ($radicado->sede == Auth::user()->sede)
+                            @if($radicado->fech_send_dir != null)    
+                                @if ($radicado->fech_recive_dir != null)
+                                    @if ($radicado->fech_recive_dir != null &&  $radicado->fech_recive_radic != null )
+                                        <tr class="bg-success">
+                                            <th class="text-truncate">{{ $radicado->fechradic_id}}-{{ $radicado->year}}</th>
+                                            <td class="text-truncate">{{ $radicado->name}}</td>
+                                            <td class="text-truncate">{{ $radicado->last_name}}</td>
+                                            <td>{{ $radicado->program->name}}</td>
+                                            <!--DIRIGIDO A-->
+                                            @foreach ($programas as $programa)
+                                              @if ($programa->id == $radicado->sendTo_id)
+                                              <td>{{ $programa->name}}</td>
+                                              @endif
+                                            @endforeach 
+                                            <td class="text-truncate">{{ $radicado->motivo->name}}</td>
+                                            <td class="text-truncate">{{ $radicado->asunto}}</td>
+                                            <td>{{ $radicado->origen_correo}}</td>
+                                            <td class="text-truncate">{{ $radicado->origen_cel}}</td>
+                                            <td class="text-truncate">{{ $radicado->respuesta}}</td>
+                                            <td>{{ $radicado->user->name}}</td>
+                                            <!--REVISADO POR-->
+                                            @if (!$radicado->respuesta)
+                                            <td> |</td>
+                                            @else
+                                                @foreach ($users as $user)
+                                                    @if ($user->id == $radicado->respon_id)
+                                                        <td>{{ $user->name}}</td>
+                                                    @endif
+                                                @endforeach
+                                            @endif                      
+                                            <td class="text-truncate">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
+                                            <td class="text-truncate">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
+                                            <td class="text-truncate">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
+                                        </tr>  
                                     @else
-                                        @foreach ($users as $user)
-                                            @if ($user->id == $radicado->respon_id)
-                                                <td>{{ $user->name}}</td>
+                                        <tr class="bg-light">
+                                            <th class="text-truncate">{{ $radicado->fechradic_id}}-{{ $radicado->year}}</th>
+                                            <td class="text-truncate">{{ $radicado->name}}</td>
+                                            <td class="text-truncate">{{ $radicado->last_name}}</td>
+                                            <td>{{ $radicado->program->name}}</td>
+                                            <!--DIRIGIDO A-->
+                                            @foreach ($programas as $programa)
+                                              @if ($programa->id == $radicado->sendTo_id)
+                                              <td>{{ $programa->name}}</td>
+                                              @endif
+                                            @endforeach 
+                                            <td class="text-truncate">{{ $radicado->motivo->name}}</td>
+                                            <td class="text-truncate">{{ $radicado->asunto}}</td>
+                                            <td>{{ $radicado->origen_correo}}</td>
+                                            <td class="text-truncate">{{ $radicado->origen_cel}}</td>
+                                            <td class="text-truncate">{{ $radicado->respuesta}}</td>
+                                            <td>{{ $radicado->user->name}}</td>
+                                            <!--REVISADO POR-->
+                                            @if (!$radicado->respuesta)
+                                            <td> |</td>
+                                            @else
+                                                @foreach ($users as $user)
+                                                    @if ($user->id == $radicado->respon_id)
+                                                        <td>{{ $user->name}}</td>
+                                                    @endif
+                                                @endforeach
                                             @endif
-                                        @endforeach
-                                    @endif                      
-                                    <td class="text-truncate">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
-                                    <td class="text-truncate">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
-                                    <td class="text-truncate">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
-                                </tr>  
-                            @else
-                                <tr class="bg-light">
-                                    <th class="text-truncate">{{ $radicado->fechradic_id}}-{{ $radicado->year}}</th>
-                                    <td class="text-truncate">{{ $radicado->name}}</td>
-                                    <td class="text-truncate">{{ $radicado->last_name}}</td>
-                                    <td>{{ $radicado->program->name}}</td>
-                                    <!--DIRIGIDO A-->
-                                    @foreach ($programas as $programa)
-                                      @if ($programa->id == $radicado->sendTo_id)
-                                      <td>{{ $programa->name}}</td>
-                                      @endif
-                                    @endforeach 
-                                    <td class="text-truncate">{{ $radicado->motivo->name}}</td>
-                                    <td class="text-truncate">{{ $radicado->asunto}}</td>
-                                    <td>{{ $radicado->origen_correo}}</td>
-                                    <td class="text-truncate">{{ $radicado->origen_cel}}</td>
-                                    <td class="text-truncate">{{ $radicado->respuesta}}</td>
-                                    <td>{{ $radicado->user->name}}</td>
-                                    <!--REVISADO POR-->
-                                    @if (!$radicado->respuesta)
-                                    <td> |</td>
-                                    @else
-                                        @foreach ($users as $user)
-                                            @if ($user->id == $radicado->respon_id)
-                                                <td>{{ $user->name}}</td>
-                                            @endif
-                                        @endforeach
+
+                                            <td class="text-truncate">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
+                                            <td class="text-truncate">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
+                                            <td class="text-truncate">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
+                                        </tr>
                                     @endif
-                                    
-                                    <td class="text-truncate">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
-                                    <td class="text-truncate">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
-                                    <td class="text-truncate">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
-                                </tr>
+                                @else
+                                    <tr class="bg-warning ">
+                                            <th class="text-truncate">{{ $radicado->fechradic_id}}-{{ $radicado->year}}</th>
+                                            <td class="text-truncate">{{ $radicado->name}}</td>
+                                            <td class="text-truncate">{{ $radicado->last_name}}</td>
+                                            <td>{{ $radicado->program->name}}</td>
+                                            <!--DIRIGIDO A-->
+                                            @foreach ($programas as $programa)
+                                              @if ($programa->id == $radicado->sendTo_id)
+                                              <td>{{ $programa->name}}</td>
+                                              @endif
+                                            @endforeach 
+                                            <td class="text-truncate">{{ $radicado->motivo->name}}</td>
+                                            <td class="text-truncate">{{ $radicado->asunto}}</td>
+                                            <td>{{ $radicado->origen_correo}}</td>
+                                            <td class="text-truncate">{{ $radicado->origen_cel}}</td>
+                                            <td class="text-truncate">{{ $radicado->respuesta}}</td>
+                                            <td>{{ $radicado->user->name}}</td>
+                                            <!--REVISADO POR-->
+                                            @if (!$radicado->respuesta)
+                                            <td> |</td>
+                                            @else
+                                                @foreach ($users as $user)
+                                                    @if ($user->id == $radicado->respon_id)
+                                                        <td>{{ $user->name}}</td>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+
+                                            <td class="text-truncate">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
+                                            <td class="text-truncate">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
+                                            <td class="text-truncate">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
+                                    </tr>
+                                @endif
                             @endif
-                        @else
-                            <tr class="bg-warning ">
-                                    <th class="text-truncate">{{ $radicado->fechradic_id}}-{{ $radicado->year}}</th>
-                                    <td class="text-truncate">{{ $radicado->name}}</td>
-                                    <td class="text-truncate">{{ $radicado->last_name}}</td>
-                                    <td>{{ $radicado->program->name}}</td>
-                                    <!--DIRIGIDO A-->
-                                    @foreach ($programas as $programa)
-                                      @if ($programa->id == $radicado->sendTo_id)
-                                      <td>{{ $programa->name}}</td>
-                                      @endif
-                                    @endforeach 
-                                    <td class="text-truncate">{{ $radicado->motivo->name}}</td>
-                                    <td class="text-truncate">{{ $radicado->asunto}}</td>
-                                    <td>{{ $radicado->origen_correo}}</td>
-                                    <td class="text-truncate">{{ $radicado->origen_cel}}</td>
-                                    <td class="text-truncate">{{ $radicado->respuesta}}</td>
-                                    <td>{{ $radicado->user->name}}</td>
-                                    <!--REVISADO POR-->
-                                    @if (!$radicado->respuesta)
-                                    <td> |</td>
-                                    @else
-                                        @foreach ($users as $user)
-                                            @if ($user->id == $radicado->respon_id)
-                                                <td>{{ $user->name}}</td>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                    
-                                    <td class="text-truncate">{{ $radicado->fech_start_radic}} | {{$radicado->time_start_radic}}</td>
-                                    <td class="text-truncate">{{ $radicado->fech_recive_dir}} | {{$radicado->time_recive_dir}}</td>
-                                    <td class="text-truncate">{{ $radicado->fech_recive_radic}} | {{$radicado->time_recive_radic}}</td>
-                            </tr>
                         @endif
-                    @endif
                     @endforeach
                 </tbody>
             </table> 

@@ -11,7 +11,7 @@ class ProgramSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('programs')->insert(['name'=>'direccíon','correo_director'=>'direccion@maxmail.in']);
+        DB::table('programs')->insert(['name'=>'direccíon','correo_director'=>'direccion.bca@zohomail.com']);
         DB::table('programs')->insert(['name'=>'industrial','correo_director'=>'industrial@maxmail.in']);
         DB::table('programs')->insert(['name'=>'administración','correo_director'=>'administración@maxmail.in']);
         DB::table('programs')->insert(['name'=>'psicologia','correo_director'=>'psicologia@maxmail.in']);

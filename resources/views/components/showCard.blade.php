@@ -77,7 +77,7 @@
             <div class="col"><strong class="card-text">Respondido por:
               <p class="card-text-var">
                 @if (!$radicado->respuesta)
-                  sin responder
+                  sin respuesta
                 @else
                   @foreach ($users as $user)
                       @if ($user->id == $radicado->respon_id)
@@ -102,7 +102,7 @@
         <div class="col-6">
           <div class="form-group">
             <label class="card-text" for="my-textarea">respuesta:</label>
-            <textarea id="my-textarea" style="overflow:hidden; resize:none" class="form-control" name="" rows="2"<?php if(Auth::user()->type_user == 3){?>placeholder="Escribe aquí tu respuesta" <?php }else{ ?>disabled placeholder="N/a"<?php } ?>><?php if($radicado->fech_recive_radic != ''){ ?>{{$radicado->respuesta}}<?php }?></textarea>
+            <textarea id="my-textarea" style="overflow:hidden; resize:none" class="form-control" name="" rows="2"<?php if(Auth::user()->type_user == 3){?>placeholder="Escribe aquí tu respuesta" <?php }else if($radicado->delegate_id != Auth::user()->program_id || Auth::user()->type_user == 2){ ?>disabled placeholder="N/a"<?php } ?>><?php if($radicado->fech_recive_radic != ''){ ?>{{$radicado->respuesta}}<?php }?></textarea>
             <!--mostrando cuando se edito la respuesta-->
             @if ($radicado->fech_recive_radic != null)
               @if ($radicado->editAdmRequest != null)

@@ -26,6 +26,7 @@
     "dependencies": {
         "@material/textfield": "^1.1.1",
         "bootstrap-vue": "^2.0.0-rc.28",
-        "material-components-web": "^3.1.1"
+        "material-components-web": "^3.1.1",
+        "ngrok": "^3.2.5"
     }
 }

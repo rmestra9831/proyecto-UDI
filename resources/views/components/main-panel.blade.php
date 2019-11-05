@@ -59,7 +59,7 @@
               @if (Auth::user()->type_user == 4)
                 <a href="{{route('dirprog.index')}}"><i class="fas fa-chevron-right"></i>inicio</a>
                 <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>
-                <a href="{{route('filter.viewSearchRadicDir')}}"><i class="fas fa-chevron-right"></i>estado de radicados</a>  
+                <a href="{{route('filter.viewSearchRadicDir_prog')}}"><i class="fas fa-chevron-right"></i>estado de radicados</a>  
               @else
                 @if (Auth::user()->superAdmin == 1)
                   <a href="{{route('superAdm.index')}}"><i class="fas fa-chevron-right"></i>Inicio</a>
@@ -79,6 +79,7 @@
               @endif
             @endif
       @endif
+      
     </div>
 </div>
 <!-- Piecera -->

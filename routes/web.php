@@ -91,6 +91,7 @@ Route::put('aprovar/{status}','EstadoController@aprovado')->middleware('auth')->
 //rutas de filtrado
 Route::get('filterStatus', 'FilterController@viewSearchRadic')->middleware('auth')->name('filter.viewSearchRadic');
 Route::get('filterStatus_dir', 'FilterController@viewSearchRadicDir')->middleware('auth')->name('filter.viewSearchRadicDir');
+Route::get('filterStatus_dir_prog', 'FilterController@viewSearchRadicDir_prog')->middleware('auth')->name('filter.viewSearchRadicDir_prog');
 Route::get('filterStatus_adm', 'FilterController@viewSearchRadicAdm')->middleware('auth')->name('filter.viewSearchRadicAdm');
 Route::get('filter_all_radic', 'FilterController@viewAllRadic')->middleware('auth')->name('filter.viewAllRadic');
 

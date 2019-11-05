@@ -1,41 +1,40 @@
-@if (Auth::user()->type_user == 2)
+@if (Auth::user()->type_user == 2 && $radicado->sede == Auth::user()->sede )
         <table>
             <thead>
-            <tr>
-                <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
-                ">NUMERO DE RADICADO</th>
-                <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
-                ">NOMBRES</th>
-                <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
-                ">APELLIDOS</th>
-                <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
-                ">PROGRAMA</th>
-                <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
-                ">DIRIGIDO A</th>
-                <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
-                ">MOTIVO</th>
-                <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
-                ">ASUNTO</th>
-                <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
-                ">CORREO</th>
-                <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
-                ">CELULAR</th>
-                <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
-                ">RESPUESTA</th>
-                <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
-                ">CREADO POR</th>
-                <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
-                ">RESPONDIDO POR</th>
-                <th style="background-color: #ffe710;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 40px;border: 2px solid black;font-weight: 800;
-                ">FECHA DE CREACIÓN</th>
-                <th style="background-color: #ffe710;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 40px;border: 2px solid black;font-weight: 800;
-                ">FECHA ENVIADO A DIRECCIÓN</th>
-                <th style="background-color: #00d3ea;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 40px;border: 2px solid black;font-weight: 800;
-                ">RECIBIDO DE DIRECCIÓN</th>
-                <th style="background-color: ##183bff;color: #ffffff;font-size: 15px;text-align: center;height: 25px;width: 40px;border: 2px solid black;font-weight: 800;
-                ">ENTREGADO FINAL</th>
-                
-            </tr>
+                <tr>
+                    <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
+                    ">NUMERO DE RADICADO</th>
+                    <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
+                    ">NOMBRES</th>
+                    <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
+                    ">APELLIDOS</th>
+                    <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
+                    ">PROGRAMA</th>
+                    <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
+                    ">DIRIGIDO A</th>
+                    <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
+                    ">MOTIVO</th>
+                    <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
+                    ">ASUNTO</th>
+                    <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
+                    ">CORREO</th>
+                    <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
+                    ">CELULAR</th>
+                    <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
+                    ">RESPUESTA</th>
+                    <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
+                    ">CREADO POR</th>
+                    <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
+                    ">RESPONDIDO POR</th>
+                    <th style="background-color: #ffe710;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 40px;border: 2px solid black;font-weight: 800;
+                    ">FECHA DE CREACIÓN</th>
+                    <th style="background-color: #ffe710;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 40px;border: 2px solid black;font-weight: 800;
+                    ">FECHA ENVIADO A DIRECCIÓN</th>
+                    <th style="background-color: #00d3ea;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 40px;border: 2px solid black;font-weight: 800;
+                    ">RECIBIDO DE DIRECCIÓN</th>
+                    <th style="background-color: ##183bff;color: #ffffff;font-size: 15px;text-align: center;height: 25px;width: 40px;border: 2px solid black;font-weight: 800;
+                    ">ENTREGADO FINAL</th>      
+                </tr>
             </thead>
         
             <tbody>
@@ -151,7 +150,7 @@
             </tbody>
         </table>
 @else
-    @if (Auth::user()->type_user == 3)
+    @if (Auth::user()->type_user == 3 && $radicado->sede == Auth::user()->sede)
     <table>
         <thead>
         <tr>

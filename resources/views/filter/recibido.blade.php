@@ -25,13 +25,29 @@
                 <button class="btn btn-primary text-capitalize" type="submit">recibir</button>
               </form>
             </div>
-            @include('components.cards')
+              @include('components.cards')
           </div>
   
         @endif
       @endforeach
     @else
       <div class="content-card" style="width: 50%"><h4 style="margin: 0; text-align: center">No se encontraron recibidos</h4></div>
+    @endif
+  
+  @else
+    @if (Auth::user()->type_user == 4)
+    
+      @if (count($query_recive_dir) > 0)
+          @foreach ($query_recive_dir as $radicado)
+            <div  class="col-11 content-card">
+              @include('components.cards')
+            </div>
+          @endforeach
+      
+      @else
+        <div class="content-card" style="width: 50%"><h4 style="margin: 0; text-align: center">No se encontraron recibidos</h4></div>
+      @endif
+
     @endif
   @endif
 @endif

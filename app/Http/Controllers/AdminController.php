@@ -129,7 +129,6 @@ class AdminController extends Controller
         $programas= Program::where('sede',Auth::user()->sede)->get();
         $roles = $this->roles;
         $radic = $admin;
-
         return view('admin.showradics', compact('radicados','radic','programas','users', 'roles'));
 
     }
