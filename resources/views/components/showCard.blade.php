@@ -111,6 +111,10 @@
             @endif
           </div>
         </div>
+        {{-- aqui muestra la hora en la que fue aprobado la respuesta --}}
+        @if ($radicado->aproved != null)
+          <h5 class="card-title text-center" style="margin:2% auto">Fecha de  aprobación: {{$radicado->fech_aprovado}} </h5>
+        @endif
       @else
         @if (Auth::user()->type_user == 3)
           @if (Auth::user()->superAdmin == 1)
@@ -186,7 +190,7 @@
                         <select name="delegate_id" id="" class="form-control form-control-md @error('program_id') is-invalid @enderror">
                           <option class="text-capitalize" value="{{ old('program_id') }}">Asignar Respuesta</option>                      
                           @foreach ($programas as $programa)
-                          <option class="" value="{{$programa->id}}">dirección de {{$programa->name}}</option>
+                          <option class="" value="{{$programa->id}}">Dirección de {{$programa->name}}</option>
                           @endforeach
                         </select>
                       </div>
@@ -247,7 +251,6 @@
           @endif
 
           {{-- valida se esta aprovada la respuesta --}}
-          @if ($radicado->revisar)
             @if ($radicado->respuesta!= null && !$radicado->aproved)
               <div class="col-12 align-content-center">
                 <div class="container card col-8">
@@ -265,16 +268,17 @@
                             @if ($radicado->aproved == 1)
                               <div class="row">
                                     <h5 class="card-title text-center" style="margin:auto">Fecha de  aprobación: {{$radicado->fech_aprovado}} </h5>
-                                    <div class="col">
-                                      <button class="btn btn-secondary mr-2 ml-2" type="submit">Generar PDF</button>
-                                    </div>
+                                    @if (Auth::user()->type_user == 4)
+                                      <div class="col">
+                                        <button class="btn btn-secondary mr-2 ml-2" type="submit">Generar PDF</button>
+                                      </div>                                      
+                                    @endif
                               </div>
                             @endif
                         </form>
                   </div>
               </div>
             @endif   
-          @endif
 
         @else
           @if (Auth::user()->type_user == 4)
@@ -381,7 +385,7 @@
                 <select name="delegate_id" id="" class="form-control form-control-md @error('program_id') is-invalid @enderror">
                   <option class="text-capitalize" value="{{ old('program_id') }}">Asignar Respuesta</option>                      
                   @foreach ($programas as $programa)
-                  <option class="" value="{{$programa->id}}">dirección de {{$programa->name}}</option>
+                  <option class="" value="{{$programa->id}}">Dirección de {{$programa->name}}</option>
                   @endforeach
                 </select>
               </div>
@@ -399,6 +403,7 @@
             </div>
           </div>
         @else
+        
         <!-- boton para editar la respuesta-->
           <form method="POST" action="{{action('AdminController@saveRequest', $radicado->slug)}}">
               @method('PUT')
@@ -437,6 +442,9 @@
         @endif
       @endif
     </div>
+    @if ($radicado->aproved != null)
+      <h5 class="card-title text-center" style="margin:2% auto">Fecha de  aprobación: {{$radicado->fech_aprovado}} </h5>
+    @endif
     <hr>
   @endif
   <!--tabla de fechas -->

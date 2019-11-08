@@ -228,6 +228,12 @@ class FilterController extends Controller
             ->numradic($fechradic_id)
             ->motivo($motivo)
             ->programa($programa)->get();#->paginate(1)
+        //filtrdo de corregir           -- PENDIENTE POR CORREGIR 
+            $query_corregir_dir = Radicado::orderBy('id', 'DESC')->where([
+            ['delegate_id',Auth::user()->program_id],
+            ['revisar',true],
+            //['respuesta',null], 
+            ['fech_recive_radic',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de recibidos            
             $query_recive_dir = Radicado::orderBy('id', 'DESC')->where([
                 ['fech_recive_dir',null],
@@ -241,20 +247,25 @@ class FilterController extends Controller
                 ['fech_recive_radic','!=',' ']])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de pendientes           
             $query_pendiente_dir = Radicado::orderBy('id', 'DESC')->where([
-                ['fech_recive_dir','!=',' '],
-                //['respuesta',null], 
-                ['fech_recive_radic',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
-        //filtrdo de importantes           
+                ['delegate_id','=', null],
+                ['respuesta',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
+        //filtrdo de importantes          
             $query_important_dir = Radicado::orderBy('id', 'DESC')->where([
                 ['atention','=','urgente '],])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
-            
+        //filtrdo de aprovados    -- PENDIENTE POR CORREGIR     
+                $query_aprovados_dir = Radicado::orderBy('id', 'DESC')->where([
+                ['atention','=','urgente '],])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
+        //filtrdo de editados     
+                $query_editado_dir = Radicado::orderBy('id', 'DESC')->where([
+                ['editAdmRequest','!=', null],])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
+    
           
                 return view('filter.search-radic-adm', compact(
+                    'query_corregir_dir',
                     'query_recive_dir',
-                    'query_response_dir',
-                    'query_entregado_dir',
                     'query_pendiente_dir',
-                    'query_important_dir',
+                    'query_aprovados_dir',
+                    'query_editado_dir',
                     'radicados',
                     'motivos',
                     'programas',

@@ -30,8 +30,9 @@ class AdminController extends Controller
         $users= User::where('sede',Auth::user()->sede)->get();
         $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
         $programas= $this->programas;
+        $radicados_recibidos = Radicado::where([['sede',Auth::user()->sede],['fech_send_dir','!=',null]])->orderBy('id', 'DESC')->get();
 
-        return view('admin.home', compact('radicados','programas','users'));
+        return view('admin.home', compact('radicados','programas','users','radicados_recibidos'));
     }
     //registart usuarios
     public function register(Request $request)
@@ -74,6 +75,7 @@ class AdminController extends Controller
         }
         $programa->name = $request->input('name');          
         $programa->correo_director = $request->input('correo_director');          
+        $programa->sede = Auth::user()->sede;          
         
         $programa->save();
 
@@ -119,7 +121,6 @@ class AdminController extends Controller
         $programas= Program::where('sede',Auth::user()->sede)->get();
         $roles = $this->roles;
         $radic = $admin;
-
         return view('admin.showprogram', compact('radicados','radic','programas','users', 'roles'));
 
     }

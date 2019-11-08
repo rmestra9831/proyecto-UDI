@@ -183,7 +183,6 @@ class RegctrolController extends Controller
         $users = $this->users;
         $programas = $this->programas;        
         $radicado = $reg_ctrol;
-    
         return view('regctrol.showRadic', compact('radicado','programas','users'));
     }
 

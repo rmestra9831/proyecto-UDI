@@ -18,7 +18,7 @@
                     <a href=" {{route('admin.showRadics')}} " class="col card desing-1">
                         <img src=" {{asset('img/radic-2.svg')}} " alt="">
                         <div class="h3">Radicados</div>
-                        <div class="p"> {{count($radicados)}} </div>
+                        <div class="p"> {{count($radicados_recibidos)}} </div>
                     </a>
 
                     <a href="{{route('admin.showUsers')}}" class="col card desing-1">
