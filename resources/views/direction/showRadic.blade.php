@@ -28,7 +28,7 @@
           <button class="btn btn-outline-secondary"disabled type="submit">Enviado a Registro y control</button>    
         @endif
         @endif
-        <a name="" id="" class="btn btn-primary" href=" {{route('direction.index')}} " role="button">Volver</a>
+        <a name="" id="" class="btn btn-primary" href=" <?=$_SERVER["HTTP_REFERER"]?>" role="button">Volver</a>
         @endsection
       </div>
   </div>

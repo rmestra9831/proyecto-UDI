@@ -86,7 +86,8 @@
                           @endif
                           @endif
                           <a btn-norm name="" id="" class="btn btn-secondary"
-                          @if (Auth::user()->type_user == 2)
+                          href="<?=$_SERVER["HTTP_REFERER"]?>"
+                          {{-- @if (Auth::user()->type_user == 2)
                             href="{{route('reg-ctrol.edit',$radicado->slug)}}"
                             @else
                               @if (Auth::user()->type_user == 3)
@@ -94,7 +95,7 @@
                               @else
                                     
                              @endif
-                          @endif
+                          @endif --}}
                           role="button">Volver</a>
                         </div>
                       </div>

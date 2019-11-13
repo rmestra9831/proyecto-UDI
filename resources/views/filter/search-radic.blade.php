@@ -5,13 +5,21 @@
   <div p1 class="row title-content">
       <h2 class="text-center text-capitalize title">Filtrado Por Estados</h2>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          <a class="col nav-item nav-link active" id="nav-normales-tab" data-toggle="tab" href="#nav-normales" role="tab" aria-controls="nav-contact" aria-selected="true">normales</a>
+          <a class="col nav-item nav-link active" id="nav-normales-tab" data-toggle="tab" href="#nav-normales" role="tab" aria-controls="nav-contact" aria-selected="true">Normales</a>
           <a class="col nav-item nav-link" id="nav-enviados-tab" data-toggle="tab" href="#nav-enviados" role="tab" aria-controls="nav-enviados" aria-selected="false">Enviados</a>
           <a class="col nav-item nav-link" id="nav-recivido-tab" data-toggle="tab" href="#nav-recivido" role="tab" aria-controls="nav-recivido" aria-selected="false">Recibido</a>
           <a class="col nav-item nav-link" id="nav-respondido-tab" data-toggle="tab" href="#nav-respondido" role="tab" aria-controls="nav-respondido" aria-selected="false">Respondido</a>
           <a class="col nav-item nav-link" id="nav-respondido-tab" data-toggle="tab" href="#nav-reciverg" role="tab" aria-controls="nav-reciverg" aria-selected="false">Recibido RG</a>
           <a class="col nav-item nav-link" id="nav-entregados-tab" data-toggle="tab" href="#nav-entregados" role="tab" aria-controls="nav-entregados" aria-selected="false">Entregados</a>
-          <a class="col nav-item nav-link" id="nav-pendientes-tab" data-toggle="tab" href="#nav-pendientes" role="tab" aria-controls="nav-pendientes" aria-selected="false">Pendientes</a>
+          <a class="col nav-item nav-link" id="nav-pendientes-tab" data-toggle="tab" href="#nav-pendientes" role="tab" aria-controls="nav-pendientes" aria-selected="false">Pendientes
+            {{-- muestra la notificación si hay radicados --}}
+              <?php
+                $radic = DB::table('radicados')->where([['fech_recive_radic','!=',' '],['fech_delivered',null]])->get();
+                if (count($radic)!=0) {
+                  ?>  <span class="badge badge-secondary"> {{count($radic)}} </span> <?php
+                }
+              ?>
+          </a>
           <a class="col nav-item nav-link" id="nav-importantes-tab" data-toggle="tab" href="#nav-importantes" role="tab" aria-controls="nav-importantes" aria-selected="false">Importantes</a>
         </div>
       </nav>

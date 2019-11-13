@@ -17,15 +17,23 @@
           </a>
           <a class="col nav-item nav-link" id="nav-revisar-tab" data-toggle="tab" href="#nav-revisar" role="tab" aria-controls="nav-revisar" aria-selected="false">Revisar
             <!-- {{-- muestra la notificación si hay radicados por revisar --}} -->
-            <?php
-              $radic_revisar = DB::table('radicados')->where('revisar',true)->get();
-              if (count($radic_revisar)!=0) {
-                ?> <span class="badge badge-secondary"> {{count($radic_revisar)}} </span> <?php
-              }
-            ?>
+              <?php
+                $radic_revisar = DB::table('radicados')->where('revisar',true)->get();
+                if (count($radic_revisar)!=0) {
+                  ?> <span class="badge badge-secondary"> {{count($radic_revisar)}} </span> <?php
+                }
+              ?>
           </a>
           <a class="col nav-item nav-link" id="nav-respondido-tab" data-toggle="tab" href="#nav-respondido" role="tab" aria-controls="nav-respondido" aria-selected="false">Respondido</a>
-          <a class="col nav-item nav-link" id="nav-pendientes-tab" data-toggle="tab" href="#nav-pendientes" role="tab" aria-controls="nav-pendientes" aria-selected="false">Pendientes</a>
+          <a class="col nav-item nav-link" id="nav-pendientes-tab" data-toggle="tab" href="#nav-pendientes" role="tab" aria-controls="nav-pendientes" aria-selected="false">Pendientes
+            {{-- muestra la notificación si hay radicados --}}
+              <?php
+                $radic = DB::table('radicados')->where([['fech_recive_dir','!=',' '],['fech_recive_radic',null],['aproved',!false],['delegate_id',Auth::user()->program_id]])->get();
+                if (count($radic)!=0) {
+                  ?>  <span class="badge badge-secondary"> {{count($radic)}} </span> <?php
+                }
+              ?>
+          </a>
           <a class="col nav-item nav-link" id="nav-entregados-tab" data-toggle="tab" href="#nav-entregados" role="tab" aria-controls="nav-entregados" aria-selected="false">Entregados</a>
           <a class="col nav-item nav-link" id="nav-importantes-tab" data-toggle="tab" href="#nav-importantes" role="tab" aria-controls="nav-importantes" aria-selected="false">Importantes</a>
         </div>

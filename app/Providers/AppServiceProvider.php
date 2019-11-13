@@ -3,6 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Radicado;
+use App\Models\Program;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        
     }
 }

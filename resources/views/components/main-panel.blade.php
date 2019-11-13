@@ -49,21 +49,30 @@
         <a href="{{route('reg-ctrol.index')}}"><i class="fas fa-chevron-right"></i>Inicio</a>
         <a href="{{route('reg-ctrol.create')}}"><i class="fas fa-chevron-right"></i>nuevo radicado</a>
         <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>
-        <a href="{{route('filter.viewSearchRadic')}}"><i class="fas fa-chevron-right"></i>estado de radicados</a>
+        <a href="{{route('filter.viewSearchRadic')}}"><i class="fas fa-chevron-right"></i>estado de radicados
+          {{-- muestra la notificación si hay radicados --}}
+            <?php
+              $radic = DB::table('radicados')->where([['fech_recive_radic','!=',' '],['fech_delivered',null]])->get();
+              if (count($radic)) {
+                ?> <strong status="" data-toggle="tooltip" data-placement="top" title="Tooltip on top" aria-hidden="true" class="fas fa-circle status-recive-dir"></strong> <?php
+              }
+            ?>
+        </a>
           @else
-          @if (Auth::user()->type_user == 3)
-            <a href="{{route('direction.index')}}"><i class="fas fa-chevron-right"></i>inicio</a>
-            <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado Profile</a>
-            <a href="{{route('filter.viewSearchRadicDir')}}"><i class="fas fa-chevron-right"></i>estado de radicados
-              {{-- muestra la notificación si hay radicados por responder --}}
-              <?php
-                $radic_revisar = DB::table('radicados')->where('revisar',true)->get();
-                $radic = DB::table('radicados')->where([['respuesta',null],['delegate_id',Auth::user()->program_id]])->get();
-                if (count($radic)!=0 || count($radic_revisar) == true) {
-                  ?> <strong status="" data-toggle="tooltip" data-placement="top" title="Tooltip on top" aria-hidden="true" class="fas fa-circle status-recive-dir"></strong> <?php
-                }
-              ?>
-            </a>
+            @if (Auth::user()->type_user == 3)
+              <a href="{{route('direction.index')}}"><i class="fas fa-chevron-right"></i>inicio</a>
+              <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado Profile</a>
+              <a href="{{route('filter.viewSearchRadicDir')}}"><i class="fas fa-chevron-right"></i>estado de radicados
+                {{-- muestra la notificación si hay radicados por responder --}}
+                  <?php
+                    $radic_send_ar = DB::table('radicados')->where([['fech_recive_radic',!null],['fech_recive_radic',null],['delegate_id',Auth::user()->program_id]])->get();
+                    $radic_revisar = DB::table('radicados')->where('revisar',true)->get();
+                    $radic = DB::table('radicados')->where([['respuesta',null],['delegate_id',Auth::user()->program_id]])->get();
+                    if (count($radic)!=0 || count($radic_revisar) == true || count($radic_send_ar)) {
+                      ?> <strong status="" data-toggle="tooltip" data-placement="top" title="Tooltip on top" aria-hidden="true" class="fas fa-circle status-recive-dir"></strong> <?php
+                    }
+                  ?>
+              </a>
             @else
               @if (Auth::user()->type_user == 4)
                 <a href="{{route('dirprog.index')}}"><i class="fas fa-chevron-right"></i>inicio</a>
@@ -84,7 +93,15 @@
                 {{-- @endif --}}
                 
                 <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>   
-                <a href="{{route('filter.viewSearchRadicAdm')}}"><i class="fas fa-chevron-right"></i>estado de radicados</a>                  
+                <a href="{{route('filter.viewSearchRadicAdm')}}"><i class="fas fa-chevron-right"></i>estado de radicados
+                  {{-- muestra la notificación PENDIENTES EN ADMINISTRADOR --}}
+                    <?php
+                      $radic = DB::table('radicados')->where([['fech_send_dir',null],['fech_recive_dir',null]])->get();
+                      if (count($radic)!=0) {
+                        ?> <strong status="" data-toggle="tooltip" data-placement="top" title="Tooltip on top" aria-hidden="true" class="fas fa-circle status-recive-dir"></strong> <?php
+                      }
+                    ?>
+                </a>                  
               @endif
             @endif
       @endif

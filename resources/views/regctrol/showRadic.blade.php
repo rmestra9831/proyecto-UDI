@@ -31,14 +31,15 @@
 				@endif
 	  		@endif
 	  	@endif
-	  		<a btn-norm name="" id="" class="btn btn-secondary"
-			@if (Auth::user()->type_user == 2)
+			  <a btn-norm name="" id="" class="btn btn-secondary"
+			  href="<?=$_SERVER["HTTP_REFERER"]?>"
+			{{-- @if (Auth::user()->type_user == 2)
 				href="{{route('reg-ctrol.index')}}"
 	  		@else
 				@if (Auth::user()->type_user == 3)
 				  href="{{route('direction.index')}}"
 				@endif
-	  		@endif
+	  		@endif --}}
 	  	role="button">Volver</a>
 	</div>
 	
