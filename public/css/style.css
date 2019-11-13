@@ -180,6 +180,10 @@ hr {
   opacity: 1;
 }
 
+.menu-panel .p-item-list a strong {
+  color: lime;
+}
+
 .content-panel {
   background: white;
   position: relative;

@@ -107,6 +107,14 @@ class FilterController extends Controller
                 ['fech_recive_dir',null],
                 ['fech_notifi_end',null],
                 ['respuesta',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
+        //filtrdo para responder          
+            $query_responder_dir = Radicado::orderBy('id', 'DESC')->where([
+                ['delegate_id',Auth::user()->program_id],
+                ['respuesta',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
+        //filtrdo para revisar        
+            $query_revisar_dir = Radicado::orderBy('id', 'DESC')->where([
+                ['delegate_id',Auth::user()->program_id],
+                ['revisar',true]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de respondidos            
             $query_response_dir = Radicado::orderBy('id', 'DESC')->where([
                 ['respuesta','!=',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
@@ -121,11 +129,13 @@ class FilterController extends Controller
         //filtrdo de importantes           
             $query_important_dir = Radicado::orderBy('id', 'DESC')->where([
                 ['atention','=','urgente '],])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
-            
+            // dd($query_responder_dir);
           
                 return view('filter.search-radic-dir', compact(
                     'query_recive_dir',
                     'query_response_dir',
+                    'query_responder_dir',
+                    'query_revisar_dir',
                     'query_entregado_dir',
                     'query_pendiente_dir',
                     'query_important_dir',
@@ -160,7 +170,6 @@ class FilterController extends Controller
         //filtrdo de recibidos            
         $query_recive_dir = Radicado::orderBy('id', 'DESC')->where([
             ['delegate_id',Auth::user()->program_id],
-
             ['respuesta',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de respondidos            
         $query_response_dir_prog = Radicado::orderBy('id', 'DESC')->where([

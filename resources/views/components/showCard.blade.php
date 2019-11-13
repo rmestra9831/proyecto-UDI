@@ -251,7 +251,7 @@
           @endif
 
           {{-- valida se esta aprovada la respuesta --}}
-            @if ($radicado->respuesta!= null && !$radicado->aproved)
+            @if ($radicado->revisar!= true && !$radicado->aproved )
               <div class="col-12 align-content-center">
                 <div class="container card col-8">
                   <div class="card-body">

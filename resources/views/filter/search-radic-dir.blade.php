@@ -6,6 +6,24 @@
       <h2 class="text-center text-capitalize title">Filtrado Por Estados</h2>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
           <a class="col nav-item nav-link active" id="nav-recivido-tab" data-toggle="tab" href="#nav-recivido" role="tab" aria-controls="nav-recivido" aria-selected="false">Recibido</a>
+          <a class="col nav-item nav-link" id="nav-responder-tab" data-toggle="tab" href="#nav-responder" role="tab" aria-controls="nav-respodner" aria-selected="false">Responder
+            <!-- {{-- muestra la notificación si hay radicados por responder --}} -->
+            <?php
+              $radic = DB::table('radicados')->where([['respuesta',null],['delegate_id',Auth::user()->program_id]])->get();
+              if (count($radic)!=0) {
+                ?> <span class="badge badge-primary"> {{count($radic)}} </span> <?php
+              }
+            ?>
+          </a>
+          <a class="col nav-item nav-link" id="nav-revisar-tab" data-toggle="tab" href="#nav-revisar" role="tab" aria-controls="nav-revisar" aria-selected="false">Revisar
+            <!-- {{-- muestra la notificación si hay radicados por revisar --}} -->
+            <?php
+              $radic_revisar = DB::table('radicados')->where('revisar',true)->get();
+              if (count($radic_revisar)!=0) {
+                ?> <span class="badge badge-secondary"> {{count($radic_revisar)}} </span> <?php
+              }
+            ?>
+          </a>
           <a class="col nav-item nav-link" id="nav-respondido-tab" data-toggle="tab" href="#nav-respondido" role="tab" aria-controls="nav-respondido" aria-selected="false">Respondido</a>
           <a class="col nav-item nav-link" id="nav-pendientes-tab" data-toggle="tab" href="#nav-pendientes" role="tab" aria-controls="nav-pendientes" aria-selected="false">Pendientes</a>
           <a class="col nav-item nav-link" id="nav-entregados-tab" data-toggle="tab" href="#nav-entregados" role="tab" aria-controls="nav-entregados" aria-selected="false">Entregados</a>
@@ -23,6 +41,8 @@
     
       <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-recivido" role="tabpanel" aria-labelledby="nav-recivido-tab">@include('filter.recibido')</div>
+        <div class="tab-pane fade" id="nav-responder" role="tabpanel" aria-labelledby="nav-responder-tab">@include('filter.responder')</div>
+        <div class="tab-pane fade" id="nav-revisar" role="tabpanel" aria-labelledby="nav-revisar-tab">@include('filter.revisar')</div>
         <div class="tab-pane fade" id="nav-respondido" role="tabpanel" aria-labelledby="nav-respondido-tab">@include('filter.response')</div>
         <div class="tab-pane fade" id="nav-pendientes" role="tabpanel" aria-labelledby="nav-pendientes-tab">@include('filter.pendiente')</div>
         <div class="tab-pane fade" id="nav-entregados" role="tabpanel" aria-labelledby="nav-entregados-tab">@include('filter.entregado')</div>

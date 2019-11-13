@@ -1,6 +1,6 @@
 @if (count($query_reciverg)>0)
   @foreach ($query_reciverg as $radicado)
-  <div  class="col-11 content-card">
+    <div  class="col-11 content-card">
       @include('components.cards')
     </div>
   @endforeach

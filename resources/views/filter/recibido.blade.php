@@ -17,13 +17,15 @@
           <div  class="col-11 content-card">
             <div class="unrecive" id="{{$radicado->id}}" valid="{{$radicado->id}}">
               <!-- formulario para actualizar el estado de recivido direccion-->
-              <form action="{{route('status.update',$radicado->slug)}}" method="post">
-                 @method('PUT')
-                 @csrf
-                   <input  name="time_recive_dir" type="hidden" value="{{date("h:i:s A")}}">
-                   <input  name="fech_recive_dir" type="hidden" value="{{date("y/m/d")}}">
-                <button class="btn btn-primary text-capitalize" type="submit">recibir</button>
-              </form>
+              @if (Auth::user()->isAdmin != null)
+                <form action="{{route('status.update',$radicado->slug)}}" method="post">
+                  @method('PUT')
+                  @csrf
+                    <input  name="time_recive_dir" type="hidden" value="{{date("h:i:s A")}}">
+                    <input  name="fech_recive_dir" type="hidden" value="{{date("y/m/d")}}">
+                  <button class="btn btn-primary text-capitalize" type="submit">recibir</button>
+                </form>
+              @endif
             </div>
               @include('components.cards')
           </div>
