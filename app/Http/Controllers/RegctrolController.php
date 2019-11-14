@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRadicadoRequest;
+use App\Http\Requests\UploadPDF;
 use App\Models\Radicado;
 use App\Models\Program;
 use App\Models\Motivo;
@@ -208,11 +209,23 @@ class RegctrolController extends Controller
             'fech_delivered',
             'time_delivered'
         ));
-        $radicado->save();
-        return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('status','Radicado #'.$radicado->fechradic_id.'-'.$radicado->year.' enviado exitosamente');
+        if (!$radicado->filePDF) {
+            return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('error','No se encontró el documento PDF, por favor carguelo');
+        }else{
+            $radicado->save();
+            return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('status','Radicado #'.$radicado->fechradic_id.'-'.$radicado->year.' enviado exitosamente');
+        }
         //return 'Actualizado';
     }
+    // UPDATE ARCHIVO PDF
+    public function uploadPDF(UploadPDF $request, Radicado $reg_ctrol)
+    {
+        $radicado = $reg_ctrol;
 
+        $radicado->filePDF = $request->file('filePDF')->store('public');
+        $radicado->save();
+        return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('status','Archivo subido correctametne');
+    }
     public function updateMailEst(Request $request, Radicado $reg_ctrol){
         $radicado = $reg_ctrol;
 

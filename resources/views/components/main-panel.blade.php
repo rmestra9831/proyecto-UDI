@@ -96,7 +96,7 @@
                 <a href="{{route('filter.viewSearchRadicAdm')}}"><i class="fas fa-chevron-right"></i>estado de radicados
                   {{-- muestra la notificación PENDIENTES EN ADMINISTRADOR --}}
                     <?php
-                      $radic = DB::table('radicados')->where([['fech_send_dir',null],['fech_recive_dir',null]])->get();
+                      $radic = DB::table('radicados')->where([['fech_send_dir',!null],['fech_recive_dir',null]])->get();
                       if (count($radic)!=0) {
                         ?> <strong status="" data-toggle="tooltip" data-placement="top" title="Tooltip on top" aria-hidden="true" class="fas fa-circle status-recive-dir"></strong> <?php
                       }

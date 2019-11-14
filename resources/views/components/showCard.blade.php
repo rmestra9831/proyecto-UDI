@@ -8,6 +8,10 @@
   @endif
   <p>@include('components.stades')</p>
 </div>
+{{-- NOTIFICACIONES --}}
+@if ($errors->has('filePDF'))
+<p>@include('common.denegado')</p>
+@endif
   <!--cuerpo del card-->
   <div class="col-12 body-card">
     <div class="row">
@@ -47,18 +51,45 @@
     </div>
     <hr>
     <div class="row">
-          <!--prueba mostrar roles -->
-          <div class="col-4 text-right">
-            <div class="row">
-              <div class="col"><strong class="card-text">motivo:<p class="card-text-var text-truncate">{{$radicado->motivo->name}}</p></strong></div>
+      <!--prueba mostrar roles -->
+      <div class="col-4 text-right">
+        <div class="row">
+          <div class="col"><strong class="card-text">motivo:<p class="card-text-var text-truncate">{{$radicado->motivo->name}}</p></strong></div>
+        </div>
+      </div>
+
+      <div class="col-4 text-truncate">
+        <div class="row">
+          <div class="col"><strong class="card-text">asunto:<p class="card-text-var text-right">{{$radicado->asunto}}</p></strong></div>
+        </div>
+      </div>
+        {{-- seleccionar el archivo pdf --}}
+      <div class="col-4 text-truncate">
+        <div class="row custom-file">
+          @if (!$radicado->filePDF)
+            @if (Auth::user()->type_user == 2)
+              <form method="POST" action="{{action('RegctrolController@uploadPDF', $radicado->slug)}}" enctype="multipart/form-data">
+                @method('PUT') @csrf          
+                  <div class="row" style="margin-left: 5px">
+                    <div class="col-7">
+                      <input name="filePDF" type="file" class="custom-file-input @error('filePDF') is-invalid @enderror" id="customFileLang" lang="es">
+                      <label class="custom-file-label col-form-label col-form-label-sm text-truncate" for="customFileLang" data-browse="Cargar">Archivo</label>                    
+                    </div>
+                    <div class="col-1">
+                      <button class="btn btn-outline-success" type="submit"><i class="fas fa-cloud-upload-alt"></i> Cargar</button>
+                    </div>  
+                  </div>
+              </form>
+            @endif
+          @else
+            <div class="row text-center">
+              <div class="col-12">
+                <button class="btn btn-outline-success col-7" type="submit"><i class="fas fa-download"></i> Descargar radicado</button>
+              </div> 
             </div>
-          </div>
-    
-          <div class="col-8 text-truncate">
-            <div class="row">
-              <div class="col"><strong class="card-text">asunto:<p class="card-text-var text-right">{{$radicado->asunto}}</p></strong></div>
-            </div>
-          </div>
+          @endif
+        </div>
+      </div>
     </div>
     <hr>
     <div class="row">

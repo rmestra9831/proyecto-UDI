@@ -55,11 +55,28 @@
         </div>
       </div>
 
-      <div class="col-8 text-truncate">
+      <div class="col-4 text-truncate">
         <div class="row">
           <div class="col"><strong class="card-text">asunto:<p class="card-text-var text-right">{{$radicado->asunto}}</p></strong></div>
         </div>
       </div>
+
+        {{-- seleccionar el archivo pdf --}}
+        <div class="col-4 text-truncate">
+            <div class="row custom-file">
+              @if (!$radicado->filePDF)
+                @if (Auth::user()->type_user == 2)
+                  <div class="col"><strong class="card-text">Archivo:<p class="card-text-var text-right">Sin documento cargado</p></strong></div>
+                @endif
+              @else
+                <div class="row text-center">
+                  <div class="col-12">
+                    <button class="btn btn-outline-success col-7" type="submit"><i class="fas fa-download"></i> Descargar radicado</button>
+                  </div> 
+                </div>
+              @endif
+            </div>
+          </div>
     </div>
     <hr>
     <div class="row">

@@ -93,7 +93,11 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-//imports
+// INICIA LA ANIMACIÓN DEL CAMPO CARGAR
+$(document).ready(function () {
+  bsCustomFileInput.init();
+}); //imports
+
 window.setTimeout(function () {
   $(".alert").fadeTo(500, 0).slideUp(500, function () {
     $(this).remove();

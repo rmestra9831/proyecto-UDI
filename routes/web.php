@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth','userAR'], function () {
     Route::post('reg-ctrol/restart', 'RegctrolController@restarFechRadic')->name('reg-ctrol.restarFechRadic');
     Route::put('sme/{reg_ctrol}', 'RegctrolController@updateMailEst')->name('reg-ctrol.sme');
     Route::put('delivered/{reg_ctrol}', 'RegctrolController@updateDelivered')->name('reg-ctrol.updateDelivered');
+    Route::put('uploadPDF/{reg_ctrol}', 'RegctrolController@uploadPDF')->name('reg-ctrol.uploadPDF');
 });
 //rutas de direccion
 Route::group(['middleware' => 'auth','userDir'], function () {
@@ -105,5 +106,6 @@ Route::get('Export_all_Radic', 'ReportController@ExportAR')->middleware('auth')-
 Route::get('Export_for_motivo', 'ReportController@ExportMotivo')->middleware('auth')->name('Report.ExportMotivo');
 Route::get('Export_for_programa', 'ReportController@ExportPrograma')->middleware('auth')->name('Report.ExportPrograma');
 Route::get('Export_for_fecha', 'ReportController@ExportFecha')->middleware('auth')->name('Report.ExportFecha');
+Route::get('Download_archivo', 'ReportController@downloadArchivo')->middleware('auth')->name('Report.downloadArchivo');
 
 Auth::routes();

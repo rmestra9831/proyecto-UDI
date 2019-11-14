@@ -10,8 +10,9 @@
 <!--cuerpo delcontenido -->
 <div class="row justify-content-md-center">
     <div class="container">
+    @include('common.ErrorList')
 <hr>
-        <form class="needs-validation" action="{{route('reg-ctrol.store')}}" method="post" id="form-create">
+        <form class="needs-validation " action="{{route('reg-ctrol.store')}}" method="post" id="form-create">
           @csrf
           <div class="row">
             <!-- nombres y apellidos-->
@@ -19,7 +20,7 @@
                 <div class="row">
                   <div class="col-6 form-group" no-margin>
                     <label class="text-capitalize col-form-label-lg col-form-label" for="name">nombres</label>
-                    <input type="text"class="text-capitalize @error('name') is-invalid @enderror form-control form-control-lg" name="name" id="name" aria-describedby="helpId" placeholder="Jhon" value="{{old('name')}}">
+                    <input type="text"class="form-control text-capitalize @error('name') is-invalid @enderror  form-control-lg" name="name" id="name" aria-describedby="helpId" placeholder="Jhon" value="{{old('name')}}">
                   </div>
         
                   <div class="col-6 form-group" no-margin>
@@ -37,7 +38,7 @@
                           <select name="program_id" id="" class="form-control form-control-lg @error('program_id') is-invalid @enderror">
                             <option class="text-capitalize" value="{{ old('program_id') }}">Selección</option>                      
                             @foreach ($programas as $programa)
-                            <option class="" value="{{$programa->id}}">dirección de {{$programa->name}}</option>
+                            <option class="" value="{{$programa->id}} {{ old('program_id') }}">dirección de {{$programa->name}}</option>
                             @endforeach
                           </select>
                         </div>
@@ -55,7 +56,7 @@
                 <label class="text-capitalize col-form-label-lg col-form-label" for="asunto">Motivo</label>            
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <select name="type_motivo" id="type_motivo" class="@error('sendTo_id') is-invalid @enderror btn btn-lg btn-outline-secondary">
+                    <select name="type_motivo" id="type_motivo" class="@error('type_motivo') is-invalid @enderror btn btn-lg btn-outline-secondary">
                       <div class="dropdown-menu">
                         <option class="dropdown-item" value="">Tipo</option>                                          
                         <option class="dropdown-item" value="2">Academico</option>                                          
@@ -65,7 +66,7 @@
                   </div>
                   <!-- select de academico-->
                   <select name="motivo_id" id="motivo_select" class="form-control form-control-lg" disabled>
-                    <option class="" value="" vname="">Selección</option>    
+                    <option class="" value=" {{old('motivo_id')}} " vname="">Selección</option>    
                       <!-- Select del sector academico -->
                       <div class="list_ac">                                     
                         @foreach ($motivos as $motivo)
@@ -104,7 +105,7 @@
               
               <div class="col-6 form-group" no-margin>
                 <label class=" col-form-label-lg col-form-label" for="number_contacto">Número de Contacto</label>            
-                <input maxlength="14" type="text"class="text-capitalize form-control form-control-lg" name="origen_cel" id="number_contacto" aria-describedby="helpId" placeholder="(123) 456-7890">
+                <input maxlength="14" type="text"class="text-capitalize form-control form-control-lg @error('origen_cel') is-invalid @enderror" name="origen_cel" id="number_contacto" aria-describedby="helpId" placeholder="(123) 456-7890">
               </div>
     
               <div class="col-6 form-group" no-margin>

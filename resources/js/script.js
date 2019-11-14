@@ -1,3 +1,7 @@
+// INICIA LA ANIMACIÓN DEL CAMPO CARGAR
+$(document).ready(function () {
+  bsCustomFileInput.init()
+})
 //imports
   window.setTimeout(function () {
     $(".alert").fadeTo(500, 0).slideUp(500, function () {
@@ -29,6 +33,7 @@
     }
   });*/
   //formato del numero
+
   var backspacePressedLast = false;
 
 $(document).on('keydown', '#number_contacto', function(e) {

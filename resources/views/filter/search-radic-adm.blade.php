@@ -8,7 +8,7 @@
           <a class="col nav-item nav-link active" id="nav-pendiente-tab" data-toggle="tab" href="#nav-pendiente" role="tab" aria-controls="nav-pendiente" aria-selected="false">Pendiente
             {{-- muestra la notificación PENDIENTES EN ADMINISTRADOR --}}
               <?php
-                $radic = DB::table('radicados')->where([['fech_send_dir',null],['fech_recive_dir',null]])->get();
+                $radic = DB::table('radicados')->where([['fech_send_dir',!null],['fech_recive_dir',null]])->get();
                 if (count($radic)!=0) {
                   ?>  <span class="badge badge-secondary"> {{count($radic)}} </span> <?php
                 }

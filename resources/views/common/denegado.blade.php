@@ -16,4 +16,12 @@
     @endif
 @endif
 
+@if ($errors->has('filePDF'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error de Archivo</strong> {{$errors->first('filePDF')}}
+        <button type="button" class="close" data-dismiss="dangers" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
     

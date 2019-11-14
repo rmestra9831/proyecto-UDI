@@ -241,6 +241,9 @@ class ReportController extends Controller
         return $pdf->download('ejemplo.pdf');
     }
     
+    // DESCARGAR ARCHIVO DE RADICADO
+    public function downloadArchivo(Requiest $reg_ctrol){
+    }
 
 
 }

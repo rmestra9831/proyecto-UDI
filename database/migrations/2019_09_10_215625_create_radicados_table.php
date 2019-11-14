@@ -27,6 +27,7 @@ class CreateRadicadosTable extends Migration
             $table->integer('respon_id')->unsigned()->nullable();
             $table->integer('motivo_id')->unsigned()->nullable();
             $table->string('asunto')->nullable();
+            $table->string('filePDF')->nullable();
             $table->string('origen_cel',14)->nullable();
             $table->string('origen_correo')->nullable();
             $table->text('observaciones');
@@ -38,6 +39,7 @@ class CreateRadicadosTable extends Migration
             $table->boolean('revisar')->nullable();
             $table->boolean('openAdm')->nullable();
             $table->integer('sede')->unsigned();
+            
             $table->string('fech_aprovado')->nullable();
 
             //---

@@ -2,11 +2,10 @@
 @section('title','| Radicado')
 @section('content-panel')
 	<div class="row title-content">
-		@include('common.success')      
 	</div>
 <div class="container show-card">
   <div class="col-11 content-show-card">
-	
+	@include('common.success') {{--NOTIFICACIONES--}}
 	@include('components.showCard')
 
 	<div class="col-12 text-center text-capitalize">
@@ -14,11 +13,10 @@
 	  	@if ($radicado->fech_send_dir == '')
 	  		<div class="d-inline-flex">
 				<form method="POST" action="{{action('RegctrolController@update', $radicado->slug)}}">
-				@method('PUT')
-				@csrf
-				  	<input name="time_send_dir" type="hidden" value="{{date("h:i:s A")}}">
-				  	<input name="fech_send_dir" type="hidden" value="{{date("y/m/d")}}">
-				<button class="btn btn-outline-success" type="submit"><i class="far fa-share-square"></i> Enviar a Direccion</button>
+					@method('PUT') @csrf
+					  	<input name="time_send_dir" type="hidden" value="{{date("h:i:s A")}}">
+					  	<input name="fech_send_dir" type="hidden" value="{{date("y/m/d")}}">
+					<button class="btn btn-outline-success" type="submit"><i class="far fa-share-square"></i> Enviar a Direccion</button>
 				</form>
 	  		</div>
 	  	@else
