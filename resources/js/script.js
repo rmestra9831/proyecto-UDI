@@ -196,10 +196,10 @@ $disabled = document.createAttribute('disabled');
   
 //ACTIVANDO EL SPINNER AL GUARDAR UN RADICADO
 $('form').submit(function(event){
-  $('#spinner').fadeIn();
+  $('.container_spinner').fadeIn();
   $('#exampleModal').hide();
   $('.modal-backdrop').hide();
-  $('#spinner').removeAttr('hidden');
+  $('.container_spinner').removeAttr('hidden');
 });
 
 

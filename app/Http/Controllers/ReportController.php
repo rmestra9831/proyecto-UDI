@@ -7,6 +7,7 @@ use App\Models\Program;
 use App\Models\Motivo;
 use App\User;
 use Illuminate\Http\Request;
+use Storage;
 use App\Exports\ReportExport;
 use App\Exports\ReportFechas;
 use App\Exports\ReportMotivo;
@@ -242,7 +243,24 @@ class ReportController extends Controller
     }
     
     // DESCARGAR ARCHIVO DE RADICADO
-    public function downloadArchivo(Requiest $reg_ctrol){
+    public function DownloadArchivo(Request $request, Radicado $report){
+
+        $url = $report->filePDF;
+        // remplazando valores de la cadena de text
+        $text = $report->year;
+        $text_result = str_replace("/","_",$text);
+        $headers = array(
+            'Content-Type: application/pdf',
+            'Content-Type: application/pdx',
+          );
+        return Storage::download($url,'Radicado '.$report->fechradic_id.'-'.$text_result.'.pdf',$headers);
+        
+    }
+    public function SawArchivo(Request $request, Radicado $report){
+
+        
+        return view('components.viewPDF', compact());
+
     }
 
 

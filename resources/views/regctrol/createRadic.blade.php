@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title','| Nuevo radicado')
+@include('components.spinner')
 @section('content-panel')
-
 
 <!-- cabecera del contenido-->
 <div class="row title-content">
@@ -171,7 +171,7 @@
         </div>
     </div>
 
-    @include('components.spinner')
+
 </div>
 
 @endsection

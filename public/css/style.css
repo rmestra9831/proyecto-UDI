@@ -41,6 +41,37 @@ hr {
   padding: 0;
 }
 
+.container_spinner {
+  background: #5a5a5a78;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 10;
+}
+
+.container_spinner .body_spinner {
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  position: relative;
+}
+
+.container_spinner .content_spinner {
+  margin: auto;
+}
+
+.container_spinner .content_spinner #spinner {
+  width: 8rem;
+  height: 8rem;
+  margin: auto;
+  font-size: 2rem;
+  color: cyan;
+}
+
+.img_foot_modal {
+  width: 140px;
+}
+
 .menu-panel {
   display: grid;
   grid-template-columns: repeat(1, 1fr);

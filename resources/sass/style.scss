@@ -20,6 +20,7 @@ hr{
     //padding-top: 55px; Eliminando el espacio del nav
 }
 #h-content-img {
+
     display: flex !important;
     #w-img-log {
         height: 29px;
@@ -29,6 +30,36 @@ hr{
 .cot {
     margin: 0;
     padding: 0;
+}
+// ESTILOS DEL SPINNER DE CARGA
+.container_spinner{
+    background: #5a5a5a78;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 10;
+    .body_spinner{
+        width: 100%;
+        height: 100%;
+        display: inline-flex;
+        position: relative;
+    }
+    .content_spinner{
+        margin: auto;
+        #spinner{
+            width: 8rem; 
+            height: 8rem; 
+            // position: absolute; 
+            // top: 40%; 
+            margin: auto;
+            font-size: 2rem;
+            color: cyan;
+        }
+    }
+}
+//estilos de la imagen de los modales
+.img_foot_modal{
+    width: 140px;
 }
 //Estilos de panel
 .menu-panel {

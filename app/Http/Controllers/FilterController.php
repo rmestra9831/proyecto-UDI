@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Radicado;
 use App\Models\Program;
 use App\Models\Motivo;
+use App\Models\Role;
 use App\User;
 
 class FilterController extends Controller
@@ -64,7 +65,7 @@ class FilterController extends Controller
             $query_important = Radicado::orderBy('id', 'DESC')->where([
                 ['atention','=','urgente '],['sede',Auth::user()->sede]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
             
-          
+                $roles = Role::get();
                 return view('filter.search-radic', compact(
                     'query_norm',
                     'query_send',
@@ -77,6 +78,7 @@ class FilterController extends Controller
                     'radicados',
                     'motivos',
                     'programas',
+                    'roles',
                     'users'
                 ));
        
@@ -130,7 +132,7 @@ class FilterController extends Controller
             $query_important_dir = Radicado::orderBy('id', 'DESC')->where([
                 ['atention','=','urgente '],])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
             // dd($query_responder_dir);
-          
+                $roles = Role::get();
                 return view('filter.search-radic-dir', compact(
                     'query_recive_dir',
                     'query_response_dir',
@@ -142,6 +144,7 @@ class FilterController extends Controller
                     'radicados',
                     'motivos',
                     'programas',
+                    'roles',
                     'users'
                 ));
        
@@ -199,8 +202,7 @@ class FilterController extends Controller
         $query_aprovados_dir = Radicado::orderBy('id', 'DESC')->where([
             ['delegate_id',Auth::user()->program_id],
             ['aproved',true],])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
-        
-      
+            $roles = Role::get();
             return view('filter.search-radic-dir-prog', compact(
                 'query_recive_dir',
                 'query_response_dir_prog',
@@ -212,6 +214,7 @@ class FilterController extends Controller
                 'radicados',
                 'motivos',
                 'programas',
+                'roles',
                 'users'
             ));
    
@@ -267,8 +270,7 @@ class FilterController extends Controller
         //filtrdo de editados     
                 $query_editado_dir = Radicado::orderBy('id', 'DESC')->where([
                 ['editAdmRequest','!=', null],])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
-    
-          
+                $roles = Role::get();
                 return view('filter.search-radic-adm', compact(
                     'query_corregir_dir',
                     'query_recive_dir',
@@ -278,6 +280,7 @@ class FilterController extends Controller
                     'radicados',
                     'motivos',
                     'programas',
+                    'roles',
                     'users'
                 ));
        
@@ -308,11 +311,12 @@ class FilterController extends Controller
             ->programa($programa)
             ->Dates($start_date, $end_date)
             ->paginate(25);
-
+            $roles = Role::get();
             return view('filter.all-radic', compact(
                 'radicados',
                 'motivos',
                 'programas',
+                'roles',
                 'users'
             ));
 
@@ -325,19 +329,14 @@ class FilterController extends Controller
                 ->programa($programa)
                 ->Dates($start_date, $end_date)
                 ->paginate(25);
-    
+                $roles = Role::get();
                 return view('filter.all-radic', compact(
                     'radicados',
                     'motivos',
                     'programas',
+                    'roles',
                     'users'
                 ));
         }
-
-
-
-            // ->where(function ($query) {
-                // $id_progm_dir = Auth::user()->program_id;
-                // $query->where('delegate_id', '=', $id_progm_dir);})
     }
 }

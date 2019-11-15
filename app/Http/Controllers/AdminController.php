@@ -27,12 +27,14 @@ class AdminController extends Controller
      */
     public function index()
     {
+
         $users= User::where('sede',Auth::user()->sede)->get();
         $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
+        $roles = $this->roles;
         $programas= $this->programas;
         $radicados_recibidos = Radicado::where([['sede',Auth::user()->sede],['fech_send_dir','!=',null]])->orderBy('id', 'DESC')->get();
 
-        return view('admin.home', compact('radicados','programas','users','radicados_recibidos'));
+        return view('admin.home', compact('radicados','programas','users','radicados_recibidos','roles'));
     }
     //registart usuarios
     public function register(Request $request)
@@ -180,7 +182,6 @@ class AdminController extends Controller
     }
     //vista editar Directores
     public function dirEdit(Request $request, Program $admin){
-        // dd($admin);
 
         $programas= $admin;
         $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();

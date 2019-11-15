@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Radicado;
+use App\Models\Role;
 use App\Models\Program;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,7 @@ class DirectionController extends Controller
     public function __construct(){
         $this->programas = Program::get();
         $this->users = User::get();
+        $this->roles = Role::get();
     }
     /**
      * Display a listing of the resource.
@@ -25,8 +27,8 @@ class DirectionController extends Controller
         $radicados = Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();;
         $users = $this->users;
         $programas = $this->programas;
-
-        return view('direction.home', compact('radicados','programas','users'));
+        $roles = $this->roles;
+        return view('direction.home', compact('radicados','programas','users','roles'));
     }
 
     /**
@@ -72,7 +74,8 @@ class DirectionController extends Controller
         $users = $this->users;
         $programas = $this->programas;
         $radicado = $direction;
-        return view('direction.showRadic', compact('radicado','programas','users'));
+        $roles = $this->roles;
+        return view('direction.showRadic', compact('radicado','programas','users','roles'));
     }
 
     /**
@@ -96,7 +99,6 @@ class DirectionController extends Controller
             'respon_id'
         ));
         $radicado->save();
-
         return redirect()->route('direction.edit',[$direction])->with('status','Radicado Enviado exitosamente');
     }
     //Aqui se guarda la respuesta hecha del radicado

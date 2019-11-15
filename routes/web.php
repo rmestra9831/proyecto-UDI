@@ -106,6 +106,5 @@ Route::get('Export_all_Radic', 'ReportController@ExportAR')->middleware('auth')-
 Route::get('Export_for_motivo', 'ReportController@ExportMotivo')->middleware('auth')->name('Report.ExportMotivo');
 Route::get('Export_for_programa', 'ReportController@ExportPrograma')->middleware('auth')->name('Report.ExportPrograma');
 Route::get('Export_for_fecha', 'ReportController@ExportFecha')->middleware('auth')->name('Report.ExportFecha');
-Route::get('Download_archivo', 'ReportController@downloadArchivo')->middleware('auth')->name('Report.downloadArchivo');
-
+Route::get('/Download_archivo/{report}', 'ReportController@DownloadArchivo')->middleware('auth')->name('Report.DownloadArchivo');
 Auth::routes();

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreRadicadoRequest;
 use App\Http\Requests\UploadPDF;
 use App\Models\Radicado;
+use App\Models\Role;
 use App\Models\Program;
 use App\Models\Motivo;
 use App\Models\Sede;
@@ -25,7 +26,7 @@ class RegctrolController extends Controller
         $this->programas = Program::get();
         $this->motivos = Motivo::orderBy('name', 'ASC')->get();
         $this->users = User::get();
-
+        $this->roles = Role::get();
     }
     /**
      * Display a listing of the resource.
@@ -37,8 +38,8 @@ class RegctrolController extends Controller
         $radicados = Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();;
         $users = $this->users;
         $programas = $this->programas;
-
-        return view('regctrol.home', compact('radicados','programas','users'));
+        $roles = $this->roles;
+        return view('regctrol.home', compact('radicados','programas','users','roles'));
     }
 
     /**
@@ -59,7 +60,8 @@ class RegctrolController extends Controller
         $num_more= str_pad($sede__cont, 4, "0", STR_PAD_LEFT);
         $year= date('d/m/Y');
         
-        return view('regctrol.createRadic', compact('radicados','programas','motivos','num_more','year'));
+        $roles = $this->roles; 
+        return view('regctrol.createRadic', compact('radicados','programas','motivos','num_more','year','roles'));
     }
     /**
      * Display the specified resource.
@@ -169,6 +171,7 @@ class RegctrolController extends Controller
             
             Mail::to($mailDirN)->send(new SendDirMail($subjectDirN, $messajeDirN,$radicado));
         }
+        $roles = $this->roles;
         return redirect()->route('reg-ctrol.index')->with('status','Radicado '.$radicado->fechradic_id.'-'.$radicado->year.' Creado exitosamente');
     }
 
@@ -184,7 +187,8 @@ class RegctrolController extends Controller
         $users = $this->users;
         $programas = $this->programas;        
         $radicado = $reg_ctrol;
-        return view('regctrol.showRadic', compact('radicado','programas','users'));
+        $roles = $this->roles;
+        return view('regctrol.showRadic', compact('radicado','programas','users','roles'));
     }
 
     /**

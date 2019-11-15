@@ -82,9 +82,15 @@
               </form>
             @endif
           @else
+              {{-- ver y descargar el archivo si ya existe --}}
             <div class="row text-center">
               <div class="col-12">
-                <button class="btn btn-outline-success col-7" type="submit"><i class="fas fa-download"></i> Descargar radicado</button>
+                <div class="row justify-content-center">
+                  <form class="col-5" method="GET" action="{{action('ReportController@DownloadArchivo', $radicado->slug)}}">
+                    <button class="btn btn-outline-success" type="submit"><i class="fas fa-download"></i> Descargar</button>
+                  </form>
+                  <button class="btn btn-outline-primary col-4" type="submit" value=" {{$radicado->filePDF}} " data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-eye"></i> Ver </button>
+                </div>
               </div> 
             </div>
           @endif
@@ -510,3 +516,15 @@
     </tbody>
   </table>
   
+@include('components.modalViewPDF')
+  <script>
+    // manda la orden pra previsualización del docuemento
+    $('.table #btnEdit').click(function(){
+    //$('#content_edit_user').load("public/views/admin/editUser.php");
+      $valor = $(this).val();
+      $url = window.location.origin + '/admin/'+$valor+"/edit_dir";
+      $('.user_create #frame_show').attr("src", $url);
+  
+      //alert("el valor es: "+ $valor);
+    });
+  </script>

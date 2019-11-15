@@ -66,12 +66,17 @@
             <div class="row custom-file">
               @if (!$radicado->filePDF)
                 @if (Auth::user()->type_user == 2)
-                  <div class="col"><strong class="card-text">Archivo:<p class="card-text-var text-right">Sin documento cargado</p></strong></div>
+                  <div class="col"><strong class="card-text">Archivo:<p class="card-text-var text-right"><i class="fas fa-exclamation-triangle text-warning"></i> Sin documento cargado</p></strong></div>
                 @endif
               @else
                 <div class="row text-center">
+                  {{-- ver y descargar el archivo si ya existe --}}
                   <div class="col-12">
-                    <button class="btn btn-outline-success col-7" type="submit"><i class="fas fa-download"></i> Descargar radicado</button>
+                    <div class="row justify-content-center">
+                      <form class="col-9" method="GET" action="{{action('ReportController@DownloadArchivo', $radicado->slug)}}">
+                        <button class="btn btn-outline-success" type="submit"><i class="fas fa-download"></i> Descargar</button>
+                      </form>
+                    </div>
                   </div> 
                 </div>
               @endif
