@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             //permisos de usuario
             $table->boolean('activeUser')->nullable();
-            $table->boolean('superAdmin')->nullable();
+            $table->boolean('PermissionAdmin')->nullable();
             //clave foranea
             $table->foreign('type_user')->references('id')->on('roles');
             $table->foreign('program_id')->references('id')->on('programs');

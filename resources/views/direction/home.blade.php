@@ -14,8 +14,8 @@
 <div class="row justify-content-md-center cont-panel">
    
       @foreach ($radicados as $radicado)
-        {{-- aqui se valida que tenga permisos de superAdministrador para recibir los radicados --}}
-        @if(Auth::user()->superAdmin == 1)
+        {{-- aqui se valida que tenga permisos de PermissionAdministrador para recibir los radicados --}}
+        @if(Auth::user()->PermissionAdmin == 1)
           @if ($radicado->fech_recive_radic == '')
               @if ($radicado->fech_recive_dir == '')
                 <div class="col-11 content-card">

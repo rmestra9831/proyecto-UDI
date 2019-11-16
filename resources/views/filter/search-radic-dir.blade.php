@@ -8,12 +8,12 @@
           <a class="col nav-item nav-link active" id="nav-recivido-tab" data-toggle="tab" href="#nav-recivido" role="tab" aria-controls="nav-recivido" aria-selected="false">Recibido</a>
           <a class="col nav-item nav-link" id="nav-responder-tab" data-toggle="tab" href="#nav-responder" role="tab" aria-controls="nav-respodner" aria-selected="false">Responder
             <!-- {{-- muestra la notificación si hay radicados por responder --}} -->
-            <?php
-              $radic = DB::table('radicados')->where([['respuesta',null],['delegate_id',Auth::user()->program_id]])->get();
-              if (count($radic)!=0) {
-                ?> <span class="badge badge-primary"> {{count($radic)}} </span> <?php
-              }
-            ?>
+              <?php
+                $radic = DB::table('radicados')->where([['respuesta',null],['fech_recive_dir',!null],['delegate_id',Auth::user()->program_id]])->get();
+                if (count($radic)!=0) {
+                  ?> <span class="badge badge-primary"> {{count($radic)}} </span> <?php
+                }
+              ?>
           </a>
           <a class="col nav-item nav-link" id="nav-revisar-tab" data-toggle="tab" href="#nav-revisar" role="tab" aria-controls="nav-revisar" aria-selected="false">Revisar
             <!-- {{-- muestra la notificación si hay radicados por revisar --}} -->

@@ -23,7 +23,13 @@
     
           <div class="col-3 text-truncate text-right">
             <div class="row">
-              <div class="col"><strong class="card-text">Programa:<p class="card-text-var">{{$radicado->program->name}}</p></strong></div>
+              <div class="col"><strong class="card-text">Programa:<p class="card-text-var">
+                @if ($radicado->program->id == Auth::user()->program_id)
+                  Dirección
+                @else
+                  {{$radicado->program->name}}
+                @endif  
+              </p></strong></div>
             </div>
           </div>
     
@@ -154,7 +160,7 @@
         @endif
       @else
         @if (Auth::user()->type_user == 3)
-          @if (Auth::user()->superAdmin == 1)
+          @if (Auth::user()->PermissionAdmin == 1)
             <div class="col-6">
               <div class="form-group">
                 <!-- guardar la respuesta al radicado-->
@@ -213,7 +219,7 @@
             </div>             
           @endif
 
-          @if (Auth::user()->superAdmin)
+          @if (Auth::user()->PermissionAdmin)
             <div class="row container">
               @if (!$radicado->delegate_id)
                 <!-- boton para asignar respuesta-->

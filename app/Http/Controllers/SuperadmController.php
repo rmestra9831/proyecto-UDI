@@ -20,11 +20,10 @@ class SuperadmController extends Controller
     
     public function index()
     {
-        return('esto es lo que ve el super Admin   ');
-        // $users= User::where('sede',Auth::user()->sede)->get();
-        // $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
-        // $programas= $this->programas;
-
-        // return view('admin.home', compact('radicados','programas','users'));
+        $users= User::where('sede',Auth::user()->sede)->get();
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
+        $programas= $this->programas;
+        $radicados_recibidos = Radicado::where([['sede',Auth::user()->sede],['fech_send_dir','!=',null]])->orderBy('id', 'DESC')->get();
+        return view('superAdmin.home', compact('radicados','programas','users','radicados_recibidos'));
     }
 }

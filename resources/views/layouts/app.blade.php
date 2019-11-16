@@ -52,6 +52,8 @@
                             ?>bg-p-direction<?php
                         }elseif(Auth::user()->type_user == 4) {
                             ?>bg-warning<?php
+                        }elseif(Auth::user()->type_user == 5){
+                            ?>bg-secondary<?php
                         }
                         else{?> bg-success<?php } ?>
                         text-white h-100">

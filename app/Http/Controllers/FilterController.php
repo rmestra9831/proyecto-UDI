@@ -112,6 +112,7 @@ class FilterController extends Controller
         //filtrdo para responder          
             $query_responder_dir = Radicado::orderBy('id', 'DESC')->where([
                 ['delegate_id',Auth::user()->program_id],
+                ['fech_recive_dir',!null],
                 ['respuesta',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo para revisar        
             $query_revisar_dir = Radicado::orderBy('id', 'DESC')->where([

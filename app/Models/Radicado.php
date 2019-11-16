@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
 use App\Models\Motivo;
 use App\Models\Sede;
 
 class Radicado extends Model
 {
-
+  use SoftDeletes;
   protected $fillable = [
     'fech_send_dir',
     'time_send_dir',
@@ -28,6 +29,7 @@ class Radicado extends Model
     'editAdmRequest',
     'revisar',
     'aproved',
+    'filePDF',
     'openAdm',
     'sede',
     'respon_id'];

@@ -71,14 +71,9 @@ class AdminController extends Controller
     public function registerProg(Request $request)
     {
         $programa = new Program();
-
-        if (!$request->input('name_dir')) {
-            $programa->name_dir = "N/a";          
-        }
-        $programa->name = $request->input('name');          
+        $programa->name = ucfirst($request->input('name'));          
         $programa->correo_director = $request->input('correo_director');          
         $programa->sede = Auth::user()->sede;          
-        
         $programa->save();
 
         return redirect()->route('admin.showProg')->with('status','Usuario creado satisfactoriamente');
@@ -135,7 +130,12 @@ class AdminController extends Controller
         return view('admin.showradics', compact('radicados','radic','programas','users', 'roles'));
 
     }
-    
+    // eliminar programas
+    public function deleteProg(Request $request, Program $admin){
+
+        Program::where('id',$admin->id)->delete();
+        return redirect()->route('admin.showProg')->with('status','Programa Borrado Satisfactoriamente');
+    }
     //redireccionar a la pagina de mostrar radicado
 
     //controler editar usuarios

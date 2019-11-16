@@ -72,6 +72,7 @@ Route::group(['middleware' => 'auth','userAdm'], function () {
     Route::post('show_Programs', 'AdminController@registerProg')->name('admin.registerProg');
     //exportaciones
     Route::get('/imprimir/{admin}', 'ReportController@imprimir')->name('admin.print_pdf');
+    Route::post('delete_prog/{admin}', 'AdminController@deleteProg')->name('admin.deleteProg');
 });
 //rutas de Director de Programa
 Route::group(['middleware' => 'auth','UserDirProg'], function () {

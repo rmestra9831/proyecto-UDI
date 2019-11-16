@@ -64,6 +64,7 @@ class CreateRadicadosTable extends Migration
             $table->string('slug')->unique()->nullable();
             $table->integer('status_id')->nullable();
 
+            $table->softDeletes();
             $table->timestamps();
             //agregando las claves foraneas
             $table->foreign('program_id')->references('id')->on('programs');

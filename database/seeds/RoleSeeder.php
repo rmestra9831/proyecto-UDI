@@ -15,5 +15,6 @@ class RoleSeeder extends Seeder
         DB::table('roles')->insert(['name_role'=>'Registro y Control']);        
         DB::table('roles')->insert(['name_role'=>'Direccion']);        
         DB::table('roles')->insert(['name_role'=>'Dirección de programa']);        
+        DB::table('roles')->insert(['name_role'=>'Super Administrador']);        
     }
 }

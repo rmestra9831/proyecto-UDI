@@ -8,8 +8,6 @@
     </div>
 <!--cuerpo delcontenido -->
     <div class="row justify-content-md-center cont-panel">
-
-        @include('common.success')
         @if(Session::has('alert-ok-radic'))
           {{ Session::get('alert-ok-radic') }}
         @endif     
@@ -18,6 +16,7 @@
             <div class="container">
                 <!-- Se muestran los usuarios-->
                 <div class="card p-4 item_user desing-1_1">
+                    @include('common.success') {{--mostrado de alertas--}}
                     <h5 class="text-capitalize text-center">Listado</h5>
                     <div class="par">
                         @include('admin.tableProg')
