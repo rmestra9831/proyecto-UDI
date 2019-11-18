@@ -245,16 +245,14 @@ class FilterController extends Controller
             $query_corregir_dir = Radicado::orderBy('id', 'DESC')->where([
             ['delegate_id',Auth::user()->program_id],
             ['revisar',true],
-            //['respuesta',null], 
             ['fech_recive_radic',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
-        //filtrdo de recibidos            
-            $query_recive_dir = Radicado::orderBy('id', 'DESC')->where([
-                ['fech_recive_dir',null],
-                ['fech_notifi_end',null],
-                ['respuesta',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de respondidos            
             $query_response_dir = Radicado::orderBy('id', 'DESC')->where([
                 ['respuesta','!=',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
+        //filtrdo de llegados a administrador para recivir          
+            $query_recividos_admin = Radicado::orderBy('id', 'DESC')->where([
+                ['fech_send_dir','!=',' '],
+                ['fech_recive_dir',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de entregados           
             $query_entregado_dir = Radicado::orderBy('id', 'DESC')->where([
                 ['fech_recive_radic','!=',' ']])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
@@ -273,8 +271,8 @@ class FilterController extends Controller
                 ['editAdmRequest','!=', null],])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
                 $roles = Role::get();
                 return view('filter.search-radic-adm', compact(
+                    'query_recividos_admin',
                     'query_corregir_dir',
-                    'query_recive_dir',
                     'query_pendiente_dir',
                     'query_aprovados_dir',
                     'query_editado_dir',

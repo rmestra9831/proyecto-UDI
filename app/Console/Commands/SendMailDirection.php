@@ -3,7 +3,11 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use App\Mail\SendReminder;
+use App\Models\Radicado;
+use App\Models\Program;
 use Illuminate\Support\Facades\Mail;
 
 class SendMailDirection extends Command
@@ -39,7 +43,23 @@ class SendMailDirection extends Command
      */
     public function handle()
     {
-        $subject = 'esto es la prueba del correo';
-        Mail::to('pruebasudi2019@gmail.comgmail.com')->send(new SendReminder($subject));
+        $date = Carbon::now();
+        $date_year = $date->format('Y-m-d');
+        $program = Program::get();
+        $radicados = Radicado::get();
+      
+        foreach ($radicados as $radicado) {
+            if ($radicado->fech_recomendate_delivery == $date_year) {
+                foreach ($program as $programa) {
+                    if ($radicado->program_id == $programa->id) {
+                        $correo = $programa->correo_director;
+                        $subject = 'ALERTA de retraso Radicado #'.$radicado->year.'-'.$radicado->fechradic_id;
+                        Mail::to($correo)->send(new SendReminder($subject));
+                    }
+                }
+            }
+        }
+
+
     }
 }

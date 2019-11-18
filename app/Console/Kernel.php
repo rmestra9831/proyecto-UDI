@@ -24,10 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function(){
-            $e_subject = $this->sub;
-            return $this->view('mail.reminder')->subject($e_subject);    
-        })->everyMinute();
+        $schedule->command('email:reminder')
+                 ->dailyAt('10:00');
     }
 
     /**

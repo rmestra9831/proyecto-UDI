@@ -11,6 +11,7 @@ use App\Models\Program;
 use App\Models\Motivo;
 use App\Models\Sede;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
@@ -83,6 +84,7 @@ class RegctrolController extends Controller
     public function store(StoreRadicadoRequest $request)
     {
         //variables
+        $date = Carbon::now();
         $year = date("d/m/Y");
         $fech_start_radic = date("Y/m/d");
         $time_start_radic = date('h:i:s A');
@@ -132,9 +134,10 @@ class RegctrolController extends Controller
         }else {
             $radicado->observaciones = $request->input('observaciones');
         };
-    /* ------------------ */
+    /* ------------------ */      
         $radicado->fech_start_radic = $fech_start_radic;
         $radicado->time_start_radic = $time_start_radic;
+        $radicado->fech_recomendate_delivery = $date->addDay(3);
         $radicado->slug = date("Ymd").$request->input('name').date('h_i_s').$request->input('last_name');
         $radicado->save();
     //validar tipo de atencion para enviar correo

@@ -46,6 +46,8 @@ class CreateRadicadosTable extends Migration
             $table->date('fech_start_radic')->nullable();
             $table->string('time_start_radic')->nullable();
             //---   
+            $table->date('fech_recomendate_delivery')->nullable();
+            //---   
             $table->date('fech_send_dir')->nullable();
             $table->string('time_send_dir')->nullable();
             //---

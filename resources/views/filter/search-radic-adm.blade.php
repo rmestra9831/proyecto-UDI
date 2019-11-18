@@ -5,7 +5,8 @@
   <div p1 class="row title-content">
       <h2 class="text-center text-capitalize title">Filtrado Por Estados</h2>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          <a class="col nav-item nav-link active" id="nav-pendiente-tab" data-toggle="tab" href="#nav-pendiente" role="tab" aria-controls="nav-pendiente" aria-selected="false">Pendiente
+          <a class="col nav-item nav-link active" id="nav-recivido-tab" data-toggle="tab" href="#nav-recivido" role="tab" aria-controls="nav-recivido" aria-selected="false">Recibido</a>
+          <a class="col nav-item nav-link" id="nav-pendiente-tab" data-toggle="tab" href="#nav-pendiente" role="tab" aria-controls="nav-pendiente" aria-selected="false">Pendiente
             {{-- muestra la notificación PENDIENTES EN ADMINISTRADOR --}}
               <?php
                 $radic = DB::table('radicados')->where([['fech_send_dir',!null],['fech_recive_dir',null]])->get();
@@ -29,7 +30,8 @@
     @endif
     
       <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-pendiente" role="tabpanel" aria-labelledby="nav-pendiente-tab">@include('filter.pendiente-respon')</div>
+        <div class="tab-pane fade show active" id="nav-recivido" role="tabpanel" aria-labelledby="nav-recivido-tab">@include('filter.recive-admin')</div>
+        <div class="tab-pane fade" id="nav-pendiente" role="tabpanel" aria-labelledby="nav-pendiente-tab">@include('filter.pendiente-respon')</div>
         <div class="tab-pane fade" id="nav-editado" role="tabpanel" aria-labelledby="nav-editado-tab">@include('filter.editado')</div>
         <div class="tab-pane fade" id="nav-corregir" role="tabpanel" aria-labelledby="nav-corregir-tab">@include('filter.corregir')</div>
         <div class="tab-pane fade" id="nav-aprovado" role="tabpanel" aria-labelledby="nav-aprovado-tab">@include('filter.aprovado')</div>
