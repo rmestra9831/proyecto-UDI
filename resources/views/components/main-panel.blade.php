@@ -91,16 +91,11 @@
                   <a href="{{route('admin.showProg')}}"><i class="fas fa-chevron-right"></i>programas</a>
                 @else
                   <a href="{{route('admin.index')}}"><i class="fas fa-chevron-right"></i>Inicio</a>
-                  @if (Auth::user()->type_user == 1 && Auth::user()->PermissionAdmin == !null)
-                    <a href="{{route('admin.showUsers')}}"><i class="fas fa-chevron-right"></i>Usuarios</a>
-                    <a href="{{route('admin.showDir')}}"><i class="fas fa-chevron-right"></i>Directores</a>
-                    <a href="{{route('admin.showProg')}}"><i class="fas fa-chevron-right"></i>programas</a>   
-                  @endif
                   <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>   
                   <a href="{{route('filter.viewSearchRadicAdm')}}"><i class="fas fa-chevron-right"></i>estado de radicados
                     {{-- muestra la notificación PENDIENTES EN ADMINISTRADOR --}}
                       <?php
-                        $radic = DB::table('radicados')->where([['fech_send_dir',!null],['fech_recive_dir',null]])->get();
+                        $radic = DB::table('radicados')->where([['fech_send_dir','!=',' '],['fech_recive_dir',null]])->get();
                         if (count($radic)!=0) {
                           ?> <strong status="" data-toggle="tooltip" data-placement="top" title="Tooltip on top" aria-hidden="true" class="fas fa-circle status-recive-dir"></strong> <?php
                         }

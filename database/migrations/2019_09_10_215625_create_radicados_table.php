@@ -33,7 +33,7 @@ class CreateRadicadosTable extends Migration
             $table->text('observaciones');
             $table->text('obs')->nullable();
             $table->integer('delegate_id')->unsigned()->nullable();
-            $table->text('respuesta')->nullable();
+            $table->string('respuesta')->nullable();
             $table->string('editAdmRequest')->nullable();
             $table->boolean('aproved')->nullable();
             $table->boolean('revisar')->nullable();

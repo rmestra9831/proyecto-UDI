@@ -41,6 +41,10 @@ hr {
   padding: 0;
 }
 
+.upload_response {
+  align-items: baseline;
+}
+
 .container_spinner {
   background: #5a5a5a78;
   width: 100%;

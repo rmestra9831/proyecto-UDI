@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth','userAR'], function () {
     Route::put('sme/{reg_ctrol}', 'RegctrolController@updateMailEst')->name('reg-ctrol.sme');
     Route::put('delivered/{reg_ctrol}', 'RegctrolController@updateDelivered')->name('reg-ctrol.updateDelivered');
     Route::put('uploadPDF/{reg_ctrol}', 'RegctrolController@uploadPDF')->name('reg-ctrol.uploadPDF');
+    Route::put('uploadWORD/{reg_ctrol}', 'RegctrolController@uploadWORD')->name('reg-ctrol.uploadWORD');
 });
 //rutas de direccion
 Route::group(['middleware' => 'auth','userDir'], function () {

@@ -7,7 +7,7 @@
     </div>
   @endforeach
 @else
-  <div class="content-card" style="width: 50%"><h4 style="margin: 0; text-align: center">No se encontraron aprovados</h4></div>
+  <div class="content-card" style="width: 50%"><h4 style="margin: 0; text-align: center">No se encontraron aprobados</h4></div>
 @endif
 
 <div class="container">

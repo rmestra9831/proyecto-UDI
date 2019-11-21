@@ -82,7 +82,7 @@
                       <label class="custom-file-label col-form-label col-form-label-sm text-truncate" for="customFileLang" data-browse="Cargar">Archivo</label>                    
                     </div>
                     <div class="col-1">
-                      <button class="btn btn-outline-success" type="submit"><i class="fas fa-cloud-upload-alt"></i> Cargar</button>
+                      <button class="btn btn-outline-success" type="submit"><i class="far fa-file-pdf"></i> Cargar</button>
                     </div>  
                   </div>
               </form>
@@ -145,7 +145,20 @@
         <div class="col-6">
           <div class="form-group">
             <label class="card-text" for="my-textarea">respuesta:</label>
-            <textarea id="my-textarea" style="overflow:hidden; resize:none" class="form-control" name="" rows="2"<?php if(Auth::user()->type_user == 3){?>placeholder="Escribe aquí tu respuesta" <?php }else if($radicado->delegate_id != Auth::user()->program_id || Auth::user()->type_user == 2){ ?>disabled placeholder="N/a"<?php } ?>><?php if($radicado->fech_recive_radic != ''){ ?>{{$radicado->respuesta}}<?php }?></textarea>
+            <div class="row custom-file">
+              <form method="POST" action="{{action('RegctrolController@uploadWORD', $radicado->slug)}}" enctype="multipart/form-data">
+                @method('PUT') @csrf          
+                  <div class="row upload_response" style="margin-left: 5px">
+                    <div class="col-7">
+                      <input name="respuesta" type="file" class="custom-file-input @error('respuesta') is-invalid @enderror" id="customFileLang" lang="es">
+                      <label class="custom-file-label col-form-label col-form-label-sm text-truncate" for="customFileLang" data-browse="Cargar Respuesta">Archivo</label>                    
+                    </div>
+                    <div class="col-5">
+                      <button class="btn btn-outline-primary" type="submit"><i class="far fa-file-word"></i> Cargar</button>
+                    </div>  
+                  </div>
+              </form>
+            </div>
             <!--mostrando cuando se edito la respuesta-->
             @if ($radicado->fech_recive_radic != null)
               @if ($radicado->editAdmRequest != null)

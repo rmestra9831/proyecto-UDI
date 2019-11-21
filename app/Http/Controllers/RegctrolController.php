@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRadicadoRequest;
 use App\Http\Requests\UploadPDF;
+use App\Http\Requests\UploadWORD;
 use App\Models\Radicado;
 use App\Models\Role;
 use App\Models\Program;
 use App\Models\Motivo;
 use App\Models\Sede;
 use App\User;
+use Storage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -194,6 +196,28 @@ class RegctrolController extends Controller
         return view('regctrol.showRadic', compact('radicado','programas','users','roles'));
     }
 
+    // UPDATE RESPONSE WORD
+    public function uploadWORD(UploadWORD $request, Radicado $reg_ctrol){
+
+        $radicado = Radicado::findOrfail($reg_ctrol->id);
+
+    try {
+        if($radicado->respuesta){ //borrando archivo existente
+                (Storage::disk('local')->delete($radicado->respuesta));
+
+                $radicado->respuesta = $request->file('respuesta')->store('public');
+                $radicado->save();
+                return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('status','Archivo subido correctametne');
+            }
+            $radicado->respuesta = $request->file('respuesta')->store('public');
+            $radicado->save();
+            return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('status','Archivo subido correctametne');
+
+    } catch (\Throwable $th) {
+        return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('error','A ocurrido un error al subir el archivo');
+    }
+ 
+    }
     /**
      * Update the specified resource in storage.
      *
