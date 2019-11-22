@@ -5,7 +5,15 @@
   <div p1 class="row title-content">
       <h2 class="text-center text-capitalize title">Filtrado Por Estados</h2>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          <a class="col nav-item nav-link active" id="nav-recivido-tab" data-toggle="tab" href="#nav-recivido" role="tab" aria-controls="nav-recivido" aria-selected="false">Recibido</a>
+          <a class="col nav-item nav-link active" id="nav-recivido-tab" data-toggle="tab" href="#nav-recivido" role="tab" aria-controls="nav-recivido" aria-selected="false">Recibido
+            <!-- {{-- muestra la notificación si hay radicados por responder --}} -->
+              <?php
+                $radic = DB::table('radicados')->where([['delegate_id',Auth::user()->program_id],['respuesta','!=',' ']])->get();
+                if (count($radic)!=0) {
+                  ?> <span class="badge badge-primary"> {{count($radic)}} </span> <?php
+                }
+              ?>
+          </a>
           <a class="col nav-item nav-link" id="nav-responder-tab" data-toggle="tab" href="#nav-responder" role="tab" aria-controls="nav-respodner" aria-selected="false">Responder
             <!-- {{-- muestra la notificación si hay radicados por responder --}} -->
               <?php

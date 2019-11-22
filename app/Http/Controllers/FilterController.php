@@ -106,7 +106,6 @@ class FilterController extends Controller
             ->programa($programa)->get();#->paginate(1)
         //filtrdo de recibidos            
             $query_recive_dir = Radicado::orderBy('id', 'DESC')->where([
-                ['fech_recive_dir',null],
                 ['fech_notifi_end',null],
                 ['respuesta',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo para responder          

@@ -146,18 +146,70 @@
           <div class="form-group">
             <label class="card-text" for="my-textarea">respuesta:</label>
             <div class="row custom-file">
-              <form method="POST" action="{{action('RegctrolController@uploadWORD', $radicado->slug)}}" enctype="multipart/form-data">
-                @method('PUT') @csrf          
-                  <div class="row upload_response" style="margin-left: 5px">
-                    <div class="col-7">
-                      <input name="respuesta" type="file" class="custom-file-input @error('respuesta') is-invalid @enderror" id="customFileLang" lang="es">
-                      <label class="custom-file-label col-form-label col-form-label-sm text-truncate" for="customFileLang" data-browse="Cargar Respuesta">Archivo</label>                    
+              @if (!$radicado->respuesta)
+                {{-- cargar respuesta --}}
+                @if (Auth::user()->type_user == 2)
+                  @if ($radicado->respuesta && $radicado->aproved)
+                    <div class="row">
+                      <div class="col-12 d-flex">
+                        <div class="col-6">
+                          <button class="btn btn-outline-success col-12" type="submit"><i class="far fa-file-word"></i> Descargar</button>
+                        </div> 
+                        <div class="col-6">
+                          <button class="btn btn-outline-primary col-12" type="submit"><i class="far fa-file-word"></i> Ver</button>
+                        </div> 
+                      </div>
                     </div>
-                    <div class="col-5">
-                      <button class="btn btn-outline-primary" type="submit"><i class="far fa-file-word"></i> Cargar</button>
-                    </div>  
+                  @else
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="card">
+                          <div class="card-body">
+                            <p class="card-text d-block text-center">
+                              {{-- muestra a que director a sido asignada la respesta --}}
+                              @if ($radicado->delegate_id)
+                                @foreach ($programas as $programa)
+                                  @if ($programa->id == $radicado->delegate_id)
+                                    Respuesta delegada a {{$programa->name}}
+                                  @endif
+                                @endforeach
+                              @else
+                                Respuesta sin delegar
+                              @endif
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  @endif
+                @else
+                  {{-- si no es AR Muestra para cargar respuesta --}}
+                  <form method="POST" action="{{action('RegctrolController@uploadWORD', $radicado->slug)}}" enctype="multipart/form-data">
+                    @method('PUT') @csrf          
+                    <div class="row upload_response" style="margin-left: 5px">
+                      <div class="col-7">
+                        <input name="respuesta" type="file" class="custom-file-input @error('respuesta') is-invalid @enderror" id="customFileLang" lang="es">
+                        <label class="custom-file-label col-form-label col-form-label-sm text-truncate" for="customFileLang" data-browse="Cargar Respuesta">Archivo</label>                    
+                      </div>
+                      <div class="col-5">
+                        <button class="btn btn-outline-primary" type="submit"><i class="far fa-file-word"></i> Cargar</button>
+                      </div>  
+                    </div>
+                  </form>
+                @endif
+              @else
+                {{-- cuando la respuesta a sido cargada y aprovada se muestra esto --}}
+                <div class="row">
+                  <div class="col-12 d-flex">
+                    <div class="col-6">
+                      <button class="btn btn-outline-success col-12" type="submit"><i class="far fa-file-word"></i> Descargar</button>
+                    </div> 
+                    <div class="col-6">
+                      <button class="btn btn-outline-primary col-12" type="submit"><i class="far fa-file-word"></i> Ver</button>
+                    </div> 
                   </div>
-              </form>
+                </div> 
+              @endif
             </div>
             <!--mostrando cuando se edito la respuesta-->
             @if ($radicado->fech_recive_radic != null)
@@ -207,28 +259,44 @@
           @else
             {{-- sin permisos de super administrador  --}}
             <div class="col-6">
-              <div class="form-group">
-                <!-- guardar la respuesta al radicado-->
-                  <form method="POST" action="{{action('DirectionController@saveRequest', $radicado->slug)}}">
-                    @method('PUT')
-                    @csrf
-                    <input type="hidden" name="respon_id" value="{{auth()->user()->id}}">
-                    <input type="hidden" name="revisar" id="" value="0" hidden>
-                    <label class="card-text" for="my-textarea">respuesta:</label>
-                    <textarea  id="my-textarea" style="overflow:hidden; resize:none" class="form-control col-12 @error('respuesta') is-invalid @enderror" name="respuesta" rows="2"<?php if(Auth::user()->type_user == 3 && $radicado->delegate_id == Auth::user()->program_id){?>placeholder="Escribe aquí tu respuesta" <?php }else{ ?>disabled placeholder="N/a"<?php }?> <?php if($radicado->respuesta == '' || $radicado->revisar == true){?><?php }else{ ?>placeholder="{{$radicado->respuesta}}" disabled<?php }?>>{{$radicado->respuesta}}</textarea>
-                      @if ($radicado->editAdmRequest != null)
-                        <small id="emailHelp" class="form-text text-muted">[ Editado por el Administrador {{$radicado->editAdmRequest}} ]</small> 
-                      @endif    
-                      @if ($radicado->delegate_id == Auth::user()->program_id)
-                        <button class="btn-revisado <?php if($radicado->respuesta == '' || $radicado->revisar == true){?><?php }else{ ?>d-none<?php }?>" type="submit"><i class="fas fa-check"></i></button>
+                <div class="form-group">
+                  <label class="card-text" for="my-textarea">respuesta:</label>
+                    <div class="row custom-file">
+                      @if (!$radicado->respuesta)
+                        {{-- cargar respuesta --}}
+                          <form method="POST" action="{{action('RegctrolController@uploadWORD', $radicado->slug)}}" enctype="multipart/form-data">
+                            @method('PUT') @csrf          
+                            <div class="row upload_response" style="margin-left: 5px">
+                              <div class="col-7">
+                                <input name="respuesta" type="file" class="custom-file-input @error('respuesta') is-invalid @enderror" id="customFileLang" lang="es">
+                                <label class="custom-file-label col-form-label col-form-label-sm text-truncate" for="customFileLang" data-browse="Cargar Respuesta">Archivo</label>                    
+                              </div>
+                              <div class="col-5">
+                                <button class="btn btn-outline-primary" type="submit"><i class="far fa-file-word"></i> Cargar</button>
+                              </div>  
+                            </div>
+                          </form>
+                      @else
+                        {{-- cuando la respuesta a sido cargada y aprovada se muestra esto --}}
+                        <div class="row">
+                          <div class="col-12 d-flex">
+                            <div class="col-6">
+                              <button class="btn btn-outline-success col-12" type="submit"><i class="far fa-file-word"></i> Descargar</button>
+                            </div> 
+                            <div class="col-6">
+                              <button class="btn btn-outline-primary col-12" type="submit"><i class="far fa-file-word"></i> Ver</button>
+                            </div> 
+                          </div>
+                        </div> 
                       @endif
-                      @error('respuesta')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
-                    @enderror
-                  </form>
-              </div>
+                    </div>
+                    <!--mostrando cuando se edito la respuesta-->
+                    @if ($radicado->fech_recive_radic != null)
+                      @if ($radicado->editAdmRequest != null)
+                        <small id="emailHelp" class="form-text text-muted">[Editado por el Administrador {{$radicado->editAdmRequest}} ]</small> 
+                      @endif
+                    @endif
+                </div>
             </div>             
           @endif
 
@@ -390,35 +458,64 @@
             @endif
           @else
           <!-- ESTO ES LO QUE VE EL ADMINISTRADOR -->
-              <div class="col-6">
-                <div class="form-group">
-                  <!-- guardar la respuesta al radicado-->
-                    <form method="POST" action="{{action('AdminController@saveRequest', $radicado->slug)}}">
-                      @method('PUT')
-                      @csrf
-                      <input type="hidden" name="editAdmRequest" value="{{date('h:i:s A')}} | {{date('d_m_Y')}}">
-                      <label class="card-text " for="my-textarea">Respuesta: <?php if($radicado->delegate_id != null){ 
-                        ?>Delegada a
-                        <?php }foreach ($programas as $programa) {
-                          if ($programa->id == $radicado->delegate_id) { 
-                            ?> {{$programa->name}} <?php
-                          }
-                        } ?></label>
-
-                      <textarea id="responText" style="overflow:hidden; resize:none" value="" class="form-control col-12 @error('respuesta') is-invalid @enderror" name="respuesta" rows="2"
-                        <?php if(Auth::user()->type_user == 1){?>
-                          <?php if($radicado->respuesta == ''){?>disabled placeholder="N/a"<?php }else{ ?>placeholder="{{$radicado->respuesta}}"<?php }?>>{{$radicado->respuesta}}</textarea>
-                        <?php }else{ ?><?php }?> 
-                      @if ($radicado->editAdmRequest != null)
-                        <small id="emailHelp" class="form-text text-muted">[Editado por el Administrador {{$radicado->editAdmRequest}} ]</small> 
-                      @endif      
-                      @error('respuesta')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                      @enderror
-                    </form>
+          <div class="col-6">
+              <div class="form-group">
+                <label class="card-text" for="my-textarea">respuesta:</label>
+                <div class="row custom-file">
+                  @if (!$radicado->respuesta)
+                    {{-- mostrando delegado --}}
+                    <div class="row">
+                        <div class="col-12">
+                          <div class="card">
+                            <div class="card-body">
+                              <p class="card-text d-block text-center">
+                                {{-- muestra a que director a sido asignada la respesta --}}
+                                @if ($radicado->delegate_id)
+                                  @foreach ($programas as $programa)
+                                    @if ($programa->id == $radicado->delegate_id)
+                                      Respuesta delegada a {{$programa->name}}                                     
+                                    @endif
+                                  @endforeach
+                                @else
+                                  Respuesta sin delegar
+                                @endif
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  @else
+                    <div class="row">
+                      <div class="col-12 d-flex">
+                          <form method="POST" action="{{action('RegctrolController@uploadWORD', $radicado->slug)}}" enctype="multipart/form-data">
+                              @method('PUT') @csrf          
+                              <div class="row upload_response" style="margin-left: 5px">
+                                <div class="col-7">
+                                  <input name="respuesta" type="file" class="custom-file-input @error('respuesta') is-invalid @enderror" id="customFileLang" lang="es">
+                                  <label class="custom-file-label col-form-label col-form-label-sm text-truncate" for="customFileLang" data-browse="Cargar Respuesta">Archivo</label>                    
+                                </div>
+                                <div class="col-5">
+                                  <button class="btn btn-outline-primary" type="submit"><i class="far fa-file-word"></i> Cargar</button>
+                                </div>  
+                              </div>
+                            </form>
+                        <div class="col-6">
+                          <button class="btn btn-outline-success col-12" type="submit"><i class="far fa-file-word"></i> Descargar</button>
+                        </div> 
+                        <div class="col-6">
+                          <button class="btn btn-outline-primary col-12" type="submit"><i class="far fa-file-word"></i> Ver</button>
+                        </div> 
+                      </div>
+                    </div>
+                  @endif
                 </div>
+                <!--mostrando cuando se edito la respuesta-->
+                @if ($radicado->fech_recive_radic != null)
+                  @if ($radicado->editAdmRequest != null)
+                    <small id="emailHelp" class="form-text text-muted">[Editado por el Administrador {{$radicado->editAdmRequest}} ]</small> 
+                  @endif
+                @endif
+              </div>
             </div>
           @endif
         @endif
