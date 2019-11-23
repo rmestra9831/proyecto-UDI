@@ -375,7 +375,7 @@
           @endif
 
           {{-- valida se esta aprovada la respuesta --}}
-            @if ($radicado->revisar!= true && !$radicado->aproved )
+            @if ($radicado->revisar!= null && !$radicado->aproved )
               <div class="col-12 align-content-center">
                 <div class="container card col-8">
                   <div class="card-body">
@@ -487,23 +487,13 @@
                   @else
                     <div class="row">
                       <div class="col-12 d-flex">
-                          <form method="POST" action="{{action('RegctrolController@uploadWORD', $radicado->slug)}}" enctype="multipart/form-data">
-                              @method('PUT') @csrf          
-                              <div class="row upload_response" style="margin-left: 5px">
-                                <div class="col-7">
-                                  <input name="respuesta" type="file" class="custom-file-input @error('respuesta') is-invalid @enderror" id="customFileLang" lang="es">
-                                  <label class="custom-file-label col-form-label col-form-label-sm text-truncate" for="customFileLang" data-browse="Cargar Respuesta">Archivo</label>                    
-                                </div>
-                                <div class="col-5">
-                                  <button class="btn btn-outline-primary" type="submit"><i class="far fa-file-word"></i> Cargar</button>
-                                </div>  
-                              </div>
-                            </form>
                         <div class="col-6">
                           <button class="btn btn-outline-success col-12" type="submit"><i class="far fa-file-word"></i> Descargar</button>
                         </div> 
                         <div class="col-6">
-                          <button class="btn btn-outline-primary col-12" type="submit"><i class="far fa-file-word"></i> Ver</button>
+                          <button class="btn btn-outline-primary col-12" type="submit" value=" {{$radicado->filePDF}} " data-toggle="modal" data-target="#exampleModalCenterWORD"><i class="fas fa-eye"></i> Ver </button>
+
+                          {{-- <button class="btn btn-outline-primary col-12" type="submit"><i class="far fa-file-word"></i> Ver</button> --}}
                         </div> 
                       </div>
                     </div>
@@ -633,6 +623,7 @@
   </table>
   
 @include('components.modalViewPDF')
+@include('components.modalViewWORD')
   <script>
     // manda la orden pra previsualización del docuemento
     $('.table #btnEdit').click(function(){
