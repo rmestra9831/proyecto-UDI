@@ -198,25 +198,23 @@ class RegctrolController extends Controller
 
     // UPDATE RESPONSE WORD
     public function uploadWORD(UploadWORD $request, Radicado $reg_ctrol){
-
         $radicado = Radicado::findOrfail($reg_ctrol->id);
+        try {
+            if($radicado->respuesta){ //borrando archivo existente
+                    (Storage::disk('local')->delete($radicado->respuesta));
 
-    try {
-        if($radicado->respuesta){ //borrando archivo existente
-                (Storage::disk('local')->delete($radicado->respuesta));
-
+                    $radicado->respuesta = $request->file('respuesta')->store('public');
+                    $radicado->save();
+                    return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('status','Archivo subido correctametne');
+                }
                 $radicado->respuesta = $request->file('respuesta')->store('public');
+                $radicado->respon_id = Auth::user()->id;
                 $radicado->save();
                 return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('status','Archivo subido correctametne');
-            }
-            $radicado->respuesta = $request->file('respuesta')->store('public');
-            $radicado->save();
-            return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('status','Archivo subido correctametne');
 
-    } catch (\Throwable $th) {
-        return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('error','A ocurrido un error al subir el archivo');
-    }
- 
+        } catch (\Throwable $th) {
+            return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('error','A ocurrido un error al subir el archivo');
+        }
     }
     /**
      * Update the specified resource in storage.

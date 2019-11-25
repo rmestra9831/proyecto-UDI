@@ -69,7 +69,7 @@
               <a href="{{route('filter.viewSearchRadicDir')}}"><i class="fas fa-chevron-right"></i>estado de radicados
                 {{-- muestra la notificación si hay radicados por responder --}}
                   <?php
-                    $recive_new_delegate = DB::table('radicados')->where([['delegate_id',Auth::user()->program_id],['respuesta','!=',' ']])->get();
+                    $recive_new_delegate = DB::table('radicados')->where([['delegate_id',Auth::user()->program_id],['send_temp_admin',null]])->get();
                     $radic_send_ar = DB::table('radicados')->where([['fech_recive_radic',!null],['fech_recive_radic',null],['delegate_id',Auth::user()->program_id]])->get();
                     $radic_revisar = DB::table('radicados')->where('revisar',true)->get();
                     $radic = DB::table('radicados')->where([['respuesta',null],['fech_recive_dir',!null],['delegate_id',Auth::user()->program_id]])->get();

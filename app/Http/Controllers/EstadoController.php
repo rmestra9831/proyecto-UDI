@@ -108,18 +108,8 @@ class EstadoController extends Controller
     // Mandar la solicitud de revisar la respuesta del radicado
     public function revisar(Request $request, Radicado $status){
         $radicado = $status;
-        
-        $radicado->fill($request->except(
-            'fech_send_dir',
-            'time_send_dir',
-            'fech_recive_radic',
-            'time_recive_radic',
-            'fech_notifi_end',
-            'time_notifi_end',
-            'time_recive_dir',
-            'fech_recive_dir',
-            'aproved'
-        ));
+        $radicado->send_temp_admin = null;
+        $radicado->revisar = 1;
         $radicado->save();
         return redirect()->route('admin.ShowRadic',[$status])->with('status','Radicado '.$radicado->fechradic_id.'-'.$radicado->year.' en Revisión ');
 

@@ -4,9 +4,9 @@
   <div class="row title-content">
 	</div>
 <div class="container show-card">
-  @include('common.success')      
-    <div class="col-11 content-show-card">
-      @include('components.showCard')
+  <div class="col-11 content-show-card">
+    @include('common.success')      
+    @include('components.showCard')
   
       <div class="col-12 text-center text-capitalize">
         <!-- Aqui se imprime la información que contiene el radicado-->
@@ -19,9 +19,9 @@
               <input  name="fech_recive_radic" type="hidden" value="{{date("y/m/d")}}">
               <!-- Si el estado no es enviado aparece este boton, cuando ya se ha enviado-->
               <!-- este cambia de estadp-->
-          <button class="btn btn-primary" type="submit"
-            <?php if($radicado->respuesta == '' || $radicado->aproved == false){ 
-            ?>disabled<?php }?> <?php if($radicado->respuesta == ''){ ?>hidden<?php }?>><?php if($radicado->revisar == true){?> corregir <?php }else if($radicado->aproved == 0){?> Esperando aprovación<?php }else{ ?> Enviar a Registro y control <?php }?></button>
+              <button class="btn btn-primary" type="submit"
+              <?php if($radicado->respuesta == '' || $radicado->aproved == false){ 
+              ?>disabled<?php }?> <?php if($radicado->respuesta == ''){ ?>hidden<?php }?>><?php if($radicado->revisar == true){?> corregir <?php }else if($radicado->aproved == 0){?> Esperando aprovación<?php }else{ ?> Enviar a Registro y control <?php }?></button>         
           </form>
         </div>
         @else

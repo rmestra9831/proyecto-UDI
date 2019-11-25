@@ -1,15 +1,13 @@
 @extends('layouts.app')
 @section('title','| Radicado #'.$radicado->fechradic_id.'-'.$radicado->year.'')
 @section('content-panel')
-  @include('common.success')
 
 <div></div>
 
 <div class="container show-card">
-    <div class="col-11 content-show-card">
-    
+  <div class="col-11 content-show-card">
+      @include('common.success')
     	@include('components.showCard')
-
     	<div class="col-12 text-center text-capitalize">
     	  	<!--botones y formulario para guardar la fecha y la hora-->
     	  	<a btn-norm name="" id="" class="btn btn-secondary"

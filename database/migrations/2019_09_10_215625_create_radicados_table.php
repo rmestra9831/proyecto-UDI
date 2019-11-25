@@ -36,6 +36,7 @@ class CreateRadicadosTable extends Migration
             $table->string('respuesta')->nullable();
             $table->string('editAdmRequest')->nullable();
             $table->boolean('aproved')->nullable();
+            $table->boolean('send_temp_admin')->nullable();
             $table->boolean('revisar')->nullable();
             $table->boolean('openAdm')->nullable();
             $table->integer('sede')->unsigned();

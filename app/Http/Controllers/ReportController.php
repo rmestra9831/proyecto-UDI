@@ -244,7 +244,6 @@ class ReportController extends Controller
     
     // DESCARGAR ARCHIVO DE RADICADO
     public function DownloadArchivo(Request $request, Radicado $report){
-
         $url = $report->filePDF;
         // remplazando valores de la cadena de text
         $text = $report->year;
@@ -253,15 +252,21 @@ class ReportController extends Controller
             'Content-Type: application/pdf',
             'Content-Type: application/pdx',
           );
-        return Storage::download($url,'Radicado '.$report->fechradic_id.'-'.$text_result.'.pdf',$headers);
-        
+        return Storage::download($url,'Radicado '.$report->fechradic_id.'-'.$text_result.'.pdf',$headers);     
     }
     public function SawArchivo(Request $request, Radicado $report){
-
-        
-        return view('components.viewPDF', compact());
-
+          return view('components.viewPDF', compact());
     }
-
+    public function DownloadResponse(Radicado $report){
+        $url = $report->respuesta;
+        // remplazando valores de la cadena de text
+        $text = $report->year;
+        $text_result = str_replace("/","_",$text);
+        $headers = array(
+            'Content-Type: application/doc',
+            'Content-Type: application/docx',
+          );
+        return Storage::download($url,'Radicado '.$report->fechradic_id.'-'.$text_result.'.docx', $headers);
+    }
 
 }

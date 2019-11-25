@@ -8,7 +8,7 @@
           <a class="col nav-item nav-link active" id="nav-recivido-tab" data-toggle="tab" href="#nav-recivido" role="tab" aria-controls="nav-recivido" aria-selected="false">Recibido
             <!-- {{-- muestra la notificación si hay radicados por responder --}} -->
               <?php
-                $radic = DB::table('radicados')->where([['delegate_id',Auth::user()->program_id],['respuesta','!=',' ']])->get();
+                $radic = DB::table('radicados')->where([['delegate_id',Auth::user()->program_id],['send_temp_admin',null]])->get();
                 if (count($radic)!=0) {
                   ?> <span class="badge badge-primary"> {{count($radic)}} </span> <?php
                 }

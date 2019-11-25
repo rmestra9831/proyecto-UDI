@@ -2,6 +2,10 @@
 $(document).ready(function () {
   bsCustomFileInput.init()
 })
+// activando tooltips
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 //imports
   window.setTimeout(function () {
     $(".alert").fadeTo(500, 0).slideUp(500, function () {
@@ -171,7 +175,7 @@ $disabled = document.createAttribute('disabled');
           asunto.value = '';
         }
       } else {
-        select_mot.value = '';
+        select_mot.value = 1;
         asunto.value = '';
         opt1 = $("[vtypemotivo='1']").hide();
         opt2 = $("[vtypemotivo='2']").hide();

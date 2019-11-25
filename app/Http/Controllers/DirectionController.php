@@ -103,17 +103,11 @@ class DirectionController extends Controller
     }
     //Aqui se guarda la respuesta hecha del radicado
     //donde si no esta validado, si esta vacia no deja marcar como recivido
-    public function saveRequest (UpdateRespuestaRequest $request, Radicado $direction)
+    public function saveRequest (Radicado $direction)
     {
         $radicado = $direction;
-        $radicado->fill($request->except(
-            'fech_send_dir',
-            'time_send_dir',
-            'fech_recive_dir',
-            'time_recive_dir',
-            'fech_notifi_end',
-            'time_notifi_end'
-        ));
+        $radicado->send_temp_admin = 1;
+        $radicado->revisar = null;
         $radicado->save();
         return redirect()->route('direction.edit',[$direction])->with('status','Respuesta guardada');
     }

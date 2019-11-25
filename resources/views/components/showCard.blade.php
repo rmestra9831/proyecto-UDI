@@ -152,11 +152,12 @@
                   @if ($radicado->respuesta && $radicado->aproved)
                     <div class="row">
                       <div class="col-12 d-flex">
-                        <div class="col-6">
-                          <button class="btn btn-outline-success col-12" type="submit"><i class="far fa-file-word"></i> Descargar</button>
-                        </div> 
-                        <div class="col-6">
-                          <button class="btn btn-outline-primary col-12" type="submit"><i class="far fa-file-word"></i> Ver</button>
+                        
+                        <div class="col-12">
+                          <form method="POST" action="{{action('ReportController@DownloadResponse', $radicado->slug)}}">
+                              @method('GET') @csrf
+                            <button class="btn btn-outline-success col" type="submit" data-toggle="tooltip" data-placement="top" title="Descargar Respuesta"><i class="fas fa-arrow-alt-circle-down"></i>Descargar</button>
+                          </form>
                         </div> 
                       </div>
                     </div>
@@ -182,41 +183,54 @@
                       </div>
                     </div>
                   @endif
-                @else
-                  {{-- si no es AR Muestra para cargar respuesta --}}
-                  <form method="POST" action="{{action('RegctrolController@uploadWORD', $radicado->slug)}}" enctype="multipart/form-data">
-                    @method('PUT') @csrf          
-                    <div class="row upload_response" style="margin-left: 5px">
-                      <div class="col-7">
-                        <input name="respuesta" type="file" class="custom-file-input @error('respuesta') is-invalid @enderror" id="customFileLang" lang="es">
-                        <label class="custom-file-label col-form-label col-form-label-sm text-truncate" for="customFileLang" data-browse="Cargar Respuesta">Archivo</label>                    
-                      </div>
-                      <div class="col-5">
-                        <button class="btn btn-outline-primary" type="submit"><i class="far fa-file-word"></i> Cargar</button>
-                      </div>  
-                    </div>
-                  </form>
                 @endif
               @else
-                {{-- cuando la respuesta a sido cargada y aprovada se muestra esto --}}
-                <div class="row">
-                  <div class="col-12 d-flex">
-                    <div class="col-6">
-                      <button class="btn btn-outline-success col-12" type="submit"><i class="far fa-file-word"></i> Descargar</button>
-                    </div> 
-                    <div class="col-6">
-                      <button class="btn btn-outline-primary col-12" type="submit"><i class="far fa-file-word"></i> Ver</button>
-                    </div> 
-                  </div>
-                </div> 
+                {{-- cuando la respuesta a sido cargada y aprovada se muestra esto --}}               
+                @if ($radicado->aproved && $radicado->fech_recive_radic)
+                  <div class="row">
+                    <div class="col-12 d-flex">
+                      <div class="col-6">
+                        <form method="POST" action="{{action('ReportController@DownloadResponse', $radicado->slug)}}">
+                            @method('GET') @csrf
+                          <button class="btn btn-outline-success col" type="submit" data-toggle="tooltip" data-placement="top" title="Descargar Respuesta"><i class="fas fa-arrow-alt-circle-down"></i>Descargar</button>
+                        </form>
+                      </div>
+                      <div class="col-6">
+                        <div class="card">
+                          <div class="card-body">
+                            <p class="card-text d-block text-center">
+                              {{-- muestra a que director a sido asignada la respesta --}}
+                              aprobado
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
+                  @else
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="card">
+                          <div class="card-body">
+                            <p class="card-text d-block text-center">
+                              {{-- muestra a que director a sido asignada la respesta --}}
+                              @if ($radicado->delegate_id)
+                                @foreach ($programas as $programa)
+                                  @if ($programa->id == $radicado->delegate_id)
+                                    Respuesta delegada a {{$programa->name}}
+                                  @endif
+                                @endforeach
+                              @else
+                                Respuesta sin delegar
+                              @endif
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                @endif
               @endif
             </div>
-            <!--mostrando cuando se edito la respuesta-->
-            @if ($radicado->fech_recive_radic != null)
-              @if ($radicado->editAdmRequest != null)
-                <small id="emailHelp" class="form-text text-muted">[Editado por el Administrador {{$radicado->editAdmRequest}} ]</small> 
-              @endif
-            @endif
           </div>
         </div>
         {{-- aqui muestra la hora en la que fue aprobado la respuesta --}}
@@ -281,10 +295,52 @@
                         <div class="row">
                           <div class="col-12 d-flex">
                             <div class="col-6">
-                              <button class="btn btn-outline-success col-12" type="submit"><i class="far fa-file-word"></i> Descargar</button>
+                              {{-- validación si se manda a revisar  --}}
+                              @if ($radicado->revisar)
+                                <form method="POST" action="{{action('RegctrolController@uploadWORD', $radicado->slug)}}" enctype="multipart/form-data">
+                                  @method('PUT') @csrf          
+                                  <div class="row upload_response">
+                                    <div class="col-7">
+                                      <input name="respuesta" type="file" class="custom-file-input @error('respuesta') is-invalid @enderror" id="customFileLang" lang="es">
+                                      <label class="custom-file-label col-form-label col-form-label-sm text-truncate" for="customFileLang" data-browse="...">Archivo</label>                    
+                                    </div>
+                                    <div class="col-5">
+                                      <button class="btn btn-outline-primary" type="submit" data-toggle="tooltip" data-placement="top" title="Cargar Nueva Respuesta"><i class="fas fa-arrow-circle-up"></i></button>
+                                    </div>  
+                                  </div>
+                                </form>
+                              @endif
+                                <form method="POST" action="{{action('ReportController@DownloadResponse', $radicado->slug)}}">
+                                    @method('GET') @csrf
+                                  <button class="btn btn-outline-success col" type="submit" data-toggle="tooltip" data-placement="top" title="Descargar Respuesta"><i class="fas fa-arrow-alt-circle-down"></i>Descargar</button>
+                                </form>
                             </div> 
                             <div class="col-6">
-                              <button class="btn btn-outline-primary col-12" type="submit"><i class="far fa-file-word"></i> Ver</button>
+                              {{-- enviar respuesta a dirección para aprobación --}}
+                              @if ($radicado->revisar || !$radicado->send_temp_admin)
+                                <form method="POST" action="{{action('DirectionController@saveRequest', $radicado->slug)}}">
+                                  @method('PUT') @csrf          
+                                  <button class="btn btn-outline-primary col-12" type="submit"><i class="far fa-share-square"></i> Enviar a Dirección</button>
+                                </form>
+                              @else
+                                {{-- muestra la confirmación de que fue resuelta la respuesta --}}
+                                @if ($radicado->aproved)
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <div class="card">
+                                        <div class="card-body">
+                                          <p class="card-text d-block text-center">
+                                            {{-- muestra a que director a sido asignada la respesta --}}
+                                            aprobado
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                @else
+                                  <button class="btn btn-outline-dark-50 col-12 disabled"disabled type="">Esperando Confirmación</button>
+                                @endif
+                              @endif
                             </div> 
                           </div>
                         </div> 
@@ -375,7 +431,7 @@
           @endif
 
           {{-- valida se esta aprovada la respuesta --}}
-            @if ($radicado->revisar!= null && !$radicado->aproved )
+            @if ($radicado->revisar == null && !$radicado->aproved )
               <div class="col-12 align-content-center">
                 <div class="container card col-8">
                   <div class="card-body">
@@ -458,11 +514,11 @@
             @endif
           @else
           <!-- ESTO ES LO QUE VE EL ADMINISTRADOR -->
-          <div class="col-6">
+            <div class="col-6">
               <div class="form-group">
                 <label class="card-text" for="my-textarea">respuesta:</label>
                 <div class="row custom-file">
-                  @if (!$radicado->respuesta)
+                  @if (!$radicado->send_temp_admin)
                     {{-- mostrando delegado --}}
                     <div class="row">
                         <div class="col-12">
@@ -486,14 +542,51 @@
                       </div>
                   @else
                     <div class="row">
-                      <div class="col-12 d-flex">
-                        <div class="col-6">
-                          <button class="btn btn-outline-success col-12" type="submit"><i class="far fa-file-word"></i> Descargar</button>
+                      <div class="col-12 d-flex"> 
+                        <div class="col-8">
+                          {{-- formulario apra editar la respuesta en el administrador --}}
+                          @if (!$radicado->aproved)
+                            <div class="form-group card">
+                              <form method="POST" action="{{action('RegctrolController@uploadWORD', $radicado->slug)}}" enctype="multipart/form-data">
+                                @method('PUT') @csrf          
+                                <div class="row upload_response card-body">
+                                  <div class="col-9">
+                                    <input name="respuesta" type="file" class="custom-file-input @error('respuesta') is-invalid @enderror" id="customFileLang" lang="es">
+                                    <label class="custom-file-label col-form-label col-form-label-sm text-truncate" for="customFileLang" data-browse="Respuesta">Archivo</label>                    
+                                  </div> 
+                                  <div class="col-3">
+                                    <button class="btn btn-outline-primary" type="submit"><i class="fas fa-arrow-up"></i> </button>  
+                                  </div> 
+                                </div>
+                              </form>   
+                            </div>
+                          @else
+                            <div class="row">
+                              <div class="col-12">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <p class="card-text d-block text-center">
+                                      {{-- muestra a que director a sido asignada la respesta --}}
+                                      @if ($radicado->aproved)
+                                        @foreach ($programas as $programa)
+                                          @if ($programa->id == $radicado->delegate_id)
+                                            Respuesta delegada a {{$programa->name}}
+                                          @endif
+                                        @endforeach
+                                      @endif
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          @endif
                         </div> 
-                        <div class="col-6">
-                          <button class="btn btn-outline-primary col-12" type="submit" value=" {{$radicado->filePDF}} " data-toggle="modal" data-target="#exampleModalCenterWORD"><i class="fas fa-eye"></i> Ver </button>
-
-                          {{-- <button class="btn btn-outline-primary col-12" type="submit"><i class="far fa-file-word"></i> Ver</button> --}}
+                        <div class="col-4">
+                          {{-- descargar la respuesta --}}
+                          <form method="POST" action="{{action('ReportController@DownloadResponse', $radicado->slug)}}">
+                              @method('GET') @csrf
+                            <button class="btn btn-outline-success col-12" type="submit"><i class="fas fa-cloud-download-alt"></i> Descargar</button>
+                          </form>
                         </div> 
                       </div>
                     </div>
@@ -539,34 +632,19 @@
           </form>
         </div>
       @else
-        @if (!$radicado->respuesta)
+        @if ($radicado->send_temp_admin == null)
           <div class="card col-8">
             <div class="card-body">
               <h5 class="card-title text-center">Esperando respuesta</h5>
             </div>
           </div>
         @else
-        
-        <!-- boton para editar la respuesta-->
-          <form method="POST" action="{{action('AdminController@saveRequest', $radicado->slug)}}">
-              @method('PUT')
-              @csrf
-  
-              <input type="hidden" name="editAdmRequest" value="{{date('h:i:s A')}} | {{date('d_m_Y')}}">
-              <input type="text" name="respuesta" id="seteoTextArea" value="" hidden>
-              @if ($radicado->aproved != 1)
-                @if ($radicado->revisar == 1 || $radicado->aproved ==1)
-                @else  
-                  <button id="btnedit" name="" class="btn btn-outline-primary mr-2 ml-2" type="submit" disabled>Editar</button>
-                @endif
-              @endif
-          </form>
-        <!-- boton para editar la respuesta-->
+        <!-- boton para modificar la respuesta-->
           <form method="POST" action="{{action('EstadoController@revisar', $radicado->slug)}}">
             @method('PUT')
             @csrf
             <input type="text" name="revisar" id="" value="1" hidden>
-            <button  class="btn btn-outline-danger mr-2 ml-2" type="submit" <?php if($radicado->revisar == 1 || $radicado->aproved == 1){ ?>disabled<?php }?>><?php if($radicado->revisar == 1){ ?>Revisando<?php }else{?> Revisar<?php }?></button>
+            <button  class="btn btn-outline-danger mr-2 ml-2" type="submit" <?php if($radicado->revisar == 1 || $radicado->aproved == 1){ ?>disabled<?php }?>><?php if($radicado->revisar == 1){ ?>Revisando<?php }else{?> Modificar<?php }?></button>
           </form>
         <!-- boton para aprovar la respuesta-->
           <form method="POST" action="{{action('EstadoController@aprovado', $radicado->slug)}}">
@@ -623,7 +701,6 @@
   </table>
   
 @include('components.modalViewPDF')
-@include('components.modalViewWORD')
   <script>
     // manda la orden pra previsualización del docuemento
     $('.table #btnEdit').click(function(){

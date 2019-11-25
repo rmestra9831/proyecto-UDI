@@ -67,7 +67,7 @@
                   </div>
                   <!-- select de academico-->
                   <select name="motivo_id" id="motivo_select" class="form-control form-control-lg" disabled>
-                    <option class="" value=" {{old('motivo_id')}} " vname="">Selección</option>    
+                    <option class="" value="" vname="">Selección</option>    
                       <!-- Select del sector academico -->
                       <div class="list_ac">                                     
                         @foreach ($motivos as $motivo)
@@ -84,21 +84,6 @@
                   </select>
                 </div>
               </div>
-            <!--
-              <div class="col-9">
-                <label class="text-capitalize col-form-label-lg col-form-label" for="motivo_id">motivo</label>
-                <div class="card">
-                  <div class="col-6 form-group" no-margin>
-                    <select name="motivo_id" id="motivo_select" class=" form-control form-control-lg">
-                        <option class="" value="" vname="">Seleción</option>                                          
-                      @foreach ($motivos as $motivo)
-                      <option class="" id="itemSelecMotivo" value="{{$motivo->id}}" vname="{{$motivo->name}}">{{$motivo->name}}</option>
-                      @endforeach
-                    </select>
-                  </div>
-                </div>
-              </div>
-            -->
                 <div class="col-6 form-group" no-margin>
                     <label class="text-capitalize col-form-label-lg col-form-label" for="asunto">asunto</label>            
                     <input value="" type="text" class="form-control form-control-lg @error('last_name') is-invalid @enderror bl-form-text" name="asunto" id="asunto" disabled placeholder="Asunto" data-word-limit="120" {{old('asunto')}}/>

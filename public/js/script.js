@@ -96,6 +96,10 @@
 // INICIA LA ANIMACIÓN DEL CAMPO CARGAR
 $(document).ready(function () {
   bsCustomFileInput.init();
+}); // activando tooltips
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
 }); //imports
 
 window.setTimeout(function () {
@@ -264,7 +268,7 @@ $(select_mot_type).change(function (e) {
       asunto.value = '';
     }
   } else {
-    select_mot.value = '';
+    select_mot.value = 1;
     asunto.value = '';
     opt1 = $("[vtypemotivo='1']").hide();
     opt2 = $("[vtypemotivo='2']").hide();
