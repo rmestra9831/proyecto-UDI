@@ -38,8 +38,11 @@
                           <select name="program_id" id="" class="form-control form-control-lg @error('program_id') is-invalid @enderror">
                             <option class="text-capitalize" value="{{ old('program_id') }}">Selección</option>                      
                             @foreach ($programas as $programa)
-                            <option class="" value="{{$programa->id}} {{ old('program_id') }}">Dirección de {{$programa->name}}
-                            </option>
+                              @if ($programa->id != 1)
+                                <option class="" value="{{$programa->id}} {{ old('program_id') }}">Dirección de {{$programa->name}}</option>
+                              @else
+                                <option class="" value="{{$programa->id}} {{ old('program_id') }}">{{$programa->name}}</option>
+                              @endif
                             @endforeach
                           </select>
                         </div>

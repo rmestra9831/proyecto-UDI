@@ -70,7 +70,7 @@
         @endif
           @foreach ($radicados as $radicado)
             @if($radicado->sede == Auth::user()->sede)
-              @if ($radicado->sede == Auth::user()->sede) <!--Autenticación para impirmir los radicados dependiendo el usuario-->
+              @if ($radicado->sede == Auth::user()->sede && $radicado->delegate_id == Auth::user()->program_id) <!--Autenticación para impirmir los radicados dependiendo el usuario-->
                 @if ($radicado->fech_send_dir == '')
                 @else
                   @if ($radicado->fech_recive_radic == '')
@@ -171,40 +171,17 @@
             <!-- imprime todo lo que no se ha revisado -->
             @foreach ($radicados as $radicado)
               @if ($radicado->respuesta != null)
-                @if ($radicado->openAdm == 1 )
-                  <div class="col-11 content-card">
-                    {{-- mostrar imagen segun el estado --}}
-                      @if ($radicado->revisar == 1)
-                        <img src="{{asset('img/waiting.svg')}}" alt="">
-                      @else
-                        @if ($radicado->aproved == 1)
-                          <img src="{{asset('img/check.svg')}}" alt="">
-                        @endif
-                      @endif
-                    @include('components.cards')
-                  </div>
-                @else
-                  @if (Auth::user()->type_user != 1)
-                      <div class="col-11 content-card">
-                        <!--ventada de recivido-->
-                        <div class="unrecive" id="{{$radicado->id}}" valid="{{$radicado->id}}">
-                          <!-- formulario para actualizar el estado de recivido direccion-->
-                          <form action="{{route('status.openRadicAdm',$radicado->slug)}}" method="post">
-                             @method('PUT')
-                             @csrf
-                               <input  name="openAdm" type="hidden" value="1">
-                            <button class="btn btn-primary text-capitalize" type="submit">Abrir</button>
-                          </form>
-                      </div>
-                        @include('components.cards')
-                      </div>
+                <div class="col-11 content-card">
+                  {{-- mostrar imagen segun el estado --}}
+                    @if ($radicado->revisar == 1)
+                      <img src="{{asset('img/waiting.svg')}}" alt="">
                     @else
-                      <div class="col-11 content-card">   
-                        @include('components.cards')
-                      </div>
-                      <div>
-                  @endif
-                @endif
+                      @if ($radicado->aproved == 1)
+                        <img src="{{asset('img/check.svg')}}" alt="">
+                      @endif
+                    @endif
+                  @include('components.cards')
+                </div>
               @endif
             @endforeach
         </div>

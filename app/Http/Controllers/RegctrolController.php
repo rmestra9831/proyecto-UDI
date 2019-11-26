@@ -149,7 +149,7 @@ class RegctrolController extends Controller
             $subject= 'Atención Inmediata R#'.$radicado->fechradic_id.'-'.$radicado->year;
             $messaje= 'mensaje de prueba';
             Mail::to($mail)->send(new SendUrgenteMail($subject, $messaje, $radicado, $programas));
-    //enviado correo director programa
+            //enviado correo director programa
             foreach ($programas as $programa) {
                 if ($programa->id == $radicado->sendTo_id) {
                     if ($radicado->sendTo_id == 1) {
@@ -210,7 +210,11 @@ class RegctrolController extends Controller
                 $radicado->respuesta = $request->file('respuesta')->store('public');
                 $radicado->respon_id = Auth::user()->id;
                 $radicado->save();
-                return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('status','Archivo subido correctametne');
+                if (Auth::user()->type_user == 3) {
+                    return redirect()->route('direction.edit',[$reg_ctrol])->with('status','Archivo subido correctametne');
+                }elseif(Auth::user()->type_user == 4){
+                    return redirect()->route('dirprog.showinfoRadic',[$reg_ctrol])->with('status','Archivo subido correctametne');
+                }
 
         } catch (\Throwable $th) {
             return redirect()->route('reg-ctrol.edit',[$reg_ctrol])->with('error','A ocurrido un error al subir el archivo');

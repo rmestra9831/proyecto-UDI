@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title','| Radicado')
 @section('content-panel')
-
+<div></div>
 <div class="container show-card">
   @include('common.success')      
     <div class="col-11 content-show-card">

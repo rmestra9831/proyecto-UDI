@@ -9,7 +9,16 @@
           <a class="col nav-item nav-link" id="nav-enviados-tab" data-toggle="tab" href="#nav-enviados" role="tab" aria-controls="nav-enviados" aria-selected="false">Enviados</a>
           <a class="col nav-item nav-link" id="nav-recivido-tab" data-toggle="tab" href="#nav-recivido" role="tab" aria-controls="nav-recivido" aria-selected="false">Recibido</a>
           <a class="col nav-item nav-link" id="nav-respondido-tab" data-toggle="tab" href="#nav-respondido" role="tab" aria-controls="nav-respondido" aria-selected="false">Respondido</a>
-          <a class="col nav-item nav-link" id="nav-respondido-tab" data-toggle="tab" href="#nav-reciverg" role="tab" aria-controls="nav-reciverg" aria-selected="false">Recibido RG</a>
+          <a class="col nav-item nav-link" id="nav-respondido-tab" data-toggle="tab" href="#nav-reciverg" role="tab" aria-controls="nav-reciverg" aria-selected="false">Recibido AR
+            {{-- muestra la notificación si hay radicados --}}
+              <?php
+                $radic = DB::table('radicados')->where([['fech_recive_radic','!=',' '],['fech_notifi_end',null],['fech_delivered','!=',null]])->get();
+                if (count($radic)!=0) {
+                  ?>  <span class="badge badge-secondary"> {{count($radic)}} </span> <?php
+                }
+              ?>
+        
+          </a>
           <a class="col nav-item nav-link" id="nav-entregados-tab" data-toggle="tab" href="#nav-entregados" role="tab" aria-controls="nav-entregados" aria-selected="false">Entregados</a>
           <a class="col nav-item nav-link" id="nav-pendientes-tab" data-toggle="tab" href="#nav-pendientes" role="tab" aria-controls="nav-pendientes" aria-selected="false">Pendientes
             {{-- muestra la notificación si hay radicados --}}

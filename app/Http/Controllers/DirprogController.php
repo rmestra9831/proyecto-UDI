@@ -38,18 +38,8 @@ class DirprogController extends Controller
         return view('dir_prog.showRadic', compact('radicado','programas','users'));
     }
 
-    public function saveRequest (UpdateRespuestaRequest $request, Radicado $direction)
-    {
-        $radicado = $direction;
-        $radicado->fill($request->except(
-            'fech_send_dir',
-            'time_send_dir',
-            'fech_recive_dir',
-            'time_recive_dir',
-            'fech_notifi_end',
-            'time_notifi_end'
-        ));
-        $radicado->save();
+    public function saveRequest (UpdateRespuestaRequest $request, Radicado $direction){
+        
         return redirect()->route('direction.edit',[$direction])->with('status','Respuesta guardada');
     }
 }

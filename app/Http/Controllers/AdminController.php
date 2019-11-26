@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendDirProgMail;
 use App\Models\Radicado;
 use App\Models\Program;
 use App\Models\Motivo;
@@ -230,7 +232,29 @@ class AdminController extends Controller
         $radicado = $admin;
         $radicado->delegate_id = $request->input('delegate_id');
         $radicado->save();
-        return redirect()->route('admin.ShowRadic',[$admin])->with('status','Petición de Respuesta enviada');
+        // enviando correo
+        $programas =Program::all();
+
+        if ($radicado->atention == 'urgente') {
+            foreach ($programas as $programa) {
+                if ($programa->id == $radicado->delegate_id) {                
+                    $mailDirProg= $programa->correo_director;
+                    $subjectDirProg= 'Atención Inmediata R#'.$radicado->fechradic_id.'-'.$radicado->year;
+                    $messajeDirProg= 'mensaje de prueba';
+                    Mail::to($mailDirProg)->send(new SendDirProgMail($subjectDirProg, $messajeDirProg, $radicado));                
+                }
+            }
+        }else{
+            foreach ($programas as $programa) {
+                if ($programa->id == $radicado->delegate_id) {
+                    $mailDirProg= $programa->correo_director;
+                    $subjectDirProg= 'Nuevo Radicado R#'.$radicado->fechradic_id.'-'.$radicado->year;
+                    $messajeDirProg= 'mensaje de prueba';
+                    Mail::to($mailDirProg)->send(new SendDirProgMail($subjectDirProg, $messajeDirProg, $radicado));                
+                }
+            }
+        }   
+        return redirect()->route('admin.ShowRadic',[$admin])->with('status','La solicitud de respuesta a sido emitida');
     }
     /**
      * Remove the specified resource from storage.

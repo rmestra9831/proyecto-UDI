@@ -105,11 +105,7 @@
               @else
                 @foreach ($users as $user)
                     @if ($user->id == $radicado->respon_id)
-                    {{$user->name}} | <?php foreach ($programas as  $programa) {
-                      if ($programa->id == $user->program_id) {
-                        ?> {{$programa->name}} <?php
-                      }
-                    } ?>
+                    {{$user->name}} | {{$radicado->program->name}}
                     @endif
                 @endforeach
               @endif

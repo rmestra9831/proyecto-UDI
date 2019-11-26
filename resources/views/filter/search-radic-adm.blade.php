@@ -14,7 +14,15 @@
                 }
               ?>        
           </a>
-          <a class="col nav-item nav-link" id="nav-pendiente-tab" data-toggle="tab" href="#nav-pendiente" role="tab" aria-controls="nav-pendiente" aria-selected="false">Pendiente</a>
+          <a class="col nav-item nav-link" id="nav-pendiente-tab" data-toggle="tab" href="#nav-pendiente" role="tab" aria-controls="nav-pendiente" aria-selected="false">Pendiente
+            {{-- muestra la notificación PENDIENTES EN ADMINISTRADOR --}}
+              <?php
+                $radic = DB::table('radicados')->where([['aproved',null],['fech_recive_radic',null],['fech_recive_dir','!=',' '],['send_temp_admin','!=',null]])->orWhere([['fech_recive_dir','!=',' '],['delegate_id',null]])->get();
+                if (count($radic)!=0) {
+                  ?>  <span class="badge badge-secondary"> {{count($radic)}} </span> <?php
+                }
+              ?>
+          </a>
           <a class="col nav-item nav-link" id="nav-editado-tab" data-toggle="tab" href="#nav-editado" role="tab" aria-controls="nav-editado" aria-selected="false">Editado</a>
           <a class="col nav-item nav-link" id="nav-corregir-tab" data-toggle="tab" href="#nav-corregir" role="tab" aria-controls="nav-corregir" aria-selected="false">Corregir</a>
           <a class="col nav-item nav-link" id="nav-aprovado-tab" data-toggle="tab" href="#nav-aprovado" role="tab" aria-controls="nav-aprovado" aria-selected="false">Aprobado</a>

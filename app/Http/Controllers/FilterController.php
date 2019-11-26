@@ -96,7 +96,7 @@ class FilterController extends Controller
             $users= User::get();
             $motivos= Motivo::orderBy('name', 'ASC')->get();
             $programas= Program::get();
-            $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
+            $radicados= Radicado::where([['sede',Auth::user()->sede],['delegate_id',Auth::user()->program_id]])->orderBy('id', 'DESC')->get();
             // $radicados= Radicado::orderBy('id', 'DESC')->get();
             $query_norm = Radicado::orderBy('id', 'DESC')->whereNull('fech_send_dir')
             ->name($name)
@@ -106,6 +106,7 @@ class FilterController extends Controller
             ->programa($programa)->get();#->paginate(1)
         //filtrdo de recibidos            
             $query_recive_dir = Radicado::orderBy('id', 'DESC')->where([
+                ['delegate_id',Auth::user()->program_id],
                 ['fech_notifi_end',null],
                 ['respuesta',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo para responder          
@@ -119,17 +120,21 @@ class FilterController extends Controller
                 ['revisar',true]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de respondidos            
             $query_response_dir = Radicado::orderBy('id', 'DESC')->where([
+                ['delegate_id',Auth::user()->program_id],
                 ['respuesta','!=',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de entregados           
             $query_entregado_dir = Radicado::orderBy('id', 'DESC')->where([
+                ['delegate_id',Auth::user()->program_id],
                 ['fech_recive_radic','!=',' ']])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de pendientes           
             $query_pendiente_dir = Radicado::orderBy('id', 'DESC')->where([
+                ['delegate_id',Auth::user()->program_id],
                 ['fech_recive_dir','!=',' '],
                 ['fech_recive_radic',null],
                 ['aproved',!false]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de importantes           
             $query_important_dir = Radicado::orderBy('id', 'DESC')->where([
+                ['delegate_id',Auth::user()->program_id],
                 ['atention','=','urgente '],])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
             // dd($query_responder_dir);
                 $roles = Role::get();
@@ -242,7 +247,6 @@ class FilterController extends Controller
             ->programa($programa)->get();#->paginate(1)
         //filtrdo de corregir           -- PENDIENTE POR CORREGIR 
             $query_corregir_dir = Radicado::orderBy('id', 'DESC')->where([
-            ['delegate_id',Auth::user()->program_id],
             ['revisar',true],
             ['fech_recive_radic',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de respondidos    l        
@@ -257,8 +261,15 @@ class FilterController extends Controller
                 ['fech_recive_radic','!=',' ']])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de pendientes           
             $query_pendiente_dir = Radicado::orderBy('id', 'DESC')->where([
-                ['fech_send_dir','!=',' '],
-                ['respuesta',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
+                ['aproved',null],
+                ['fech_recive_radic',null],
+                ['fech_recive_dir','!=',' '],
+                ['send_temp_admin','!=',null]])
+                ->orWhere([
+                    ['fech_recive_dir','!=',' '],
+                    ['delegate_id',null],
+                ])
+                ->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de importantes          
             $query_important_dir = Radicado::orderBy('id', 'DESC')->where([
                 ['atention','=','urgente '],])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();

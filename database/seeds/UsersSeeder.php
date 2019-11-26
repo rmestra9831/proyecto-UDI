@@ -44,7 +44,7 @@ class UsersSeeder extends Seeder
             'type_user'=>'4',
             'sede'=>'1',
             'password'=> bcrypt('123'),
-            'program_id'=>null
+            'program_id'=>2
         ]);
         // aqui van los usuarios de barranca
         DB::table('users')->insert([
