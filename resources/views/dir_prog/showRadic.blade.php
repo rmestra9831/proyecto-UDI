@@ -3,8 +3,8 @@
 @section('content-panel')
 <div></div>
 <div class="container show-card">
-  @include('common.success')      
-    <div class="col-11 content-show-card">
+  <div class="col-11 content-show-card">
+      @include('common.success')      
       @include('components.showCard')
   
       <div class="col-12 text-center text-capitalize">

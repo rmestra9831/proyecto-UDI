@@ -1,23 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
-
-<p><strong>Estimado(a) Ing.
-  @foreach ($e_users as $e_user)
-    @if ($e_user->program_id == $e_data->program->id )
-        sass
-    @endif
-  @endforeach
-</strong></p>
-<p>Nombre: <strong></strong></p>
-<p>aqui va todo el contenido delcorreo</p>
-
-
-</body>
-</html>
+<div style="display: position: relative; display: flex;">
+  <div class="row" style="text-align:center;margin:50px 0 0 0;">
+    <div class="body">
+        <p><strong>Estimado(a) Ing. {{$user}}</strong></p>
+        <p>
+            Se ha recibido una comunicación con radicado No. <strong>{{$data->fechradic_id}}-{{$data->year}}</strong>, 
+            para que por favor emita su respuesta en el término de 3 días hábiles.<br><br>
+        </p>
+        <p>
+            Agradecemos dar cumplimiento a lo mencionado<br><br>
+            Cordialmente<br><br>
+            Ing. Jhon Jairo Jiménez Taborda<br><br>
+            Director Sede {{$sede}}    
+        </p>
+        
+    </div>
+  </div>
+</div>

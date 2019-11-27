@@ -190,9 +190,11 @@ class FilterController extends Controller
         //filtrdo de pendientes           
         $query_pendiente_dir = Radicado::orderBy('id', 'DESC')->where([
             ['delegate_id',Auth::user()->program_id],
-            ['fech_recive_dir','!=',' '],
-            //['respuesta',null], 
-            ['fech_recive_radic',null]])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
+            ['revisar','!=',1],
+            ['send_temp_admin',null]])->orWhere([
+                ['send_temp_admin','!=',null],
+                ['delegate_id',Auth::user()->program_id]
+            ])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de corregir           
         $query_corregir_dir = Radicado::orderBy('id', 'DESC')->where([
             ['delegate_id',Auth::user()->program_id],

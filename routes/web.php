@@ -26,6 +26,8 @@ Route::get('/', function () {
             return redirect()->intended('/home/reg-ctrol');
         }elseif(auth()->user()->type_user == 4) {
             return redirect()->intended('dir-programa');
+        }elseif(auth()->user()->type_user == 5){
+            return redirect()->intended('superAdm');
         }else{
             return redirect()->intended('admin');
         }
@@ -54,10 +56,6 @@ Route::group(['middleware' => 'auth','userAdm'], function () {
     Route::resource('admin', 'AdminController');
     Route::get('Export_for_ar', 'ReportController@indexAR')->name('Report.indexAR');
     Route::get('Export_for_dir', 'ReportController@indexDir')->name('Report.indexDir');
-    Route::get('show_Users', 'AdminController@showUsers')->name('admin.showUsers');
-    Route::get('show_Directores', 'AdminController@showDir')->name('admin.showDir');
-    Route::get('show_programas', 'AdminController@showProg')->name('admin.showProg');
-    Route::get('show_radicados', 'AdminController@showRadics')->name('admin.showRadics');
     Route::get('admin/{admin}/show_Users', 'AdminController@ShowRadic')->name('admin.ShowRadic');
     Route::get('admin/{admin}/edit_user', 'AdminController@userEdit')->name('admin.userEdit');    
     Route::get('admin/{admin}/edit_dir', 'AdminController@dirEdit')->name('admin.dirEdit');    
@@ -82,8 +80,12 @@ Route::group(['middleware' => 'auth','UserDirProg'], function () {
     Route::get('save_request/{dirprog}','DirprogController@saveRequest')->name('dirprog.saveRequest');
 });
 //rutas de superadministrador
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('superAdm','SuperadmController@index')->name('superAdm.index');    
+Route::group(['middleware' => 'auth','UserSuperAdm'], function () {
+    Route::get('superAdm','SuperadmController@index')->name('superAdm.index');
+    Route::get('show_Users/config', 'SuperadmController@showUsers')->name('superAdm.showUsers');
+    Route::get('show_Directores/config', 'SuperadmController@showDir')->name('superAdm.showDir');
+    Route::get('show_programas/config', 'SuperadmController@showProg')->name('superAdm.showProg');
+    Route::get('show_radicados/config', 'SuperadmController@showRadics')->name('superAdm.showRadics');
 });
 //rutas de estado
 Route::resource('status', 'EstadoController')->middleware('auth');

@@ -77,6 +77,8 @@ class LoginController extends Controller
                 return redirect()->intended('/reg-ctrol');
             }elseif(auth()->user()->type_user == 4){
                 return redirect()->intended('/dir_programa');
+            }elseif(auth()->user()->type_user == 5){
+                return redirect()->intended('/superAdm');
             }else{
                 return route('admin.index');
             }

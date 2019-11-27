@@ -82,14 +82,23 @@
               @if (Auth::user()->type_user == 4)
                 <a href="{{route('dirprog.index')}}"><i class="fas fa-chevron-right"></i>inicio</a>
                 <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>
-                <a href="{{route('filter.viewSearchRadicDir_prog')}}"><i class="fas fa-chevron-right"></i>estado de radicados</a>  
+                <a href="{{route('filter.viewSearchRadicDir_prog')}}"><i class="fas fa-chevron-right"></i>estado de radicados
+                  {{-- muestra la notificación si hay radicados por responder --}}
+                   <?php
+                      $radic_pendiente = DB::table('radicados')->where([['send_temp_admin',null],['fech_recive_dir','!=',' '],['delegate_id',Auth::user()->program_id]])->orWhere([['send_temp_admin','!=',null],['delegate_id',Auth::user()->program_id]])->get();
+                      $radic = DB::table('radicados')->where([['respuesta',null],['delegate_id',Auth::user()->program_id]])->get();
+                      if (count($radic)>0 || count($radic_pendiente)>0) {
+                        ?> <strong status="" data-toggle="tooltip" data-placement="top" title="Tooltip on top" aria-hidden="true" class="fas fa-circle status-recive-dir"></strong> <?php
+                      }
+                   ?>
+                </a>  
               @else
                 @if (Auth::user()->type_user == 5) {{--SUPER-ADMIN--}}
                   <a href="{{route('superAdm.index')}}"><i class="fas fa-chevron-right"></i>Inicio</a>
-                  <a href="{{route('admin.showRadics')}}"><i class="fas fa-chevron-right"></i>radicados</a>  
-                  <a href="{{route('admin.showUsers')}}"><i class="fas fa-chevron-right"></i>Usuarios</a>
-                  <a href="{{route('admin.showDir')}}"><i class="fas fa-chevron-right"></i>Directores</a>
-                  <a href="{{route('admin.showProg')}}"><i class="fas fa-chevron-right"></i>programas</a>
+                  <a href="{{route('superAdm.showRadics')}}"><i class="fas fa-chevron-right"></i>radicados</a>  
+                  <a href="{{route('superAdm.showUsers')}}"><i class="fas fa-chevron-right"></i>Usuarios</a>
+                  <a href="{{route('superAdm.showDir')}}"><i class="fas fa-chevron-right"></i>Directores</a>
+                  <a href="{{route('superAdm.showProg')}}"><i class="fas fa-chevron-right"></i>programas</a>
                 @else
                   <a href="{{route('admin.index')}}"><i class="fas fa-chevron-right"></i>Inicio</a>
                   <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>   

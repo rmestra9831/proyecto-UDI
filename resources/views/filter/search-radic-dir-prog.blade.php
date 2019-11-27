@@ -5,9 +5,25 @@
   <div p1 class="row title-content">
       <h2 class="text-center text-capitalize title">Filtrado Por Estados</h2>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          <a class="col nav-item nav-link active" id="nav-recivido-tab" data-toggle="tab" href="#nav-recivido" role="tab" aria-controls="nav-recivido" aria-selected="false">Recibido</a>
+          <a class="col nav-item nav-link active" id="nav-recivido-tab" data-toggle="tab" href="#nav-recivido" role="tab" aria-controls="nav-recivido" aria-selected="false">Recibido
+            <!-- {{-- muestra la notificación si hay radicados por responder --}} -->
+              <?php
+                $radic = DB::table('radicados')->where([['respuesta',null],['delegate_id',Auth::user()->program_id]])->get();
+                if (count($radic)!=0) {
+                  ?> <span class="badge badge-primary"> {{count($radic)}} </span> <?php
+                }
+              ?>
+          </a>
           <a class="col nav-item nav-link" id="nav-respondido-tab" data-toggle="tab" href="#nav-respondido" role="tab" aria-controls="nav-respondido" aria-selected="false">Respondido</a>
-          <a class="col nav-item nav-link" id="nav-pendientes-tab" data-toggle="tab" href="#nav-pendientes" role="tab" aria-controls="nav-pendientes" aria-selected="false">Pendientes</a>
+          <a class="col nav-item nav-link" id="nav-pendientes-tab" data-toggle="tab" href="#nav-pendientes" role="tab" aria-controls="nav-pendientes" aria-selected="false">Pendientes
+                        {{-- muestra la notificación si hay radicados --}}
+                        <?php
+                        $radic = DB::table('radicados')->where([['send_temp_admin',null],['revisar','!=',1],['delegate_id',Auth::user()->program_id]])->orWhere([['send_temp_admin','!=',null],['delegate_id',Auth::user()]])->get();
+                        if (count($radic)!=0) {
+                          ?>  <span class="badge badge-secondary"> {{count($radic)}} </span> <?php
+                        }
+                      ?>
+          </a>
           <a class="col nav-item nav-link" id="nav-corregir-tab" data-toggle="tab" href="#nav-corregir" role="tab" aria-controls="nav-corregir" aria-selected="false">Corregir</a>
           <a class="col nav-item nav-link" id="nav-aprovado-tab" data-toggle="tab" href="#nav-aprovado" role="tab" aria-controls="nav-aprovado" aria-selected="false">Aprobado</a>
           <a class="col nav-item nav-link" id="nav-importantes-tab" data-toggle="tab" href="#nav-importantes" role="tab" aria-controls="nav-importantes" aria-selected="false">Importantes</a>

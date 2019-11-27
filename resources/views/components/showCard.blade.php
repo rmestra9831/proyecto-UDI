@@ -369,9 +369,13 @@
                       <div class="col-3">
                         <select name="delegate_id" id="" class="form-control form-control-md @error('program_id') is-invalid @enderror">
                           <option class="text-capitalize" value="{{ old('program_id') }}">Asignar Respuesta</option>                      
-                          @foreach ($programas as $programa)
-                          <option class="" value="{{$programa->id}}">Dirección de {{$programa->name}}</option>
-                          @endforeach
+                            @foreach ($programas as $programa)
+                            @if ($programa->id != 1)
+                              <option class="" value="{{$programa->id}} {{ old('program_id') }}">Dirección de {{$programa->name}}</option>
+                            @else
+                              <option class="" value="{{$programa->id}} {{ old('program_id') }}">{{$programa->name}}</option>
+                            @endif
+                            @endforeach
                         </select>
                       </div>
                       <div class="col-2">
@@ -677,7 +681,11 @@
                 <select name="delegate_id" id="" class="form-control form-control-md @error('program_id') is-invalid @enderror">
                   <option class="text-capitalize" value="{{ old('program_id') }}">Asignar Respuesta</option>                      
                   @foreach ($programas as $programa)
-                  <option class="" value="{{$programa->id}}">Dirección de {{$programa->name}}</option>
+                    @if ($programa->id != 1)
+                      <option class="" value="{{$programa->id}} {{ old('program_id') }}">Dirección de {{$programa->name}}</option>
+                    @else
+                      <option class="" value="{{$programa->id}} {{ old('program_id') }}">{{$programa->name}}</option>
+                    @endif
                   @endforeach
                 </select>
               </div>

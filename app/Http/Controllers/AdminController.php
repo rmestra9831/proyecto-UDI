@@ -10,8 +10,10 @@ use App\Mail\SendDirProgMail;
 use App\Models\Radicado;
 use App\Models\Program;
 use App\Models\Motivo;
+use App\Models\Sede;
 use App\Models\Role;
 use App\User;
+use Storage;
 use DataTables;
 
 
@@ -79,58 +81,6 @@ class AdminController extends Controller
         $programa->save();
 
         return redirect()->route('admin.showProg')->with('status','Usuario creado satisfactoriamente');
-    }
-    public function showUsers(User $admin){
-        $users= User::where('sede',Auth::user()->sede)->get();
-        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
-        $programas= Program::where('sede',Auth::user()->sede)->get();
-        $roles = $this->roles;
-        $radic = $admin;
-
-        return view('admin.showusers', compact('radicados','radic','programas','users', 'roles'));
-
-    }
-    public function showDir(Request $request, User $admin){
-        $users= User::where('sede',Auth::user()->sede)->get();
-        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
-        $programas= $this->programas;
-        $roles = $this->roles;
-        $radic = $admin;
-
-        
-        // if ($request->ajax()) {
-        //     $data = $programas;
-        //     return DataTables::of($data)
-        //             ->addIndexColumn()
-        //             ->addColumn('action', ['admin.actions'])
-        //             ->rawColumns(['action'])
-        //             ->make(true);
-        // }
-        // else {
-        //     return 'no es ajax';
-        // }
-
-
-        return view('admin.showdir', compact('radicados','radic','programas','users', 'roles'));
-
-    }
-    public function showProg(User $admin){
-        $users= User::where('sede',Auth::user()->sede)->get();
-        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
-        $programas= Program::where('sede',Auth::user()->sede)->get();
-        $roles = $this->roles;
-        $radic = $admin;
-        return view('admin.showprogram', compact('radicados','radic','programas','users', 'roles'));
-
-    }
-    public function showRadics(User $admin){
-        $users= User::where('sede',Auth::user()->sede)->get();
-        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
-        $programas= Program::where('sede',Auth::user()->sede)->get();
-        $roles = $this->roles;
-        $radic = $admin;
-        return view('admin.showradics', compact('radicados','radic','programas','users', 'roles'));
-
     }
     // eliminar programas
     public function deleteProg(Request $request, Program $admin){
@@ -234,14 +184,25 @@ class AdminController extends Controller
         $radicado->save();
         // enviando correo
         $programas =Program::all();
-
+        $users =User::all();
+        $sedes =Sede::all();
         if ($radicado->atention == 'urgente') {
             foreach ($programas as $programa) {
                 if ($programa->id == $radicado->delegate_id) {                
                     $mailDirProg= $programa->correo_director;
                     $subjectDirProg= 'Atención Inmediata R#'.$radicado->fechradic_id.'-'.$radicado->year;
                     $messajeDirProg= 'mensaje de prueba';
-                    Mail::to($mailDirProg)->send(new SendDirProgMail($subjectDirProg, $messajeDirProg, $radicado));                
+                    foreach ($users as $key => $user) {
+                        if ($user->program_id == $radicado->delegate_id) {
+                            foreach ($sedes as $sede) {
+                                if ($radicado->sede == $sede->id) {
+                                    $sede_dir = $sede->name;
+                                }
+                            }
+                            $name_dir = $user->name;
+                        }
+                    }
+                    Mail::to($mailDirProg)->send(new SendDirProgMail($subjectDirProg, $radicado, $name_dir, $sede_dir));                
                 }
             }
         }else{
@@ -250,7 +211,17 @@ class AdminController extends Controller
                     $mailDirProg= $programa->correo_director;
                     $subjectDirProg= 'Nuevo Radicado R#'.$radicado->fechradic_id.'-'.$radicado->year;
                     $messajeDirProg= 'mensaje de prueba';
-                    Mail::to($mailDirProg)->send(new SendDirProgMail($subjectDirProg, $messajeDirProg, $radicado));                
+                    foreach ($users as $key => $user) {
+                        if ($user->program_id == $radicado->delegate_id) {
+                            foreach ($sedes as $sede) {
+                                if ($radicado->sede == $sede->id) {
+                                    $sede_dir = $sede->name;
+                                }
+                            }
+                            $name_dir = $user->name;
+                        }
+                    }
+                    Mail::to($mailDirProg)->send(new SendDirProgMail($subjectDirProg, $radicado, $name_dir, $sede_dir));                
                 }
             }
         }   
