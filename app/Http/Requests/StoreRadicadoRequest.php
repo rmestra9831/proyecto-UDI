@@ -30,11 +30,11 @@ class StoreRadicadoRequest extends FormRequest
             'program_id'=>'required|numeric',
             'sendTo_id'=>'required|numeric',
             'motivo_id'=>'required',
+            'type_motivo'=>'required',
             'description'=>'alpha',
             'origen_cel'=>'required|max:14',
             'origen_correo'=>'email|required',
             'observaciones'=>'max:210',
-            'type_motivo'=>'required',
         ];
         if ('motivo' == '') {
             # code...
@@ -47,10 +47,10 @@ class StoreRadicadoRequest extends FormRequest
             'atention.required'  => 'Selecciona el tipo de atención requerida',
             'program_id.required'  => 'El campo PROGRAMA es obligatorio',
             'motivo_id.required'  => 'El campo MOTIVO es obligatorio',
+            'type_motivo.required'  => 'El campo MOTIVO/TIPO es obligatorio',
             'origen_correo.required'  => 'El campo CORREO es obligatorio',
             'origen_cel.required'  => 'El campo de CELULAR es obligatorio',
             'description.required'  => 'Si seleccionaste "Otro" debes especificar ',
-            'type_motivo.required'  => 'El campo MOTIVO/TIPO es obligatorio',
         ];
     }
 }

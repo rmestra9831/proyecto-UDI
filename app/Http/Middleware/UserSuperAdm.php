@@ -16,9 +16,9 @@ class UserSuperAdm
     public function handle($request, Closure $next)
     {
         $now_user = Auth::user();
-        if ($now_user->type_user != 1) {
-            abort(403);
+        if ($now_user->type_user == 5) {
+            return $next($request);
         }
-        return $next($request);
+        abort(403);
     }
 }

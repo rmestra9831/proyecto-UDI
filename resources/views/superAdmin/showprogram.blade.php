@@ -31,11 +31,10 @@
                 <!-- Se crean los usuarios-->
                 <div class="card p-4 desing-2">
                         <h5 class="text-capitalize text-center">Crear nuevo Programa</h5>
-                        <form method="POST" action="{{ action('AdminController@registerProg') }}" style="margin: auto 5%;">
+                        <form method="POST" action="{{ action('SuperadmController@registerProg') }}" style="margin: auto 5%;">
                             @csrf
-    
                             <div class="form-group row">
-                                <div class="col-md-6">
+                                <div class="col">
                                     <input autocomplete="off" id="name" placeholder="Nombre del Programa" type="text" class="form-control form-control-sm @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="off" autofocus>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -43,8 +42,16 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col">
                                     <input autocomplete="off" id="correo_director" placeholder="Correo del Programa" type="text" class="form-control form-control-sm @error('name') is-invalid @enderror" name="correo_director" value="{{ old('name') }}" required autocomplete="off" autofocus>
+                                </div>
+                                <div class="col">
+                                    <select name="sede" id="sede" class="form-control form-control-sm text-capitalize">
+                                        <option>Seleccióna la sede</option>
+                                        @foreach ($sedes as $sede)
+                                        <option  class="text-capitalize" id="motivo_select_op" value="{{$sede->id}}" >{{$sede->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">

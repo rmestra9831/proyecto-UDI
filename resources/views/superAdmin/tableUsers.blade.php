@@ -3,28 +3,29 @@
         <tr>
             <th>Nombre</th>
             <th>Cargo</th>
+            <th>Sede</th>
             <th>Acción</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($users as $user)
             <tr>
-                <td>{{$user->name}}</td>
-                @foreach ($roles as $rol)
-                    @if ($rol->id == $user->type_user)
-                        <td>{{$rol->name_role}}
+                <td class="text-capitalize">{{$user->name}}</td>
+                <td>@foreach ($roles as $rol)
+                        @if ($rol->id == $user->type_user)
+                            {{$rol->name_role}}
                             @foreach ($programas as $programa)
                                 @if ($programa->id == $user->program_id)
                                     @if ($user->program_id != 1)
                                         | <strong>{{$programa->name}}</strong>
                                     @endif
-                                @else
                                 @endif
                             @endforeach
-                        </td>
-                        <td><button id="btnEdit" class="btn btn-primary" value="{{$user->id}}" >Editar</button></td>
-                    @endif
-                @endforeach
+                        @endif
+                    @endforeach
+                </td>
+                <td class="text-capitalize">@foreach ($sedes as $sede) @if ($sede->id == $user->sede) {{$sede->name}} @endif @endforeach</td>
+                <td><button id="btnEdit" class="btn btn-primary" value="{{$user->id}}" >Editar</button></td>
             </tr>
         @endforeach
     </tbody>

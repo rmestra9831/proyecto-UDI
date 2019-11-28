@@ -99,6 +99,7 @@
                   <a href="{{route('superAdm.showUsers')}}"><i class="fas fa-chevron-right"></i>Usuarios</a>
                   <a href="{{route('superAdm.showDir')}}"><i class="fas fa-chevron-right"></i>Directores</a>
                   <a href="{{route('superAdm.showProg')}}"><i class="fas fa-chevron-right"></i>programas</a>
+                  <a href="{{route('superAdm.showResetRadic')}}"><i class="fas fa-chevron-right"></i>Contadores</a>
                 @else
                   <a href="{{route('admin.index')}}"><i class="fas fa-chevron-right"></i>Inicio</a>
                   <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>   

@@ -175,13 +175,21 @@ $disabled = document.createAttribute('disabled');
           asunto.value = '';
         }
       } else {
-        select_mot.value = 1;
-        asunto.value = '';
-        opt1 = $("[vtypemotivo='1']").hide();
-        opt2 = $("[vtypemotivo='2']").hide();
-        opt3 = $("[vtypemotivo='3']").hide();
-        asunto.setAttributeNode($disabled);
-        select_mot.setAttributeNode($disabled);
+        // var motivo_select = document.getElementById('motivo_select');
+        // motivo_select.setAttributeNode($disabled);
+        if (select_mot.value != '' && asunto.value != '') {
+            opt1 = $("[vtypemotivo='1']").hide();
+            opt2 = $("[vtypemotivo='2']").hide();
+            opt3 = $("[vtypemotivo='3']").hide();
+            asunto.value = '';
+            select_mot.value = '';
+            select_mot.setAttributeNode($disabled);
+        }else{
+          opt1 = $("[vtypemotivo='1']").hide();
+          opt2 = $("[vtypemotivo='2']").hide();
+          opt3 = $("[vtypemotivo='3']").hide();
+          select_mot.setAttributeNode($disabled);
+        }
     }
   });
   /** Selec del motivo */
@@ -197,7 +205,17 @@ $disabled = document.createAttribute('disabled');
       asunto.value = selectedMotivoOption.text;
     }
   });
-  
+  // seleccionando el programa para el NUEVO USUARIO CREADO en super admin
+  $("#select_cargo_superAdm").change(function (e) { 
+    var selectedCargoOption= this.options[select_cargo_superAdm.selectedIndex];
+    var selectPrograma = document.getElementById("select_prog_superAdm");
+    if (selectedCargoOption.value == 4) {
+      $(selectPrograma).removeAttr('disabled');   
+    }else{
+      selectPrograma.setAttributeNode($disabled);
+      selectPrograma.value = '';
+    }
+  });
 //ACTIVANDO EL SPINNER AL GUARDAR UN RADICADO
 $('form').submit(function(event){
   $('.container_spinner').fadeIn();

@@ -67,11 +67,9 @@ Route::group(['middleware' => 'auth','userAdm'], function () {
     Route::put('save_request/{admin}', 'AdminController@saveRequest')->name('admin.saveRequest');    
     Route::put('asing_delegate/{admin}', 'AdminController@asingDelegate')->name('admin.asingDelegate');    
     // Route::post('show_Users', 'AdminController@register')->name('admin.register');
-    // Route::post('show_Directores', 'AdminController@registerDir')->name('admin.registerDir');
-    // Route::post('show_Programs', 'AdminController@registerProg')->name('admin.registerProg');
+    Route::post('show_Directores', 'AdminController@registerDir')->name('admin.registerDir');
     //exportaciones
     Route::get('/imprimir/{admin}', 'ReportController@imprimir')->name('admin.print_pdf');
-    Route::post('delete_prog/{admin}', 'AdminController@deleteProg')->name('admin.deleteProg');
 });
 //rutas de Director de Programa
 Route::group(['middleware' => 'auth','UserDirProg'], function () {
@@ -87,8 +85,11 @@ Route::group(['middleware' => 'auth','UserSuperAdm'], function () {
     Route::get('show_programas/config', 'SuperadmController@showProg')->name('superAdm.showProg');
     Route::get('show_radicados/config', 'SuperadmController@showRadics')->name('superAdm.showRadics');
     Route::get('superAdm/{superAdm}/show_radic', 'SuperadmController@showradic')->name('superAdm.showradic');    
+    Route::get('showResetRadic/config', 'SuperadmController@showResetRadic')->name('superAdm.showResetRadic');    
     Route::post('register_user', 'SuperadmController@register')->name('superAdmin.register');    
-
+    Route::post('show_Programs', 'SuperadmController@registerProg')->name('superAdm.registerProg');
+    Route::put('reset_radicados/{superAdm}', 'SuperadmController@resetRadic')->name('superAdm.resetRadic');
+    Route::post('delete_prog/{superAdm}', 'SuperadmController@deleteProg')->name('superAdm.deleteProg');
 });
 //rutas de estado
 Route::resource('status', 'EstadoController')->middleware('auth');

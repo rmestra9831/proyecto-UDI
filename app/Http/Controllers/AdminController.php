@@ -55,23 +55,6 @@ class AdminController extends Controller
 
         return redirect()->route('admin.showUsers')->with('status','Usuario creado satisfactoriamente');
     }
-    //registart Programas
-    public function registerProg(Request $request)
-    {
-        $programa = new Program();
-        $programa->name = ucfirst($request->input('name'));          
-        $programa->correo_director = $request->input('correo_director');          
-        $programa->sede = Auth::user()->sede;          
-        $programa->save();
-
-        return redirect()->route('admin.showProg')->with('status','Usuario creado satisfactoriamente');
-    }
-    // eliminar programas
-    public function deleteProg(Request $request, Program $admin){
-
-        Program::where('id',$admin->id)->delete();
-        return redirect()->route('admin.showProg')->with('status','Programa Borrado Satisfactoriamente');
-    }
     //redireccionar a la pagina de mostrar radicado
 
     //controler editar usuarios

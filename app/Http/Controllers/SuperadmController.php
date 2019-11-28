@@ -8,6 +8,7 @@ use App\Models\Radicado;
 use App\Models\Program;
 use App\Models\Motivo;
 use App\Models\Role;
+use App\Models\Sede;
 use App\User;
 use Hash;
 
@@ -17,6 +18,7 @@ class SuperadmController extends Controller
         $this->programas = Program::get();
         $this->motivos = Motivo::get();
         $this->roles = Role::get();
+        $this->sedes = Sede::get();
     }
     
     public function index()
@@ -29,46 +31,33 @@ class SuperadmController extends Controller
     }
 
     public function showUsers(User $superAdm){
-        $users= User::where('sede',Auth::user()->sede)->get();
+        $users= User::get();
         $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
         $programas= Program::where('sede',Auth::user()->sede)->get();
         $roles = $this->roles;
         $radic = $superAdm;
-
-        return view('superAdmin.showusers', compact('radicados','radic','programas','users', 'roles'));
+        $sedes = $this->sedes;
+        return view('superAdmin.showusers', compact('radicados','radic','programas','users', 'roles','sedes'));
 
     }
     public function showDir(Request $request, User $superAdm){
-        $users= User::where('sede',Auth::user()->sede)->get();
+        $users= User::where('program_id','!=',null)->get();
         $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
         $programas= $this->programas;
         $roles = $this->roles;
         $radic = $superAdm;
-
-        
-        // if ($request->ajax()) {
-        //     $data = $programas;
-        //     return DataTables::of($data)
-        //             ->addIndexColumn()
-        //             ->addColumn('action', ['admin.actions'])
-        //             ->rawColumns(['action'])
-        //             ->make(true);
-        // }
-        // else {
-        //     return 'no es ajax';
-        // }
-
-
-        return view('superAdmin.showdir', compact('radicados','radic','programas','users', 'roles'));
+        $sedes = $this->sedes;
+        return view('superAdmin.showdir', compact('radicados','radic','programas','users', 'roles','sedes'));
 
     }
     public function showProg(User $superAdm){
         $users= User::where('sede',Auth::user()->sede)->get();
         $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
-        $programas= Program::where('sede',Auth::user()->sede)->get();
+        $programas= Program::get();
         $roles = $this->roles;
         $radic = $superAdm;
-        return view('superAdmin.showprogram', compact('radicados','radic','programas','users', 'roles'));
+        $sedes = $this->sedes;
+        return view('superAdmin.showprogram', compact('radicados','radic','programas','users', 'roles', 'sedes'));
 
     }
     public function showRadics(User $superAdm){
@@ -108,6 +97,41 @@ class SuperadmController extends Controller
         return redirect()->route('superAdm.showUsers')->with('status','Usuario creado satisfactoriamente');
 
     }
-      
+    //registart Programas
+    public function registerProg(Request $request)
+    {
+        $programa = new Program();
+        $programa->name = ucfirst($request->input('name'));          
+        $programa->correo_director = $request->input('correo_director');          
+        $programa->sede = $request->input('sede');         
+        $programa->save();
+
+        return redirect()->route('superAdm.showProg')->with('status','Usuario creado satisfactoriamente');
+    }
+    // eliminar programas
+    public function deleteProg(Request $request, Program $superAdm){
+        $programa = $superAdm->name;
+        Program::where('id',$superAdm->id)->delete();
+        return redirect()->route('superAdm.showProg')->with('status','Programa '.$programa.' Borrado Satisfactoriamente');
+    }
+    //resetear contadores
+    public function showResetRadic(Sede $superAdm){
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
+        $programas= $this->programas;
+        $sedes = $this->sedes;
+
+        return view('superAdmin.showResetRadic', compact('radicados','sedes'));
+    }
+    public function resetRadic(Sede $superAdm){
+        
+        $sede_id = Sede::find($superAdm->id);        
+        $sede_id->cont_radic = 0;
+        // $sede_id->save();
+        $delete_radic = Radicado::all();
+        foreach ($delete_radic as $delete) {
+            $delete->delete();
+        }
+        return view('superAdmin.showResetRadic', compact('sedes'))->with('status','Los registros han sido eliminados');
+    }
 
 }
