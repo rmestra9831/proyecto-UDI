@@ -40,22 +40,6 @@ class AdminController extends Controller
 
         return view('admin.home', compact('radicados','programas','users','radicados_recibidos','roles'));
     }
-    //registart usuarios
-    public function register(Request $request)
-    {
-        $user = new User();
-
-        $user->name = $request->input('name');
-        $user->password = Hash::make($request->input('password'));
-        $user->type_user = $request->input('type_user');
-        $user->program_id = $request->input('program_id');
-        $user->sede = Auth::user()->sede;
-
-        $user->save();
-
-
-        return redirect()->route('admin.showUsers')->with('status','Usuario creado satisfactoriamente');
-    }
     //registart Directores
     public function registerDir(Request $request)
     {

@@ -12,7 +12,16 @@
                 <td>{{$user->name}}</td>
                 @foreach ($roles as $rol)
                     @if ($rol->id == $user->type_user)
-                        <td>{{$rol->name_role}}</td>
+                        <td>{{$rol->name_role}}
+                            @foreach ($programas as $programa)
+                                @if ($programa->id == $user->program_id)
+                                    @if ($user->program_id != 1)
+                                        | <strong>{{$programa->name}}</strong>
+                                    @endif
+                                @else
+                                @endif
+                            @endforeach
+                        </td>
                         <td><button id="btnEdit" class="btn btn-primary" value="{{$user->id}}" >Editar</button></td>
                     @endif
                 @endforeach

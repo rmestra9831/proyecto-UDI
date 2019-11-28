@@ -129,7 +129,11 @@
         @if (Auth::user()->type_user == 4)
           href="{{action('DirprogController@showinfoRadic', $radicado->slug)}}"
         @else
-          href="{{action('AdminController@ShowRadic', $radicado->slug)}}"
+          @if (Auth::user()->type_user == 5)
+            href="{{action('SuperadmController@showradic', $radicado->slug)}}"
+          @else
+            href="{{action('AdminController@ShowRadic', $radicado->slug)}}"
+          @endif
         @endif   
       @endif
     @endif

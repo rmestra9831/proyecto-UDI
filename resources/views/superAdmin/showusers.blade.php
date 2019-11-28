@@ -9,18 +9,17 @@
 <!--cuerpo delcontenido -->
     <div class="row justify-content-md-center cont-panel">
 
-        @include('common.success')
         @if(Session::has('alert-ok-radic'))
-          {{ Session::get('alert-ok-radic') }}
+        {{ Session::get('alert-ok-radic') }}
         @endif     
         
         <div class=" cont-panel-adm-user">
-                <div class="container">
-                    <!-- Se muestran los usuarios-->
+            <div class="container">
+                <!-- Se muestran los usuarios-->
                     <div class="card p-4 item_user desing-1_1">
                         <h5 class="text-capitalize text-center">Listado</h5>
                         <div class="par">
-                            @include('admin.tableUsers')
+                            @include('superAdmin.tableUsers')
                         </div>
                     </div>
                     <!-- Se edita el usuario seleccionado-->
@@ -31,9 +30,10 @@
                     </div>
                     <!-- Se crean los usuarios-->
                     <div class="card p-4 desing-2">
+                        @include('common.success')
                         <h5 class="text-capitalize text-center">Crear nuevo usuario</h5>
-                            <form method="POST" action="{{ action('AdminController@register') }}" style="margin: auto 5%;">
-                                @csrf
+                            <form method="POST" action="{{ action('SuperadmController@register') }}" style="margin: auto 5%;">
+                                @method('POST') @csrf
         
                                 <div class="form-group row">
                                     
@@ -69,7 +69,7 @@
       
                                 <div class="form-group row">
                                     <div class="col-md-6">
-                                        <input id="password" placeholder="Contraseña" type="" class="form-control form-control-sm @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                        <input id="password" placeholder="Contraseña" type="password" class="form-control form-control-sm @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
         
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">

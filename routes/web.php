@@ -57,18 +57,18 @@ Route::group(['middleware' => 'auth','userAdm'], function () {
     Route::get('Export_for_ar', 'ReportController@indexAR')->name('Report.indexAR');
     Route::get('Export_for_dir', 'ReportController@indexDir')->name('Report.indexDir');
     Route::get('admin/{admin}/show_Users', 'AdminController@ShowRadic')->name('admin.ShowRadic');
-    Route::get('admin/{admin}/edit_user', 'AdminController@userEdit')->name('admin.userEdit');    
-    Route::get('admin/{admin}/edit_dir', 'AdminController@dirEdit')->name('admin.dirEdit');    
-    Route::get('admin/{admin}/edit_prog', 'AdminController@progEdit')->name('admin.progEdit');    
+    // Route::get('admin/{admin}/edit_user', 'AdminController@userEdit')->name('admin.userEdit');    
+    // Route::get('admin/{admin}/edit_dir', 'AdminController@dirEdit')->name('admin.dirEdit');    
+    // Route::get('admin/{admin}/edit_prog', 'AdminController@progEdit')->name('admin.progEdit');    
     Route::get('admin/{admin}/show_radic', 'AdminController@showradicedit')->name('admin.showradicedit');    
     Route::put('edit_user/{admin}', 'AdminController@userEdit_ctrl')->name('admin.userEdit_ctrl');    
     Route::put('edit_dir/{admin}', 'AdminController@dirgEdit_ctrl')->name('admin.dirgEdit_ctrl');    
     Route::put('edit_prog/{admin}', 'AdminController@progEdit_ctrl')->name('admin.progEdit_ctrl');    
     Route::put('save_request/{admin}', 'AdminController@saveRequest')->name('admin.saveRequest');    
     Route::put('asing_delegate/{admin}', 'AdminController@asingDelegate')->name('admin.asingDelegate');    
-    Route::post('show_Users', 'AdminController@register')->name('admin.register');
-    Route::post('show_Directores', 'AdminController@registerDir')->name('admin.registerDir');
-    Route::post('show_Programs', 'AdminController@registerProg')->name('admin.registerProg');
+    // Route::post('show_Users', 'AdminController@register')->name('admin.register');
+    // Route::post('show_Directores', 'AdminController@registerDir')->name('admin.registerDir');
+    // Route::post('show_Programs', 'AdminController@registerProg')->name('admin.registerProg');
     //exportaciones
     Route::get('/imprimir/{admin}', 'ReportController@imprimir')->name('admin.print_pdf');
     Route::post('delete_prog/{admin}', 'AdminController@deleteProg')->name('admin.deleteProg');
@@ -86,6 +86,9 @@ Route::group(['middleware' => 'auth','UserSuperAdm'], function () {
     Route::get('show_Directores/config', 'SuperadmController@showDir')->name('superAdm.showDir');
     Route::get('show_programas/config', 'SuperadmController@showProg')->name('superAdm.showProg');
     Route::get('show_radicados/config', 'SuperadmController@showRadics')->name('superAdm.showRadics');
+    Route::get('superAdm/{superAdm}/show_radic', 'SuperadmController@showradic')->name('superAdm.showradic');    
+    Route::post('register_user', 'SuperadmController@register')->name('superAdmin.register');    
+
 });
 //rutas de estado
 Route::resource('status', 'EstadoController')->middleware('auth');

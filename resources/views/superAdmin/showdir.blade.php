@@ -20,7 +20,7 @@
                     <div class="card p-4 item_user desing-1_1">
                         <h5 class="text-capitalize text-center">Listado</h5>
                         <div class="par">
-                            @include('admin.tableDir')
+                            @include('superAdmin.tableDir')
                         </div>
                     </div>
                     <!-- Se edita el usuario seleccionado-->

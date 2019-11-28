@@ -19,7 +19,7 @@
                     @include('common.success') {{--mostrado de alertas--}}
                     <h5 class="text-capitalize text-center">Listado</h5>
                     <div class="par">
-                        @include('admin.tableProg')
+                        @include('superAdmin.tableProg')
                     </div>
                 </div>
                 <!-- Se edita el usuario seleccionado-->
