@@ -101,7 +101,7 @@
                   <a href="{{route('superAdm.showProg')}}"><i class="fas fa-chevron-right"></i>programas</a>
                   <a href="{{route('superAdm.showResetRadic')}}"><i class="fas fa-chevron-right"></i>Contadores</a>
                 @else
-                  <a href="{{route('admin.index')}}"><i class="fas fa-chevron-right"></i>Inicio</a>
+                  <a href="{{route('admin.showRadics')}}"><i class="fas fa-chevron-right"></i>Inicio</a>
                   <a href="{{route('filter.viewAllRadic')}}"><i class="fas fa-chevron-right"></i>filtrado de radicado</a>   
                   <a href="{{route('filter.viewSearchRadicAdm')}}"><i class="fas fa-chevron-right"></i>estado de radicados
                     {{-- muestra la notificación PENDIENTES EN ADMINISTRADOR --}}

@@ -142,6 +142,14 @@ class AdminController extends Controller
         $radicado->save();
         return redirect()->route('admin.ShowRadic',[$admin])->with('status','Respuesta guardada');
     }
+    public function showRadics(User $admin){
+        $users= User::where('sede',Auth::user()->sede)->get();
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
+        $programas= Program::where('sede',Auth::user()->sede)->get();
+        $roles = $this->roles;
+        $radic = $admin;
+        return view('admin.showradics', compact('radicados','radic','programas','users', 'roles'));
+    }
 
     //delegar quien responde el radicado
     public function asingDelegate(Request $request, Radicado $admin){

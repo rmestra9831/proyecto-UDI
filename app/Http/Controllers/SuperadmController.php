@@ -67,7 +67,6 @@ class SuperadmController extends Controller
         $roles = $this->roles;
         $radic = $superAdm;
         return view('superAdmin.showradics', compact('radicados','radic','programas','users', 'roles'));
-
     }
      public function ShowRadic(Radicado $superAdm){
         $users= User::where('sede',Auth::user()->sede)->get();
@@ -123,10 +122,10 @@ class SuperadmController extends Controller
         return view('superAdmin.showResetRadic', compact('radicados','sedes'));
     }
     public function resetRadic(Sede $superAdm){
-        
+        $sedes = $this->sedes;
         $sede_id = Sede::find($superAdm->id);        
         $sede_id->cont_radic = 0;
-        // $sede_id->save();
+        $sede_id->save();
         $delete_radic = Radicado::all();
         foreach ($delete_radic as $delete) {
             $delete->delete();

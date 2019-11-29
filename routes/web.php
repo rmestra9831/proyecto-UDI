@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth','userAdm'], function () {
     // Route::get('admin/{admin}/edit_user', 'AdminController@userEdit')->name('admin.userEdit');    
     // Route::get('admin/{admin}/edit_dir', 'AdminController@dirEdit')->name('admin.dirEdit');    
     // Route::get('admin/{admin}/edit_prog', 'AdminController@progEdit')->name('admin.progEdit');    
+    Route::get('show_radicados', 'AdminController@showRadics')->name('admin.showRadics');
     Route::get('admin/{admin}/show_radic', 'AdminController@showradicedit')->name('admin.showradicedit');    
     Route::put('edit_user/{admin}', 'AdminController@userEdit_ctrl')->name('admin.userEdit_ctrl');    
     Route::put('edit_dir/{admin}', 'AdminController@dirgEdit_ctrl')->name('admin.dirgEdit_ctrl');    

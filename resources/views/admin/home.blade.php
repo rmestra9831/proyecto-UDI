@@ -15,7 +15,8 @@
         
         <div class=" cont-panel-adm">
             <div class="container">
-                    <a href=" {{route('admin.showRadics')}} " class="col card desing-1">
+                {{-- lista de superAdmin --}}
+                    {{-- <a href=" {{route('admin.showRadics')}} " class="col card desing-1">
                         <img src=" {{asset('img/radic-2.svg')}} " alt="">
                         <div class="h3">Radicados</div>
                         <div class="p"> {{count($radicados_recibidos)}} </div>
@@ -37,8 +38,8 @@
                         <img src=" {{asset('img/inge.svg')}} " alt="">
                         <div class="h3">Programas</div>
                         <div class="p">{{count($programas)}}</div>
-                    </a>
-                    
+                    </a> --}}
+                {{-- lista de superAdmin --}}
             </div>
         </div>
 
