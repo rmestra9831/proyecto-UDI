@@ -57,7 +57,7 @@ Route::group(['middleware' => 'auth','userAdm'], function () {
     Route::get('Export_for_ar', 'ReportController@indexAR')->name('Report.indexAR');
     Route::get('Export_for_dir', 'ReportController@indexDir')->name('Report.indexDir');
     Route::get('admin/{admin}/show_Users', 'AdminController@ShowRadic')->name('admin.ShowRadic');
-    // Route::get('admin/{admin}/edit_user', 'AdminController@userEdit')->name('admin.userEdit');    
+    Route::get('admin/{admin}/edit_user', 'AdminController@userEdit')->name('admin.userEdit');    
     // Route::get('admin/{admin}/edit_dir', 'AdminController@dirEdit')->name('admin.dirEdit');    
     // Route::get('admin/{admin}/edit_prog', 'AdminController@progEdit')->name('admin.progEdit');    
     Route::get('show_radicados', 'AdminController@showRadics')->name('admin.showRadics');
@@ -89,7 +89,8 @@ Route::group(['middleware' => 'auth','UserSuperAdm'], function () {
     Route::post('register_user', 'SuperadmController@register')->name('superAdmin.register');    
     Route::post('show_Programs', 'SuperadmController@registerProg')->name('superAdm.registerProg');
     Route::put('reset_radicados/{superAdm}', 'SuperadmController@resetRadic')->name('superAdm.resetRadic');
-    Route::put('edit_user/{superAdm}', 'SuperadmController@userEdit_ctrl')->name('superAdm.userEdit_ctrl');    
+    Route::get('superadm/{superAdm}/edit_user', 'SuperadmController@userEdit')->name('superAdm.userEdit');    
+    Route::put('edit_user/{superAdm}/superAdmin', 'SuperadmController@userEdit_ctrl')->name('superAdm.userEdit_ctrl');    
     Route::post('delete_prog/{superAdm}', 'SuperadmController@deleteProg')->name('superAdm.deleteProg');
 });
 //rutas de estado

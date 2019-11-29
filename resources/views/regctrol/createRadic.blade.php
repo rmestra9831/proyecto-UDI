@@ -170,14 +170,6 @@
                     <textarea class="form-control form-control-lg @error('observaciones') is-invalid @enderror" name="observaciones" id="observaciones" cols="30"></textarea>
                     <small id="emailHelp" class="form-text text-muted">Observaciones hechas por Admisiones Registro</small>
                   </div>
-                  <!-- respuesta del radicado-->
-                  <!--
-                  <div class="col-6 form-group" no-margin>
-                    <label class="text-capitalize col-form-label-lg col-form-label" for="respuesta">respuesta</label>  
-                    <textarea class="form-control form-control @error('observaciones') is-invalid @enderror" name="respuesta" id="respuesta" cols="30"></textarea>
-                    <small id="emailHelp" class="form-text text-muted">Respuesta del radicado</small>
-                  </div>
-                  -->
                 </div>
               </div>
           </div>

@@ -49,7 +49,16 @@ class SuperadmController extends Controller
             'password'
         ));
         $user->save();
-        return redirect()->route('superAdmin.shoeusers',[$superAdm])->with('status','Usuario Actualizado');
+        return redirect()->route('superAdm.userEdit',[$superAdm])->with('status','Usuario Actualizado');
+
+    }
+    // vista de editar usuarios
+    public function userEdit(Request $request, User $superAdm){
+        $programas= $this->programas;
+        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
+        $roles = $this->roles;
+        $users = $superAdm;
+        return view('superAdmin.editUser', compact('radicados','programas','roles','users'));
 
     }
     public function showDir(Request $request, User $superAdm){

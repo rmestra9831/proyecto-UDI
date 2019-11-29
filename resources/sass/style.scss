@@ -36,6 +36,12 @@ hr{
     align-items: baseline;
 }
 
+// MODAL DE EDITAR USUARIOS
+.modal-body #frame_show_editUser{
+    width: 100%;
+    height: 100%;
+}
+
 // ESTILOS DEL SPINNER DE CARGA
 .container_spinner{
     background: #5a5a5a78;

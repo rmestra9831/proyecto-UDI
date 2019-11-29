@@ -107,12 +107,11 @@
                 function EditUser(){
 
                 }
-
-                $('.table #btnEdit').click(function(){
+                var $btns_edit_user = document.querySelectorAll('#btnEditUser');
+                $($btns_edit_user).click(function(){
                     $valor = $(this).val();
-                    $url = window.location.origin+"/admin/"+$valor+"/edit_user";
-                    $('.user_create #frame_show').attr("src", $url);
-
+                    var url = window.location.origin+"/superadm/"+$valor+"/edit_user";
+                    $('.modal-body #frame_show_editUser').attr("src", url);
                 });
             });
         </script>

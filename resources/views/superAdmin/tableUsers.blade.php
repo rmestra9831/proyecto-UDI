@@ -25,7 +25,7 @@
                     @endforeach
                 </td>
                 <td class="text-capitalize">@foreach ($sedes as $sede) @if ($sede->id == $user->sede) {{$sede->name}} @endif @endforeach</td>
-                <td><button class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop{{$user->id}}" >Editar</button></td>
+                <td><button id="btnEditUser" value=" {{$user->id}} " class="btn btn-primary" data-toggle="modal" data-target="#editModalUser{{$user->id}}" >Editar</button></td>
             </tr>
             @include('components.modalEditUser')
         @endforeach
