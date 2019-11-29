@@ -24,10 +24,11 @@ class SuperadmController extends Controller
     public function index()
     {
         $users= User::where('sede',Auth::user()->sede)->get();
+        $dirProg= User::where('program_id','!=',null)->get();
         $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
         $programas= $this->programas;
         $radicados_recibidos = Radicado::where([['sede',Auth::user()->sede],['fech_send_dir','!=',null]])->orderBy('id', 'DESC')->get();
-        return view('superAdmin.home', compact('radicados','programas','users','radicados_recibidos'));
+        return view('superAdmin.home', compact('radicados','programas','users','radicados_recibidos','dirProg'));
     }
 
     public function showUsers(User $superAdm){
@@ -38,6 +39,17 @@ class SuperadmController extends Controller
         $radic = $superAdm;
         $sedes = $this->sedes;
         return view('superAdmin.showusers', compact('radicados','radic','programas','users', 'roles','sedes'));
+
+    }
+    //controler editar usuarios
+    public function userEdit_ctrl(Request $request, User $superAdm){
+        
+        $user = $superAdm;
+        $user->fill($request->except(
+            'password'
+        ));
+        $user->save();
+        return redirect()->route('superAdmin.shoeusers',[$superAdm])->with('status','Usuario Actualizado');
 
     }
     public function showDir(Request $request, User $superAdm){

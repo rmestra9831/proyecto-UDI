@@ -62,7 +62,6 @@ Route::group(['middleware' => 'auth','userAdm'], function () {
     // Route::get('admin/{admin}/edit_prog', 'AdminController@progEdit')->name('admin.progEdit');    
     Route::get('show_radicados', 'AdminController@showRadics')->name('admin.showRadics');
     Route::get('admin/{admin}/show_radic', 'AdminController@showradicedit')->name('admin.showradicedit');    
-    Route::put('edit_user/{admin}', 'AdminController@userEdit_ctrl')->name('admin.userEdit_ctrl');    
     Route::put('edit_dir/{admin}', 'AdminController@dirgEdit_ctrl')->name('admin.dirgEdit_ctrl');    
     Route::put('edit_prog/{admin}', 'AdminController@progEdit_ctrl')->name('admin.progEdit_ctrl');    
     Route::put('save_request/{admin}', 'AdminController@saveRequest')->name('admin.saveRequest');    
@@ -90,6 +89,7 @@ Route::group(['middleware' => 'auth','UserSuperAdm'], function () {
     Route::post('register_user', 'SuperadmController@register')->name('superAdmin.register');    
     Route::post('show_Programs', 'SuperadmController@registerProg')->name('superAdm.registerProg');
     Route::put('reset_radicados/{superAdm}', 'SuperadmController@resetRadic')->name('superAdm.resetRadic');
+    Route::put('edit_user/{superAdm}', 'SuperadmController@userEdit_ctrl')->name('superAdm.userEdit_ctrl');    
     Route::post('delete_prog/{superAdm}', 'SuperadmController@deleteProg')->name('superAdm.deleteProg');
 });
 //rutas de estado

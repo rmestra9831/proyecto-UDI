@@ -16,17 +16,11 @@
         <div class=" cont-panel-adm-user">
             <div class="container">
                 <!-- Se muestran los usuarios-->
-                    <div class="card p-4 item_user desing-1_1">
+                    <div class="card p-4 item_user desing-1_1" style="grid-column: 1/4 !important;">
                         <h5 class="text-capitalize text-center">Listado</h5>
                         <div class="par">
                             @include('superAdmin.tableUsers')
                         </div>
-                    </div>
-                    <!-- Se edita el usuario seleccionado-->
-                    <div class="card p-4 user_create desing-1_2">
-                        <h5 class="text-capitalize text-center">Editar</h5>
-                        <iframe id="frame_show" src="" frameborder="0">
-                        </iframe>
                     </div>
                     <!-- Se crean los usuarios-->
                     <div class="card p-4 desing-2">

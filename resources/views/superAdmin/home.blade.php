@@ -30,7 +30,7 @@
                     <a href="{{route('superAdm.showDir')}}" class="col card desing-1">
                         <img src=" {{asset('img/directors.svg')}} " alt="">
                         <div class="h3">Directores</div>
-                        <div class="p">directores</div>
+                        <div class="p">{{count($dirProg)}} </div>
                     </a>
 
                     <a href="{{route('superAdm.showProg')}}" class="col card desing-1">

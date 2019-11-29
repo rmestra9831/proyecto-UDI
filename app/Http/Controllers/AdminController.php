@@ -57,19 +57,6 @@ class AdminController extends Controller
     }
     //redireccionar a la pagina de mostrar radicado
 
-    //controler editar usuarios
-    public function userEdit_ctrl(Request $request, User $admin){
-
-        $user = $admin;
-
-        $user->fill($request->except(
-            'password'
-        ));
-
-        $user->save();
-        return redirect()->route('admin.userEdit',[$admin])->with('status','Usuario Actualizado');
-
-    }
     //controler editar Directores
     public function dirgEdit_ctrl(Request $request, Program $admin){
 
@@ -88,16 +75,6 @@ class AdminController extends Controller
         $programa->save();
         return redirect()->route('admin.progEdit',[$admin])->with('status','Programa Actualizado');
 
-    }
-
-    //vista editar usuarios
-    public function userEdit(User $admin){
-        $users= $admin;
-        $radicados= Radicado::where('sede',Auth::user()->sede)->orderBy('id', 'DESC')->get();
-        $programas= $this->programas;
-        $roles = $this->roles;
-
-        return view('admin.editUser', compact('radicados','programas','users', 'roles'));
     }
     //vista editar Directores
     public function dirEdit(Request $request, Program $admin){
