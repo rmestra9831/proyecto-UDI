@@ -97,7 +97,7 @@
                     <th scope="col">ASUNTO</th>
                     <th scope="col">CORREO</th>
                     <th scope="col">CELULAR</th>
-                    <th scope="col">RESPUESTA</th>
+                    {{-- <th scope="col">RESPUESTA</th> --}}
                     <th scope="col">CREADO POR</th>
                     <th scope="col">RESPONDIDO POR</th>
                     <th scope="col">FECHA DE CREACIÓN</th>
@@ -127,7 +127,7 @@
                                     <td class="text-truncate">{{ $radicado->asunto}}</td>
                                     <td>{{ $radicado->origen_correo}}</td>
                                     <td class="text-truncate">{{ $radicado->origen_cel}}</td>
-                                    <td class="text-truncate">{{ $radicado->respuesta}}</td>
+                                    {{-- <td class="text-truncate">{{ $radicado->respuesta}}</td> --}}
                                     <td>{{ $radicado->user->name}}</td>
                                     <!--REVISADO POR-->
                                     @if (!$radicado->respuesta)
@@ -160,7 +160,7 @@
                                     <td class="text-truncate">{{ $radicado->asunto}}</td>
                                     <td>{{ $radicado->origen_correo}}</td>
                                     <td class="text-truncate">{{ $radicado->origen_cel}}</td>
-                                    <td class="text-truncate">{{ $radicado->respuesta}}</td>
+                                    {{-- <td class="text-truncate">{{ $radicado->respuesta}}</td> --}}
                                     <td>{{ $radicado->user->name}}</td>
                                     <!--REVISADO POR-->
                                     @if (!$radicado->respuesta)
@@ -195,7 +195,7 @@
                                     <td class="text-truncate">{{ $radicado->asunto}}</td>
                                     <td>{{ $radicado->origen_correo}}</td>
                                     <td class="text-truncate">{{ $radicado->origen_cel}}</td>
-                                    <td class="text-truncate">{{ $radicado->respuesta}}</td>
+                                    {{-- <td class="text-truncate">{{ $radicado->respuesta}}</td> --}}
                                     <td>{{ $radicado->user->name}}</td>
                                     <!--REVISADO POR-->
                                     @if (!$radicado->respuesta)

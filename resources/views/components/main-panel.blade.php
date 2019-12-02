@@ -85,7 +85,7 @@
                 <a href="{{route('filter.viewSearchRadicDir_prog')}}"><i class="fas fa-chevron-right"></i>estado de radicados
                   {{-- muestra la notificación si hay radicados por responder --}}
                    <?php
-                      $radic_pendiente = DB::table('radicados')->where([['send_temp_admin',null],['fech_recive_dir','!=',' '],['delegate_id',Auth::user()->program_id]])->orWhere([['send_temp_admin','!=',null],['delegate_id',Auth::user()->program_id]])->get();
+                      $radic_pendiente = DB::table('radicados')->where([['aproved',null],['fech_recive_radic',null],['fech_recive_dir','!=',' '],['send_temp_admin',true]])->orWhere([['fech_recive_dir','!=',' '],['delegate_id',null],])->get();
                       $radic = DB::table('radicados')->where([['respuesta',null],['delegate_id',Auth::user()->program_id]])->get();
                       if (count($radic)>0 || count($radic_pendiente)>0) {
                         ?> <strong status="" data-toggle="tooltip" data-placement="top" title="Tooltip on top" aria-hidden="true" class="fas fa-circle status-recive-dir"></strong> <?php
@@ -106,7 +106,7 @@
                   <a href="{{route('filter.viewSearchRadicAdm')}}"><i class="fas fa-chevron-right"></i>estado de radicados
                     {{-- muestra la notificación PENDIENTES EN ADMINISTRADOR --}}
                       <?php
-                        $radic_pendiente = DB::table('radicados')->where([['aproved',null],['fech_recive_dir','!=',null],['send_temp_admin','!=',null]])->get();
+                        $radic_pendiente = DB::table('radicados')->where([['aproved',false],['fech_recive_dir','!=',null],['send_temp_admin','!=',null]])->get();
                         $radic = DB::table('radicados')->where([['fech_send_dir','!=',' '],['fech_recive_dir',null]])->get();
                         if (count($radic)!=0 || count($radic_pendiente)!=0) {
                           ?> <strong status="" data-toggle="tooltip" data-placement="top" title="Tooltip on top" aria-hidden="true" class="fas fa-circle status-recive-dir"></strong> <?php

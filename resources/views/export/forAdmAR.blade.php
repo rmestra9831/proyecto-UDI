@@ -19,8 +19,8 @@
         ">CORREO</th>
         <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
         ">CELULAR</th>
-        <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
-        ">RESPUESTA</th>
+        {{-- <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
+        ">RESPUESTA</th> --}}
         <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
         ">CREADO POR</th>
         <th style="background-color: #c3c3c3;color: #000000;font-size: 15px;text-align: center;height: 25px;width: 30px;border: 2px solid black;font-weight: 800;
@@ -57,7 +57,7 @@
                         <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->asunto}}</td>
                         <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_correo}}</td>
                         <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_cel}}</td>
-                        <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->respuesta}}</td>
+                        {{-- <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->respuesta}}</td> --}}
                         <td style="background-color: #3bff18; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->user->name}}</td>
                         <!--REVISADO POR-->
                         @if (!$radicado->respuesta)
@@ -91,7 +91,7 @@
                         <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->asunto}}</td>
                         <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_correo}}</td>
                         <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_cel}}</td>
-                        <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->respuesta}}</td>
+                        {{-- <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->respuesta}}</td> --}}
                         <td style="background-color: #ffe710; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->user->name}}</td>
                         <!--REVISADO POR-->
                         @if (!$radicado->respuesta)
@@ -126,7 +126,7 @@
                         <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->asunto}}</td>
                         <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_correo}}</td>
                         <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->origen_cel}}</td>
-                        <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->respuesta}}</td>
+                        {{-- <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->respuesta}}</td> --}}
                         <td style="background-color: #ffffff; border: 1px solid #000000; font-size: 12px; height: 20px;">{{ $radicado->user->name}}</td>
                         <!--REVISADO POR-->
                         @if (!$radicado->respuesta)

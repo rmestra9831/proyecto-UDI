@@ -18,7 +18,7 @@
           <a class="col nav-item nav-link" id="nav-pendientes-tab" data-toggle="tab" href="#nav-pendientes" role="tab" aria-controls="nav-pendientes" aria-selected="false">Pendientes
                         {{-- muestra la notificación si hay radicados --}}
                         <?php
-                        $radic = DB::table('radicados')->where([['send_temp_admin',null],['revisar','!=',1],['delegate_id',Auth::user()->program_id]])->orWhere([['send_temp_admin','!=',null],['delegate_id',Auth::user()]])->get();
+                        $radic = DB::table('radicados')->where([['send_temp_admin',null],['revisar','!=',1],['delegate_id',Auth::user()->program_id]])->orWhere([['send_temp_admin',1],['delegate_id',Auth::user()]])->get();
                         if (count($radic)!=0) {
                           ?>  <span class="badge badge-secondary"> {{count($radic)}} </span> <?php
                         }

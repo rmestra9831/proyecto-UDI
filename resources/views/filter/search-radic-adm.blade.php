@@ -17,7 +17,7 @@
           <a class="col nav-item nav-link" id="nav-pendiente-tab" data-toggle="tab" href="#nav-pendiente" role="tab" aria-controls="nav-pendiente" aria-selected="false">Pendiente
             {{-- muestra la notificación PENDIENTES EN ADMINISTRADOR --}}
               <?php
-                $radic = DB::table('radicados')->where([['aproved',null],['fech_recive_radic',null],['fech_recive_dir','!=',' '],['send_temp_admin','!=',null]])->orWhere([['fech_recive_dir','!=',' '],['delegate_id',null]])->get();
+                $radic = DB::table('radicados')->where([['aproved',false],['fech_recive_radic',null],['fech_recive_dir','!=',' '],['send_temp_admin','!=',null]])->orWhere([['fech_recive_dir','!=',' '],['delegate_id',null]])->get();
                 if (count($radic)!=0) {
                   ?>  <span class="badge badge-secondary"> {{count($radic)}} </span> <?php
                 }

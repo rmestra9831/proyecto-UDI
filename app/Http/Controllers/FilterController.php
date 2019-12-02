@@ -263,13 +263,14 @@ class FilterController extends Controller
                 ['fech_recive_radic','!=',' ']])->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de pendientes           
             $query_pendiente_dir = Radicado::orderBy('id', 'DESC')->where([
-                ['aproved',null],
+                ['aproved',false],
                 ['fech_recive_radic',null],
                 ['fech_recive_dir','!=',' '],
-                ['send_temp_admin','!=',null]])
+                ['send_temp_admin',true]])
                 ->orWhere([
                     ['fech_recive_dir','!=',' '],
                     ['delegate_id',null],
+                    // ['aproved',false]
                 ])
                 ->name($name)->lastname($last_name)->numradic($fechradic_id)->motivo($motivo)->programa($programa)->get();
         //filtrdo de importantes          
