@@ -24,7 +24,7 @@ class DirectionController extends Controller
      */
     public function index()
     {
-        $radicados = Radicado::where([['sede',Auth::user()->sede],['delegate_id',Auth::user()->program_id]])->orderBy('id', 'DESC')->get();;
+        $radicados = Radicado::where([['sede',Auth::user()->sede]])->orderBy('id', 'DESC')->get();;
         $users = $this->users;
         $programas = $this->programas;
         $roles = $this->roles;

@@ -109,7 +109,7 @@ class SuperadmController extends Controller
             return redirect()->route('superAdm.showUsers')->with('error','Por favor seleccióne un programa para el "Director de programa"');
         }
         $user->type_user = $request->input('type_user');
-        $user->program_id = null;
+        if ($request->input('type_user') == 3) {$user->program_id = 1;}else{$user->program_id = $request->input('program_id');};
         $user->sede = Auth::user()->sede;
 
         $user->save();

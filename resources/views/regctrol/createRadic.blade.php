@@ -133,7 +133,7 @@
               
               <div class="col-6 form-group" no-margin>
                 <label class=" col-form-label-lg col-form-label" for="number_contacto">Número de Contacto</label>            
-                <input value=" {{old('origen_cel')}} " maxlength="14" type="text"class="text-capitalize form-control form-control-lg @error('origen_cel') is-invalid @enderror" name="origen_cel" id="number_contacto" aria-describedby="helpId" placeholder="(123) 456-7890">
+                <input value="{{old('origen_cel')}}" maxlength="14" type="text"class="text-capitalize form-control form-control-lg @error('origen_cel') is-invalid @enderror" name="origen_cel" id="number_contacto" aria-describedby="helpId" placeholder="(123) 456-7890">
                 @error('origen_cel')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror
               </div>
     

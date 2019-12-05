@@ -15,7 +15,7 @@
    
       @foreach ($radicados as $radicado)
         {{-- aqui se valida que tenga permisos de PermissionAdministrador para recibir los radicados --}}
-        @if(Auth::user()->PermissionAdmin == 1)
+        @if(Auth::user()->PermissionAdmin == true)
           @if ($radicado->fech_recive_radic == '')
               @if ($radicado->fech_recive_dir == '')
                 <div class="col-11 content-card">
@@ -34,7 +34,7 @@
                  </div>
                 @else
                 {{-- aqui se pone la imagen del estado de revisar y aprovado --}}
-                 <div class="col-11 content-card">
+                  <div class="col-11 content-card">
                     @if ($radicado->revisar == 1)
                      <img src="{{asset('img/warning.svg')}}" alt="">
                     @else
@@ -53,19 +53,21 @@
           @endif
         @else
           {{-- esto se muestra siempre y cuando el admnistrador halla recibido el radicado --}}
-          @if ($radicado->fech_recive_dir != '')
-            <div class="col-11 content-card">
-              @if ($radicado->revisar == 1)
-               <img src="{{asset('img/warning.svg')}}" alt="">
-              @else
-                @if ($radicado->aproved == 0)
-                  <img src="{{asset('img/waiting.svg')}}" alt="">
-                @endif
+          @if (Auth::user()->program_id == $radicado->delegate_id)
+            @if ($radicado->fech_recive_dir != '')
+                <div class="col-11 content-card">
+                  @if ($radicado->revisar == 1)
+                   <img src="{{asset('img/warning.svg')}}" alt="">
+                  @else
+                    @if ($radicado->aproved == 0)
+                      <img src="{{asset('img/waiting.svg')}}" alt="">
+                    @endif
+                  @endif
+                  @include('components.cards')
+                </div>
               @endif
-              @include('components.cards')
-            </div>
+            @endif
           @endif
-        @endif
       @endforeach
 </div>
 <div class="row footer-home b-show-top">

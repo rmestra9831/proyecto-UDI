@@ -11,7 +11,6 @@ class ProgramSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('programs')->insert(['name'=>'Direccíon','correo_director'=>'direccion.bca@yopmail.com']);
-        DB::table('programs')->insert(['name'=>'Sistemas','correo_director'=>'sistemas.bca@yopmail.com']);
+        DB::table('programs')->insert(['name'=>'Direccíon','correo_director'=>'direccion.bca@yopmail.com','sede'=>2]);
     }
 }
