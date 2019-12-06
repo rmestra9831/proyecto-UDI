@@ -110,39 +110,40 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }});
 
-                //boton para guardar datos a actualizar
-            
-
-                function EditUser(){
-
-                }
-                
                 var $btns_edit_user = document.querySelectorAll('#btnEditUser');
                 $($btns_edit_user).click(function(){
                     $valor = $(this).val();
-
                     $.ajax({
-                        url: "http://127.0.0.1:90/proyecto-UDI/public/test?val="+$valor,
+                        url: "/test?val="+$valor,
                         type:"GET",
 
                         beforeSend:function(){
-                            //abrir el modal e imprimir "cargando"
-                            $('.elif').html("loading");
+
                         },
                         success:function(response){
                             // datos que se resiven por metodo
                             $name = response["user"][0]["name"];
                             $id_user = response["user"][0]["id"];
                             $actual_rol = response["user"][0]["type_user"];
+                            $actual_prog = response["user"][0]["program_id"];
                             $rol = response["rol"];
+                            $program = response["program"];
                             for(i=0; i < $rol.length; i++){
-                                //console.log($rol[i]["name_role"]);
-                                if($actual_rol == $rol[i]["id"]){
+                                if($actual_rol == $rol[i]["id"]){ //obtiene el rol del usuario y si es jefe de programa aparece o ocuta el campo
+                                    if ($actual_rol == 4) {
+                                        $('#select_programa').show();
+                                    }else{$('#select_programa').hide();}
                                     $status = "selected";
                                 }else{$status = ""}
-                                $('#select_user_rol').append("<option class='text-capitalize' "+$status+" value="+$rol[i]["id"]+">"+$rol[i]["name_role"]+"</option>");
+                                $('#select_user_rol').append("<option class='text-capitalize' id='selectOption_user_rol' "+$status+" value="+$rol[i]["id"]+">"+$rol[i]["name_role"]+"</option>");
                             }
-                            $('.elif').html("ya se otuvo");
+                            for(p=0; p<$program.length; p++){
+                                if ($actual_prog == $program[p]['id']) {
+                                    $status_prog = "selected";
+                                }else{$status_prog = ""}
+                                $('#select_user_prog').append("<option class='text-capitalize' id='selectOption_user_prog' "+$status_prog+" value="+$program[p]["id"]+">"+$program[p]["name"]+"</option>");
+                            }
+                            $('#staticBackdropLabel').html('Editando a '+$name);
                             $('.user_name').attr("value",$name);
                             $('.xtreme_u').attr("gateway",$id_user);
                         },
@@ -153,21 +154,33 @@
                         
                     })
                 });
+
                 $('.xtreme #btnSaveUpdateUser').click(function(){
-                
                     $valor = $(".user_name").val();
                     $id_type_user = $('.xtreme #select_user_rol').val();
+                    $id_program = $('#select_user_prog').val();
                     $gateway = $('.xtreme_u').attr("gateway");
+                    console.log($id_program);
                     $.ajax({
-                        url:"http://127.0.0.1:90/proyecto-UDI/public/edit_user/"+$gateway+"/superAdmin",
+                        url:"/edit_user/"+$gateway+"/superAdmin",
                         type:"PUT",
                         methos:"PUT",
-                        data:{nombre:$valor,type_user:$id_type_user,id:$gateway},
+                        data:{nombre:$valor,type_user:$id_type_user,id:$gateway, program_id:$id_program},
                         beforeSend: function(){
-                           // $('#btnSaveUpdateUser').html("Loading");
+                           $('#btnSaveUpdateUser').html("Loading");
                         },
-                        success:function(result){
-                            console.log(result)
+                        success:function(response){
+                            $('#btnSaveUpdateUser').html("Actualizar");
+                            $name = response.name;
+                            $('#staticBackdropLabel').html('Editando a '+$name);
+                            $('.showAlert').append(
+                                "<div class='alert alert-success alert-dismissible fade show' role='alert'>"+
+                                    "<strong>! Excelente ¡</strong> Usuario editado correctamente."+
+                                    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"+
+                                    "<span aria-hidden='true'>&times;</span>"+
+                                    "</button>"+
+                                "</div>"
+                            );
                         }
 
                     });

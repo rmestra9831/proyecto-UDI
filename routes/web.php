@@ -91,8 +91,10 @@ Route::group(['middleware' => 'auth','UserSuperAdm'], function () {
     Route::put('reset_radicados/{superAdm}', 'SuperadmController@resetRadic')->name('superAdm.resetRadic');
     Route::get('superadm/{superAdm}/edit_user', 'SuperadmController@userEdit')->name('superAdm.userEdit');    
     Route::put('edit_user/{superAdm}/superAdmin', 'SuperadmController@userEdit_ctrl')->name('superAdm.userEdit_ctrl');    
+    Route::put('show_programas/{superAdm}/superAdmin', 'SuperadmController@programEdit_ctrl')->name('superAdm.programEdit_ctrl');    
     Route::post('delete_prog/{superAdm}', 'SuperadmController@deleteProg')->name('superAdm.deleteProg');
     Route::get('test', 'SuperadmController@test')->name('superAdm.test');
+    Route::get('infoProgramas', 'SuperadmController@infoProgramas')->name('superAdm.infoProgramas');
 });
 //rutas de estado
 Route::resource('status', 'EstadoController')->middleware('auth');

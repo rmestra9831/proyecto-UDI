@@ -15,18 +15,12 @@
         <div class=" cont-panel-adm-user">
             <div class="container">
                 <!-- Se muestran los usuarios-->
-                <div class="card p-4 item_user desing-1_1">
+                <div class="card p-4 item_user desing-1_1" style="grid-column: 1/4 !important;">
                     @include('common.success') {{--mostrado de alertas--}}
                     <h5 class="text-capitalize text-center">Listado</h5>
                     <div class="par">
                         @include('superAdmin.tableProg')
                     </div>
-                </div>
-                <!-- Se edita el usuario seleccionado-->
-                <div class="card p-4 user_create desing-1_2">
-                        <h5 class="text-capitalize text-center">Editar</h5>
-                        <iframe id="frame_show" src="" frameborder="0">
-                        </iframe>
                 </div>
                 <!-- Se crean los usuarios-->
                 <div class="card p-4 desing-2">
@@ -77,19 +71,74 @@
                 "lengthMenu": [[-1], ['All']],
             });
 
-            function EditUser(){
+            $.ajaxSetup({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}}
+            );
 
-            }
-
-            $('.table #btnEdit').click(function(){
-              //$('#content_edit_user').load("public/views/admin/editUser.php");
+            var btnEditProg = document.querySelectorAll('#btnEditProg');
+            $('.table #btnEditProg').click(function(){
                 $valor = $(this).val();
-                $url = window.location.origin+"/admin/"+$valor+"/edit_prog";
-                $('.user_create #frame_show').attr("src", $url);
 
-                //alert("el valor es: "+ $valor);
+                $.ajax({
+                    url: "/infoProgramas?val="+$valor,
+                    type:"GET",
+                    beforeSend:function(){
+                        $('#staticBackdropProgram').html('Cargando...');
+                    },
+                    success:function(response){
+                        $correo_program = response['program'][0]['correo_director'];
+                        $name_program = response['program'][0]['name'];
+                        $id_program = response['program'][0]['id'];
+                        $sedes = response['sede'];
+                        console.log($correo_program);
+                        $('#staticBackdropProgram').html('Editar el programa de '+$name_program);
+                        // datos que se resiven por metodo
+                        for(s=0; s < $sedes.length; s++){
+                            if ($id_program == $sedes[s]['id'] ) {
+                                $status = "selected";
+                            }else{$status = "";}
+                            $('#select_sede').append("<option class='text-capitalize' id='selectOption_user_rol' "+$status+" value="+$sedes[s]["id"]+">"+$sedes[s]["name"]+"</option>");
+                        }
+                        
+                        $('.correo_prog').attr("value",$correo_program);
+                        $('.xtreme_p').attr("gateway",$id_program);
+                    },
+                    error:function(){
+                        $('.modal-body').html("error");
+                    }
+                    
+                })
             });
+            $('.xtreme #btnSaveUpdateProg').click(function(){
+                    $correo_prog = $('.xtreme .correo_prog').val();
+                    $id_sede = $('#select_sede').val();
+                    $gateway = $('.xtreme_p').attr("gateway");
+                    console.log($correo_prog);
+                    $.ajax({
+                        url: $gateway+"/superAdmin",
+                        type:"PUT",
+                        methos:"PUT",
+                        data:{correo:$correo_prog, sede:$id_sede, id:$gateway},
+                        beforeSend: function(){
+                           $('#btnSaveUpdateUser').html("Loading");
+                        },
+                        success:function(response){
+                            console.log(response);
+                            $('#btnSaveUpdateUser').html("Actualizar");
+                            $name = response.name;
+                            $('#staticBackdropLabel').html('Editando a '+$name);
+                            $('.showAlert').append(
+                                "<div class='alert alert-success alert-dismissible fade show' role='alert'>"+
+                                    "<strong>! Excelente ¡</strong> Programa editado correctamente."+
+                                    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"+
+                                    "<span aria-hidden='true'>&times;</span>"+
+                                    "</button>"+
+                                "</div>"
+                            );
+                        }
 
+                    });
+                });
         });
     </script> 
 @endsection

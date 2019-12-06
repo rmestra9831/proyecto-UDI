@@ -42,23 +42,30 @@ class SuperadmController extends Controller
 
     }
     //controler editar usuarios
-    /* public function userEdit_ctrl(Request $request, User $superAdm){
-        
-        $user = $superAdm;
-        $user->fill($request->except(
-            'password'
-        ));
-        $user->save();
-        return redirect()->route('superAdm.userEdit',[$superAdm])->with('status','Usuario Actualizado');
-
-    } */
     public function userEdit_ctrl(Request $request){
 
         if($request->ajax()){
-                /* $name = $request->input('name');
-                $type_user = $request->input('type_user'); */
-               
-                return $request;
+            $user = User::find($request->id);
+            $user->name = $request->nombre;
+            $user->type_user = $request->type_user;
+            if ($request->type_user == 4) {
+                $user->program_id = $request->program_id;
+            }else{$user->program_id = null; }
+            $user->save();
+                return response()->json($user);
+        }else{
+            return "nope";
+        }
+
+    }
+    public function programEdit_ctrl(Request $request){
+
+        if($request->ajax()){
+            $programa = Program::find($request->id);
+            $programa->correo_director = $request->correo;
+            $programa->sede = $request->sede;
+            $programa->save();
+                return response()->json($programa);
         }else{
             return "nope";
         }
@@ -164,16 +171,18 @@ class SuperadmController extends Controller
         }
         return view('superAdmin.showResetRadic', compact('sedes'))->with('status','Los registros han sido eliminados');
     }
-
+    // MANDAR INFO DE LOS USUARIOS A LA VISTA SHOWUSERS MEDIANTE AJAX
     public function test(){
         if(!empty($_GET['val'])){
             $valor = $_GET['val'];
             
             $user = User::where("id",$valor)->get();
             $user_rol = Role::get();
+            $user_prog = Program::get();
             $array =[
                 "user"=> $user,
-                "rol" => $user_rol
+                "rol" => $user_rol,
+                "program" => $user_prog
             ];
         }
         else{
@@ -181,6 +190,21 @@ class SuperadmController extends Controller
             $user="error";
         }
     
+        return $array;
+    }
+    // MANDANDO INFO DE PROGRAMAS A LA VISTA SHOWPROGRAM CON AJAX
+    public function infoProgramas(){
+        if (!empty($_GET['val'])) {
+            $valor = $_GET['val'];
+            $program = Program::where("id",$valor)->get();
+            $sedes = Sede::get();
+            $array =[
+                "program"=>$program,
+                "sede"=>$sedes
+            ];
+        }else{
+            $valor = "no existe";
+        }
         return $array;
     }
 }
