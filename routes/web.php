@@ -92,6 +92,7 @@ Route::group(['middleware' => 'auth','UserSuperAdm'], function () {
     Route::get('superadm/{superAdm}/edit_user', 'SuperadmController@userEdit')->name('superAdm.userEdit');    
     Route::put('edit_user/{superAdm}/superAdmin', 'SuperadmController@userEdit_ctrl')->name('superAdm.userEdit_ctrl');    
     Route::post('delete_prog/{superAdm}', 'SuperadmController@deleteProg')->name('superAdm.deleteProg');
+    Route::get('test', 'SuperadmController@test')->name('superAdm.test');
 });
 //rutas de estado
 Route::resource('status', 'EstadoController')->middleware('auth');

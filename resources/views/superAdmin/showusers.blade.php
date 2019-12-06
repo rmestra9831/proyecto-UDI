@@ -97,23 +97,85 @@
     @endsection
     @section('scripts')
         <script>
+            
             $(document).ready(function () {
                 $('#users').DataTable({
                     "scrollY":        "200px",
                     "scrollCollapse": true,
                     "lengthMenu": [[-1], ['All']],
                 });
+                
+                $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }});
+
+                //boton para guardar datos a actualizar
+            
 
                 function EditUser(){
 
                 }
+                
                 var $btns_edit_user = document.querySelectorAll('#btnEditUser');
                 $($btns_edit_user).click(function(){
                     $valor = $(this).val();
-                    var url = window.location.origin+"/superadm/"+$valor+"/edit_user";
-                    $('.modal-body #frame_show_editUser').attr("src", url);
+
+                    $.ajax({
+                        url: "http://127.0.0.1:90/proyecto-UDI/public/test?val="+$valor,
+                        type:"GET",
+
+                        beforeSend:function(){
+                            //abrir el modal e imprimir "cargando"
+                            $('.elif').html("loading");
+                        },
+                        success:function(response){
+                            // datos que se resiven por metodo
+                            $name = response["user"][0]["name"];
+                            $id_user = response["user"][0]["id"];
+                            $actual_rol = response["user"][0]["type_user"];
+                            $rol = response["rol"];
+                            for(i=0; i < $rol.length; i++){
+                                //console.log($rol[i]["name_role"]);
+                                if($actual_rol == $rol[i]["id"]){
+                                    $status = "selected";
+                                }else{$status = ""}
+                                $('#select_user_rol').append("<option class='text-capitalize' "+$status+" value="+$rol[i]["id"]+">"+$rol[i]["name_role"]+"</option>");
+                            }
+                            $('.elif').html("ya se otuvo");
+                            $('.user_name').attr("value",$name);
+                            $('.xtreme_u').attr("gateway",$id_user);
+                        },
+
+                        error:function(){
+                            $('.modal-body').html("error");
+                        }
+                        
+                    })
+                });
+                $('.xtreme #btnSaveUpdateUser').click(function(){
+                
+                    $valor = $(".user_name").val();
+                    $id_type_user = $('.xtreme #select_user_rol').val();
+                    $gateway = $('.xtreme_u').attr("gateway");
+                    $.ajax({
+                        url:"http://127.0.0.1:90/proyecto-UDI/public/edit_user/"+$gateway+"/superAdmin",
+                        type:"PUT",
+                        methos:"PUT",
+                        data:{nombre:$valor,type_user:$id_type_user,id:$gateway},
+                        beforeSend: function(){
+                           // $('#btnSaveUpdateUser').html("Loading");
+                        },
+                        success:function(result){
+                            console.log(result)
+                        }
+
+                    });
                 });
             });
+
+            //var $btns_save_update_user = document.getElementById('btnSaveUpdateUser');
+            
         </script>
     @endsection
     <!-- piecera-->

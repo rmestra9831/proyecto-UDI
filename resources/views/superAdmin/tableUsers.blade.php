@@ -25,10 +25,33 @@
                     @endforeach
                 </td>
                 <td class="text-capitalize">@foreach ($sedes as $sede) @if ($sede->id == $user->sede) {{$sede->name}} @endif @endforeach</td>
-                <td><button id="btnEditUser" value=" {{$user->id}} " class="btn btn-primary" data-toggle="modal" data-target="#editModalUser{{$user->id}}" >Editar</button></td>
+                <td><button id="btnEditUser" value=" {{$user->id}} " class="btn btn-primary" data-toggle="modal" data-target="#editModalUser" >Editar</button></td>
             </tr>
-            @include('components.modalEditUser')
-        @endforeach
+            @endforeach
+            @include('components.modalEditUser') 
     </tbody>
 </table>
+
+<script>
+
+    editUser(id,data){
+
+        if(id){
+            $.ajax{
+                url:'url',
+                data: {},
+                dataType:'html',
+                type:'post',
+                beforeSend: function(){
+                    console.log("enviando...")
+                },
+                success: function(response){
+                    console.log(response)
+                }
+
+            }
+        }
+    }
+
+</script>
 

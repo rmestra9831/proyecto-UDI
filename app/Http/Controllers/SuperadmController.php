@@ -42,7 +42,7 @@ class SuperadmController extends Controller
 
     }
     //controler editar usuarios
-    public function userEdit_ctrl(Request $request, User $superAdm){
+    /* public function userEdit_ctrl(Request $request, User $superAdm){
         
         $user = $superAdm;
         $user->fill($request->except(
@@ -50,6 +50,18 @@ class SuperadmController extends Controller
         ));
         $user->save();
         return redirect()->route('superAdm.userEdit',[$superAdm])->with('status','Usuario Actualizado');
+
+    } */
+    public function userEdit_ctrl(Request $request){
+
+        if($request->ajax()){
+                /* $name = $request->input('name');
+                $type_user = $request->input('type_user'); */
+               
+                return $request;
+        }else{
+            return "nope";
+        }
 
     }
     // vista de editar usuarios
@@ -69,7 +81,6 @@ class SuperadmController extends Controller
         $radic = $superAdm;
         $sedes = $this->sedes;
         return view('superAdmin.showdir', compact('radicados','radic','programas','users', 'roles','sedes'));
-
     }
     public function showProg(User $superAdm){
         $users= User::where('sede',Auth::user()->sede)->get();
@@ -154,4 +165,22 @@ class SuperadmController extends Controller
         return view('superAdmin.showResetRadic', compact('sedes'))->with('status','Los registros han sido eliminados');
     }
 
+    public function test(){
+        if(!empty($_GET['val'])){
+            $valor = $_GET['val'];
+            
+            $user = User::where("id",$valor)->get();
+            $user_rol = Role::get();
+            $array =[
+                "user"=> $user,
+                "rol" => $user_rol
+            ];
+        }
+        else{
+            $valor="no existe";
+            $user="error";
+        }
+    
+        return $array;
+    }
 }

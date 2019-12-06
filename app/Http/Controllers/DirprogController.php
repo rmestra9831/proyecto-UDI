@@ -42,4 +42,5 @@ class DirprogController extends Controller
         
         return redirect()->route('direction.edit',[$direction])->with('status','Respuesta guardada');
     }
+
 }
