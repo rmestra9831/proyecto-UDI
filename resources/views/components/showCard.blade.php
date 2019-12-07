@@ -171,7 +171,10 @@
                               @if ($radicado->delegate_id)
                                 @foreach ($programas as $programa)
                                   @if ($programa->id == $radicado->delegate_id)
-                                    Respuesta delegada a {{$programa->name}}
+                                    Respuesta delegada a 
+                                      @if ($user->program_id == $programa->id && $user->program_id == $radicado->delegate_id)
+                                        {{$programa->name}}
+                                      @endif
                                   @endif
                                 @endforeach
                               @else
@@ -217,7 +220,10 @@
                               @if ($radicado->delegate_id)
                                 @foreach ($programas as $programa)
                                   @if ($programa->id == $radicado->delegate_id)
-                                    Respuesta delegada a {{$programa->name}}
+                                    Respuesta delegada a 
+                                      @if ($user->program_id == $programa->id && $user->program_id == $radicado->delegate_id)
+                                        {{$programa->name}}
+                                      @endif
                                   @endif
                                 @endforeach
                               @else
@@ -593,7 +599,10 @@
                                 @if ($radicado->delegate_id)
                                   @foreach ($programas as $programa)
                                     @if ($programa->id == $radicado->delegate_id)
-                                      Respuesta delegada a {{$programa->name}}                                     
+                                      Respuesta delegada a 
+                                          @if ($programa->id == $radicado->delegate_id)
+                                              {{$programa->name}}
+                                          @endif                                   
                                     @endif
                                   @endforeach
                                 @else
@@ -632,7 +641,10 @@
                                     <p class="card-text d-block text-center">
                                       {{-- muestra a que director a sido asignada la respesta --}}
                                       @if ($radicado->aproved)
-                                        Respuesta delegada a {{$radicado->program->name}}
+                                        Respuesta delegada a 
+                                            @if ($programa->id = $radicado->delegate_id)
+                                                {{$programa->name}}
+                                            @endif
                                       @endif
                                     </p>
                                   </div>

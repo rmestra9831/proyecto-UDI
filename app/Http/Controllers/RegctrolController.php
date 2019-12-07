@@ -143,9 +143,9 @@ class RegctrolController extends Controller
         $radicado->slug = date("Ymd").$request->input('name').date('h_i_s').$request->input('last_name');
         $radicado->save();
     //validar tipo de atencion para enviar correo
-        if ($radicado->atention == "urgente") {
+        if ($request->input('atention') == 'urgente') {
 
-            $mail= 'direccion@maxmail.in';
+            $mail= 'direccion.bca@yopmail.com';
             $subject= 'Atención Inmediata R#'.$radicado->fechradic_id.'-'.$radicado->year;
             $messaje= 'mensaje de prueba';
             Mail::to($mail)->send(new SendUrgenteMail($subject, $messaje, $radicado, $programas));

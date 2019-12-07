@@ -11,18 +11,6 @@
       margin: auto;
     "
     >
-    <!--logo-->
-    <div
-    style="
-      background: #bfbfbf;
-      padding: 10px 30px;
-    ">
-      <img src="{{asset('img/logo-udi-completo.svg')}}" alt=""
-      style="
-      width: %;
-      "
-      >
-    </div>
     <!-- cabecera-->
     <div class="col" style="margin: 10px 25px; position: relative;"><strong style="color: red; text-transform: uppercase;">origen:<p class="card-text-var text-truncate" style="text-transform: capitalize;">{{$e_data->name}} {{$e_data->last_name}}</p></strong></div>
     <div class="col" style="margin: 10px 25px; position: relative;"><strong style="color: red; text-transform: uppercase;" class="card-text">motivo:<p class="card-text-var text-truncate" style="text-transform: capitalize;">{{$e_data->motivo->name}}</p></strong></div>

@@ -105,7 +105,12 @@
               @else
                 @foreach ($users as $user)
                     @if ($user->id == $radicado->respon_id)
-                    {{$user->name}} | {{$radicado->program->name}}
+                    {{$user->name}} | 
+                    @foreach ($programas as $programa)
+                      @if ($user->program_id == $programa->id && $user->program_id == $radicado->delegate_id)
+                          {{$programa->name}}
+                      @endif
+                    @endforeach
                     @endif
                 @endforeach
               @endif
